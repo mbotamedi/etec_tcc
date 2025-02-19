@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/inicio.css">
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar" style="width: 100%; background-color: rgba(0, 0, 0, 0.791);">
+        <div class="container-fluid px-4 px-lg-5">
+            <div class="imagem col-2">
+                <img src="imgs/cantina3irmaos 1.png" alt="" width="100px">
+            </div>
+
+            <div class="items col-4">
+                <a href="index.html">INICIO</a>
+                <a href="#">PEÇA AGORA</a>
+                <a href="#">UNIDADES</a>
+                <a href="#">SOBRE</a>
+            </div>
+
+            <div class="buy-actions">
+                <a href="#" id="abrirModal">
+                    <img src="imgs/User.png" alt="Usuário" width="30px">
+                </a>
+
+                <a href="#">
+                    <img src="imgs/Shopping cart.png" alt="Carrinho" width="30px">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+    <div id="meuModal" class="modal-container">
+        <div class="modal-content col-3">
+            <a href="#">Cadastre-se</a>
+            <a href="#">Entrar</a>
+            <button id="fecharModal">Fechar</button>
+        </div>
+    </div>
+
+    <!--CARROSEL-->
+    <div class="carrosel" style="display: flex; justify-content: center; width: 100%; height: 100vh; overflow: hidden;">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 100%; height: 100%;">
+            <div class="carousel-inner" style="height: 100%;">
+                <div class="carousel-item active">
+                    <img src="imgs/promocoes/promo1.png" alt="Promoção 1" class="d-block w-100" style="height: 10%; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                    <img src="imgs/promocoes/promo1.png" alt="Promoção 2" class="d-block w-100" style="height: 10%; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                    <img src="imgs/promocoes/promo1.png" alt="Promoção 3" class="d-block w-100" style="height: 10%; object-fit: cover;">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <!-- Product items here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <!-- Product price-->
+                                $40.00 - $80.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            Oferta</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Special Item</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$20.00</span>
+                                $18.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            Oferta</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder"> Item com Oferta</h5>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$50.00</span>
+                                $25.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Popular Item</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                $40.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            Oferta</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Oferta Item</h5>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$50.00</span>
+                                $25.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <!-- Product price-->
+                                $120.00 - $280.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            Oferta</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Special Item</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">$20.00</span>
+                                $18.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Popular Item</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                $40.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <script>
+        document.getElementById("abrirModal").addEventListener("click", function (event) {
+            event.preventDefault(); // Impede que o link recarregue a página
+            document.getElementById("meuModal").style.display = "flex";
+        });
+
+        document.getElementById("fecharModal").addEventListener("click", function () {
+            document.getElementById("meuModal").style.display = "none";
+        });
+
+        // Fecha ao clicar fora do modal
+        document.getElementById("meuModal").addEventListener("click", function (event) {
+            if (event.target === this) {
+                this.style.display = "none";
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
