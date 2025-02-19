@@ -1,11 +1,13 @@
 .items{
     gap: 50px;
     display: flex;
+    font-family: "Fredoka", serif;
 }
 
 .items>a{
     text-decoration: none;
     color: white;
+    font-size: 20px;
 }
 
 .buy-actions{
@@ -66,8 +68,7 @@
 .produtos-Destaques{
     display: flex;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.495);
-    color: #fff;
+    color: rgba(0, 0, 0, 0.671);
     padding: 5px;
     font-size: 50px;
     margin-top: 50px;
