@@ -2,12 +2,25 @@
     gap: 50px;
     display: flex;
     font-family: "Fredoka", serif;
+    
+    
+    
+    
+    
 }
+
 
 .items>a{
     text-decoration: none;
     color: white;
     font-size: 20px;
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.items>a:hover{
+    color: rgb(255, 157, 0);
+    transform: scale(1.05);
 }
 
 .buy-actions{
