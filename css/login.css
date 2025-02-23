@@ -173,3 +173,143 @@ button[type="submit"]:hover {
         background-position: 0% 50%;
     }
 }
+
+.information {
+    margin-top: 25px;
+}
+
+.information a {
+    font-family: "Inter", serif;
+    font-weight: 500;
+    color: #333333;
+    /* Cor de texto */
+    transition: transform 0.5s ease-in-out;
+}
+
+.information a:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease-in-out;
+}
+
+.information a {
+    font-family: "Inter", serif;
+    font-weight: 500;
+    color: #333333;
+    /* Cor de texto */
+    text-decoration: none;
+    transition: color 0.5s ease-in-out;
+}
+
+.information a:hover {
+    color: rgb(182, 113, 0);
+    /* Cor de texto hover */
+    transition: color 0.5s ease-in-out;
+}
+
+/*media query*/
+
+/* Tela pequena (menos de 768px) */
+@media (max-width: 767px) {
+    .cadastro-login {
+        width: 80%;
+        padding: 10px;
+        height: 500px;
+    }
+    
+    .header-title > h2{
+        font-size: 35px;
+    }
+
+    form {
+        margin-left: 0px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+
+    .user-icon {
+        margin: 5px 0px 10px 0px;
+    }
+
+    .information {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 767px){
+    .header-title > h2{
+        font-size: 30px;
+    }
+}
+
+/* Tela média (entre 768px e 992px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .cadastro-login {
+        width: 60%;
+        padding: 15px;
+        height: 450px;
+    }
+
+    .header-title > h2{
+        font-size: 35px;
+    }
+    
+
+    form {
+        margin-left: 0px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+
+    .user-icon {
+        margin: 10px 0px 15px 0px;
+    }
+
+    .information {
+        margin-top: 15px;
+    }
+}
+
+/* Tela grande (mais de 992px) */
+@media (min-width: 992px) {
+    .cadastro-login {
+        width: 40%;
+        padding: 20px;
+        height: 500px;
+    }
+    
+
+    form {
+        margin-left: -60px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 120%;
+    }
+
+    button[type="submit"] {
+        width: 120%;
+    }
+
+    .user-icon {
+        margin: 10px 0px 15px 0px;
+    }
+
+    .information {
+        margin-top: 25px;
+    }
+}
