@@ -214,7 +214,7 @@ button[type="submit"]:hover {
     transition: color 0.5s ease-in-out;
 }
 
-/*---------------------------------MEDIA QUERY*---------------------------------/
+/*MEDIA QUERY*/
 
 /* Tela pequena (menos de 768px) */
 @media (max-width: 767px) {
