@@ -48,26 +48,29 @@ button {
     /* Cor de texto */
 }
 
+.cadastro-login {
+    background-color: #8f8f8f6a;
+    /* Cor de fundo */
+    border: 5px solid #333333;
+    /* Cor de borda */
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    /* Adicionando espaço nas beiradas */
+    margin: 0 auto; /* Adicionando margin para alinhar ao centro */
+    max-width: 500px; /* Definindo largura máxima para o formulário */
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.cadastro-login {
-background-color: #8f8f8f6a;
-/* Cor de fundo */
-border: 5px solid #333333;
-/* Cor de borda */
-border-radius: 10px;
-border: none;
-width: 45%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
-padding: 20px; /* Adicionando espaço nas beiradas */
+    height: 100vh; /* Definindo altura para o container */
 }
 
 form {
@@ -226,7 +229,7 @@ button[type="submit"]:hover {
         margin-right: -30px;
     }
 
-    .header-title > h2 {
+    .header-title>h2 {
         font-size: 30px;
     }
 
@@ -271,7 +274,7 @@ button[type="submit"]:hover {
         margin-right: -30px;
     }
 
-    .header-title > h2 {
+    .header-title>h2 {
         font-size: 35px;
     }
 
@@ -316,7 +319,7 @@ button[type="submit"]:hover {
         margin-right: -30px;
     }
 
-    .header-title > h2 {
+    .header-title>h2 {
         font-size: 40px;
     }
 
@@ -348,8 +351,9 @@ button[type="submit"]:hover {
     }
 }
 
-@media (max-width: 992px){
-    .container{
+@media (max-width: 992px) {
+    .container {
         margin-top: 100px;
     }
 }
+
