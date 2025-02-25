@@ -41,3 +41,15 @@ function fecharModal() {
 }
 
 
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.menu');
+
+menuToggle.addEventListener('click', () => {
+    if (menu.classList.contains('active')) {
+      menu.classList.remove('active');
+      menu.style.display = 'none';
+    } else {
+      menu.classList.add('active');
+      menu.style.display = 'block';
+    }
+  });

@@ -1,16 +1,16 @@
-.items{
+.items {
     gap: 50px;
     display: flex;
     font-family: "Fredoka", serif;
-    
-    
-    
-    
-    
+
+
+
+
+
 }
 
 
-.items>a{
+.items>a {
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -18,12 +18,12 @@
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.items>a:hover{
+.items>a:hover {
     color: rgb(255, 157, 0);
     transform: scale(1.05);
 }
 
-.buy-actions{
+.buy-actions {
     display: flex;
     gap: 30px;
 }
@@ -31,15 +31,18 @@
 /*-------------ESTILO DO MODAL-------------*/
 /* -------------ESTILO DO MODAL------------- */
 .modal-container {
-    display: none; /* Oculto por padrão */
+    display: none;
+    /* Oculto por padrão */
     position: absolute;
-    right: 40px; /* Encosta no canto direito */
+    right: 40px;
+    /* Encosta no canto direito */
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 10px;
     z-index: 1000;
-    width: 150px; /* Tamanho pequeno */
+    width: 150px;
+    /* Tamanho pequeno */
 
     /* Configuração da animação inicial */
     max-height: 0;
@@ -50,7 +53,8 @@
 
 /* Classe para exibir o modal com animação */
 .modal-container.show {
-    max-height: 200px; /* Ajuste conforme o conteúdo */
+    max-height: 200px;
+    /* Ajuste conforme o conteúdo */
     opacity: 1;
 }
 
@@ -62,7 +66,8 @@
     gap: 5px;
 }
 
-.modal-content a, .modal-content button {
+.modal-content a,
+.modal-content button {
     text-decoration: none;
     color: black;
     padding: 5px;
@@ -78,7 +83,7 @@
 
 /*-------TÍTULO DO DESTAQUES-------*/
 
-.produtos-Destaques{
+.produtos-Destaques {
     display: flex;
     justify-content: center;
     color: rgba(0, 0, 0, 0.671);
@@ -86,4 +91,235 @@
     font-size: 50px;
     margin-top: 50px;
 
+}
+
+/*MEDIA QUERY*/
+
+/* Tela grande (desktop) */
+@media (min-width: 1200px) {
+    .items {
+        gap: 50px;
+        display: flex;
+        font-family: "Fredoka", serif;
+
+    }
+
+    .items>a {
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+        transform: scale(1.02);
+        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .items>a:hover {
+        color: rgb(255, 157, 0);
+        transform: scale(1.05);
+    }
+}
+
+/* Tela média (tablet) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .items {
+        gap: 30px;
+        display: flex;
+        font-family: "Fredoka", serif;
+    }
+
+    .items>a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        transform: scale(1.01);
+        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .items>a:hover {
+        color: rgb(255, 157, 0);
+        transform: scale(1.03);
+    }
+}
+
+
+/*--------------------------------------------------------------*/
+
+
+
+
+/* Tela pequena (celular) */
+@media (max-width: 767px) {
+
+    .items {
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        font-family: "Fredoka", serif;
+        display: none;
+
+
+    }
+
+    .items>a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        transform: scale(1.0);
+        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .items>a:hover {
+        color: rgb(255, 157, 0);
+        transform: scale(1.02);
+    }
+
+    .buy-actions {
+        display: none;
+    }
+
+    @media (max-width: 767px) {
+
+        .menu-toggle {
+            display: inline-block;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #333;
+            padding: 10px;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .menu li > a{
+            margin-bottom: 100px;
+        }
+
+        .menu>a {
+            color: #fff;
+            text-decoration: none;
+            
+        }
+
+        .menu a:hover {
+            color: rgb(255, 157, 0);
+        }
+
+        .fa-solid{
+            margin-right: 5px;
+        }
+
+        li > a{
+            font-size: 20px;
+        }
+
+    }
+
+
+}
+
+
+
+
+/*-----------------------------------------------------------*/
+
+@media (max-width: 767px) {
+    .menu-toggle {
+        display: inline-block;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .bar1,
+    .bar2,
+    .bar3 {
+        width: 30px;
+        height: 5px;
+        background-color: #fff;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+    .bar1 {
+        transform: rotate(0deg) translate(0px, 0px);
+    }
+
+    .bar2 {
+        transform: rotate(0deg) translate(0px, 0px);
+    }
+
+    .bar3 {
+        transform: rotate(0deg) translate(0px, 0px);
+    }
+
+    .menu-toggle:hover .bar1 {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle:hover .bar2 {
+        opacity: 0;
+    }
+
+    .menu-toggle:hover .bar3 {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #333;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .menu li {
+        margin-bottom: 10px;
+    }
+
+    .menu a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .menu a:hover {
+        color: #ccc;
+    }
+
+    .menu-toggle.active .bar1 {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active .bar2 {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar3 {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .menu-toggle.active+.menu {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu li {
+        margin-right: 20px;
+    }
 }
