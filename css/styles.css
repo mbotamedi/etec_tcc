@@ -7971,8 +7971,10 @@ textarea.form-control-lg {
 }
 
 .fw-bolder {
-  font-weight: bolder !important;
+  font-weight: 800 !important;
+  font-size: 250px;
 }
+
 
 .lh-1 {
   line-height: 1 !important;
