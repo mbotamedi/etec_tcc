@@ -1,0 +1,13 @@
+.sobre-cantina{
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.container-info{
+   padding: 50px;
+}
+
+h1,h2{
+    font-family: "Fredoka", serif;
+    font-weight: 600;
+}
