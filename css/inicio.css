@@ -175,9 +175,6 @@
         display: none;
     }
 
-    .carrosel {
-        display: none;
-    }
 
     @media (max-width: 767px) {
 
