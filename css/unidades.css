@@ -11,3 +11,13 @@ h1,h2{
     font-family: "Fredoka", serif;
     font-weight: 600;
 }
+
+p{
+    font-family: "Inter", serif;
+    line-height: 2;
+
+}
+
+.header-title>p{
+    text-align: justify;
+}
