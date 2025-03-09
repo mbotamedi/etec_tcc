@@ -1,3 +1,6 @@
+<?php
+    session_start(); // Inicia a sessão para armazenar mensagens
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +28,17 @@
             <div class="user-icon">
                 <img src="../imgs/usuario-de-perfil.png" alt="" width="50px">
             </div>
-            <form>
+            <!-- Exibe a mensagem de erro, se houver -->
+            <?php
+                
+                if (isset($_SESSION['erro_senha'])) {
+                    echo "<p id='erro-msg' style='color: red;'>" . $_SESSION['erro_senha'] . "</p>";
+                    // Limpa a mensagem após exibir
+                    unset($_SESSION['erro_senha']);
+                }
+                ?>
+
+            <form name="cadastro" id="cadastro" action="../includes/salvar.php" method="POST">
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required>
@@ -34,11 +47,16 @@
                     <label for="email">E-mail:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-               <!--<div class="form-group">
+               <div class="form-group">
                     <label for="celular">Celular:</label>
                     <input type="tel" id="celular" name="celular" required pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
                         placeholder="(99) 99999-9999" maxlength="15" oninput="mascaraTelefone(this)">
-                </div>--> 
+                </div>
+                <div class="form-group">
+                    <label for="CPF">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                        placeholder="555.555.555-55" maxlength="14" oninput="mascaraCPF(this)">
+                </div>
                 <div class="form-group">
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
@@ -52,17 +70,15 @@
                 </div>
             </form>
             <div class="information">
-                <p>Já tem conta? <a href="../HTML/login.html">Entrar</a></p>
+                <p>Já tem conta? <a href="login.php">Entrar</a></p>
             </div>
         </div>
     </div>
+   
 </body>
-<script>
-    function mascaraTelefone(input) {
-        var telefone = input.value.replace(/\D/g, '');
-        input.value = telefone.replace(/(\d{2})(\d)/, '($1) $2')
-            .replace(/(\d{5})(\d)/, '$1-$2');
-    }
-</script>
 
+<script src="../js/funcao.js"></script>
+
+
+</body>
 </html>
