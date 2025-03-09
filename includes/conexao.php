@@ -1,10 +1,11 @@
 <?php
-    $host = "localhost:3307";
+    $host = "localhost";
     $usuario= "root";
     $senha = "";
     $banco = "bd_cantina";
+    $port = "3307";
 
-    $conexao = mysqli_connect($host, $usuario, $senha, $banco);
+    $conexao = mysqli_connect($host, $usuario, $senha, $banco, $port);
 
     /*if($conexao){
         echo ('Conexão estabelecida com sucesso!');
