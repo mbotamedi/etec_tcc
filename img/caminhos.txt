@@ -1,0 +1,74 @@
+comando em dos para gerar caminho : for /r %%i in (*) do echo %%i >> caminhos.txt
+
+
+D:\wamp64\www\etec_tcc\img\agua.jpg 
+D:\wamp64\www\etec_tcc\img\Aros de Morango Azedinhos 80g - Fini.jpg 
+D:\wamp64\www\etec_tcc\img\Bala  Bananas fini.jpg 
+D:\wamp64\www\etec_tcc\img\Bala  Escovinhas Fini.jpg 
+D:\wamp64\www\etec_tcc\img\Bala Fini amora.jpg 
+D:\wamp64\www\etec_tcc\img\Bala Fini banana.jpg 
+D:\wamp64\www\etec_tcc\img\Bala Fini bolo_chocolate.jpg 
+D:\wamp64\www\etec_tcc\img\Bala fini tubes.jpg 
+D:\wamp64\www\etec_tcc\img\Bala Gelatina Amoras Fini.jpg 
+D:\wamp64\www\etec_tcc\img\bala gelatina fini.jpg 
+D:\wamp64\www\etec_tcc\img\Bala Gelatina Finiburguers Fini.jpg 
+D:\wamp64\www\etec_tcc\img\Bala Gelatinas Polvo 80g FINI.jpg 
+D:\wamp64\www\etec_tcc\img\bala.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry avela.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry banana.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry caju.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry cappuccino.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry coco.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry cookies.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry frutas-vermelhas.jpg 
+D:\wamp64\www\etec_tcc\img\barra nutry morango.jpg 
+D:\wamp64\www\etec_tcc\img\Bis.jpeg 
+D:\wamp64\www\etec_tcc\img\bolo.jpg 
+D:\wamp64\www\etec_tcc\img\bombons.jpeg 
+D:\wamp64\www\etec_tcc\img\cha mate lim o.jpeg 
+D:\wamp64\www\etec_tcc\img\cha mate pessego.jpeg 
+D:\wamp64\www\etec_tcc\img\chagelado.jpg 
+D:\wamp64\www\etec_tcc\img\chocolate.jpg 
+D:\wamp64\www\etec_tcc\img\coxinha.jpg 
+D:\wamp64\www\etec_tcc\img\fini Dentaduras.jpg 
+D:\wamp64\www\etec_tcc\img\finiMinhocas.jpg 
+D:\wamp64\www\etec_tcc\img\hotdog.jpg 
+D:\wamp64\www\etec_tcc\img\iogurte.jpg 
+D:\wamp64\www\etec_tcc\img\kitcat.jpg 
+D:\wamp64\www\etec_tcc\img\Melancia Azedinha fini.jpg 
+D:\wamp64\www\etec_tcc\img\nikito chocolate.jpeg 
+D:\wamp64\www\etec_tcc\img\nikito doce leite.jpeg 
+D:\wamp64\www\etec_tcc\img\nikito morango.jpeg 
+D:\wamp64\www\etec_tcc\img\nikito.jpg 
+D:\wamp64\www\etec_tcc\img\ouro branco.jpeg 
+D:\wamp64\www\etec_tcc\img\paodequeijo.jpg 
+D:\wamp64\www\etec_tcc\img\pastel.jpg 
+D:\wamp64\www\etec_tcc\img\pipoca.jpg 
+D:\wamp64\www\etec_tcc\img\pizza.jpg 
+D:\wamp64\www\etec_tcc\img\refrigerante.jpg 
+D:\wamp64\www\etec_tcc\img\saladadefrutas.jpg 
+D:\wamp64\www\etec_tcc\img\salgadinho-queijo.jpg 
+D:\wamp64\www\etec_tcc\img\sanduiche.jpg 
+D:\wamp64\www\etec_tcc\img\Sem t tulo.xcf 
+D:\wamp64\www\etec_tcc\img\sonodevalsa.jpeg 
+D:\wamp64\www\etec_tcc\img\sorvete.jpg 
+D:\wamp64\www\etec_tcc\img\suco.jpg 
+D:\wamp64\www\etec_tcc\img\torta.jpg 
+D:\wamp64\www\etec_tcc\img\trento avelas.jpg 
+D:\wamp64\www\etec_tcc\img\trento branco-drak.jpg 
+D:\wamp64\www\etec_tcc\img\trento Caramelo.jpg 
+D:\wamp64\www\etec_tcc\img\trento cheese morango.jpg 
+D:\wamp64\www\etec_tcc\img\trento chocolate 38.jpg 
+D:\wamp64\www\etec_tcc\img\trento chocolate 38.png 
+D:\wamp64\www\etec_tcc\img\trento dark.jpg 
+D:\wamp64\www\etec_tcc\img\trento duo.jpg 
+D:\wamp64\www\etec_tcc\img\trento limao.jpg 
+D:\wamp64\www\etec_tcc\img\trento maracuja.jpg 
+D:\wamp64\www\etec_tcc\img\trento milk.jpg 
+D:\wamp64\www\etec_tcc\img\trento morango.jpg 
+D:\wamp64\www\etec_tcc\img\trento trufa Ma  .jpg 
+D:\wamp64\www\etec_tcc\img\trento turfa de chocolate.jpg 
+D:\wamp64\www\etec_tcc\img\tubes fini azedinhos fru_silveste.jpg 
+D:\wamp64\www\etec_tcc\img\tubes fini azedinhos tuttifrutti.jpg 
+D:\wamp64\www\etec_tcc\img\tubes fini azedinhos uva.jpg 
+D:\wamp64\www\etec_tcc\img\tubes fini azedinhos.jpg 
