@@ -17,6 +17,16 @@
     <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
@@ -40,7 +50,7 @@
                 <a href="index.html">INICIO</a>
                 <a href="HTML/produtos.php">PEÇA AGORA</a>
                 <a href="HTML/unidades.html">UNIDADES</a>
-                
+
             </div>
 
             <div class="menu-toggle">
@@ -112,50 +122,50 @@
             <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
         </div>
         <?php
-            // Inclui o arquivo de conexão
-            include ("includes/conexao.php");
+        // Inclui o arquivo de conexão
+        include("includes/conexao.php");
 
-            // Executa a consulta usando MySQLi
-            $query = "SELECT * FROM tb_produtos order by descricao limit 3";
-            $resultado = mysqli_query($conexao, $query);
+        // Executa a consulta usando MySQLi
+        $query = "SELECT * FROM tb_produtos order by descricao limit 3";
+        $resultado = mysqli_query($conexao, $query);
 
-            // Verifica se a consulta foi bem-sucedida
-            if (!$resultado) {
-                die("Erro na consulta: " . mysqli_error($conexao));
-            }
+        // Verifica se a consulta foi bem-sucedida
+        if (!$resultado) {
+            die("Erro na consulta: " . mysqli_error($conexao));
+        }
 
-            // Busca todos os produtos
-            $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-            ?>
+        // Busca todos os produtos
+        $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        ?>
 
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <?php foreach ($produtos as $produto): ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100">
-                                <div class="card-img-container">
-                                    <img src="<?= $produto['imagem1'] ?>" alt="<?= htmlspecialchars($produto['descricao']) ?>" style="max-height: 100%; max-width: 100%;">
-                                </div>
-                                <div class="card-body p-4">
-                                    <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
-                                    <!---<p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>--->
-                                    <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
-                                    <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
-                                </div>
-                                <div class="quantity-controls">
-                                    <label>Quantidade:</label>      
-                                    <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" />
-                                    <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
-                                    <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" />
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
-                                </div>
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <?php foreach ($produtos as $produto): ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-img-container">
+                                <img src="<?= $produto['imagem1'] ?>" alt="<?= htmlspecialchars($produto['descricao']) ?>" style="max-height: 100%; max-width: 100%;">
+                            </div>
+                            <div class="card-body p-4">
+                                <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
+                                <!---<p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>--->
+                                <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
+                                <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
+                            </div>
+                            <div class="quantity-controls">
+                                <label>Quantidade:</label>
+                                <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" />
+                                <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
+                                <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" />
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
+        </div>
 
     </section>
     <!-- Footer-->
