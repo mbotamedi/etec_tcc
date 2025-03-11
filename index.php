@@ -38,19 +38,19 @@
 
             <div class="items col-5">
                 <a href="index.html">INICIO</a>
-                <a href="#">PEÇA AGORA</a>
+                <a href="HTML/produtos.php">PEÇA AGORA</a>
                 <a href="HTML/unidades.html">UNIDADES</a>
                 
             </div>
 
             <div class="menu-toggle">
-                <img src="imgs/cardapio (1).png" alt="" width="32px">
+                <img src="imgs/cardapio.png" alt="" width="32px">
                 <ul class="menu">
                     <li><a href="index.html" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
                     </li>
                     <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
                     </li>
-                    <li><a href="./HTML/unidades.html" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
+                    <li><a href="HTML/unidades.html" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
                     <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
                     <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> CARRINHO</a></li>
                 </ul>
@@ -116,7 +116,7 @@
             include ("includes/conexao.php");
 
             // Executa a consulta usando MySQLi
-            $query = "SELECT * FROM tb_produtos order by descricao";
+            $query = "SELECT * FROM tb_produtos order by descricao limit 3";
             $resultado = mysqli_query($conexao, $query);
 
             // Verifica se a consulta foi bem-sucedida
