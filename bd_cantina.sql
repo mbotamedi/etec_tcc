@@ -5779,7 +5779,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (26, 3, 'Trento Limão', 8.50, 50, '../img/trento limao.jpg ', 'img/trento limao.jpg '),
 (27, 3, 'Trento Maracujá', 8.50, 50, '../img/trento maracuja.jpg ', 'img/trento maracuja.jpg '),
 (28, 3, 'Trento Milk', 8.50, 50, '../img/trento milk.jpg ', 'img/trento milk.jpg '),
-(29, 3, 'Trento Trufa de Maçã', 8.50, 50, '../img/trento trufa Maçã .jpg ', 'img/trento trufa Maçã.jpg '),
+(29, 3, 'Trento Trufa de Maçã', 8.50, 50, '../img/trento trufa Maçã.jpg ', 'img/trento trufa Maçã.jpg '),
 (30, 3, 'Trento Trufa de Chocolate', 8.50, 50, '../img/trento turfa de chocolate.jpg ', 'img/trento turfa de chocolate.jpg '),
 (31, 16, 'Barra Nutry Avelãs', 6.00, 100, '../img/barra nutry avela.jpg ', 'img/barra nutry avela.jpg '),
 (32, 16, 'Barra Nutry Banana', 6.00, 100, '../img/barra nutry banana.jpg ', 'img/barra nutry banana.jpg '),

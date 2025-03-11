@@ -27,3 +27,25 @@ window.onload = function() {
     }
 };
 
+//Botões Quantidade
+
+// Função para processar a quantidade
+function process(change, quantId) {
+    var quantInput = document.getElementById(quantId);
+    var currentValue = parseInt(quantInput.value, 10);
+    if (!isNaN(currentValue)) {
+        quantInput.value = Math.max(0, currentValue + change);
+    }
+}
+
+
+// Exibe o modal quando a página é carregada
+   document.addEventListener('DOMContentLoaded', function () {
+    var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
+    mensagemModal.show();
+
+    // Fecha o modal após 6 segundos
+    setTimeout(function () {
+        mensagemModal.hide();
+    }, 6000); // 6000 milissegundos = 6 segundos
+});
