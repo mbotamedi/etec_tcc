@@ -10851,3 +10851,29 @@ textarea.form-control-lg {
   margin-top: 20px;
   object-fit: contain; /* Mantém a proporção da imagem */
 }
+
+/* botão de quantidade*/
+
+.quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+.quantity-controls input[type="button"] {
+  margin: 0 5px;
+}
+.quantity-controls input[type="text"] {
+  width: 50px;
+  text-align: center;
+}
+
+.buy-button {
+  margin: 10px;
+  /*width: 100%;*/
+}
+/* Efeito hover no botão */
+.buy-button:hover {
+  background-color: #a4edfd !important; /* Cor de fundo ao passar o mouse */
+  color: #0a0a0a !important; /* Cor do texto ao passar o mouse */
+}
