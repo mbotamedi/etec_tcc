@@ -23,9 +23,9 @@
             </div>
 
             <div class="items col-5">
-                <a href="index.html">INICIO</a>
-                <a href="HTML/produtos.php">PEÇA AGORA</a>
-                <a href="HTML/unidades.html">UNIDADES</a>
+                <a href="../index.php">INICIO</a>
+                <a href="../html/produtos.php">PEÇA AGORA</a>
+                <a href="../html/unidades.html">UNIDADES</a>
 
             </div>
 
