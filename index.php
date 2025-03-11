@@ -29,7 +29,6 @@
 </head>
 
 <body>
-
     <!-- Navigation-->
     <nav class="navbar" style="width: 100%; background-color: rgba(0, 0, 0, 0.791);">
         <div class="container-fluid px-4 px-lg-5">
@@ -112,248 +111,52 @@
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
         </div>
+        <?php
+            // Inclui o arquivo de conexão
+            include ("includes/conexao.php");
 
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="./imgs/imagem/kitcat.png" alt="Kitcat" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder"> Chocolate Kitkat 40gr</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">R$12.00</span>
-                                R$5.00
-                            </div>
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/trento.jpg" alt="Trento" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder"> Chocolate Trento 32gr </h5>
-                                
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">R$ 10,00</span>
-                                R$ 8,50
-                            </div>
-                             <!-- Product reviews-->
-                             <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/barra cerral.jpeg" alt="barra" />
-                        <!-- Product details-->
-                         
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder"> Barra de cereal Nutry 22gr</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">R$10.00</span>
-                                R$6.00
-                            </div>
-                             <!-- Product reviews-->
-                             <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/Fini Tubes Doce Tutti Frutti.jpeg" Fini" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fini Tubes - Diversos Sabores</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">R$12.00</span>
-                                R$7,50
-                            </div>
-                             <!-- Product reviews-->
-                             <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/sonodevalsa.jpeg" alt="bombons" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Bombom Sonho de Valsa</h5>
-                                <!-- Product price-->
-                                
-                                <span class="text-muted text-decoration-line-through">R$2,50</span>
-                                R$1,50
-                            </div>
-                             <!-- Product reviews-->
-                             <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                            
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/Bis.jpeg" alt="Bis" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Chocolate Bis Extra Original</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
-                            </div>
-                             <!-- Product reviews-->
-                             <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA AGORA</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/nikito.jpeg" alt="nikito" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Bolacha Nikito - Diversos Sabores</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
+            // Executa a consulta usando MySQLi
+            $query = "SELECT * FROM tb_produtos order by descricao";
+            $resultado = mysqli_query($conexao, $query);
+
+            // Verifica se a consulta foi bem-sucedida
+            if (!$resultado) {
+                die("Erro na consulta: " . mysqli_error($conexao));
+            }
+
+            // Busca todos os produtos
+            $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+            ?>
+
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <?php foreach ($produtos as $produto): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-img-container">
+                                    <img src="<?= $produto['imagem1'] ?>" alt="<?= htmlspecialchars($produto['descricao']) ?>" style="max-height: 100%; max-width: 100%;">
                                 </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="imgs/imagem/Melancia Azedinha fini.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fini Melancia Azedinha</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
+                                <div class="card-body p-4">
+                                    <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
+                                    <!---<p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>--->
+                                    <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
+                                    <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
                                 </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">R$12,00</span>
-                                $7,50
+                                <div class="quantity-controls">
+                                    <label>Quantidade:</label>      
+                                    <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" />
+                                    <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
+                                    <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" />
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
+                                </div>
                             </div>
                         </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">COMPRA RÁPIDA</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-        </div>
+
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">

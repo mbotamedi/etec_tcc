@@ -10836,3 +10836,18 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.card-img-container {
+  height: 200px; /* Altura fixa para o contêiner da imagem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Garante que a imagem não ultrapasse o contêiner */
+}
+.card-img-container img {
+  max-height: 100%;
+  max-width: 100%;
+  /*margin: auto;*/
+  margin-top: 20px;
+  object-fit: contain; /* Mantém a proporção da imagem */
+}
