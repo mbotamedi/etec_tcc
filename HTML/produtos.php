@@ -65,8 +65,16 @@
             </div>
         </div>
 
-
+        
     </nav>
+    <!-- Modal -->
+    <div id="meuModal" class="modal-container">
+        <div class="modal-content col-3">
+            <a href="HTML/cadastro.html">Cadastre-se</a>
+            <a href="HTML/login.html">Entrar</a>
+            <button id="fecharModal">Fechar</button>
+        </div>
+    </div>
     <!-- Navigation End-->
     <!-- Section-->
     <section class="py-5">
@@ -132,6 +140,9 @@
     <!-- Footer End-->
 
     <!--------------SCRIPTS-------------->
+    <
+    <script src="../js/scripts.js"></script>
+    <script src="../js/dropDown-menu.js"></script>
     <script src="../js/funcao.js"></script>
     
 
