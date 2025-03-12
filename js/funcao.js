@@ -49,3 +49,13 @@ function process(change, quantId) {
         mensagemModal.hide();
     }, 6000); // 6000 milissegundos = 6 segundos
 });
+
+
+// Função para o Carrossel Produtos
+function process(change, inputId) {
+    const input = document.getElementById(inputId);
+    let value = parseInt(input.value) || 0;
+    value += change;
+    if (value < 0) value = 0; // Impede valores negativos
+    input.value = value;
+}

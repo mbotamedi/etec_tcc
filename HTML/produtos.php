@@ -82,26 +82,19 @@
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">Produto Cantina</h1>
         </div>
-        <?php
-        // Inclui o arquivo de conexão
-        include("../includes/conexao.php");
-
-        // Executa a consulta usando MySQLi
-        $query = "SELECT * FROM tb_produtos order by descricao";
-        $resultado = mysqli_query($conexao, $query);
-
-        // Verifica se a consulta foi bem-sucedida
-        if (!$resultado) {
-            die("Erro na consulta: " . mysqli_error($conexao));
-        }
-
-        // Busca todos os produtos
-        $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-        ?>
+        <form class="gap-2 col-4 mx-auto" method="post">
+            <label for="consulta">Pesquisa de Produtos:</label>
+            <input type="text" name="consulta" id="consulta">
+            <button type="submit" class="btn btn-primary ">consultar</button>
+        </form>
+        
 
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php foreach ($produtos as $produto): ?>
+                <?php 
+                include("../includes/pesquisa.php");
+                foreach ($produtos as $produto): 
+                ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-img-container">

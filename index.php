@@ -121,26 +121,13 @@
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
         </div>
-        <?php
-        // Inclui o arquivo de conexão
-        include("includes/conexao.php");
-
-        // Executa a consulta usando MySQLi
-        $query = "SELECT * FROM tb_produtos order by descricao limit 3";
-        $resultado = mysqli_query($conexao, $query);
-
-        // Verifica se a consulta foi bem-sucedida
-        if (!$resultado) {
-            die("Erro na consulta: " . mysqli_error($conexao));
-        }
-
-        // Busca todos os produtos
-        $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-        ?>
-
+        
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php foreach ($produtos as $produto): ?>
+                <?php 
+                    include("includes/consulta.php");
+                    foreach ($produtos as $produto): 
+                ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-img-container">
@@ -166,7 +153,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
-
+        
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -174,18 +161,13 @@
             <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
         </div>
     </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
     <!--------------SCRIPTS-------------->
-
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/dropDown-menu.js"></script>
     <script src="js/funcao.js"></script>
-
-
     <!--------------SCRIPTS/-------------->
 
 

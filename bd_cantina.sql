@@ -5821,7 +5821,8 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (68, 4, 'Bala  Escovinhas Fini', 7.50, 50, '../img/Bala  Escovinhas Fini.jpg ', 'img/Bala  Escovinhas Fini.jpg ');
 
 -- --------------------------------------------------------
-
+----UPDATE tb_produtos
+SET descricao = UPPER(descricao);
 --
 -- Estrutura para tabela `tb_subcategoria`
 --
