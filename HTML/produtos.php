@@ -22,7 +22,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
-     
+
 </head>
 
 <body>
@@ -54,6 +54,7 @@
             </div>
 
 
+
             <div class="buy-actions">
                 <a href="#" id="abrirModal">
                     <img src="../imgs/User.png" alt="Usuário" width="30px">
@@ -65,7 +66,17 @@
             </div>
         </div>
 
-        
+        <div class="barra-pesquisa">
+            <form method="post">
+                <input type="text" name="consulta" id="consulta" class="pesquisa-input">
+                <button type="submit" class="botao-pesquisa" style="background-color: transparent; border: none;">
+                    <img src="../imgs/lupa (1).png" style="width: 25px;" alt="">
+                </button>
+            </form>
+
+        </div>
+
+
     </nav>
     <!-- Modal -->
     <div id="meuModal" class="modal-container">
@@ -82,18 +93,14 @@
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">Produto Cantina</h1>
         </div>
-        <form class="gap-2 col-4 mx-auto" method="post">
-            <label for="consulta">Pesquisa de Produtos:</label>
-            <input type="text" name="consulta" id="consulta">
-            <button type="submit" class="btn btn-primary ">consultar</button>
-        </form>
-        
+
+
 
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php 
+                <?php
                 include("../includes/pesquisa.php");
-                foreach ($produtos as $produto): 
+                foreach ($produtos as $produto):
                 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
@@ -134,10 +141,12 @@
 
     <!--------------SCRIPTS-------------->
     <
-    <script src="../js/scripts.js"></script>
-    <script src="../js/dropDown-menu.js"></script>
-    <script src="../js/funcao.js"></script>
-    
+        <script src="../js/scripts.js">
+        </script>
+        <script src="../js/dropDown-menu.js"></script>
+        <script src="../js/funcao.js"></script>
+        <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+
 
 </body>
 

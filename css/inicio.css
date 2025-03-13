@@ -1,7 +1,5 @@
 .items {
-    gap: 50px;
-    display: flex;
-    font-family: "Fredoka", serif;
+    justify-content: center;
 
 }
 
@@ -47,6 +45,8 @@
     transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
 }
 
+
+
 /* Classe para exibir o modal com animação */
 .modal-container.show {
     max-height: 200px;
@@ -89,7 +89,22 @@
 
 }
 
-/*MEDIA QUERY*/
+.barra-pesquisa{
+    display: flex !important; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+     
+}
+
+.pesquisa-input{
+    width: 500px;
+}
+
+
+
+
+/*----------------------------------MEDIA QUERY--------------------------------------------------*/
 
 /* Tela grande (desktop) */
 @media (min-width: 1200px) {
