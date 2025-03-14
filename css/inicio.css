@@ -1,7 +1,4 @@
-.items {
-    justify-content: center;
 
-}
 
 
 .items>a {
@@ -91,15 +88,28 @@
 
 .barra-pesquisa{
     display: flex !important; 
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
     width: 100%;
+    padding-left: 180px;
      
 }
 
 .pesquisa-input{
     width: 500px;
 }
+
+
+.menu-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aaa{
+    width: 100%;
+}
+
 
 
 
@@ -127,6 +137,15 @@
         color: rgb(255, 157, 0);
         transform: scale(1.05);
     }
+
+    .barra-pesquisa{
+    display: flex !important; 
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    padding-left: 180px;
+     
+}
 
 }
 
@@ -243,7 +262,10 @@
             font-size: 20px;
         }
 
+
     }
+    
+
 
 
 }
@@ -257,6 +279,7 @@
         cursor: pointer;
         margin-bottom: 10px;
     }
+    
 
     .bar1,
     .bar2,
@@ -347,4 +370,5 @@
         margin-right: 20px;
     }
 
+    
 }

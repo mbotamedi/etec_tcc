@@ -33,7 +33,7 @@
                 <img src="../imgs/logo_copia01.png" alt="" width="100px">
             </div>
 
-            <div class="items col-5">
+            <div class="items">
                 <a href="../index.php">INICIO</a>
                 <a href="../html/produtos.php">PEÇA AGORA</a>
                 <a href="../html/unidades.html">UNIDADES</a>
@@ -53,8 +53,6 @@
                 </ul>
             </div>
 
-
-
             <div class="buy-actions">
                 <a href="#" id="abrirModal">
                     <img src="../imgs/User.png" alt="Usuário" width="30px">
@@ -66,14 +64,13 @@
             </div>
         </div>
 
-        <div class="barra-pesquisa">
-            <form method="post">
+        <div class="aaa">
+            <form method="post" class="barra-pesquisa">
                 <input type="text" name="consulta" id="consulta" class="pesquisa-input">
                 <button type="submit" class="botao-pesquisa" style="background-color: transparent; border: none;">
                     <img src="../imgs/lupa (1).png" style="width: 25px;" alt="">
                 </button>
             </form>
-
         </div>
 
 
@@ -89,12 +86,6 @@
     <!-- Navigation End-->
     <!-- Section-->
     <section class="py-5">
-
-        <div class="titulo-pricipal">
-            <h1 class="produtos-Destaques">Produto Cantina</h1>
-        </div>
-
-
 
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
