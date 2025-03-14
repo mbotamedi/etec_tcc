@@ -1,0 +1,2 @@
+ src="<?= $produto['imagem'] ?>" igual a src="<?php echo $produto['imagem']; ?>
+ <?= ... ?> é uma abreviação do PHP para <?php echo ... ?>
