@@ -146,7 +146,7 @@
                                 <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" />
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
+                                <button type="submit" class="btn btn-outline-primary mt-auto buy-button ">Comprar</button>
                             </div>
                         </div>
                     </div>
