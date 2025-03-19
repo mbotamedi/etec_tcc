@@ -39,10 +39,10 @@
                 <img src="../imgs/logo_copia01.png" alt="" width="100px">
             </div>
 
-            <div class="items col-5">
-                <a href="../index.html">INICIO</a>
-                <a href="#">PEÇA AGORA</a>
-                <a href="HTML/unidades.html">UNIDADES</a>
+            <div class="items">
+                <a href="../index.php">INÍCIO</a>
+                <a href="../php/produtos.php">PEÇA AGORA</a>
+                <a href="../php/unidades.php">UNIDADES</a>
             </div>
 
             <div class="menu-toggle">
@@ -135,7 +135,7 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
     <!-- Bootstrap core JS-->

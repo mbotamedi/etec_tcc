@@ -48,8 +48,8 @@
 
             <div class="items col-5">
                 <a href="index.php">INICIO</a>
-                <a href="HTML/produtos.php">PEÇA AGORA</a>
-                <a href="HTML/unidades.html">UNIDADES</a>
+                <a href="./php/produtos.php">PEÇA AGORA</a>
+                <a href="./php/unidades.php">UNIDADES</a>
 
             </div>
 
@@ -121,12 +121,12 @@
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
         </div>
-        
+
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php 
-                    include("includes/consulta.php");
-                    foreach ($produtos as $produto): 
+                <?php
+                include("includes/consulta.php");
+                foreach ($produtos as $produto):
                 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
@@ -153,12 +153,12 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        
+
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
 

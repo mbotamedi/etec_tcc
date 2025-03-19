@@ -34,11 +34,11 @@
             </div>
 
             <div class="items">
-                <a href="../index.php">INICIO</a>
-                <a href="../html/produtos.php">PEÇA AGORA</a>
-                <a href="../html/unidades.html">UNIDADES</a>
-
+                <a href="../index.php">INÍCIO</a>
+                <a href="../php/produtos.php">PEÇA AGORA</a>
+                <a href="../php/unidades.php">UNIDADES</a>
             </div>
+
 
             <div class="menu-toggle">
                 <img src="../imgs/cardapio.png" alt="" width="32px">
@@ -124,7 +124,7 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
 
