@@ -31,15 +31,15 @@
 <script>
     $(".altera").click(function(){ 
         var id        = $(this).closest("tr").find("td").eq(0).text();
-        var descricao = $(this).closest("tr").find("td").eq(2).text();
-        var valor     = $(this).closest("tr").find("td").eq(3).text();
-        var quantidade  = $(this).closest("tr").find("td").eq(4).text();
+        var descricao = $(this).closest("tr").find("td").eq(1).text();
+        var valor     = $(this).closest("tr").find("td").eq(2).text();
+        var estoque    = $(this).closest("tr").find("td").eq(3).text();
 
-        //Carrego a descricao no Campo txtcategoria        
+        //Carrego a descricao no Campo txtcategoria 
+        $("#id")         .val(id);       
         $("#txtprodutos").val(descricao);
-        $("#id")         .val(id);
-        $("#valor") .val(valor);
-        $("quantidade").val(quantidade);
+        $("#txtvalor") .val(valor);
+        $("#txtquantidade").val(estoque);
 
     });
 

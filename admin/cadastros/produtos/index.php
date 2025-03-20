@@ -15,12 +15,12 @@
             <input type="text" name="txtprodutos" id="txtprodutos" class="form-control">
           </div>
         </div>   
-        <div class="row mb-2">
-          <label for="txtdescricao" class="col-sm-2 col-form-label">Produtos</label>
+        <!--<div class="row mb-2">
+          <label for="txtdescricao" class="col-sm-2 col-form-label">Descrição</label>
           <div class="col-sm-10">
             <input type="text" name="txtdescricao" id="txtdescricao" class="form-control">
           </div>
-        </div> 
+        </div> --->
         <div class="row mb-2">
           <label for="txtvalor" class="col-sm-2 col-form-label">Valor</label>
           <div class="col-sm-10">
@@ -30,7 +30,7 @@
         <div class="row mb-2">
           <label for="txtestoque" class="col-sm-2 col-form-label">Quantidade</label>
           <div class="col-sm-10">
-            <input type="text" name="txtestoque" id="txtestoque" class="form-control">
+            <input type="text" name="txtquantidade" id="txtquantidade" class="form-control">
           </div>
         </div>    
 
