@@ -34,11 +34,11 @@
             </div>
 
             <div class="items">
-                <a href="../index.php">INICIO</a>
-                <a href="../html/produtos.php">PEÇA AGORA</a>
-                <a href="../html/unidades.html">UNIDADES</a>
-
+                <a href="../index.php">INÍCIO</a>
+                <a href="../php/produtos.php">PEÇA AGORA</a>
+                <a href="../php/unidades.php">UNIDADES</a>
             </div>
+
 
             <div class="menu-toggle">
                 <img src="../imgs/cardapio.png" alt="" width="32px">
@@ -75,11 +75,11 @@
 
 
     </nav>
-    <!-- Modal -->
-    <div id="meuModal" class="modal-container">
+     <!-- Modal -->
+     <div id="meuModal" class="modal-container">
         <div class="modal-content col-3">
-            <a href="HTML/cadastro.html">Cadastre-se</a>
-            <a href="HTML/login.html">Entrar</a>
+            <a href="../php/cadastro.php">Cadastre-se</a>
+            <a href="../php/login.php">Entrar</a>
             <button id="fecharModal">Fechar</button>
         </div>
     </div>
@@ -105,10 +105,13 @@
                                 <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
                             </div>
                             <div class="quantity-controls">
-                                <label>Quantidade:</label>
-                                <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" />
-                                <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
-                                <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" />
+                                <label class="qtd-label">Quantidade:</label>
+                                <div>
+                                    <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" class="campo"  />
+                                    <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
+                                    <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')"   class="campo"/>
+                                </div>
+
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
@@ -124,7 +127,7 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
 

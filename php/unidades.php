@@ -135,7 +135,7 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; WebSolution 2025</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
     <!-- Bootstrap core JS-->
