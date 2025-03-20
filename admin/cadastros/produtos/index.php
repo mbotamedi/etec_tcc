@@ -10,29 +10,29 @@
       <!--begin::Body-->
       <div class="card-body">
         <div class="row mb-2">
-          <div class="col-md-6">
-                          <label for="categoria" class="form-label">Produtos</label>
-                          <select class="form-select" name="produtos" id="produtos" required="">                                                   
-                            <?php
-                                include_once("../includes/conexao.php");
-                                $qryprodutos= mysqli_query($conexao,"select * from tb_produtos order by descricao");
-                                while ($listaCat = mysqli_fetch_assoc($qryprodutos)){
-                                    echo '<option value="'.$listaCat["id"].'">'.$listaCat["descricao"].'</option>';
-                                }
-                            ?>
-                            
-                          </select>
-                          <div class="invalid-feedback">Por favor Selecione um produto.</div>
+          <label for="txtprodutos" class="col-sm-2 col-form-label">Produtos</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtprodutos" id="txtprodutos" class="form-control">
           </div>
-
-        
-          
-          <!---<div class="col-md-6">
-          <label for="inputEmail3" class="sm-2 form-label">SubCategoria</label>
-            <input type="text" name="txtsubcategoria" id="txtsubcategoria" class="form-control">
-          </div>--->
-
-        </div>      
+        </div>   
+        <div class="row mb-2">
+          <label for="txtdescricao" class="col-sm-2 col-form-label">Produtos</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtdescricao" id="txtdescricao" class="form-control">
+          </div>
+        </div> 
+        <div class="row mb-2">
+          <label for="txtvalor" class="col-sm-2 col-form-label">Valor</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtvalor" id="txtvalor" class="form-control">
+          </div>
+        </div>  
+        <div class="row mb-2">
+          <label for="txtestoque" class="col-sm-2 col-form-label">Quantidade</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtestoque" id="txtestoque" class="form-control">
+          </div>
+        </div>    
 
       </div>
       <!--end::Body-->
