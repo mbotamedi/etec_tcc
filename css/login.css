@@ -2,10 +2,8 @@
     height: 4px;
     width: 0%;
     background-color: rgb(255, 157, 0);
-    /* Cor laranja */
-    margin-bottom: 16px;
-    /* Espaço abaixo da barra */
-    margin-top: -30px;
+    margin-bottom: 10px; /* Reduzido */
+    margin-top: 0px; /* Removido o valor negativo */
     transition: width 1s ease-in-out;
     animation: carregar 1s ease-in-out;
     animation-fill-mode: forwards;
@@ -34,7 +32,7 @@ body {
 }
 
 .botao {
-    width: 110%;
+    width: 100%; /* Ajustado para compactar */
 }
 
 label,
@@ -44,7 +42,6 @@ button {
     font-family: "Inter", serif;
     font-weight: 500;
     color: #333333;
-    /* Cor de texto */
 }
 
 .container {
@@ -56,14 +53,10 @@ button {
 
 .cadastro-login {
     background-color: #8f8f8f6a;
-    /* Cor de fundo */
-    padding: 25px;
-    border: 5px solid #333333;
-    /* Cor de borda */
+    padding: 20px; /* Ajustado para compactar */
     border-radius: 10px;
-    border: none;
-    width: 400px;
-    height: 500px;
+    width: 350px; /* Ajustado para compactar */
+    height: 450px; /* Ajustado para compactar */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,36 +67,31 @@ button {
 .header-title>h2 {
     font-family: "Fredoka", serif;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 32px; /* Ajustado para compactar */
     color: #333333;
-    /* Cor de texto */
 }
 
-
-
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Ajustado para compactar */
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Ajustado para compactar */
 }
 
-
 form {
-    margin-left: -60px;
+    margin-left: 0px; /* Ajustado para compactar */
 }
 
 input[type="email"],
 input[type="password"] {
-    width: 120%;
+    width: 100%; /* Ajustado para compactar */
     height: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 15px;
     background-color: #d6d6d6e2;
-    /* Cor de fundo */
 }
 
 input:focus {
@@ -111,15 +99,12 @@ input:focus {
     border: none;
 }
 
-
 button[type="submit"] {
-    width: 120%;
+    width: 100%; /* Ajustado para compactar */
     height: 40px;
     padding: 10px;
     background-color: rgb(255, 157, 0);
-    /* Cor de botão */
     color: #FFFFFF;
-    /* Cor de texto */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -128,11 +113,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     transform: scale(1.05);
-}
-
-button[type="submit"]:hover {
     background-color: rgb(255, 128, 0);
-    /* Cor de botão hover */
 }
 
 .user-icon {
@@ -140,10 +121,9 @@ button[type="submit"]:hover {
 }
 
 .information {
-    margin-top: 25px;
+    margin-top: 20px; /* Ajustado para compactar */
 }
 
-/*---ANIMAÇÕES-----*/
 .user-icon {
     opacity: 0;
     animation: fadeIn 2s;
@@ -174,50 +154,29 @@ button[type="submit"]:hover {
     }
 }
 
-.information {
-    margin-top: 25px;
-}
-
 .information a {
     font-family: "Inter", serif;
     font-weight: 500;
     color: #333333;
-    /* Cor de texto */
     transition: transform 0.5s ease-in-out;
 }
 
 .information a:hover {
     transform: scale(1.1);
-    transition: transform 0.5s ease-in-out;
-}
-
-.information a {
-    font-family: "Inter", serif;
-    font-weight: 500;
-    color: #333333;
-    /* Cor de texto */
-    text-decoration: none;
-    transition: color 0.5s ease-in-out;
-}
-
-.information a:hover {
     color: rgb(182, 113, 0);
-    /* Cor de texto hover */
-    transition: color 0.5s ease-in-out;
 }
 
-/*media query*/
+/* Media Queries */
 
-/* Tela pequena (menos de 768px) */
 @media (max-width: 767px) {
     .cadastro-login {
         width: 80%;
         padding: 10px;
-        height: 500px;
+        height: 400px; /* Ajustado para compactar */
     }
     
-    .header-title > h2{
-        font-size: 35px;
+    .header-title > h2 {
+        font-size: 28px; /* Ajustado para compactar */
     }
 
     form {
@@ -242,24 +201,16 @@ button[type="submit"]:hover {
     }
 }
 
-@media (max-width: 767px){
-    .header-title > h2{
-        font-size: 30px;
-    }
-}
-
-/* Tela média (entre 768px e 992px) */
 @media (min-width: 768px) and (max-width: 991px) {
     .cadastro-login {
         width: 60%;
         padding: 15px;
-        height: 450px;
+        height: 400px; /* Ajustado para compactar */
     }
 
-    .header-title > h2{
-        font-size: 35px;
+    .header-title > h2 {
+        font-size: 30px; /* Ajustado para compactar */
     }
-    
 
     form {
         margin-left: 0px;
@@ -283,26 +234,24 @@ button[type="submit"]:hover {
     }
 }
 
-/* Tela grande (mais de 992px) */
 @media (min-width: 992px) {
     .cadastro-login {
-        width: 40%;
+        width: 350px; /* Ajustado para compactar */
         padding: 20px;
-        height: 500px;
+        height: 450px; /* Ajustado para compactar */
     }
-    
 
     form {
-        margin-left: -60px;
+        margin-left: 0px; /* Ajustado para compactar */
     }
 
     input[type="email"],
     input[type="password"] {
-        width: 120%;
+        width: 100%; /* Ajustado para compactar */
     }
 
     button[type="submit"] {
-        width: 120%;
+        width: 100%; /* Ajustado para compactar */
     }
 
     .user-icon {
@@ -310,6 +259,6 @@ button[type="submit"]:hover {
     }
 
     .information {
-        margin-top: 25px;
+        margin-top: 20px; /* Ajustado para compactar */
     }
 }

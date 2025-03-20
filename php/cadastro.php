@@ -12,6 +12,7 @@
         rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="shortcut icon" href="../imgs/logo_copia01.png" type="image/x-icon">
     <title>Cantina Três Irmãos - Cadastre-se</title>
