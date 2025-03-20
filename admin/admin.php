@@ -181,7 +181,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index3.html" class="nav-link">
+                    <a href="?pg=Produtos" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Produtos</p>
                     </a>
@@ -255,6 +255,7 @@
             switch($_GET["pg"]){
               case "Categorias" : $incluir = "cadastros/categorias/index.php"; break;
               case "SubCategorias" : $incluir = "cadastros/subcategorias/index.php"; break; 
+              case "Produtos" : $incluir = "cadastros/produtos/index.php"; break; 
               default : $incluir = "cards.php"; break;
             } 
             include($incluir);
