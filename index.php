@@ -48,8 +48,8 @@
 
             <div class="items col-5">
                 <a href="index.php">INICIO</a>
-                <a href="HTML/produtos.php">PEÇA AGORA</a>
-                <a href="HTML/unidades.html">UNIDADES</a>
+                <a href="PHP/produtos.php">PEÇA AGORA</a>
+                <a href="PHP/unidades.php">UNIDADES</a>
 
             </div>
 

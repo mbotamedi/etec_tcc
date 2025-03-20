@@ -40,7 +40,7 @@
             </form>
             <div class="information">
 
-                <p>Não tem conta? <a href="../HTML/cadastro.html">Cadastre-se</a></p>
+                <p>Não tem conta? <a href="cadastro.php">Cadastre-se</a></p>
             </div>
         </div>
     </div>

@@ -40,15 +40,15 @@
             </div>
 
             <div class="items col-5">
-                <a href="../index.html">INICIO</a>
-                <a href="#">PEÇA AGORA</a>
-                <a href="HTML/unidades.html">UNIDADES</a>
+                <a href="../index.php">INICIO</a>
+                <a href="produtos.php">PEÇA AGORA</a>
+                <a href="unidades.php">UNIDADES</a>
             </div>
 
             <div class="menu-toggle">
                 <img src="../imgs/cardapio.png" alt="" width="32px">
                 <ul class="menu">
-                    <li><a href="../index.html" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
+                    <li><a href="../index.php" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
                     </li>
                     <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
                     </li>
@@ -76,8 +76,8 @@
     <!-- Modal -->
     <div id="meuModal" class="modal-container">
         <div class="modal-content col-3">
-            <a href="HTML/cadastro.html">Cadastre-se</a>
-            <a href="HTML/login.html">Entrar</a>
+            <a href="php/cadastro.php">Cadastre-se</a>
+            <a href="php/login.pho">Entrar</a>
             <button id="fecharModal">Fechar</button>
         </div>
     </div>
