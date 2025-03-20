@@ -8991,6 +8991,7 @@ fieldset:disabled .btn {
 
 .text-center {
   text-align: center !important;
+  margin-top: 10px;
 }
 
 .text-decoration-none {
@@ -12639,10 +12640,19 @@ fieldset:disabled .btn {
 /* botão de quantidade*/
 
 .quantity-controls {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
+  
+}
+
+.campo{ /*TAMANHO DOS BOTÕES DE ADICIONAR E DIMINUIR QUANTIDADE*/
+  width: 30px;
+}
+
+.qtd-label{
+  display: flex;
+  justify-content: center;
 }
 
 .quantity-controls input[type="button"] {

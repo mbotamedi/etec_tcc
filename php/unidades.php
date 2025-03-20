@@ -76,8 +76,8 @@
     <!-- Modal -->
     <div id="meuModal" class="modal-container">
         <div class="modal-content col-3">
-            <a href="HTML/cadastro.html">Cadastre-se</a>
-            <a href="HTML/login.html">Entrar</a>
+            <a href="../php/cadastro.php">Cadastre-se</a>
+            <a href="../php/login.php">Entrar</a>
             <button id="fecharModal">Fechar</button>
         </div>
     </div>
