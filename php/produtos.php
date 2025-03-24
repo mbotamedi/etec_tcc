@@ -66,9 +66,9 @@
 
         <div class="aaa">
             <form method="post" class="barra-pesquisa">
-                <input type="text" name="consulta" id="consulta" class="pesquisa-input">
+                <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px;">
                 <button type="submit" class="botao-pesquisa" style="background-color: transparent; border: none;">
-                    <img src="../imgs/lupa (1).png" style="width: 25px;" alt="">
+                    <img src="../imgs/lupa (1).png" style="width: 25px;" alt="" class="search-image">
                 </button>
             </form>
         </div>
