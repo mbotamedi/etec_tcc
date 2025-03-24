@@ -1,12 +1,10 @@
-<?php   
-    include("../../../includes/conexao.php");
+<?php
+include("../../../includes/conexao.php");
 
-    $id = $_POST["id"];
+$id = $_POST["id"];
 
-    $delete = mysqli_query($conexao, 
-    "CALL spr_apagaregistro($id,'tb_subcategorias')");
+$delete = mysqli_query($conexao, "CALL spr_apagaregistro($id,'tb_produtos')");
 
-    $retorno = mysqli_fetch_assoc($delete);
+$retorno = mysqli_fetch_assoc($delete);
 
-    echo $retorno["resultado"];
-?>
+echo $retorno["resultado"];

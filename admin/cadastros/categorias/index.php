@@ -3,7 +3,9 @@
 
   <div class="card card-warning card-outline mb-4">
     <!--begin::Header-->
-    <div class="card-header"><div class="card-title">Cadastro de Categorias</div></div>
+    <div class="card-header">
+      <div class="card-title">Cadastro de Categorias</div>
+    </div>
     <!--end::Header-->
     <!--begin::Form-->
     <form name="FrmCadastro" id="FrmCadastro" action="cadastros/categorias/salvar.php" method="post">
@@ -14,14 +16,14 @@
           <div class="col-sm-10">
             <input type="text" name="txtcategoria" id="txtcategoria" class="form-control">
           </div>
-        </div>      
+        </div>
 
       </div>
       <!--end::Body-->
       <!--begin::Footer-->
       <div class="card-footer">
         <input type="hidden" name="id" id="id" value="0">
-        <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>   
+        <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
       </div>
       <!--end::Footer-->
     </form>
@@ -30,8 +32,10 @@
 
 
   <div class="card card-primary card-outline mb-4">
-    <div class="card-header"><div class="card-title">Categorias Cadastradas</div></div>
-        <div class="card-body" id="listar"></div>
+    <div class="card-header">
+      <div class="card-title">Categorias Cadastradas</div>
+    </div>
+    <div class="card-body" id="listar"></div>
   </div>
 
 
@@ -44,33 +48,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha512-YUkaLm+KJ5lQXDBdqBqk7EVhJAdxRnVdT2vtCzwPHSweCzyMgYV/tgGF4/dCyqtCC2eCphz0lRQgatGVdfR0ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/funcoes.js"></script>
 <script>
-  $( document ).ready(function() {
+  $(document).ready(function() {
 
-  $("#btnSalvar").click(function(){  
-    $("#txtcategoria").css("border-color","#CCC");
-    
-    if ($("#txtcategoria").val() == ''){
-      $("#txtcategoria").css("border-color","red");
-      alert("Favor Preencha o campo Categoria");
-      $("#txtcategoria").focus();      
-      return false;
-    }
+    $("#btnSalvar").click(function() {
+      $("#txtcategoria").css("border-color", "#CCC");
 
-    $('#FrmCadastro').ajaxForm(function(retorno) {
-       // alert(retorno);
+      if ($("#txtcategoria").val() == '') {
+        $("#txtcategoria").css("border-color", "red");
+        alert("Favor Preencha o campo Categoria");
+        $("#txtcategoria").focus();
+        return false;
+      }
+
+      $('#FrmCadastro').ajaxForm(function(retorno) {
+        // alert(retorno);
         mostraDialogo(retorno, 'info', 3000);
         $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
         $("#listar").load("cadastros/categorias/listar.php");
         $("#id").val(0);
         $('#FrmCadastro')[0].reset();
         $("#txtcategoria").focus();
-    });
-    
-  })
+      });
 
-  
-  $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-  $("#listar").load("cadastros/categorias/listar.php");
+    })
 
-});
+
+    $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
+    $("#listar").load("cadastros/categorias/listar.php");
+
+  });
 </script>
