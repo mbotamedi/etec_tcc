@@ -5797,8 +5797,8 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
 
 INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoque`, `imagem`, `imagem1`) VALUES
 (1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.00, 80, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
-(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 30, '.../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
-(3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 15, '.../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
+(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 30, '../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
+(3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 15, '../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
 (4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 30, '../assets/img/iogurte.jpg', 'assets/img/iogurte.jpg'),
 (5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 20, '../assets/img/bolo.jpg', 'assets/img/bolo.jpg'),
 (6, 8, 'CASQUINHA DE SORVETE', 4.50, 40, '../assets/img/sorvete.jpg', 'assets/img/sorvete.jpg'),
