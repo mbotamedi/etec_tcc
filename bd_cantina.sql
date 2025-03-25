@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 20/03/2025 às 02:03
+-- Tempo de geração: 25/03/2025 às 20:45
 -- Versão do servidor: 11.3.2-MariaDB
 -- Versão do PHP: 8.3.6
 
@@ -5784,19 +5784,19 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
   `descricao` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL DEFAULT 0.00,
   `estoque` int(11) NOT NULL,
-  `imagem` varchar(255) NOT NULL,
-  `imagem1` varchar(255) NOT NULL,
+  `imagem` varchar(255) DEFAULT NULL,
+  `imagem1` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `descricao` (`descricao`),
   KEY `id_subcategoria` (`id_subcategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_produtos`
 --
 
 INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoque`, `imagem`, `imagem1`) VALUES
-(1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.00, 80, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
+(1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.30, 80, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
 (2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 30, '../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
 (3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 15, '../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
 (4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 30, '../assets/img/iogurte.jpg', 'assets/img/iogurte.jpg'),
@@ -5863,7 +5863,8 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (65, 4, 'BALA FINI TUBES', 7.50, 50, '../assets/img/Bala fini tubes.jpg ', 'assets/img/Bala fini tubes.jpg '),
 (66, 4, 'BALA FINI BANANA', 7.50, 50, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
 (67, 4, 'AROS DE MORANGO AZEDINHOS 80G', 7.50, 50, '../assets/img/Aros de Morango Azedinhos 80g - Fini.jpg ', 'assets/img/Aros de Morango Azedinhos 80g - Fini.jpg '),
-(68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 50, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg ');
+(68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 50, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg '),
+(131, 3, 'BOMBOM AERO', 2.80, 80, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5913,11 +5914,24 @@ DROP TABLE IF EXISTS `tb_usuarios`;
 CREATE TABLE IF NOT EXISTS `tb_usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
+  `CPF` varchar(14) NOT NULL,
   `email` varchar(200) NOT NULL,
   `senha` varchar(132) NOT NULL,
+  `Celular` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_usuarios`
+--
+
+INSERT INTO `tb_usuarios` (`id`, `nome`, `CPF`, `email`, `senha`, `Celular`) VALUES
+(1, 'João Silva', '123.456.789-01', 'joao.silva@email.com', '@ibmb455', '(11) 98765-4321'),
+(2, 'Maria Oliveira', '234.567.890-12', 'maria.oliveira@email.com', '$ma588@ol', '(21) 99876-5432'),
+(3, 'Carlos Souza', '345.678.901-23', 'carlos.souza@email.com', 'senha123', '(31) 98765-1234'),
+(4, 'Ana Pereira', '456.789.012-34', 'ana.pereira@email.com', '123456', '(41) 99876-2345'),
+(5, 'Pedro Santos', '567.890.123-45', 'pedro.santos@email.com', 'qwerty', '(51) 98765-3456');
 
 -- --------------------------------------------------------
 

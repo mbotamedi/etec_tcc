@@ -179,7 +179,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="./index3.html" class="nav-link">
+                  <a href="?pg=Usuarios" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Usuários</p>
                   </a>
@@ -255,6 +255,9 @@
             break;
           case "Produtos":
             $incluir = "cadastros/produtos/index.php";
+            break;
+          case "Usuarios":
+            $incluir = "cadastros/usuarios/index.php";
             break;
           default:
             $incluir = "cards.php";

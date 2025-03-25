@@ -1,10 +1,16 @@
 <?php
 include("../../../includes/conexao.php");
 
-if (isset($consulta) == null) {
-    $listar = mysqli_query($conexao, "SELECT * FROM tb_produtos order by id");
+// Verifica se o parâmetro consulta foi enviado
+$consulta = isset($_POST['consulta']) ? trim($_POST['consulta']) : null;
+
+
+if ($consulta == null) {
+    $listar = mysqli_query($conexao, "SELECT tp.id, tp.descricao, ts.descricao as subcategoria, tp.valor, tp.estoque FROM tb_produtos tp
+INNER JOIN tb_subcategorias ts ON ts.id = tp.id_subcategoria order by tp.id");
 } else {
-    $listar = mysqli_query($conexao, "SELECT * FROM tb_produtos WHERE descricao LIKE UPPER ('%$consulta%') ");
+    $listar = mysqli_query($conexao, "SELECT tp.id, tp.descricao, ts.descricao as subcategoria, tp.valor, tp.estoque FROM tb_produtos tp
+INNER JOIN tb_subcategorias ts ON ts.id = tp.id_subcategoria WHERE tp.descricao LIKE UPPER ('%$consulta%') ");
 }
 
 echo '<table class="table table-striped">';
@@ -20,8 +26,9 @@ echo '<thead>
 while ($lista = mysqli_fetch_assoc($listar)) {
     echo '<tr class="align-middle">
                     <td>' . $lista["id"] . '</td>
+                    <td>' . $lista["subcategoria"] . '</td>
                     <td>' . $lista["descricao"] . '</td>
-                    <td>' . $lista["valor"] . '</td>
+                    <td>R$ ' . number_format($lista["valor"], 2, ',', '.') . '</td>
                     <td>' . $lista["estoque"] . '</td>
                     <td><i class="bi bi-pencil-square altera"></i> |
                         <i class="bi bi-trash deleta"></i></td>
@@ -37,15 +44,18 @@ echo '</tbody>
 <script>
     $(".altera").click(function() {
         var id = $(this).closest("tr").find("td").eq(0).text();
-        var descricao = $(this).closest("tr").find("td").eq(1).text();
-        var valor = $(this).closest("tr").find("td").eq(2).text();
-        var estoque = $(this).closest("tr").find("td").eq(3).text();
+        var subcategoria = $(this).closest("tr").find("td").eq(1).text();
+        var descricao = $(this).closest("tr").find("td").eq(2).text();
+        var valor_formatado = $(this).closest("tr").find("td").eq(3).text();
+        var valor = valor_formatado.replace('R$', '').replace(',', '.');
+        var estoque = $(this).closest("tr").find("td").eq(4).text();
 
         //Carrego a descricao no Campo txtcategoria 
-        $("#id").val(id);
+        $("#subcategoria").val($('option:contains("' + subcategoria + '")').val());
         $("#txtprodutos").val(descricao);
         $("#txtvalor").val(valor);
         $("#txtquantidade").val(estoque);
+        $("#id").val(id);
 
     });
 

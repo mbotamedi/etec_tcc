@@ -4,67 +4,64 @@
   <div class="card card-warning card-outline mb-4">
     <!--begin::Header-->
     <div class="card-header">
-      <div class="card-title">Cadastro de Produtos</div>
+      <div class="card-title">Cadastro de Usuarios</div>
     </div>
     <!--end::Header-->
     <!--begin::Form-->
-    <form name="FrmCadastro" id="FrmCadastro" action="cadastros/produtos/salvar.php" method="post">
+    <form name="FrmCadastro" id="FrmCadastro" action="cadastros/usuarios/salvar.php" method="post">
       <!--begin::Body-->
       <div class="card-body">
+
         <div class="row mb-2">
-          <label for="subcategoria" class="col-sm-2 col-form-label">Subcategoria:</label>
-          <div class="col-sm-7">
-            <select class="form-select" name="subcategoria" id="subcategoria" required="">
-              <!-- Opção padrão (prompt) -->
-              <?php
-              include_once("../includes/conexao.php");
-              $qryCategorias = mysqli_query($conexao, "select * from tb_subcategorias order by descricao");
-              while ($listaCat = mysqli_fetch_assoc($qryCategorias)) {
-                echo '<option value="' . $listaCat["id"] . '">' . $listaCat["descricao"] . '</option>';
-              }
-              ?>
-            </select>
-            <div class="invalid-feedback">Por favor Selecione uma SubCategoria.</div>
-          </div>
-        </div>
-        <div class="row mb-2">
-          <label for="txtprodutos" class="col-sm-2 col-form-label">Produtos</label>
+          <label for="txtnome" class="col-sm-2 col-form-label">Nome</label>
           <div class="col-sm-10">
-            <input type="text" name="txtprodutos" id="txtprodutos" class="form-control">
+            <input type="text" name="txtnome" id="txtnome" class="form-control">
           </div>
         </div>
 
         <div class="row mb-2">
-          <label for="txtvalor" class="col-sm-2 col-form-label">Valor</label>
+          <label for="txtcpf" class="col-sm-2 col-form-label">CPF</label>
           <div class="col-sm-10">
-            <input type="text" name="txtvalor" id="txtvalor" class="form-control">
+            <input type="text" name="txtcpf" id="txtcpf" class="form-control">
           </div>
         </div>
         <div class="row mb-2">
-          <label for="txtestoque" class="col-sm-2 col-form-label">Quantidade</label>
+          <label for="txtemail" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
-            <input type="text" name="txtquantidade" id="txtquantidade" class="form-control">
+            <input type="email" name="txtemail" id="txtemail" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label for="txtsenha" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" name="txtsenha" id="txtsenha" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label for="txtcelular" class="col-sm col-form-label">Celular</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtcelular" id="txtcelular" class="form-control">
           </div>
         </div>
 
-      </div>
-      <!--end::Body-->
-      <!--begin::Footer-->
-      <div class="card-footer">
-        <input type="hidden" name="id" id="id" value="0">
-        <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
-      </div>
-      <!--end::Footer-->
+
+        <!--end::Body-->
+        <!--begin::Footer-->
+        <div class="card-footer">
+          <input type="hidden" name="id" id="id" value="0">
+          <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
+        </div>
+        <!--end::Footer-->
     </form>
     <!--end::Form-->
   </div>
 
   <div class="card card-primary card-outline mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div class="card-title">Produtos Cadastrados</div>
+      <div class="card-title">Usuarios Cadastrados</div>
       <form id="pesquisa" class="d-flex align-items-center" style="gap: 10px;" method="post">
         <div class="input-group">
-          <input type="text" name="consulta" id="consulta" class="form-control pesquisa-input" placeholder="Buscar produtos...">
+          <input type="text" name="consulta" id="consulta" class="form-control pesquisa-input" placeholder="Buscar Usuarios...">
           <button id="btnpesquisa" type="submit" class="btn btn-outline-secondary">
             <img src="../imgs/lupa (1).png" style="width: 20px; height: 20px;" alt="Pesquisar">
           </button>
@@ -92,7 +89,7 @@
       e.preventDefault();
       var pesquisa = $('#consulta').val();
       //alert(pesquisa);
-      $.post('cadastros/produtos/listar.php', {
+      $.post('cadastros/usuarios/listar.php', {
         consulta: pesquisa
       }, function(retorno) {
         $("#listar").html(retorno);
@@ -101,34 +98,41 @@
 
 
     $("#btnSalvar").click(function() {
-      $("#txtSubCategoria").css("border-color", "#CCC");
+      //$("#txtSubCategoria").css("border-color", "#CCC");
 
-      if ($("#txtSubCategoria").val() == '') {
-        $("#txtSubCategoria").css("border-color", "red");
+      if ($("#txtnome").val() == '') {
+        $("#txtnome").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
-        $("#txtSubCategoria").focus();
+        $("#txtnome").focus();
         return false;
       }
 
 
-      if ($("#txtprodutos").val() == '') {
-        $("#txtprodutos").css("border-color", "red");
+      if ($("#txtcpf").val() == '') {
+        $("#txtcpf").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
-        $("#txtprodutos").focus();
+        $("#txtcpf").focus();
         return false;
       }
 
-      if ($("#txtvalor").val() == '') {
-        $("#txtvalor").css("border-color", "red");
+      if ($("#txtemail").val() == '') {
+        $("#txtemail").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
-        $("#txtvalor").focus();
+        $("#txtemail").focus();
         return false;
       }
 
-      if ($("txtquantidade").val() == '') {
-        $("txtquantidade").css("border-color", "red");
+      if ($("txtsenha").val() == '') {
+        $("txtsenha").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
-        $("txtquantidade").focus();
+        $("txtsenha").focus();
+        return false;
+      }
+
+      if ($("txtcelular").val() == '') {
+        $("txtcelular").css("border-color", "red");
+        alert("Favor Preencha o campo Descrição do Produtos");
+        $("txtcelular").focus();
         return false;
       }
 
@@ -138,17 +142,17 @@
         // alert(retorno);
         mostraDialogo(retorno, 'info', 3000);
         $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-        $("#listar").load("cadastros/produtos/listar.php");
+        $("#listar").load("cadastros/usuarios/listar.php");
         $("#id").val(0);
         $('#FrmCadastro')[0].reset();
-        $("#txtsubcategoria").focus();
+        $("#txtnome").focus();
       });
 
     })
 
 
     $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-    $("#listar").load("cadastros/produtos/listar.php");
+    $("#listar").load("cadastros/usuarios/listar.php");
 
   });
 </script>
