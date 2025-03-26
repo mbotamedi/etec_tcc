@@ -48,14 +48,14 @@ echo '</tbody>
         var nome = $(this).closest("tr").find("td").eq(1).text();
         var cpf = $(this).closest("tr").find("td").eq(2).text();
         var email = $(this).closest("tr").find("td").eq(3).text();
-        var senha = $(this).closet("tr").find("td").eq(4).text();
+        var senha = $(this).closest("tr").find("td").eq(4).text();
         var celular = $(this).closest("tr").find("td").eq(5).text();
 
         //Carrego a descricao no Campo txtcategoria 
         $("#txtnome").val(nome);
         $("#txtcpf").val(cpf);
         $("#txtemail").val(email);
-        $("#txtsenha").val(estoque);
+        $("#txtsenha").val(senha);
         $("#txtcelular").val(celular);
         $("#id").val(id);
 
