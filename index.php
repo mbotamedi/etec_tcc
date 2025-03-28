@@ -84,7 +84,7 @@ session_start()
 
     </nav>
 
-    <!-- Modal -->
+    <!-- Modal ANTES -->
     <div id="meuModal" class="modal-container">
         <div class="modal-content col-3">
             <a href="./php/cadastro.php">Cadastre-se</a>
@@ -92,6 +92,36 @@ session_start()
             <button id="fecharModal">Fechar</button>
         </div>
     </div>
+
+    <!-- Modal DEPOIS-->
+    <div id="meuModal" class="modal-container">
+        <!--CONTAINER DE FORA---->
+        <div class="modal-content col-3">
+            <!--CONTAINER DO NOME---->
+            <div class="user-info" style="display: flex;">
+                <div class="image-user">
+                    <img src="imgs/usuario-de-perfil.png" alt="" width="50px">
+                </div>
+                <div class=" user-name">
+                    <!--PUXAR O NOME DA CONTA VIA (JAVA-SCRIPT)-->
+                    <h4 id="nomeUsuario">Rafael Contieri</h4>
+                    <!-------------------------------------------->
+                    <a href="#" style="outline: none; color: red;">Sair</a>
+                </div>
+            </div>
+
+            <div class="action-buttons text-start">
+                <a href="#" class="btn btn-primary">Home</a>
+                <a href="#" class="btn btn-primary">Minha conta</a>
+                <a href="#" class="btn btn-primary">Pedidos/Compras</a>
+                <a href="./admin/admin.php" class="btn btn-primary">Administrador</a>
+                <a href="#" class="btn btn-primary">Suporte</a>
+            </div>
+
+        </div>
+    </div>
+
+
 
     <!--CARROSEL-->
     <div class="carrosel" style="display: flex; justify-content: center;">
@@ -145,9 +175,9 @@ session_start()
                             <div class="quantity-controls">
                                 <label class="qtd-label">Quantidade:</label>
                                 <div>
-                                    <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" class="campo"  />
+                                    <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" class="campo" />
                                     <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
-                                    <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')"   class="campo"/>
+                                    <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" class="campo" />
                                 </div>
 
                             </div>

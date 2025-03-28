@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar com Modais</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <span class="logo">Minha Cantina</span>
+        <ul id="navMenu">
+            <!-- Itens da Navbar serão atualizados dinamicamente -->
+        </ul>
+    </nav>
+
+    <!-- Modal de Login/Cadastro -->
+    <div id="modalLogin" class="modal">
+        <div class="modal-content">
+            <h2>Login / Cadastro</h2>
+            <input type="email" id="email" placeholder="Digite seu e-mail">
+            <input type="password" id="password" placeholder="Digite sua senha">
+            <button id="loginButton">Entrar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Informações do Usuário -->
+    <div id="modalUser" class="modal">
+        <div class="modal-content">
+            <h2>Bem-vindo, <span id="userEmail"></span></h2>
+            <p>Aqui estão suas informações...</p>
+            <button id="logoutButton">Sair</button>
+        </div>
+    </div>
+
+    <script>document.addEventListener("DOMContentLoaded", function () {
+        const modalLogin = document.getElementById("modalLogin");
+        const modalUser = document.getElementById("modalUser");
+        const loginButton = document.getElementById("loginButton");
+        const logoutButton = document.getElementById("logoutButton");
+        const userEmail = document.getElementById("userEmail");
+        const navMenu = document.getElementById("navMenu");
+    
+        // Atualiza a Navbar com base no login
+        function updateNavbar() {
+            navMenu.innerHTML = ""; // Limpa o menu antes de atualizar
+            const email = localStorage.getItem("userEmail");
+    
+            if (email) {
+                navMenu.innerHTML = `
+                    <li id="userMenu">Olá, ${email}</li>
+                    <li id="logoutLink">Sair</li>
+                `;
+                document.getElementById("userMenu").addEventListener("click", () => {
+                    modalUser.style.display = "flex";
+                });
+                document.getElementById("logoutLink").addEventListener("click", logout);
+            } else {
+                navMenu.innerHTML = `<li id="loginLink">Login / Cadastro</li>`;
+                document.getElementById("loginLink").addEventListener("click", () => {
+                    modalLogin.style.display = "flex";
+                });
+            }
+        }
+    
+        // Verifica se o usuário já está logado
+        function checkLoginStatus() {
+            const email = localStorage.getItem("userEmail");
+            if (email) {
+                userEmail.textContent = email;
+                modalUser.style.display = "flex";
+            } else {
+                modalLogin.style.display = "flex";
+            }
+        }
+    
+        // Simular Login
+        loginButton.addEventListener("click", function () {
+            const email = document.getElementById("email").value;
+            if (email) {
+                localStorage.setItem("userEmail", email);
+                modalLogin.style.display = "none";
+                updateNavbar(); // Atualiza a Navbar após login
+            }
+        });
+    
+        // Simular Logout
+        function logout() {
+            localStorage.removeItem("userEmail");
+            modalUser.style.display = "none";
+            updateNavbar(); // Atualiza a Navbar após logout
+        }
+    
+        logoutButton.addEventListener("click", logout);
+    
+        // Fechar modais ao clicar fora deles
+        window.addEventListener("click", function (event) {
+            if (event.target.classList.contains("modal")) {
+                event.target.style.display = "none";
+            }
+        });
+    
+        // Atualiza a Navbar ao carregar a página
+        updateNavbar();
+    });
+    </script>
+</body>
+<style>
+    /* Estilo da Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background: #007bff;
+    padding: 15px;
+    color: white;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar ul li {
+    cursor: pointer;
+}
+
+/* Estilo dos Modais */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: darkblue;
+}
+
+</style>
+</html>
