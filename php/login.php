@@ -26,7 +26,7 @@
             <div class="user-icon">
                 <img src="../imgs/usuario-de-perfil.png" alt="" width="80px">
             </div>
-            <form>
+            <form action="consulta_cliente.php" method="post">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
@@ -36,7 +36,7 @@
                     <input type="password" id="senha" name="senha" required>
                 </div>
                 <div class="botao">
-                    <button type="submit" onclick="consulta_cliente.php">Entrar</button>
+                    <button type="submit">Entrar</button>
                 </div>
             </form>
             <div class="information">
