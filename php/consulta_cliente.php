@@ -13,7 +13,7 @@ if (mysqli_num_rows($listar) > 0) {
     if ($senha == $row['senha']) {
         echo "Logado";  // Se a senha for correta
         header("Location: ../index.php");
-        exti;
+        exit;
     } else {
         header("Location: ../php/cadastro.php");  // Se a senha estiver incorreta
         exit; // Important to prevent further execution

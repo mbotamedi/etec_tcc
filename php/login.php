@@ -26,7 +26,7 @@
             <div class="user-icon">
                 <img src="../imgs/usuario-de-perfil.png" alt="" width="80px">
             </div>
-            <form id="form_login" method="POST">
+            <form action="consulta_cliente.php" method="POST">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
