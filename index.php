@@ -94,7 +94,7 @@ session_start()
     </div>
 
     <!-- Modal DEPOIS-->
-    <div id="meuModal" class="modal-container">
+    <div id="meuModal" class="modal-container" style="display: none;">
         <!--CONTAINER DE FORA---->
         <div class="modal-content col-3">
             <!--CONTAINER DO NOME---->
