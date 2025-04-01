@@ -94,9 +94,9 @@ session_start()
     </div>
 
     <!-- Modal DEPOIS-->
-    <div id="meuModal" class="modal-container">
+    <div id="meuModal" class="modal-depois">
         <!--CONTAINER DE FORA---->
-        <div class="modal-content col-3">
+        <div class="modal-content col-3" id="modal-content">
             <!--CONTAINER DO NOME---->
             <div class="user-info" style="display: flex;">
                 <div class="image-user">
@@ -204,6 +204,7 @@ session_start()
     <script src="js/scripts.js"></script>
     <script src="js/dropDown-menu.js"></script>
     <script src="js/funcao.js"></script>
+    <script src="js/troca-modal.js"></script>
     <!--------------SCRIPTS/-------------->
 
 

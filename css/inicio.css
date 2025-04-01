@@ -22,7 +22,7 @@
 /*-------------ESTILO DO MODAL-------------*/
 /* -------------ESTILO DO MODAL------------- */
 .modal-container {
-    display: none;
+    display: flex;
     /* Oculto por padrão */
     position: absolute;
     right: 40px;
@@ -50,6 +50,8 @@
     /* Ajuste conforme o conteúdo */
     opacity: 1;
 }
+
+
 
 
 
