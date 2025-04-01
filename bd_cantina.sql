@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 25/03/2025 às 20:45
--- Versão do servidor: 11.3.2-MariaDB
--- Versão do PHP: 8.3.6
+-- Generation Time: Apr 01, 2025 at 01:14 AM
+-- Server version: 11.3.2-MariaDB
+-- PHP Version: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `bd_cantina`
+-- Database: `bd_cantina`
 --
 
 DELIMITER $$
 --
--- Procedimentos
+-- Procedures
 --
 DROP PROCEDURE IF EXISTS `spr_apagaregistro`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_apagaregistro` (IN `pid` INT, IN `ptabela` VARCHAR(100))   BEGIN
@@ -69,7 +69,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_categorias`
+-- Table structure for table `tb_categorias`
 --
 
 DROP TABLE IF EXISTS `tb_categorias`;
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `tb_categorias` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_categorias`
+-- Dumping data for table `tb_categorias`
 --
 
 INSERT INTO `tb_categorias` (`id`, `descricao`) VALUES
@@ -98,7 +98,7 @@ INSERT INTO `tb_categorias` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_cidades`
+-- Table structure for table `tb_cidades`
 --
 
 DROP TABLE IF EXISTS `tb_cidades`;
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `tb_cidades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Despejando dados para a tabela `tb_cidades`
+-- Dumping data for table `tb_cidades`
 --
 
 INSERT INTO `tb_cidades` (`codigo_estado`, `sigla_estado`, `nome_estado`, `codigo_cidade`, `nome_cidade`) VALUES
@@ -5689,7 +5689,7 @@ INSERT INTO `tb_cidades` (`codigo_estado`, `sigla_estado`, `nome_estado`, `codig
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_clientes`
+-- Table structure for table `tb_clientes`
 --
 
 DROP TABLE IF EXISTS `tb_clientes`;
@@ -5706,7 +5706,7 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_clientes`
+-- Dumping data for table `tb_clientes`
 --
 
 INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha`) VALUES
@@ -5718,7 +5718,7 @@ INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_cliente_endereco`
+-- Table structure for table `tb_cliente_endereco`
 --
 
 DROP TABLE IF EXISTS `tb_cliente_endereco`;
@@ -5738,7 +5738,30 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_endereco` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_pedidos`
+-- Table structure for table `tb_nivel_usuario`
+--
+
+DROP TABLE IF EXISTS `tb_nivel_usuario`;
+CREATE TABLE IF NOT EXISTS `tb_nivel_usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cargo` varchar(50) NOT NULL,
+  `descricao` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `tb_nivel_usuario`
+--
+
+INSERT INTO `tb_nivel_usuario` (`id`, `cargo`, `descricao`) VALUES
+(1, 'admin', 'usuario acesso total'),
+(2, 'funcionario', 'Consulta de Pedido, Cadastro, alteração'),
+(3, 'user', 'Cliente que realiza pedido');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pedidos`
 --
 
 DROP TABLE IF EXISTS `tb_pedidos`;
@@ -5756,7 +5779,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_pedidos_itens`
+-- Table structure for table `tb_pedidos_itens`
 --
 
 DROP TABLE IF EXISTS `tb_pedidos_itens`;
@@ -5774,7 +5797,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_produtos`
+-- Table structure for table `tb_produtos`
 --
 
 DROP TABLE IF EXISTS `tb_produtos`;
@@ -5792,7 +5815,7 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_produtos`
+-- Dumping data for table `tb_produtos`
 --
 
 INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoque`, `imagem`, `imagem1`) VALUES
@@ -5869,7 +5892,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_subcategorias`
+-- Table structure for table `tb_subcategorias`
 --
 
 DROP TABLE IF EXISTS `tb_subcategorias`;
@@ -5883,7 +5906,7 @@ CREATE TABLE IF NOT EXISTS `tb_subcategorias` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_subcategorias`
+-- Dumping data for table `tb_subcategorias`
 --
 
 INSERT INTO `tb_subcategorias` (`id`, `id_categoria`, `descricao`) VALUES
@@ -5907,37 +5930,39 @@ INSERT INTO `tb_subcategorias` (`id`, `id_categoria`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_usuarios`
+-- Table structure for table `tb_usuarios`
 --
 
 DROP TABLE IF EXISTS `tb_usuarios`;
 CREATE TABLE IF NOT EXISTS `tb_usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cargo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `CPF` varchar(14) NOT NULL,
   `email` varchar(200) NOT NULL,
   `senha` varchar(132) NOT NULL,
   `Celular` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_id_cargo` (`id_cargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_usuarios`
+-- Dumping data for table `tb_usuarios`
 --
 
-INSERT INTO `tb_usuarios` (`id`, `nome`, `CPF`, `email`, `senha`, `Celular`) VALUES
-(1, 'João Silva', '123.456.789-01', 'joao.silva@email.com', '@ibmb455', '(11) 98765-4321'),
-(2, 'Maria Oliveira', '234.567.890-12', 'maria.oliveira@email.com', '$ma588@ol', '(21) 99876-5432'),
-(3, 'Carlos Souza', '345.678.901-23', 'carlos.souza@email.com', 'senha123', '(31) 98765-1234'),
-(4, 'Ana Pereira', '456.789.012-34', 'ana.pereira@email.com', '123456', '(41) 99876-2345'),
-(5, 'Pedro Santos', '567.890.123-45', 'pedro.santos@email.com', 'qwerty', '(51) 98765-3456');
+INSERT INTO `tb_usuarios` (`id`, `id_cargo`, `nome`, `CPF`, `email`, `senha`, `Celular`) VALUES
+(1, 1, 'admin', '123.456.789-01', 'admin@gmail.com', '123', '(11) 98765-4321'),
+(2, 2, 'funcionario', '234.567.890-12', 'funcionario@gmail.com', '123', '(21) 99876-5432'),
+(3, 3, 'user', '345.678.901-23', 'user@gmail.com', '123', '(31) 98765-1234'),
+(5, 3, 'Pedro Santos', '567.890.123-45', 'pedro.santos@email.com', '123', '(51) 98765-3456'),
+(6, 2, 'Carlos Marinho', '554.655.666-82', 'marinho@gmail.com', '123', '(17)99125-5589');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura stand-in para view `vw_subcategorias`
--- (Veja abaixo para a visão atual)
+-- Stand-in structure for view `vw_subcategorias`
+-- (See below for the actual view)
 --
 DROP VIEW IF EXISTS `vw_subcategorias`;
 CREATE TABLE IF NOT EXISTS `vw_subcategorias` (
@@ -5949,7 +5974,7 @@ CREATE TABLE IF NOT EXISTS `vw_subcategorias` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para view `vw_subcategorias`
+-- Structure for view `vw_subcategorias`
 --
 DROP TABLE IF EXISTS `vw_subcategorias`;
 
@@ -5957,40 +5982,46 @@ DROP VIEW IF EXISTS `vw_subcategorias`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_subcategorias`  AS SELECT `ts`.`id` AS `id`, `tc`.`descricao` AS `categorias`, `ts`.`descricao` AS `subcategorias` FROM (`tb_subcategorias` `ts` join `tb_categorias` `tc` on(`tc`.`id` = `ts`.`id_categoria`)) ;
 
 --
--- Restrições para tabelas despejadas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `tb_cliente_endereco`
+-- Constraints for table `tb_cliente_endereco`
 --
 ALTER TABLE `tb_cliente_endereco`
   ADD CONSTRAINT `tb_cliente_endereco_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id`);
 
 --
--- Restrições para tabelas `tb_pedidos`
+-- Constraints for table `tb_pedidos`
 --
 ALTER TABLE `tb_pedidos`
   ADD CONSTRAINT `tb_pedidos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id`),
   ADD CONSTRAINT `tb_pedidos_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `tb_cliente_endereco` (`id`);
 
 --
--- Restrições para tabelas `tb_pedidos_itens`
+-- Constraints for table `tb_pedidos_itens`
 --
 ALTER TABLE `tb_pedidos_itens`
   ADD CONSTRAINT `tb_pedidos_itens_ibfk_1` FOREIGN KEY (`id_pedidos`) REFERENCES `tb_pedidos` (`id`),
   ADD CONSTRAINT `tb_pedidos_itens_ibfk_2` FOREIGN KEY (`id_produtos`) REFERENCES `tb_produtos` (`id`);
 
 --
--- Restrições para tabelas `tb_produtos`
+-- Constraints for table `tb_produtos`
 --
 ALTER TABLE `tb_produtos`
   ADD CONSTRAINT `tb_produtos_ibfk_1` FOREIGN KEY (`id_subcategoria`) REFERENCES `tb_subcategorias` (`id`);
 
 --
--- Restrições para tabelas `tb_subcategorias`
+-- Constraints for table `tb_subcategorias`
 --
 ALTER TABLE `tb_subcategorias`
   ADD CONSTRAINT `tb_subcategoria_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categorias` (`id`);
+
+--
+-- Constraints for table `tb_usuarios`
+--
+ALTER TABLE `tb_usuarios`
+  ADD CONSTRAINT `fk_id_cargo` FOREIGN KEY (`id_cargo`) REFERENCES `tb_nivel_usuario` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
