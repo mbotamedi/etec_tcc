@@ -32,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        // Fecha o menu ao clicar fora
+        document.addEventListener('click', (event) => {
+            if (!menuToggle.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.remove('active');
+                menu.style.display = 'none';
+            }
+        });
     }
 
     // Função para atualizar o estado do modal
@@ -93,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function abrirModal(e) {
         if (e) {
             e.preventDefault();
+            e.stopPropagation();
         }
 
         // Verifica se algum modal está aberto

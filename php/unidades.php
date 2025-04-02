@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -104,7 +110,7 @@
                         para a comunidade da ETEC. Venha nos visitar e experimente nossas opções!</p>
                 </div>
             </div>
-            
+
         </div>
     </section>
     <section class="sec-02">
@@ -123,7 +129,7 @@
                     dia a dia.
 
                     A Cantina Três Irmãos é mais do que um local para comer; é um espaço de <br>
-                     integração e convívio
+                    integração e convívio
                     para a comunidade do IMESB. Venha nos visitar e aproveite nossas delícias!</p>
             </div>
             <div class="foto01-cantina">
