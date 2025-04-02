@@ -155,7 +155,7 @@
 }
 
 .barra-pesquisa {
-    display: flex !important;
+    display: flex !important; 
     justify-content: center !important;
     align-items: center !important;
     width: 100%;
@@ -200,12 +200,12 @@
     }
 
     .barra-pesquisa {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100%;
-        padding-left: 180px;
-    }
+    display: flex !important; 
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    padding-left: 180px;
+}
 }
 
 /* Tela média (tablet) */
@@ -260,14 +260,14 @@
     .buy-actions {
         display: none;
     }
-
+    
     .produtos-Destaques {
         font-size: 25px;
     }
 
     .text-center {
         text-align: center !important;
-    }
+      }
 
     @media (max-width: 767px) {
         .menu-toggle {

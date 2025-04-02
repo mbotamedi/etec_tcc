@@ -51,20 +51,20 @@ session_start()
             </div>
 
             <div class="items col-5">
-                <a href="index.php">INICIO</a>
-                <a href="PHP/produtos.php">PEÇA AGORA</a>
-                <a href="PHP/unidades.php">UNIDADES</a>
+                <a href="./index.php">INICIO</a>
+                <a href="php/produtos.php">PEÇA AGORA</a>
+                <a href="php/unidades.php">UNIDADES</a>
 
             </div>
 
             <div class="menu-toggle">
                 <img src="imgs/cardapio.png" alt="" width="32px">
                 <ul class="menu">
-                    <li><a href="index.html" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
+                    <li><a href="index.php" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
                     </li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
+                    <li><a href="/php/produtos.php" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
                     </li>
-                    <li><a href="HTML/unidades.html" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
+                    <li><a href="PHP/unidades.php" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
                     <li><a href="#" id="abrirModalMenu" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
                     <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> CARRINHO</a></li>
                 </ul>
@@ -129,7 +129,7 @@ session_start()
     </div>
 
     <!--CARROSEL-->
-    <div class="carrosel" style="display: flex; justify-content: center;">
+    <!--<div class="carrosel" style="display: flex; justify-content: center;">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -150,7 +150,7 @@ session_start()
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </div>
+    </div>--->
 
 
     <!-- Section-->
