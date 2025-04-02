@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/conexao.php");
 
 $email = $_POST["email"];
@@ -11,7 +12,12 @@ if (mysqli_num_rows($listar) > 0) {
     // Se o e-mail existir, verifica a senha
     $row = mysqli_fetch_assoc($listar);
     if ($senha == $row['senha']) {
-        //echo "Logado";  // Se a senha for correta
+        // Armazena os dados do usuário na sessão
+        $_SESSION['usuario'] = array(
+            'id' => $row['id'],
+            'nome' => $row['nome'],
+            'email' => $row['email']
+        );
         header("Location: ../index.php");
         exit;
     } else {

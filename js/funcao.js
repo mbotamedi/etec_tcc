@@ -14,21 +14,18 @@ function mascaraCPF(input) {
         .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
 }
 
-
 //Adicionando um script JavaScript para esconder a mensagem de erro após 3 segundos 
-
-window.onload = function() {
+window.onload = function () {
     var erroMsg = document.getElementById('erro-msg');
     if (erroMsg) {
         // Atraso de 3 segundos para esconder a mensagem
-        setTimeout(function() {
+        setTimeout(function () {
             erroMsg.style.display = 'none';  // Esconde a mensagem de erro após 3 segundos
         }, 3000); // 3000ms = 3 segundos
     }
 };
 
 //Botões Quantidade
-
 // Função para processar a quantidade
 function process(change, quantId) {
     var quantInput = document.getElementById(quantId);
@@ -38,18 +35,19 @@ function process(change, quantId) {
     }
 }
 
-
 // Exibe o modal quando a página é carregada
-   document.addEventListener('DOMContentLoaded', function () {
-    var mensagemModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
-    mensagemModal.show();
+document.addEventListener('DOMContentLoaded', function () {
+    const mensagemModalElement = document.getElementById('mensagemModal');
+    if (mensagemModalElement) {
+        var mensagemModal = new bootstrap.Modal(mensagemModalElement);
+        mensagemModal.show();
 
-    // Fecha o modal após 6 segundos
-    setTimeout(function () {
-        mensagemModal.hide();
-    }, 6000); // 6000 milissegundos = 6 segundos
+        // Fecha o modal após 6 segundos
+        setTimeout(function () {
+            mensagemModal.hide();
+        }, 6000); // 6000 milissegundos = 6 segundos
+    }
 });
-
 
 // Função para o Carrossel Produtos
 function process(change, inputId) {

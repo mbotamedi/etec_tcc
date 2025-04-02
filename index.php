@@ -1,5 +1,6 @@
 <?php
 session_start()
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,7 +10,7 @@ session_start()
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>Cantina Três Irmãos</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -64,7 +65,7 @@ session_start()
                     <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
                     </li>
                     <li><a href="HTML/unidades.html" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
+                    <li><a href="#" id="abrirModalMenu" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
                     <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> CARRINHO</a></li>
                 </ul>
             </div>
@@ -85,41 +86,37 @@ session_start()
     </nav>
 
     <!-- Modal ANTES -->
-    <div id="meuModal" class="modal-container">
-        <div class="modal-content col-3">
-            <a href="./php/cadastro.php">Cadastre-se</a>
-            <a href="./php/login.php">Entrar</a>
-            <button id="fecharModal">Fechar</button>
+    <div id="modalAntes" class="modal-container01">
+        <div class="modal-content01">
+            <p class="conta-cadastro">Não possui uma conta?</p>
+            <a href="PHP/login.php">Cadastre-se ou faça seu login</a>
+            <button id="fecharModalAntes">Fechar</button>
         </div>
     </div>
 
-    <!-- Modal DEPOIS-->
-    <div id="meuModal" class="modal-depois">
-        <!--CONTAINER DE FORA---->
-        <div class="modal-content col-3" id="modal-content">
-            <!--CONTAINER DO NOME---->
+    <!-- Modal DEPOIS -->
+    <div id="modalDepois" class="modal-container" style="display: none;">
+        <div class="modal-content col-3">
             <div class="user-info" style="display: flex;">
                 <div class="image-user">
                     <img src="imgs/usuario-de-perfil.png" alt="" width="50px">
                 </div>
-                <div class=" user-name">
-                    <!--PUXAR O NOME DA CONTA VIA (JAVA-SCRIPT)-->
-                    <h4 id="nomeUsuario">Rafael Contieri</h4>
-                    <!-------------------------------------------->
-                    <a href="#" style="outline: none; color: red;">Sair</a>
+                <div class="user-name">
+                    <h4 id="nomeUsuario"></h4>
+                    <a href="./php/logout.php" class="sair-usuario"><span style="color: red;">Sair</span></a>
                 </div>
             </div>
 
-            <div class="action-buttons text-start">
-                <a href="#" class="btn btn-primary">Home</a>
+            <div class="action-buttons">
+                <a href="./index.php" class="btn btn-primary">Home</a>
                 <a href="#" class="btn btn-primary">Minha conta</a>
                 <a href="#" class="btn btn-primary">Pedidos/Compras</a>
                 <a href="./admin/admin.php" class="btn btn-primary">Administrador</a>
                 <a href="#" class="btn btn-primary">Suporte</a>
             </div>
-
         </div>
     </div>
+
 
 
 
@@ -202,7 +199,6 @@ session_start()
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="js/dropDown-menu.js"></script>
     <script src="js/funcao.js"></script>
     <script src="js/troca-modal.js"></script>
     <!--------------SCRIPTS/-------------->

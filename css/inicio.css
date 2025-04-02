@@ -1,6 +1,3 @@
-
-
-
 .items>a {
     text-decoration: none;
     color: white;
@@ -21,59 +18,129 @@
 
 /*-------------ESTILO DO MODAL-------------*/
 /* -------------ESTILO DO MODAL------------- */
-.modal-container {
-    display: flex;
-    /* Oculto por padrão */
+.modal-container01 {
+    display: none;
     position: absolute;
+    top: 80px;
     right: 40px;
-    /* Encosta no canto direito */
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 10px;
     z-index: 1000;
-    width: 150px;
-    /* Tamanho pequeno */
-
-    /* Configuração da animação inicial */
-    max-height: 0;
+    width: 280px;
+    max-height: 200px;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    gap: 20px;
 }
 
-
-
-/* Classe para exibir o modal com animação */
-.modal-container.show {
-    max-height: 200px;
-    /* Ajuste conforme o conteúdo */
-    opacity: 1;
+.modal-container {
+    display: block;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    z-index: 1000;
 }
 
-
-
-
+/* Estilo base para links e botões do modal */
+.modal-content01 a,
+.modal-content01 button {
+    text-decoration: none;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-family: "Fredoka", serif;
+    font-size: 16px;
+}
 
 .modal-content {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    display: block;
+    width: 250px;
+    height: 350px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin-right: 20px;
 }
 
 .modal-content a,
 .modal-content button {
     text-decoration: none;
     color: black;
-    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
     text-align: center;
     border: none;
     background: none;
     cursor: pointer;
+    margin-bottom: 8px;
+    font-family: "Fredoka", serif;
+    font-size: 16px;
 }
 
-.modal-content button {
-    color: red;
+.modal-content button:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    transform: translateX(5px);
+    color: #ff0000;
+}
+
+/* Classe para exibir o modal com animação */
+.modal-container01.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Estilo para os botões */
+.action-buttons {
+    display: flex;
+    flex-direction: column !important;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.user-name {
+    margin-left: 15px;
+    font-family: "Fredoka", serif;
+    font-size: 18px;
+    color: #333;
+}
+
+.action-buttons tex {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cadastro-login {
+    color: rgb(255, 157, 0);
+}
+
+.conta-cadastro {
+    text-align: center;
+    font-family: "Fredoka", serif;
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
 /*-------TÍTULO DO DESTAQUES-------*/
@@ -85,23 +152,19 @@
     padding: 5px;
     font-size: 50px;
     margin-top: 50px;
-
 }
 
-.barra-pesquisa{
-    display: flex !important; 
+.barra-pesquisa {
+    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100%;
     padding-left: 180px;
-     
 }
 
-.pesquisa-input{
+.pesquisa-input {
     width: 500px;
-
 }
-
 
 .menu-toggle {
     display: none;
@@ -109,14 +172,9 @@
     align-items: center;
 }
 
-.aaa{
+.aaa {
     width: 100%;
 }
-
-
-
-
-
 
 /*----------------------------------MEDIA QUERY--------------------------------------------------*/
 
@@ -126,7 +184,6 @@
         gap: 50px;
         display: flex;
         font-family: "Fredoka", serif;
-
     }
 
     .items>a {
@@ -142,20 +199,18 @@
         transform: scale(1.05);
     }
 
-    .barra-pesquisa{
-    display: flex !important; 
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100%;
-    padding-left: 180px;
-     
-}
-
+    .barra-pesquisa {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100%;
+        padding-left: 180px;
+    }
 }
 
 /* Tela média (tablet) */
 @media (min-width: 768px) and (max-width: 1199px) {
-    .items  {
+    .items {
         display: flex;
         font-family: "Fredoka", serif;
         margin-left: -150px;
@@ -165,7 +220,6 @@
         text-decoration: none;
         color: white;
         font-size: 18px;
-        
         display: inline-block;
         transform: scale(1.01);
         transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -178,23 +232,16 @@
     }
 }
 
-
 /*--------------------------------------------------------------*/
-
-
-
 
 /* Tela pequena (celular) */
 @media (max-width: 767px) {
-
     .items {
         gap: 20px;
         display: flex;
         flex-direction: column;
         font-family: "Fredoka", serif;
         display: none;
-
-
     }
 
     .items>a {
@@ -214,23 +261,19 @@
         display: none;
     }
 
-    
     .produtos-Destaques {
         font-size: 25px;
-
     }
+
     .text-center {
         text-align: center !important;
-      }
-
+    }
 
     @media (max-width: 767px) {
-
         .menu-toggle {
             display: inline-block;
             cursor: pointer;
             margin-bottom: 10px;
-
         }
 
         .menu {
@@ -251,7 +294,6 @@
         .menu>a {
             color: #fff;
             text-decoration: none;
-
         }
 
         .menu a:hover {
@@ -265,15 +307,8 @@
         li>a {
             font-size: 20px;
         }
-
-
     }
-    
-
-
-
 }
-
 
 /*-----------------------------------------------------------*/
 
@@ -283,7 +318,6 @@
         cursor: pointer;
         margin-bottom: 10px;
     }
-    
 
     .bar1,
     .bar2,
@@ -375,6 +409,54 @@
     .menu li {
         margin-right: 20px;
     }
+}
 
-    
+.modal-container01 a {
+    text-decoration: none;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-family: "Fredoka", serif;
+    font-size: 16px;
+}
+
+.modal-container01 a:hover {
+    background-color: rgba(255, 157, 0, 0.1);
+    transform: translateX(5px);
+    color: rgb(255, 157, 0);
+}
+
+.modal-container01 button {
+    text-decoration: none;
+    color: red;
+    padding: 12px 20px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-family: "Fredoka", serif;
+    font-size: 16px;
+}
+
+.modal-container01 button:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    transform: translateX(5px);
+    color: #ff0000;
 }
