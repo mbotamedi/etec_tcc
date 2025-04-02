@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 10/03/2025 às 20:28
--- Versão do servidor: 11.3.2-MariaDB
--- Versão do PHP: 8.3.6
+-- Generation Time: Apr 01, 2025 at 01:14 AM
+-- Server version: 11.3.2-MariaDB
+-- PHP Version: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,58 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `bd_cantina`
+-- Database: `bd_cantina`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `spr_apagaregistro`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_apagaregistro` (IN `pid` INT, IN `ptabela` VARCHAR(100))   BEGIN
+ /* CORPO DO PROCEDIMENTO */
+    -- Monta a query dinamicamente
+    SET @sql = CONCAT('DELETE FROM ', ptabela, ' WHERE ID = ', pid);
+
+    -- Prepara e executa a query dinâmica
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+
+    -- Retorna uma mensagem de sucesso
+    SELECT 'Categoria removida com sucesso' as resultado;
+END$$
+
+DROP PROCEDURE IF EXISTS `spr_gravaCategoria`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_gravaCategoria` (`pid` INT, `pdescricao` VARCHAR(100))   BEGIN
+                                    
+   if pid = 0 THEN
+      INSERT INTO tb_categorias (descricao) VALUES (pdescricao);
+   ELSE 
+      UPDATE tb_categorias SET descricao  = pdescricao WHERE id = pid;
+   END IF;
+   
+   SELECT 'Dados gravados com sucesso' as resultado;
+END$$
+
+DROP PROCEDURE IF EXISTS `spr_gravaSubcategoria`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_gravaSubcategoria` (IN `pid` INT, IN `pcategoria` INT, IN `psubcategoria` VARCHAR(100))   BEGIN
+    if pid = 0 THEN
+       INSERT INTO tb_subcategorias (id_categorias, descricao) VALUES (pcategoria, psubcategoria);
+    ELSE 
+       UPDATE tb_subcategorias SET id_categorias = pcategoria,  descricao = psubcategoria WHERE id = pid;   
+    END IF;  
+	
+	SELECT 'Dados gravados com sucesso' as resultado;
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_categoria`
+-- Table structure for table `tb_categorias`
 --
 
 DROP TABLE IF EXISTS `tb_categorias`;
@@ -33,10 +78,10 @@ CREATE TABLE IF NOT EXISTS `tb_categorias` (
   `descricao` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `descicao` (`descricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_categoria`
+-- Dumping data for table `tb_categorias`
 --
 
 INSERT INTO `tb_categorias` (`id`, `descricao`) VALUES
@@ -53,7 +98,7 @@ INSERT INTO `tb_categorias` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_cidades`
+-- Table structure for table `tb_cidades`
 --
 
 DROP TABLE IF EXISTS `tb_cidades`;
@@ -67,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `tb_cidades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
--- Despejando dados para a tabela `tb_cidades`
+-- Dumping data for table `tb_cidades`
 --
 
 INSERT INTO `tb_cidades` (`codigo_estado`, `sigla_estado`, `nome_estado`, `codigo_cidade`, `nome_cidade`) VALUES
@@ -5644,7 +5689,7 @@ INSERT INTO `tb_cidades` (`codigo_estado`, `sigla_estado`, `nome_estado`, `codig
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_clientes`
+-- Table structure for table `tb_clientes`
 --
 
 DROP TABLE IF EXISTS `tb_clientes`;
@@ -5661,7 +5706,7 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_clientes`
+-- Dumping data for table `tb_clientes`
 --
 
 INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha`) VALUES
@@ -5673,7 +5718,7 @@ INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_cliente_endereco`
+-- Table structure for table `tb_cliente_endereco`
 --
 
 DROP TABLE IF EXISTS `tb_cliente_endereco`;
@@ -5693,7 +5738,30 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_endereco` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_pedidos`
+-- Table structure for table `tb_nivel_usuario`
+--
+
+DROP TABLE IF EXISTS `tb_nivel_usuario`;
+CREATE TABLE IF NOT EXISTS `tb_nivel_usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cargo` varchar(50) NOT NULL,
+  `descricao` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `tb_nivel_usuario`
+--
+
+INSERT INTO `tb_nivel_usuario` (`id`, `cargo`, `descricao`) VALUES
+(1, 'admin', 'usuario acesso total'),
+(2, 'funcionario', 'Consulta de Pedido, Cadastro, alteração'),
+(3, 'user', 'Cliente que realiza pedido');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pedidos`
 --
 
 DROP TABLE IF EXISTS `tb_pedidos`;
@@ -5711,7 +5779,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_pedidos_itens`
+-- Table structure for table `tb_pedidos_itens`
 --
 
 DROP TABLE IF EXISTS `tb_pedidos_itens`;
@@ -5729,7 +5797,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_produtos`
+-- Table structure for table `tb_produtos`
 --
 
 DROP TABLE IF EXISTS `tb_produtos`;
@@ -5739,91 +5807,92 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
   `descricao` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL DEFAULT 0.00,
   `estoque` int(11) NOT NULL,
-  `imagem` varchar(255) NOT NULL,
-  `imagem1` varchar(255) NOT NULL,
+  `imagem` varchar(255) DEFAULT NULL,
+  `imagem1` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `descricao` (`descricao`),
   KEY `id_subcategoria` (`id_subcategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_produtos`
+-- Dumping data for table `tb_produtos`
 --
 
 INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoque`, `imagem`, `imagem1`) VALUES
-(1, 1, 'Garrafa de água mineral (500ml)', 3.00, 80, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
-(2, 2, 'Garrafa de chá gelado (1.5l)', 7.20, 30, '.../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
-(3, 15, 'Mix de frutas frescas', 6.50, 15, '.../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
-(4, 5, 'Iogurte natural com granola', 5.00, 30, '../assets/img/iogurte.jpg', 'assets/img/iogurte.jpg'),
-(5, 7, 'Fatia de bolo de chocolate', 4.00, 20, '../assets/img/bolo.jpg', 'assets/img/bolo.jpg'),
-(6, 8, 'Casquinha de sorvete', 4.50, 40, '../assets/img/sorvete.jpg', 'assets/img/sorvete.jpg'),
-(7, 9, 'Sanduíche com peito de peru e queijo', 7.00, 25, '../assets/img/sanduiche.jpg', 'assets/img/sanduiche.jpg'),
-(8, 10, 'Cachorro-quente simples', 7.50, 25, '../assets/img/hotdog.jpg', 'assets/img/hotdog.jpg'),
-(9, 13, 'Salgadinho assado recheado com queijo', 7.50, 50, '../assets/img/salgadinho-queijo.jpg', 'assets/img/salgadinho-queijo.jpg'),
-(10, 14, 'Coxinha de frango', 4.00, 30, '../assets/img/coxinha.jpg', 'assets/img/coxinha.jpg'),
-(11, 14, 'Pastel assado com recheio de carne', 5.00, 40, '../assets/img/pastel.jpg', 'assets/img/pastel.jpg'),
-(12, 13, 'Pão de queijo tradicional', 2.50, 100, '../assets/img/paodequeijo.jpg', 'assets/img/paodequeijo.jpg'),
-(13, 14, 'Pipoca doce ou salgada', 2.50, 50, '../assets/img/pipoca.jpg', 'assets/img/pipoca.jpg'),
-(14, 13, 'Fatia de torta de frango', 5.50, 15, '../assets/img/torta.jpg', 'assets/img/torta.jpg'),
-(15, 13, 'Fatia de pizza de mussarela', 6.00, 10, '../assets/img/pizza.jpg', 'assets/img/pizza.jpg'),
-(16, 15, 'Suco natural de laranja', 6.00, 20, '../assets/img/suco.jpg', 'assets/img/suco.jpg'),
-(17, 3, 'Kitcat', 5.00, 30, '../assets/img/kitcat.jpg ', 'assets/img/kitcat.jpg '),
-(18, 3, 'Trento Avelã', 8.50, 50, '../assets/img/trento avelas.jpg ', 'assets/img/trento avelas.jpg '),
-(19, 3, 'Trento Drak', 8.50, 50, '../assets/img/trento dark.jpg ', 'assets/img/trento dark.jpg '),
-(20, 3, 'Trento Camarelo', 8.50, 50, '../assets/img/trento Caramelo.jpg ', 'assets/img/trento Caramelo.jpg '),
-(21, 3, 'Trento Morango', 8.50, 50, '../assets/img/trento morango.jpg ', 'assets/img/trento morango.jpg '),
-(22, 3, 'Trento Cheesse Morango', 8.50, 50, '../assets/img/trento cheese morango.jpg ', 'assets/img/trento cheese morango.jpg '),
-(23, 3, 'Trento Chocolate', 8.50, 50, '../assets/img/trento chocolate 38.jpg ', 'assets/img/trento chocolate 38.jpg '),
-(24, 3, 'Trento Branco Dark', 8.50, 50, '../assets/img/trento branco-drak.jpg ', 'assets/img/trento branco-drak.jpg '),
-(25, 3, 'Trento Duo', 8.50, 50, '../assets/img/trento duo.jpg ', 'assets/img/trento duo.jpg '),
-(26, 3, 'Trento Limão', 8.50, 50, '../assets/img/trento limao.jpg ', 'assets/img/trento limao.jpg '),
-(27, 3, 'Trento Maracujá', 8.50, 50, '../assets/img/trento maracuja.jpg ', 'assets/img/trento maracuja.jpg '),
-(28, 3, 'Trento Milk', 8.50, 50, '../assets/img/trento milk.jpg ', 'assets/img/trento milk.jpg '),
-(29, 3, 'Trento Trufa de Maçã', 8.50, 50, '../assets/img/trento trufa Maçã.jpg ', 'assets/img/trento trufa Maçã.jpg '),
-(30, 3, 'Trento Trufa de Chocolate', 8.50, 50, '../assets/img/trento turfa de chocolate.jpg ', 'assets/img/trento turfa de chocolate.jpg '),
-(31, 16, 'Barra Nutry Avelãs', 6.00, 100, '../assets/img/barra nutry avela.jpg ', 'assets/img/barra nutry avela.jpg '),
-(32, 16, 'Barra Nutry Banana', 6.00, 100, '../assets/img/barra nutry banana.jpg ', 'assets/img/barra nutry banana.jpg '),
-(33, 16, 'Barra Nutry Cajú', 6.00, 100, '../assets/img/barra nutry caju.jpg ', 'assets/img/barra nutry caju.jpg '),
-(34, 16, 'Barra Nutry Cappucino', 6.00, 100, '../assets/img/barra nutry cappuccino.jpg ', 'assets/img/barra nutry cappuccino.jpg '),
-(35, 16, 'Barra Nutry Coco', 6.00, 100, '../assets/img/barra nutry coco.jpg ', 'assets/img/barra nutry coco.jpg '),
-(36, 16, 'Barra Nutry Cookies', 6.00, 100, '../assets/img/barra nutry cookies.jpg ', 'assets/img/barra nutry cookies.jpg '),
-(37, 16, 'Barra Nutry Frutas- Vermelhas', 6.00, 100, '../assets/img/barra nutry frutas-vermelhas.jpg ', 'assets/img/barra nutry frutas-vermelhas.jpg '),
-(38, 16, 'Barra Nutry Morango', 6.00, 100, '../assets/img/barra nutry morango.jpg ', 'assets/img/barra nutry morango.jpg '),
-(39, 6, 'Biscoito  Nikito Chocolate ', 18.00, 30, '../assets/img/nikito chocolate.jpeg ', 'assets/img/nikito chocolate.jpeg '),
-(40, 6, 'Biscoito  Nikito Doce de Leite', 18.00, 30, '../assets/img/nikito doce leite.jpeg ', 'assets/img/nikito doce leite.jpeg '),
-(41, 6, 'Biscoito  Nikito Morango', 18.00, 30, '../assets/img/nikito morango.jpeg ', 'assets/img/nikito morango.jpeg '),
-(42, 4, 'Tubes Fini Azedinhos Furtas Silveste', 7.50, 50, '../assets/img/tubes fini azedinhos fru_silveste.jpg ', 'assets/img/tubes fini azedinhos fru_silveste.jpg '),
-(43, 4, 'Tubes Fini Azedinhos Tutti-Frutti', 7.50, 50, '../assets/img/tubes fini azedinhos tuttifrutti.jpg ', 'assets/img/tubes fini azedinhos tuttifrutti.jpg '),
-(44, 4, 'Tubes Fini Azedinhos Uva', 7.50, 50, '../assets/img/tubes fini azedinhos uva.jpg ', 'assets/img/tubes fini azedinhos uva.jpg '),
-(45, 4, 'Melancia Azedinha Fini', 7.50, 50, '../assets/img/Melancia Azedinha fini.jpg ', 'assets/img/Melancia Azedinha fini.jpg '),
-(46, 4, 'Dentaduras Fini', 7.50, 50, '../assets/img/fini Dentaduras.jpg ', 'assets/img/fini Dentaduras.jpg '),
-(47, 4, 'Minhocas Fini', 7.50, 50, '../assets/img/finiMinhocas.jpg ', 'assets/img/finiMinhocas.jpg '),
-(48, 4, 'Bala Gelatina Amoras Fini', 7.50, 50, '../assets/img/Bala Fini amora.jpg ', 'assets/img/Bala Fini amora.jpg '),
-(49, 4, 'Bala Gelatina Beijos Fini', 7.50, 50, '../assets/img/bala gelatina fini.jpg ', 'assets/img/bala gelatina fini.jpg '),
-(50, 4, 'Bala Gelatina Finiburguers Fini', 7.50, 50, '../assets/img/Bala Gelatina Finiburguers Fini.jpg ', 'assets/img/Bala Gelatina Finiburguers Fini.jpg '),
-(51, 4, 'Bala Gelatinas Polvo Fini', 7.50, 50, '../assets/img/Bala Gelatinas Polvo 80g FINI.jpg ', 'assets/img/Bala Gelatinas Polvo 80g FINI.jpg '),
-(52, 3, 'Sonho de Valsa', 2.50, 100, '../assets/img/sonhodevalsa.jpeg ', 'assets/img/sonhodevalsa.jpeg '),
-(53, 3, 'Ouro Branco', 2.50, 100, '../assets/img/ouro branco.jpeg ', 'assets/img/ouro branco.jpeg '),
-(54, 3, 'Bis Xtra', 18.00, 50, '../assets/img/Bis.jpeg ', 'assets/img/Bis.jpeg '),
-(55, 2, 'Chá Mate Leão Limão', 3.19, 30, '../assets/img/cha mate limão.jpeg ', 'assets/img/cha mate limão.jpeg '),
-(56, 2, 'Chá Mate Leão Pessego', 3.19, 30, '../assets/img/cha mate pessego.jpeg ', 'assets/img/cha mate pessego.jpeg '),
-(57, 11, 'Coca-Cola', 4.20, 20, '../assets/img/coca-cola.jpeg', 'assets/img/coca-cola.jpeg'),
-(58, 11, 'Coca-Cola Zero', 4.20, 20, '../assets/img/coca-cola zero.jpeg', 'assets/img/coca-cola zero.jpeg'),
-(59, 11, 'Sprite', 3.69, 15, '../assets/img/sprite.jpeg', 'assets/img/sprite.jpeg'),
-(60, 11, 'Fanta Laranja', 4.70, 20, '../assets/img/fanta.jpeg', 'assets/img/fanta.jpeg'),
-(61, 11, 'Fanta Uva', 3.99, 20, '../assets/img/fanta uva.jpeg', 'assets/img/fanta uva.jpeg'),
-(62, 12, 'Coca-Cola Zero 500ml', 6.99, 30, '../assets/img/coca-cola zero 500ml.jpeg', 'assets/img/coca-cola zero 500ml.jpeg'),
-(63, 12, 'Coca-Cola 500ml', 6.99, 30, '../assets/img/coca-cola 500ml.jpeg', 'assets/img/coca-cola 500ml.jpeg'),
-(64, 16, 'Barra Nutry bolo_chocolate', 6.00, 100, '../assets/img/Barra Nutry bolo_chocolate.jpg ', 'assets/img/Barra Nutry bolo_chocolate.jpg '),
-(65, 4, 'Bala fini tubes', 7.50, 50, '../assets/img/Bala fini tubes.jpg ', 'assets/img/Bala fini tubes.jpg '),
-(66, 4, 'Bala Fini banana', 7.50, 50, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
-(67, 4, 'Aros de Morango Azedinhos 80g', 7.50, 50, '../assets/img/Aros de Morango Azedinhos 80g - Fini.jpg ', 'assets/img/Aros de Morango Azedinhos 80g - Fini.jpg '),
-(68, 4, 'Bala  Escovinhas Fini', 7.50, 50, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg ');
+(1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.30, 80, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
+(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 30, '../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
+(3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 15, '../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
+(4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 30, '../assets/img/iogurte.jpg', 'assets/img/iogurte.jpg'),
+(5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 20, '../assets/img/bolo.jpg', 'assets/img/bolo.jpg'),
+(6, 8, 'CASQUINHA DE SORVETE', 4.50, 40, '../assets/img/sorvete.jpg', 'assets/img/sorvete.jpg'),
+(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 25, '../assets/img/sanduiche.jpg', 'assets/img/sanduiche.jpg'),
+(8, 10, 'CACHORRO-QUENTE SIMPLES', 7.50, 25, '../assets/img/hotdog.jpg', 'assets/img/hotdog.jpg'),
+(9, 13, 'SALGADINHO ASSADO RECHEADO COM QUEIJO', 7.50, 50, '../assets/img/salgadinho-queijo.jpg', 'assets/img/salgadinho-queijo.jpg'),
+(10, 14, 'COXINHA DE FRANGO', 4.00, 30, '../assets/img/coxinha.jpg', 'assets/img/coxinha.jpg'),
+(11, 14, 'PASTEL ASSADO COM RECHEIO DE CARNE', 5.00, 40, '../assets/img/pastel.jpg', 'assets/img/pastel.jpg'),
+(12, 13, 'PÃO DE QUEIJO TRADICIONAL', 2.50, 100, '../assets/img/paodequeijo.jpg', 'assets/img/paodequeijo.jpg'),
+(13, 14, 'PIPOCA DOCE OU SALGADA', 2.50, 50, '../assets/img/pipoca.jpg', 'assets/img/pipoca.jpg'),
+(14, 13, 'FATIA DE TORTA DE FRANGO', 5.50, 15, '../assets/img/torta.jpg', 'assets/img/torta.jpg'),
+(15, 13, 'FATIA DE PIZZA DE MUSSARELA', 6.00, 10, '../assets/img/pizza.jpg', 'assets/img/pizza.jpg'),
+(16, 15, 'SUCO NATURAL DE LARANJA', 6.00, 20, '../assets/img/suco.jpg', 'assets/img/suco.jpg'),
+(17, 3, 'KITCAT', 5.00, 30, '../assets/img/kitcat.jpg ', 'assets/img/kitcat.jpg '),
+(18, 3, 'TRENTO AVELÃ', 8.50, 50, '../assets/img/trento avelas.jpg ', 'assets/img/trento avelas.jpg '),
+(19, 3, 'TRENTO DRAK', 8.50, 50, '../assets/img/trento dark.jpg ', 'assets/img/trento dark.jpg '),
+(20, 3, 'TRENTO CAMARELO', 8.50, 50, '../assets/img/trento Caramelo.jpg ', 'assets/img/trento Caramelo.jpg '),
+(21, 3, 'TRENTO MORANGO', 8.50, 50, '../assets/img/trento morango.jpg ', 'assets/img/trento morango.jpg '),
+(22, 3, 'TRENTO CHEESSE MORANGO', 8.50, 50, '../assets/img/trento cheese morango.jpg ', 'assets/img/trento cheese morango.jpg '),
+(23, 3, 'TRENTO CHOCOLATE', 8.50, 50, '../assets/img/trento chocolate 38.jpg ', 'assets/img/trento chocolate 38.jpg '),
+(24, 3, 'TRENTO BRANCO DARK', 8.50, 50, '../assets/img/trento branco-drak.jpg ', 'assets/img/trento branco-drak.jpg '),
+(25, 3, 'TRENTO DUO', 8.50, 50, '../assets/img/trento duo.jpg ', 'assets/img/trento duo.jpg '),
+(26, 3, 'TRENTO LIMÃO', 8.50, 50, '../assets/img/trento limao.jpg ', 'assets/img/trento limao.jpg '),
+(27, 3, 'TRENTO MARACUJÁ', 8.50, 50, '../assets/img/trento maracuja.jpg ', 'assets/img/trento maracuja.jpg '),
+(28, 3, 'TRENTO MILK', 8.50, 50, '../assets/img/trento milk.jpg ', 'assets/img/trento milk.jpg '),
+(29, 3, 'TRENTO TRUFA DE MAÇÃ', 8.50, 50, '../assets/img/trento trufa Maçã.jpg ', 'assets/img/trento trufa Maçã.jpg '),
+(30, 3, 'TRENTO TRUFA DE CHOCOLATE', 8.50, 50, '../assets/img/trento turfa de chocolate.jpg ', 'assets/img/trento turfa de chocolate.jpg '),
+(31, 16, 'BARRA NUTRY AVELÃS', 6.00, 100, '../assets/img/barra nutry avela.jpg ', 'assets/img/barra nutry avela.jpg '),
+(32, 16, 'BARRA NUTRY BANANA', 6.00, 100, '../assets/img/barra nutry banana.jpg ', 'assets/img/barra nutry banana.jpg '),
+(33, 16, 'BARRA NUTRY CAJÚ', 6.00, 100, '../assets/img/barra nutry caju.jpg ', 'assets/img/barra nutry caju.jpg '),
+(34, 16, 'BARRA NUTRY CAPPUCINO', 6.00, 100, '../assets/img/barra nutry cappuccino.jpg ', 'assets/img/barra nutry cappuccino.jpg '),
+(35, 16, 'BARRA NUTRY COCO', 6.00, 100, '../assets/img/barra nutry coco.jpg ', 'assets/img/barra nutry coco.jpg '),
+(36, 16, 'BARRA NUTRY COOKIES', 6.00, 100, '../assets/img/barra nutry cookies.jpg ', 'assets/img/barra nutry cookies.jpg '),
+(37, 16, 'BARRA NUTRY FRUTAS- VERMELHAS', 6.00, 100, '../assets/img/barra nutry frutas-vermelhas.jpg ', 'assets/img/barra nutry frutas-vermelhas.jpg '),
+(38, 16, 'BARRA NUTRY MORANGO', 6.00, 100, '../assets/img/barra nutry morango.jpg ', 'assets/img/barra nutry morango.jpg '),
+(39, 6, 'BISCOITO  NIKITO CHOCOLATE ', 18.00, 30, '../assets/img/nikito chocolate.jpeg ', 'assets/img/nikito chocolate.jpeg '),
+(40, 6, 'BISCOITO  NIKITO DOCE DE LEITE', 18.00, 30, '../assets/img/nikito doce leite.jpeg ', 'assets/img/nikito doce leite.jpeg '),
+(41, 6, 'BISCOITO  NIKITO MORANGO', 18.00, 30, '../assets/img/nikito morango.jpeg ', 'assets/img/nikito morango.jpeg '),
+(42, 4, 'TUBES FINI AZEDINHOS FURTAS SILVESTE', 7.50, 50, '../assets/img/tubes fini azedinhos fru_silveste.jpg ', 'assets/img/tubes fini azedinhos fru_silveste.jpg '),
+(43, 4, 'TUBES FINI AZEDINHOS TUTTI-FRUTTI', 7.50, 50, '../assets/img/tubes fini azedinhos tuttifrutti.jpg ', 'assets/img/tubes fini azedinhos tuttifrutti.jpg '),
+(44, 4, 'TUBES FINI AZEDINHOS UVA', 7.50, 50, '../assets/img/tubes fini azedinhos uva.jpg ', 'assets/img/tubes fini azedinhos uva.jpg '),
+(45, 4, 'MELANCIA AZEDINHA FINI', 7.50, 50, '../assets/img/Melancia Azedinha fini.jpg ', 'assets/img/Melancia Azedinha fini.jpg '),
+(46, 4, 'DENTADURAS FINI', 7.50, 50, '../assets/img/fini Dentaduras.jpg ', 'assets/img/fini Dentaduras.jpg '),
+(47, 4, 'MINHOCAS FINI', 7.50, 50, '../assets/img/finiMinhocas.jpg ', 'assets/img/finiMinhocas.jpg '),
+(48, 4, 'BALA GELATINA AMORAS FINI', 7.50, 50, '../assets/img/Bala Fini amora.jpg ', 'assets/img/Bala Fini amora.jpg '),
+(49, 4, 'BALA GELATINA BEIJOS FINI', 7.50, 50, '../assets/img/bala gelatina fini.jpg ', 'assets/img/bala gelatina fini.jpg '),
+(50, 4, 'BALA GELATINA FINIBURGUERS FINI', 7.50, 50, '../assets/img/Bala Gelatina Finiburguers Fini.jpg ', 'assets/img/Bala Gelatina Finiburguers Fini.jpg '),
+(51, 4, 'BALA GELATINAS POLVO FINI', 7.50, 50, '../assets/img/Bala Gelatinas Polvo 80g FINI.jpg ', 'assets/img/Bala Gelatinas Polvo 80g FINI.jpg '),
+(52, 3, 'SONHO DE VALSA', 2.50, 100, '../assets/img/sonhodevalsa.jpeg ', 'assets/img/sonhodevalsa.jpeg '),
+(53, 3, 'OURO BRANCO', 2.50, 100, '../assets/img/ouro branco.jpeg ', 'assets/img/ouro branco.jpeg '),
+(54, 3, 'BIS XTRA', 18.00, 50, '../assets/img/Bis.jpeg ', 'assets/img/Bis.jpeg '),
+(55, 2, 'CHÁ MATE LEÃO LIMÃO', 3.19, 30, '../assets/img/cha mate limão.jpeg ', 'assets/img/cha mate limão.jpeg '),
+(56, 2, 'CHÁ MATE LEÃO PESSEGO', 3.19, 30, '../assets/img/cha mate pessego.jpeg ', 'assets/img/cha mate pessego.jpeg '),
+(57, 11, 'COCA-COLA', 4.20, 20, '../assets/img/coca-cola.jpeg', 'assets/img/coca-cola.jpeg'),
+(58, 11, 'COCA-COLA ZERO', 4.20, 20, '../assets/img/coca-cola zero.jpeg', 'assets/img/coca-cola zero.jpeg'),
+(59, 11, 'SPRITE', 3.69, 15, '../assets/img/sprite.jpeg', 'assets/img/sprite.jpeg'),
+(60, 11, 'FANTA LARANJA', 4.70, 20, '../assets/img/fanta.jpeg', 'assets/img/fanta.jpeg'),
+(61, 11, 'FANTA UVA', 3.99, 20, '../assets/img/fanta uva.jpeg', 'assets/img/fanta uva.jpeg'),
+(62, 12, 'COCA-COLA ZERO 500ML', 6.99, 30, '../assets/img/coca-cola zero 500ml.jpeg', 'assets/img/coca-cola zero 500ml.jpeg'),
+(63, 12, 'COCA-COLA 500ML', 6.99, 30, '../assets/img/coca-cola 500ml.jpeg', 'assets/img/coca-cola 500ml.jpeg'),
+(64, 16, 'BARRA NUTRY BOLO_CHOCOLATE', 6.00, 100, '../assets/img/Barra Nutry bolo_chocolate.jpg ', 'assets/img/Barra Nutry bolo_chocolate.jpg '),
+(65, 4, 'BALA FINI TUBES', 7.50, 50, '../assets/img/Bala fini tubes.jpg ', 'assets/img/Bala fini tubes.jpg '),
+(66, 4, 'BALA FINI BANANA', 7.50, 50, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
+(67, 4, 'AROS DE MORANGO AZEDINHOS 80G', 7.50, 50, '../assets/img/Aros de Morango Azedinhos 80g - Fini.jpg ', 'assets/img/Aros de Morango Azedinhos 80g - Fini.jpg '),
+(68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 50, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg '),
+(131, 3, 'BOMBOM AERO', 2.80, 80, NULL, NULL);
 
 -- --------------------------------------------------------
-UPDATE tb_produtos SET descricao = UPPER(descricao);
+
 --
--- Estrutura para tabela `tb_subcategorias`
+-- Table structure for table `tb_subcategorias`
 --
 
 DROP TABLE IF EXISTS `tb_subcategorias`;
@@ -5834,10 +5903,10 @@ CREATE TABLE IF NOT EXISTS `tb_subcategorias` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `descricao` (`descricao`),
   KEY `id_categoria` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Despejando dados para a tabela `tb_subcategorias`
+-- Dumping data for table `tb_subcategorias`
 --
 
 INSERT INTO `tb_subcategorias` (`id`, `id_categoria`, `descricao`) VALUES
@@ -5861,54 +5930,98 @@ INSERT INTO `tb_subcategorias` (`id`, `id_categoria`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_usuarios`
+-- Table structure for table `tb_usuarios`
 --
 
 DROP TABLE IF EXISTS `tb_usuarios`;
 CREATE TABLE IF NOT EXISTS `tb_usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cargo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
+  `CPF` varchar(14) NOT NULL,
   `email` varchar(200) NOT NULL,
   `senha` varchar(132) NOT NULL,
+  `Celular` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_id_cargo` (`id_cargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Restrições para tabelas despejadas
+-- Dumping data for table `tb_usuarios`
+--
+
+INSERT INTO `tb_usuarios` (`id`, `id_cargo`, `nome`, `CPF`, `email`, `senha`, `Celular`) VALUES
+(1, 1, 'admin', '123.456.789-01', 'admin@gmail.com', '123', '(11) 98765-4321'),
+(2, 2, 'funcionario', '234.567.890-12', 'funcionario@gmail.com', '123', '(21) 99876-5432'),
+(3, 3, 'user', '345.678.901-23', 'user@gmail.com', '123', '(31) 98765-1234'),
+(5, 3, 'Pedro Santos', '567.890.123-45', 'pedro.santos@email.com', '123', '(51) 98765-3456'),
+(6, 2, 'Carlos Marinho', '554.655.666-82', 'marinho@gmail.com', '123', '(17)99125-5589');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_subcategorias`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `vw_subcategorias`;
+CREATE TABLE IF NOT EXISTS `vw_subcategorias` (
+`id` int(11)
+,`categorias` varchar(100)
+,`subcategorias` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_subcategorias`
+--
+DROP TABLE IF EXISTS `vw_subcategorias`;
+
+DROP VIEW IF EXISTS `vw_subcategorias`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_subcategorias`  AS SELECT `ts`.`id` AS `id`, `tc`.`descricao` AS `categorias`, `ts`.`descricao` AS `subcategorias` FROM (`tb_subcategorias` `ts` join `tb_categorias` `tc` on(`tc`.`id` = `ts`.`id_categoria`)) ;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `tb_cliente_endereco`
+-- Constraints for table `tb_cliente_endereco`
 --
 ALTER TABLE `tb_cliente_endereco`
   ADD CONSTRAINT `tb_cliente_endereco_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id`);
 
 --
--- Restrições para tabelas `tb_pedidos`
+-- Constraints for table `tb_pedidos`
 --
 ALTER TABLE `tb_pedidos`
   ADD CONSTRAINT `tb_pedidos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id`),
   ADD CONSTRAINT `tb_pedidos_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `tb_cliente_endereco` (`id`);
 
 --
--- Restrições para tabelas `tb_pedidos_itens`
+-- Constraints for table `tb_pedidos_itens`
 --
 ALTER TABLE `tb_pedidos_itens`
   ADD CONSTRAINT `tb_pedidos_itens_ibfk_1` FOREIGN KEY (`id_pedidos`) REFERENCES `tb_pedidos` (`id`),
   ADD CONSTRAINT `tb_pedidos_itens_ibfk_2` FOREIGN KEY (`id_produtos`) REFERENCES `tb_produtos` (`id`);
 
 --
--- Restrições para tabelas `tb_produtos`
+-- Constraints for table `tb_produtos`
 --
 ALTER TABLE `tb_produtos`
   ADD CONSTRAINT `tb_produtos_ibfk_1` FOREIGN KEY (`id_subcategoria`) REFERENCES `tb_subcategorias` (`id`);
 
 --
--- Restrições para tabelas `tb_subcategorias`
+-- Constraints for table `tb_subcategorias`
 --
 ALTER TABLE `tb_subcategorias`
   ADD CONSTRAINT `tb_subcategoria_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categorias` (`id`);
+
+--
+-- Constraints for table `tb_usuarios`
+--
+ALTER TABLE `tb_usuarios`
+  ADD CONSTRAINT `fk_id_cargo` FOREIGN KEY (`id_cargo`) REFERENCES `tb_nivel_usuario` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

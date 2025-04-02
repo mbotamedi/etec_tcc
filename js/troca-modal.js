@@ -14,32 +14,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const fecharModalDepois = document.getElementById("fecharModalDepois");
     const nomeUsuario = document.getElementById("nomeUsuario");
 
-    // Log dos elementos encontrados
-    console.log('Elementos encontrados:', {
-        // Menu
-        menuToggle: !!menuToggle,
-        menu: !!menu,
-        // Modais
-        modalAntes: !!modalAntes,
-        modalDepois: !!modalDepois,
-        abrirModalBtn: !!abrirModalBtn,
-        abrirModalMenuBtn: !!abrirModalMenuBtn,
-        fecharModalAntes: !!fecharModalAntes,
-        fecharModalDepois: !!fecharModalDepois,
-        nomeUsuario: !!nomeUsuario
-    });
+    // Elementos do modal de logout
+    const modalLogout = document.getElementById('modalLogout');
+    const btnConfirmarLogout = document.getElementById('btnConfirmarLogout');
+    const btnCancelarLogout = document.getElementById('btnCancelarLogout');
+    const btnLogout = document.querySelector('.logout');
 
     // Configuração do Menu
     if (menuToggle && menu) {
-        console.log('Configurando menu dropdown...');
         menuToggle.addEventListener('click', () => {
-            console.log('Menu toggle clicado');
             if (menu.classList.contains('active')) {
-                console.log('Fechando menu');
                 menu.classList.remove('active');
                 menu.style.display = 'none';
             } else {
-                console.log('Abrindo menu');
                 menu.classList.add('active');
                 menu.style.display = 'block';
             }
@@ -48,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fecha o menu ao clicar fora
         document.addEventListener('click', (event) => {
             if (!menuToggle.contains(event.target) && !menu.contains(event.target)) {
-                console.log('Clicou fora do menu, fechando...');
                 menu.classList.remove('active');
                 menu.style.display = 'none';
             }
@@ -57,21 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para atualizar o estado do modal
     function atualizarEstadoModal(data) {
-        console.log('Atualizando estado do modal com dados:', data);
         if (!modalAntes || !modalDepois || !nomeUsuario) {
-            console.error('Elementos necessários não encontrados');
             return;
         }
 
         if (data.logado) {
-            console.log('Usuário logado, mostrando modal depois');
             nomeUsuario.textContent = data.nome;
             modalDepois.style.display = "block";
             modalAntes.style.display = "none";
             modalDepois.classList.add('show');
             modalAntes.classList.remove('show');
         } else {
-            console.log('Usuário não logado, mostrando modal antes');
             modalAntes.style.display = "block";
             modalDepois.style.display = "none";
             modalAntes.classList.add('show');
@@ -81,27 +63,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para verificar o estado de login
     function verificarLogin() {
-        console.log('Iniciando verificação de login...');
         if (!modalAntes || !modalDepois || !nomeUsuario) {
-            console.error('Elementos necessários não encontrados:', {
-                modalAntes: !!modalAntes,
-                modalDepois: !!modalDepois,
-                nomeUsuario: !!nomeUsuario
-            });
             return;
         }
 
         fetch('PHP/verificar_login.php')
-            .then(response => {
-                console.log('Resposta recebida do servidor:', response);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log('Dados recebidos:', data);
                 atualizarEstadoModal(data);
             })
             .catch(error => {
-                console.error('Erro ao verificar login:', error);
                 if (modalAntes) {
                     modalAntes.style.display = "block";
                     modalAntes.classList.add('show');
@@ -115,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para fechar todos os modais
     function fecharTodosModais() {
-        console.log('Fechando todos os modais');
         if (modalAntes) {
             modalAntes.style.display = "none";
             modalAntes.classList.remove('show');
@@ -128,10 +98,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para abrir o modal
     function abrirModal(e) {
-        console.log('Função abrirModal chamada');
         if (e) {
             e.preventDefault();
-            console.log('Prevenindo comportamento padrão do evento');
         }
 
         // Verifica se algum modal está aberto
@@ -139,29 +107,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const modalDepoisAberto = modalDepois && modalDepois.style.display === "block";
 
         if (modalAntesAberto || modalDepoisAberto) {
-            console.log('Modal já está aberto, fechando...');
             fecharTodosModais();
         } else {
-            console.log('Modal fechado, abrindo...');
             verificarLogin();
         }
     }
 
     // Event Listeners dos Modais
     if (abrirModalBtn) {
-        console.log('Adicionando listener ao botão abrirModal');
         abrirModalBtn.addEventListener('click', abrirModal);
     }
 
     if (abrirModalMenuBtn) {
-        console.log('Adicionando listener ao botão abrirModalMenu');
         abrirModalMenuBtn.addEventListener('click', abrirModal);
     }
 
     if (fecharModalAntes) {
-        console.log('Adicionando listener ao botão fecharModalAntes');
         fecharModalAntes.addEventListener('click', function () {
-            console.log('Fechando modal antes');
             if (modalAntes) {
                 modalAntes.style.display = "none";
                 modalAntes.classList.remove('show');
@@ -170,9 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (fecharModalDepois) {
-        console.log('Adicionando listener ao botão fecharModalDepois');
         fecharModalDepois.addEventListener('click', function () {
-            console.log('Fechando modal depois');
             if (modalDepois) {
                 modalDepois.style.display = "none";
                 modalDepois.classList.remove('show');
@@ -182,15 +142,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fechar modais ao clicar fora
     window.addEventListener('click', function (e) {
-        console.log('Clique fora dos modais detectado');
         if (e.target === modalAntes || e.target === modalDepois) {
-            console.log('Clicou no modal, fechando...');
             fecharTodosModais();
         }
     });
 
-    // Verificar estado de login periodicamente
-    setInterval(verificarLogin, 5000); // Verifica a cada 5 segundos
+    // Função para mostrar o modal de logout
+    function mostrarModalLogout() {
+        modalLogout.style.display = 'flex';
+    }
+
+    // Função para esconder o modal de logout
+    function esconderModalLogout() {
+        modalLogout.style.display = 'none';
+    }
+
+    // Event listener para o botão de logout
+    if (btnLogout) {
+        btnLogout.addEventListener('click', function (e) {
+            e.preventDefault();
+            mostrarModalLogout();
+        });
+    }
+
+    // Event listener para o botão de confirmar logout
+    if (btnConfirmarLogout) {
+        btnConfirmarLogout.addEventListener('click', function () {
+            fetch('php/logout.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao fazer logout:', error);
+                });
+        });
+    }
+
+    // Event listener para o botão de cancelar logout
+    if (btnCancelarLogout) {
+        btnCancelarLogout.addEventListener('click', function () {
+            esconderModalLogout();
+        });
+    }
+
+    // Fechar modal ao clicar fora dele
+    modalLogout.addEventListener('click', function (e) {
+        if (e.target === modalLogout) {
+            esconderModalLogout();
+        }
+    });
 
     console.log('Configuração dos modais e menu concluída');
 });
