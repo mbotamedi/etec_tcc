@@ -98,7 +98,7 @@ include 'php/verificar_login_inicial.php';
 
 
     <!--CARROSEL-->
-    <!--<div class="carrosel" style="display: flex; justify-content: center;">
+    <div class="carrosel" style="display: flex; justify-content: center;">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
