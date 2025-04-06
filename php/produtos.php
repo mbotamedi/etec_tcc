@@ -1,7 +1,13 @@
 <?php
 session_start();
 
+// Verifica se o usuário está logado
+$logado = isset($_SESSION['usuario']);
+$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario']['nome'] : '';
 
+// Define a classe de exibição do modal baseado no estado de login
+$modalAntesDisplay = $logado ? 'none' : 'block';
+$modalDepoisDisplay = $logado ? 'block' : 'none';
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +19,7 @@ session_start();
     <title>Produtos</title>
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
+    <link rel="stylesheet" href="../css/navbar.css">
     <!-- Favicon-->
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -33,62 +40,38 @@ session_start();
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar" style="width: 100%; background-color: rgba(0, 0, 0, 0.791);">
-        <div class="container-fluid px-4 px-lg-5">
-            <div class="imagem col-2">
-                <img src="../imgs/logo_copia01.png" alt="" width="100px">
+    <nav class="navbar">
+        <div class="nav-top">
+            <div class="logo">
+                <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
-
-            <div class="items">
-                <a href="../index.php">INÍCIO</a>
-                <a href="../php/produtos.php">PEÇA AGORA</a>
-                <a href="../php/unidades.php">UNIDADES</a>
-            </div>
-
-
-            <div class="menu-toggle">
-                <img src="../imgs/cardapio.png" alt="" width="32px">
-                <ul class="menu">
-                    <li><a href="index.html" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
-                    </li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
-                    </li>
-                    <li><a href="HTML/unidades.html" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
-                    <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> CARRINHO</a></li>
+            <div class="menu">
+                <ul>
+                    <li><a href="../index.php">INICIO</a></li>
+                    <li><a href="produtos.php">PEÇA AGORA</a></li>
+                    <li><a href="unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
-
-            <div class="buy-actions">
+            <div class="user-cart">
                 <a href="#" id="abrirModal">
                     <img src="../imgs/User.png" alt="Usuário" width="30px">
                 </a>
-
                 <a href="#">
                     <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
                 </a>
             </div>
         </div>
 
-        <div class="aaa">
-            <form method="post" class="barra-pesquisa">
-                <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px;">
-                <button type="submit" class="botao-pesquisa" style="background-color: transparent; border: none;">
-                    <img src="../imgs/lupa (1).png" style="width: 25px;" alt="" class="search-image">
+        <div class="search-bar" style="gap: 20px;">
+            <form method="post" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
+                <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px; width: 800px;">
+                <button type="submit" class="botao-pesquisa" style="background: none; border: none; cursor: pointer; padding: 0; height: 30px; display: flex; align-items: center;">
+                <img src="./lupa (3).png" style="width: 25px;" alt="" >
                 </button>
             </form>
         </div>
-
-
     </nav>
-    <!-- Modal -->
-    <div id="meuModal" class="modal-container">
-        <div class="modal-content col-3">
-            <a href="../php/cadastro.php">Cadastre-se</a>
-            <a href="../php/login.php">Entrar</a>
-            <button id="fecharModal">Fechar</button>
-        </div>
-    </div>
+
     <!-- Navigation End-->
     <!-- Section-->
     <section class="py-5">
@@ -139,15 +122,26 @@ session_start();
 
     <!-- Footer End-->
 
+
+
+    <!-- Modal de confirmação de logout -->
+    <div id="modalLogout" class="modal-logout">
+        <div class="modal-logout-content">
+            <h3>Tem certeza que deseja sair?</h3>
+            <div class="modal-logout-buttons">
+                <button id="btnConfirmarLogout" class="btn-confirmar">Sim, sair</button>
+                <button id="btnCancelarLogout" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <!--------------SCRIPTS-------------->
-    <
-        <script src="../js/scripts.js">
-        </script>
-        <script src="../js/dropDown-menu.js"></script>
-        <script src="../js/funcao.js"></script>
-        <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
-
-
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/funcao.js"></script>
+    <script src="../js/troca-modal.js"></script>
+    <!--------------SCRIPTS/-------------->
 </body>
 
 </html>

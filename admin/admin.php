@@ -40,6 +40,7 @@
   <!--begin::Required Plugin(AdminLTE)-->
   <link rel="stylesheet" href="../css/adminlte.css" />
   <link rel="stylesheet" href="../css/inicio.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
   <!--end::Required Plugin(AdminLTE)-->
   <!-- apexcharts -->
   <link

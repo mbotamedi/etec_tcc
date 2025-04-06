@@ -48,309 +48,102 @@
 .modal-content01 a,
 .modal-content01 button {
     text-decoration: none;
-    color: black;
-    padding: 12px 20px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    display: block;
-    width: 100%;
-    text-align: center;
+    color: #333;
+    padding: 8px 16px;
     border: none;
-    background: none;
+    border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 8px;
-    font-family: "Fredoka", serif;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .modal-content {
-    display: block;
-    width: 250px;
-    height: 350px;
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    padding: 10px;
-    z-index: 1000;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    margin-right: 20px;
+    padding: 20px;
+    width: 300px;
 }
 
-.modal-content a,
-.modal-content button {
-    text-decoration: none;
-    color: black;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+.modal-content a {
     display: block;
-    width: 100%;
-    text-align: center;
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-bottom: 8px;
-    font-family: "Fredoka", serif;
-    font-size: 16px;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
 }
 
 .modal-content button:hover {
-    background-color: rgba(255, 0, 0, 0.1);
-    transform: translateX(5px);
-    color: #ff0000;
+    background-color: #f0f0f0;
 }
 
-/* Classe para exibir o modal com animação */
 .modal-container01.show {
-    display: block;
     opacity: 1;
 }
 
-/* Estilo para os botões */
 .action-buttons {
     display: flex;
-    flex-direction: column !important;
-    gap: 5px;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .user-name {
-    margin-left: 15px;
-    font-family: "Fredoka", serif;
-    font-size: 18px;
-    color: #333;
+    margin-left: 10px;
 }
 
 .action-buttons tex {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    margin-top: 20px;
 }
 
 .cadastro-login {
-    color: rgb(255, 157, 0);
+    margin-top: 20px;
 }
 
 .conta-cadastro {
-    text-align: center;
-    font-family: "Fredoka", serif;
-    font-size: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-/*-------TÍTULO DO DESTAQUES-------*/
-
 .produtos-Destaques {
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    color: rgba(0, 0, 0, 0.671);
-    padding: 5px;
-    font-size: 50px;
-    margin-top: 50px;
+    font-weight: 600;
 }
 
 .barra-pesquisa {
-    display: flex !important; 
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100%;
-    padding-left: 180px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .pesquisa-input {
-    width: 500px;
+    width: 300px;
 }
 
 .menu-toggle {
     display: none;
-    justify-content: center;
-    align-items: center;
 }
 
 .aaa {
-    width: 100%;
+    display: none;
 }
 
-/*----------------------------------MEDIA QUERY--------------------------------------------------*/
-
-/* Tela grande (desktop) */
-@media (min-width: 1200px) {
-    .items {
-        gap: 50px;
-        display: flex;
-        font-family: "Fredoka", serif;
-    }
-
-    .items>a {
-        text-decoration: none;
-        color: white;
-        font-size: 20px;
-        transform: scale(1.02);
-        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-    }
-
-    .items>a:hover {
-        color: rgb(255, 157, 0);
-        transform: scale(1.05);
-    }
-
-    .barra-pesquisa {
-    display: flex !important; 
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100%;
-    padding-left: 180px;
-}
-}
-
-/* Tela média (tablet) */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .items {
-        display: flex;
-        font-family: "Fredoka", serif;
-        margin-left: -150px;
-    }
-
-    .items>a {
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        display: inline-block;
-        transform: scale(1.01);
-        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-        white-space: nowrap;
-    }
-
-    .items>a:hover {
-        color: rgb(255, 157, 0);
-        transform: scale(1.03);
-    }
-}
-
-/*--------------------------------------------------------------*/
-
-/* Tela pequena (celular) */
 @media (max-width: 767px) {
-    .items {
-        gap: 20px;
-        display: flex;
-        flex-direction: column;
-        font-family: "Fredoka", serif;
-        display: none;
-    }
-
-    .items>a {
-        text-decoration: none;
-        color: white;
-        font-size: 16px;
-        transform: scale(1.0);
-        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-    }
-
-    .items>a:hover {
-        color: rgb(255, 157, 0);
-        transform: scale(1.02);
-    }
-
-    .buy-actions {
-        display: none;
-    }
-    
     .produtos-Destaques {
-        font-size: 25px;
+        margin-top: 20px;
     }
 
     .text-center {
-        text-align: center !important;
-      }
-
-    @media (max-width: 767px) {
-        .menu-toggle {
-            display: inline-block;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-
-        .menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #333;
-            padding: 10px;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .menu li>a {
-            margin-bottom: 100px;
-        }
-
-        .menu>a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .menu a:hover {
-            color: rgb(255, 157, 0);
-        }
-
-        .fa-solid {
-            margin-right: 5px;
-        }
-
-        li>a {
-            font-size: 20px;
-        }
+        margin-top: 20px;
     }
 }
 
-/*-----------------------------------------------------------*/
-
 @media (max-width: 767px) {
     .menu-toggle {
-        display: inline-block;
+        display: block;
         cursor: pointer;
-        margin-bottom: 10px;
-    }
-
-    .bar1,
-    .bar2,
-    .bar3 {
-        width: 30px;
-        height: 5px;
-        background-color: #fff;
-        margin: 6px 0;
-        transition: 0.4s;
-    }
-
-    .bar1 {
-        transform: rotate(0deg) translate(0px, 0px);
-    }
-
-    .bar2 {
-        transform: rotate(0deg) translate(0px, 0px);
-    }
-
-    .bar3 {
-        transform: rotate(0deg) translate(0px, 0px);
-    }
-
-    .menu-toggle:hover .bar1 {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .menu-toggle:hover .bar2 {
-        opacity: 0;
-    }
-
-    .menu-toggle:hover .bar3 {
-        transform: rotate(-45deg) translate(5px, -5px);
+        padding: 10px;
     }
 
     .menu {
@@ -358,26 +151,103 @@
         position: absolute;
         top: 100%;
         left: 0;
+        width: 100%;
         background-color: #333;
         padding: 10px;
-        width: 100%;
     }
 
-    .menu li {
-        margin-bottom: 10px;
+    .menu li>a {
+        color: white;
     }
 
-    .menu a {
-        color: #fff;
-        text-decoration: none;
+    .menu>a {
+        color: white;
     }
 
     .menu a:hover {
-        color: #ccc;
+        color: #ff9d00;
+    }
+
+    .fa-solid {
+        color: white;
+    }
+
+    li>a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .bar1,
+    .bar2,
+    .bar3 {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: 0.4s;
+    }
+
+    .bar1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .bar2 {
+        opacity: 0;
+    }
+
+    .bar3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .menu-toggle:hover .bar1 {
+        background-color: #ff9d00;
+    }
+
+    .menu-toggle:hover .bar2 {
+        background-color: #ff9d00;
+    }
+
+    .menu-toggle:hover .bar3 {
+        background-color: #ff9d00;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
+    }
+
+    .menu li {
+        list-style: none;
+    }
+
+    .menu a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+    }
+
+    .menu a:hover {
+        color: #ff9d00;
     }
 
     .menu-toggle.active .bar1 {
-        transform: rotate(45deg) translate(5px, 5px);
+        transform: rotate(-45deg) translate(-5px, 6px);
     }
 
     .menu-toggle.active .bar2 {
@@ -385,7 +255,7 @@
     }
 
     .menu-toggle.active .bar3 {
-        transform: rotate(-45deg) translate(5px, -5px);
+        transform: rotate(45deg) translate(-5px, -6px);
     }
 
     .menu-toggle.active+.menu {
@@ -395,73 +265,50 @@
 
 @media (max-width: 768px) {
     .menu-toggle {
-        display: inline-block;
+        display: block;
         cursor: pointer;
-        margin-bottom: 10px;
+        padding: 10px;
     }
 
     .menu {
         display: none;
-        justify-content: space-between;
-        align-items: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
     }
 
     .menu li {
-        margin-right: 20px;
+        list-style: none;
     }
 }
 
 .modal-container01 a {
-    text-decoration: none;
-    color: black;
-    padding: 12px 20px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
     display: block;
-    width: 100%;
-    text-align: center;
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-bottom: 8px;
-    font-family: "Fredoka", serif;
-    font-size: 16px;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
 }
 
 .modal-container01 a:hover {
-    background-color: rgba(255, 157, 0, 0.1);
-    transform: translateX(5px);
-    color: rgb(255, 157, 0);
+    background-color: #f0f0f0;
 }
 
 .modal-container01 button {
-    text-decoration: none;
-    color: red;
-    padding: 12px 20px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    display: block;
-    width: 100%;
-    text-align: center;
+    background-color: #f0f0f0;
     border: none;
-    background: none;
+    padding: 10px;
     cursor: pointer;
-    margin-bottom: 8px;
-    font-family: "Fredoka", serif;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .modal-container01 button:hover {
-    background-color: rgba(255, 0, 0, 0.1);
-    transform: translateX(5px);
-    color: #ff0000;
+    background-color: #e0e0e0;
 }
 
-/* Modal de confirmação de logout */
 .modal-logout {
     display: none;
     position: fixed;
@@ -470,43 +317,38 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
+    z-index: 1000;
 }
 
 .modal-logout-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 5px;
     text-align: center;
-    max-width: 400px;
-    width: 90%;
 }
 
 .modal-logout-content h3 {
-    font-family: "Fredoka", serif;
-    color: #333;
     margin-bottom: 20px;
-    font-size: 20px;
+    color: #333;
 }
 
 .modal-logout-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .btn-confirmar,
 .btn-cancelar {
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-family: "Fredoka", serif;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn-confirmar {
@@ -516,15 +358,13 @@
 
 .btn-confirmar:hover {
     background-color: #cc0000;
-    transform: translateY(-2px);
 }
 
 .btn-cancelar {
-    background-color: #f0f0f0;
+    background-color: #ccc;
     color: #333;
 }
 
 .btn-cancelar:hover {
-    background-color: #e0e0e0;
-    transform: translateY(-2px);
+    background-color: #999;
 }

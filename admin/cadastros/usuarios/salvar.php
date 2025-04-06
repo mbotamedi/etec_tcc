@@ -5,6 +5,7 @@ $cpf = $_POST["txtcpf"];
 $email = $_POST["txtemail"];
 $senha = $_POST["txtsenha"];
 $celular = $_POST["txtcelular"];
+$id_cargo = $_POST["txtcargo"];
 $id        = $_POST["id"];
 
 
@@ -13,8 +14,8 @@ $id        = $_POST["id"];
 if ($id == 0) {
     $gravar = mysqli_query(
         $conexao,
-        "INSERT INTO tb_usuarios (nome, CPF, email, senha, Celular) VALUES 
-                                    ('$nome','$cpf', '$email', '$senha', '$celular')"
+        "INSERT INTO tb_usuarios (nome, CPF, email, senha, Celular, id_cargo) VALUES 
+                                    ('$nome','$cpf', '$email', '$senha', '$celular', '$id_cargo')"
     );
 } else {
     $gravar = mysqli_query(
@@ -23,6 +24,7 @@ if ($id == 0) {
                 nome ='$nome', CPF = '$cpf', email = '$email', senha = '$senha', Celular = '$celular' WHERE id = '$id'"
     );
 }
+
 
 if ($gravar) {
     echo "Dados salvos com sucesso";

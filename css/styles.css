@@ -677,7 +677,6 @@ progress {
 }
 
 .container,
-.container-fluid,
 .container-xxl,
 .container-xl,
 .container-lg,
@@ -4297,7 +4296,6 @@ fieldset:disabled .btn {
 }
 
 .navbar>.container,
-.navbar>.container-fluid,
 .navbar>.container-sm,
 .navbar>.container-md,
 .navbar>.container-lg,
@@ -12630,14 +12628,15 @@ fieldset:disabled .btn {
   display: grid;
   justify-content: center;
   align-items: center;
-  
+
 }
 
-.campo{ /*TAMANHO DOS BOTÕES DE ADICIONAR E DIMINUIR QUANTIDADE*/
+.campo {
+  /*TAMANHO DOS BOTÕES DE ADICIONAR E DIMINUIR QUANTIDADE*/
   width: 30px;
 }
 
-.qtd-label{
+.qtd-label {
   display: flex;
   justify-content: center;
 }

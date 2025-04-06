@@ -21,7 +21,7 @@ session_start();
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/unidades.css">
-    <link rel="stylesheet" href="../css/unidades.css">
+    <link rel="stylesheet" href="../css/navbar.css">
     <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,45 +39,31 @@ session_start();
 <body>
 
     <!-- Navigation-->
-    <nav class="navbar" style="width: 100%; background-color: rgba(0, 0, 0, 0.791);">
-        <div class="container-fluid px-4 px-lg-5">
-            <div class="imagem col-2">
-                <img src="../imgs/logo_copia01.png" alt="" width="100px">
+    <!-- Navigation-->
+    <nav class="navbar">
+        <div class="nav-top">
+            <div class="logo">
+                <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
-
-            <div class="items col-5">
-                <a href="../index.php">INICIO</a>
-                <a href="produtos.php">PEÇA AGORA</a>
-                <a href="unidades.php">UNIDADES</a>
-            </div>
-
-            <div class="menu-toggle">
-                <img src="../imgs/cardapio.png" alt="" width="32px">
-                <ul class="menu">
-                    <li><a href="../index.php" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
-                    </li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
-                    </li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
-                    <li><a href="#" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
-                    <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> CARRINHO</a></li>
+            <div class="menu">
+                <ul>
+                    <li><a href="../index.php">INICIO</a></li>
+                    <li><a href="../php/produtos.php">PEÇA AGORA</a></li>
+                    <li><a href="../php/unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
-
-
-            <div class="buy-actions">
+            <div class="user-cart">
                 <a href="#" id="abrirModal">
                     <img src="../imgs/User.png" alt="Usuário" width="30px">
                 </a>
-
                 <a href="#">
                     <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
                 </a>
             </div>
         </div>
-
-
     </nav>
+
+    <!-- Navigation End-->
 
     <!-- Modal -->
     <div id="meuModal" class="modal-container">

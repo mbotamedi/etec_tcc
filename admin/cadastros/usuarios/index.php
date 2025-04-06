@@ -22,7 +22,8 @@
         <div class="row mb-2">
           <label for="txtcpf" class="col-sm-2 col-form-label">CPF</label>
           <div class="col-sm-10">
-            <input type="text" name="txtcpf" id="txtcpf" class="form-control">
+            <input type="text" name="txtcpf" id="txtcpf" class="form-control" oninput="this.value = formatarCPF(this.value)" maxlength="14">
+
           </div>
         </div>
         <div class="row mb-2">
@@ -38,12 +39,23 @@
           </div>
         </div>
         <div class="row mb-2">
-          <label for="txtcelular" class="col-sm col-form-label">Celular</label>
+          <label for="txtcelular" class="col-sm-2 col-form-label">Celular</label>
           <div class="col-sm-10">
-            <input type="text" name="txtcelular" id="txtcelular" class="form-control">
+            <input type="text" name="txtcelular" id="txtcelular" class="form-control" oninput="this.value = formatarCelular(this.value)"
+              maxlength="15">
           </div>
         </div>
 
+        <div class="row mb-2">
+          <label for="txtcargo" class="col-sm-2 col-form-label">Cargo</label>
+          <div class="col-sm-10">
+            <select name="txtcargo" id="txtcargo" class="form-control" required>
+              <option value="">Selecione um cargo</option>
+              <option value="1">Administrador</option>
+              <option value="2">Usuário</option>
+            </select>
+          </div>
+        </div>
 
         <!--end::Body-->
         <!--begin::Footer-->
@@ -155,4 +167,18 @@
     $("#listar").load("cadastros/usuarios/listar.php");
 
   });
+
+  function formatarCPF(cpf) {
+    if (!cpf) return "";
+    cpf = cpf.replace(/\D/g, "");
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    return cpf;
+  }
+
+  function formatarCelular(celular) {
+    if (!celular) return "";
+    celular = celular.replace(/\D/g, "");
+    celular = celular.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+    return celular;
+  }
 </script>

@@ -1,6 +1,6 @@
 <?php
-session_start()
-
+// Inclui o arquivo de verificação de login
+include 'php/verificar_login_inicial.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,22 +18,15 @@ session_start()
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -44,49 +37,33 @@ session_start()
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar" style="width: 100%; background-color: rgba(0, 0, 0, 0.791);">
-        <div class="container-fluid px-4 px-lg-5">
-            <div class="imagem col-2">
-                <img src="imgs/logo_copia01.png" alt="" width="100px">
+    <nav class="navbar">
+        <div class="nav-top">
+            <div class="logo">
+                <img src="imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
-
-            <div class="items col-5">
-                <a href="./index.php">INICIO</a>
-                <a href="php/produtos.php">PEÇA AGORA</a>
-                <a href="php/unidades.php">UNIDADES</a>
-
-            </div>
-
-            <div class="menu-toggle">
-                <img src="imgs/cardapio.png" alt="" width="32px">
-                <ul class="menu">
-                    <li><a href="index.php" style="margin-bottom: 5px;"><i class="fa-solid fa-house"></i> INICIO</a>
-                    </li>
-                    <li><a href="/php/produtos.php" style="margin-bottom: 5px;"><i class="fa-solid fa-cart-plus"></i> PEÇA AGORA</a>
-                    </li>
-                    <li><a href="PHP/unidades.php" style="margin-bottom: 5px;"><i class="fa-solid fa-building"></i> UNIDADES</a></li>
-                    <li><a href="#" id="abrirModalMenu" style="margin-bottom: 5px;"><i class="fa-solid fa-user"></i> MINHA CONTA</a></li>
-                    <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> CARRINHO</a></li>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.php">INICIO</a></li>
+                    <li><a href="php/produtos.php">PEÇA AGORA</a></li>
+                    <li><a href="php/unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
-
-
-            <div class="buy-actions">
+            <div class="user-cart">
                 <a href="#" id="abrirModal">
                     <img src="imgs/User.png" alt="Usuário" width="30px">
                 </a>
-
                 <a href="#">
                     <img src="imgs/Shopping cart.png" alt="Carrinho" width="30px">
                 </a>
             </div>
         </div>
-
-
     </nav>
 
+    <!-- Navigation End-->
+
     <!-- Modal ANTES -->
-    <div id="modalAntes" class="modal-container01">
+    <div id="modalAntes" class="modal-container01" style="display: <?php echo $usuario_logado ? 'none' : 'block'; ?>">
         <div class="modal-content01">
             <p class="conta-cadastro">Não possui uma conta?</p>
             <a href="PHP/login.php">Cadastre-se ou faça seu login</a>
@@ -95,14 +72,14 @@ session_start()
     </div>
 
     <!-- Modal DEPOIS -->
-    <div id="modalDepois" class="modal-container" style="display: none;">
+    <div id="modalDepois" class="modal-container" style="display: <?php echo $usuario_logado ? 'block' : 'none'; ?>">
         <div class="modal-content col-3">
             <div class="user-info" style="display: flex;">
                 <div class="image-user">
                     <img src="imgs/usuario-de-perfil.png" alt="" width="50px">
                 </div>
                 <div class="user-name">
-                    <h4 id="nomeUsuario"></h4>
+                    <h4 id="nomeUsuario"><?php echo $nome_usuario; ?></h4>
                     <a href="./php/logout.php" class="sair-usuario"><span style="color: red;">Sair</span></a>
                 </div>
             </div>
@@ -208,7 +185,6 @@ session_start()
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/funcao.js"></script>
-    <script src="js/troca-modal.js"></script>
     <!--------------SCRIPTS/-------------->
 
 
