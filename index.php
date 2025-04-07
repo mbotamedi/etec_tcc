@@ -86,11 +86,14 @@ include 'php/verificar_login_inicial.php';
 
             <div class="action-buttons">
                 <a href="./index.php" class="btn btn-primary">Home</a>
+                <a href="./php/produtos.php" class="btn btn-primary">Produtos</a>
+                <a href="./php/unidades.php" class="btn btn-primary">Unidades</a>
                 <a href="#" class="btn btn-primary">Minha conta</a>
                 <a href="#" class="btn btn-primary">Pedidos/Compras</a>
                 <a href="./admin/admin.php" class="btn btn-primary">Administrador</a>
                 <a href="#" class="btn btn-primary">Suporte</a>
             </div>
+
         </div>
     </div>
 
