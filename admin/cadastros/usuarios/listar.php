@@ -6,9 +6,9 @@ $consulta = isset($_POST['consulta']) ? trim($_POST['consulta']) : null;
 
 echo ($consulta);
 if ($consulta == null) {
-    $listar = mysqli_query($conexao, "SELECT * FROM tb_usuarios order by nome");
+    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, n.cargo, us.celular FROM tb_usuarios as us Inner Join tb_nivel_usuario as n WHERE us.id_cargo = n.id order by upper(us.nome)");;
 } else {
-    $listar = mysqli_query($conexao, "SELECT * FROM tb_usuarios WHERE UPPER(nome) LIKE UPPER('%$consulta%')");
+    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, n.cargo, us.celular FROM tb_usuarios as us Inner Join  tb_nivel_usuario as n WHERE us.id_cargo = n.id UPPER(us.nome) LIKE UPPER('%$consulta%')");
 }
 
 echo '<table class="table table-striped">';
@@ -18,7 +18,7 @@ echo '<thead>
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Email</th>
-                <th>Password</th>
+                <th>Cargo</th>
                 <th>Celular</th>
                 <th>Ações</th></thead><tbody>';
 
@@ -29,8 +29,8 @@ while ($lista = mysqli_fetch_assoc($listar)) {
                     <td>' . $lista["nome"] . '</td>
                     <td>' . $lista["CPF"] . '</td>
                     <td>' . $lista["email"] . '</td>
-                    <td>' . $lista["senha"] . '</td>
-                    <td>' . $lista["Celular"] . '</td>
+                    <td>' . $lista["cargo"] . '</td>
+                    <td>' . $lista["celular"] . '</td>
                     <td><i class="bi bi-pencil-square altera"></i> |
                         <i class="bi bi-trash deleta"></i></td>
                 </tr>';
@@ -48,14 +48,14 @@ echo '</tbody>
         var nome = $(this).closest("tr").find("td").eq(1).text();
         var cpf = $(this).closest("tr").find("td").eq(2).text();
         var email = $(this).closest("tr").find("td").eq(3).text();
-        var senha = $(this).closest("tr").find("td").eq(4).text();
+        var cargo = $(this).closest("tr").find("td").eq(4).text();
         var celular = $(this).closest("tr").find("td").eq(5).text();
 
         //Carrego a descricao no Campo txtcategoria 
         $("#txtnome").val(nome);
         $("#txtcpf").val(cpf);
         $("#txtemail").val(email);
-        $("#txtsenha").val(senha);
+        $("#txtcargo").val(cargo);
         $("#txtcelular").val(celular);
         $("#id").val(id);
 
