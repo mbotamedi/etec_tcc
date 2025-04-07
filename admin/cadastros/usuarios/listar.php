@@ -6,9 +6,9 @@ $consulta = isset($_POST['consulta']) ? trim($_POST['consulta']) : null;
 
 echo ($consulta);
 if ($consulta == null) {
-    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, n.cargo, us.celular FROM tb_usuarios as us Inner Join tb_nivel_usuario as n WHERE us.id_cargo = n.id order by upper(us.nome)");;
+    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, us.senha, n.cargo, us.celular FROM tb_usuarios as us Inner Join tb_nivel_usuario as n WHERE us.id_cargo = n.id order by upper(us.nome)");;
 } else {
-    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, n.cargo, us.celular FROM tb_usuarios as us Inner Join  tb_nivel_usuario as n WHERE us.id_cargo = n.id UPPER(us.nome) LIKE UPPER('%$consulta%')");
+    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, us.senha, n.cargo, us.celular FROM tb_usuarios as us Inner Join  tb_nivel_usuario as n WHERE us.id_cargo = n.id UPPER(us.nome) LIKE UPPER('%$consulta%')");
 }
 
 echo '<table class="table table-striped">';
@@ -31,6 +31,7 @@ while ($lista = mysqli_fetch_assoc($listar)) {
                     <td>' . $lista["email"] . '</td>
                     <td>' . $lista["cargo"] . '</td>
                     <td>' . $lista["celular"] . '</td>
+                    <td style="display:none">' . $lista["senha"] . '</td>
                     <td><i class="bi bi-pencil-square altera"></i> |
                         <i class="bi bi-trash deleta"></i></td>
                 </tr>';
@@ -50,11 +51,12 @@ echo '</tbody>
         var email = $(this).closest("tr").find("td").eq(3).text();
         var cargo = $(this).closest("tr").find("td").eq(4).text();
         var celular = $(this).closest("tr").find("td").eq(5).text();
-
+        var senha = $(this).closest("tr").find("td").eq(6).text();
         //Carrego a descricao no Campo txtcategoria 
         $("#txtnome").val(nome);
         $("#txtcpf").val(cpf);
         $("#txtemail").val(email);
+        $("#txtsenha").val(senha);
         $("#txtcargo").val(cargo);
         $("#txtcelular").val(celular);
         $("#id").val(id);

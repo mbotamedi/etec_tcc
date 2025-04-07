@@ -4,6 +4,7 @@ $nome = $_POST["txtnome"];
 $cpf = $_POST["txtcpf"];
 $email = $_POST["txtemail"];
 $celular = $_POST["txtcelular"];
+$senha = $_POST["txtsenha"];
 $id_cargo = $_POST["txtcargo"];
 $id        = $_POST["id"];
 
@@ -13,14 +14,14 @@ $id        = $_POST["id"];
 if ($id == 0) {
     $gravar = mysqli_query(
         $conexao,
-        "INSERT INTO tb_usuarios (nome, CPF, email, Celular, id_cargo) VALUES 
-                                    ('$nome','$cpf', '$email', '$celular', '$id_cargo')"
+        "INSERT INTO tb_usuarios (nome, CPF, email, senha, Celular, id_cargo) VALUES 
+                                    ('$nome','$cpf', '$email', '$senha', $celular', '$id_cargo')"
     );
 } else {
     $gravar = mysqli_query(
         $conexao,
         "UPDATE tb_usuarios SET id = '$id', 
-                nome ='$nome', CPF = '$cpf', email = '$email', id_cargo = '$id_cargo', Celular = '$celular' WHERE id = '$id'"
+                nome ='$nome', CPF = '$cpf', email = '$email',senha = '$senha', id_cargo = '$id_cargo', Celular = '$celular' WHERE id = '$id'"
     );
 }
 
