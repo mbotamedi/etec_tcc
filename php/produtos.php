@@ -20,6 +20,7 @@ $modalDepoisDisplay = $logado ? 'block' : 'none';
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/mediaQuery.css">
     <!-- Favicon-->
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
     <!-- Bootstrap icons-->
