@@ -142,7 +142,7 @@ include 'php/verificar_login_inicial.php';
                             </div>
                             <div class="card-body p-4">
                                 <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
-                                <!---<p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>--->
+                                <p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>
                                 <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
                                 <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
                             </div>
