@@ -49,21 +49,26 @@
         <div class="row mb-2">
           <label for="txtcargo" class="col-sm-2 col-form-label">Cargo</label>
           <div class="col-sm-10">
-            <select name="txtcargo" id="txtcargo" class="form-control" required>
-              <option value="">Selecione um cargo</option>
-              <option value="1">Administrador</option>
-              <option value="2">Usuário</option>
+            <select class="form-select" name="subcategoria" id="subcategoria" required="">
+              <!-- Opção padrão (prompt) -->
+              <?php
+              include_once("../includes/conexao.php");
+              $qryCargo = mysqli_query($conexao, "select * from tb_nivel_usuario;");
+              while ($usuario = mysqli_fetch_assoc($qryCargo)) {
+                echo '<option value="' . $usuario["id"] . '">' . $usuario["cargo"] . '</option>';
+              }
+              ?>
             </select>
+            <br>
           </div>
-        </div>
 
-        <!--end::Body-->
-        <!--begin::Footer-->
-        <div class="card-footer">
-          <input type="hidden" name="id" id="id" value="0">
-          <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
-        </div>
-        <!--end::Footer-->
+          <!--end::Body-->
+          <!--begin::Footer-->
+          <div class="card-footer">
+            <input type="hidden" name="id" id="id" value="0">
+            <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
+          </div>
+          <!--end::Footer-->
     </form>
     <!--end::Form-->
   </div>
