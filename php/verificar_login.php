@@ -12,6 +12,7 @@ if (isset($_SESSION['usuario']) && isset($_SESSION['usuario']['nome'])) {
     $response['nome'] = $_SESSION['usuario']['nome'];
 }
 
+
+
 // Retorna a resposta em formato JSON
-header('Content-Type: application/json');
 echo json_encode($response);
