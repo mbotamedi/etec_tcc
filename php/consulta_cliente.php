@@ -18,11 +18,13 @@ if (mysqli_num_rows($listar) > 0) {
             'nome' => $row['nome'],
             'email' => $row['email']
         );
-        header("Location: ../index.php");
+        
+        // Redireciona para uma página intermediária que configura o sessionStorage
+        header("Location: set_session_storage.php?id=" . $row['id'] . "&nome=" . urlencode($row['nome']) . "&email=" . urlencode($row['email']));
         exit;
     } else {
         header("Location: ../php/cadastro.php");  // Se a senha estiver incorreta
-        exit; // Important to prevent further execution
+        exit;
     }
 } else {
     //echo "negativo";  // Se o e-mail não existir no banco

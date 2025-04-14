@@ -1,4 +1,4 @@
-<?php   
+<?php
 // Inclui o arquivo de verificação de login
 include 'php/verificar_login.php';
 
@@ -51,8 +51,8 @@ include 'php/verificar_login.php';
                 </ul>
             </div>
             <div class="user-cart">
-                <button href="#" id="abrirModal" style="border: none; background: none;" onclick="verificarLogin()">
-                    <img src="imgs/User.png" alt="Usuário" width="30px">
+                <button id="abrirModal" class="btn btn-link nav-link">
+                    <i class="fas fa-user"></i>
                 </button>
                 <a href="#">
                     <img src="imgs/Shopping cart.png" alt="Carrinho" width="30px">
@@ -73,7 +73,7 @@ include 'php/verificar_login.php';
     </div>
 
     <!-- Modal DEPOIS -->
-    <div id="modalDepois" class="modal-container" style="display: none;">
+    <div id="modalDepois" class="modal-container">
         <div class="modal-content col-3">
             <div class="user-info" style="display: flex;">
                 <div class="image-user">
@@ -130,7 +130,7 @@ include 'php/verificar_login.php';
     <section class="py-5">
 
         <div class="titulo-pricipal">
-            <h1 class="produtos-Destaques" >PROMOÇÕES DA SEMANA</h1>
+            <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
         </div>
 
         <div class="container px-4 px-lg-5 mt-5">

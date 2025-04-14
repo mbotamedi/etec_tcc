@@ -1,105 +1,112 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Elementos dos modais
-    const modalAntes = document.getElementById('modalAntes');
-    const modalDepois = document.getElementById('modalDepois');
-    const abrirModal = document.getElementById('abrirModal');
-    const fecharModalAntes = document.getElementById('fecharModalAntes');
-    const btnConfirmarLogout = document.getElementById('btnConfirmarLogout');
-    const btnCancelarLogout = document.getElementById('btnCancelarLogout');
+// Função para verificar se o usuário está logado
+function verificarLogin() {
+    const logado = sessionStorage.getItem('usuario_logado') === 'true';
+    const nome = sessionStorage.getItem('usuario_nome');
+    return { logado, nome };
+}
+
+// Função para fazer logout
+async function fazerLogout() {
+    try {
+        const response = await fetch('php/logout.php');
+        const data = await response.json();
+        if (data.success) {
+            // Limpa o sessionStorage
+            sessionStorage.removeItem('usuario_id');
+            sessionStorage.removeItem('usuario_nome');
+            sessionStorage.removeItem('usuario_email');
+            sessionStorage.removeItem('usuario_logado');
+        }
+        return data;
+    } catch (error) {
+        console.error('Erro ao fazer logout:', error);
+        return { success: false };
+    }
+}
+
+// Função para mostrar/esconder modais
+function toggleModal(modalId, show) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = show ? 'block' : 'none';
+    }
+}
+
+// Função para atualizar a exibição dos modais
+function atualizarModais() {
+    const loginStatus = verificarLogin();
+
+    if (loginStatus.logado) {
+        // Usuário logado - mostra modal de usuário
+        toggleModal('modalAntes', false);
+        toggleModal('modalDepois', true);
+        const nomeUsuario = document.getElementById('nomeUsuario');
+        if (nomeUsuario) {
+            nomeUsuario.textContent = loginStatus.nome;
+        }
+    } else {
+        // Usuário não logado - mostra modal de login
+        toggleModal('modalAntes', true);
+        toggleModal('modalDepois', false);
+    }
+}
+
+// Função principal que inicializa todos os eventos
+function inicializarModais() {
+    // Elementos principais
+    const btnUsuario = document.getElementById('abrirModal');
     const modalLogout = document.getElementById('modalLogout');
 
-    // Função para verificar o estado de login
-    function verificarLogin() {
-        console.log('Verificando estado de login...');
-        fetch('php/verificar_login.php')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Resposta do servidor:', data);
-                if (!data.logado) {
-                    // Se NÃO estiver logado
-                    console.log('Usuário não logado. Abrindo modal de login...');
-                    modalAntes.style.display = 'block';
-                    modalDepois.style.display = 'none';
-                } else {
-                    // Se estiver logado
-                    console.log('Usuário logado. Abrindo modal de usuário...');
-                    modalAntes.style.display = 'none';
-                    modalDepois.style.display = 'block';
-                    if (document.getElementById('nomeUsuario')) {
-                        document.getElementById('nomeUsuario').textContent = data.nome;
-                        console.log('Nome do usuário atualizado:', data.nome);
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao verificar login:', error);
-                console.log('Mostrando modal de login devido ao erro...');
-                modalAntes.style.display = 'block';
-                modalDepois.style.display = 'none';
-            });
-    }
+    // Botões de logout
+    const btnLogout = document.getElementById('btnLogout');
+    const btnConfirmarLogout = document.getElementById('btnConfirmarLogout');
+    const btnCancelarLogout = document.getElementById('btnCancelarLogout');
 
-    // Evento para abrir o modal de login
-    if (abrirModal) {
-        abrirModal.addEventListener('click', function (e) {
-            e.preventDefault();
-            console.log('Botão de usuário clicado. Verificando login...');
-            verificarLogin();
+    // Atualiza os modais inicialmente
+    atualizarModais();
+
+    // Evento de clique no botão de usuário
+    if (btnUsuario) {
+        btnUsuario.addEventListener('click', () => {
+            atualizarModais();
         });
     }
 
-    // Evento para fechar o modal de login
-    if (fecharModalAntes) {
-        fecharModalAntes.addEventListener('click', function () {
-            console.log('Fechando modal de login...');
-            modalAntes.style.display = 'none';
+    // Evento de abrir modal de logout
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            toggleModal('modalLogout', true);
         });
     }
 
-    // Eventos para o modal de logout
+    // Evento de confirmar logout
     if (btnConfirmarLogout) {
-        btnConfirmarLogout.addEventListener('click', function () {
-            console.log('Iniciando processo de logout...');
-            // Faz logout
-            fetch('logout.php')
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Resposta do logout:', data);
-                    if (data.success) {
-                        console.log('Logout realizado com sucesso. Fechando modais...');
-                        modalLogout.style.display = 'none';
-                        verificarLogin(); // Atualiza a exibição dos modais
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao fazer logout:', error);
-                });
+        btnConfirmarLogout.addEventListener('click', async () => {
+            const resultado = await fazerLogout();
+            if (resultado.success) {
+                toggleModal('modalLogout', false);
+                atualizarModais(); // Atualiza os modais após o logout
+            }
         });
     }
 
+    // Evento de cancelar logout
     if (btnCancelarLogout) {
-        btnCancelarLogout.addEventListener('click', function () {
-            console.log('Cancelando logout. Fechando modal de confirmação...');
-            modalLogout.style.display = 'none';
+        btnCancelarLogout.addEventListener('click', () => {
+            toggleModal('modalLogout', false);
         });
     }
 
-    // Fecha modais ao clicar fora
-    window.addEventListener('click', function (e) {
-        if (e.target === modalAntes) {
-            console.log('Clicou fora do modal de login. Fechando...');
-            modalAntes.style.display = 'none';
-        }
-        if (e.target === modalDepois) {
-            console.log('Clicou fora do modal de usuário. Fechando...');
-            modalDepois.style.display = 'none';
-        }
+    // Fechar modais ao clicar fora
+    window.addEventListener('click', (e) => {
         if (e.target === modalLogout) {
-            console.log('Clicou fora do modal de logout. Fechando...');
-            modalLogout.style.display = 'none';
+            toggleModal('modalLogout', false);
         }
     });
-});
+}
+
+// Inicializa tudo quando o documento estiver carregado
+document.addEventListener('DOMContentLoaded', inicializarModais);
 
 
 
