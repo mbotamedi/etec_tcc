@@ -1,10 +1,5 @@
 <?php
-<<<<<<< HEAD
 @session_start();
-=======
->>>>>>> dece13274491d436920fce8e15bf8030830176e7
-
-include 'verificar_login.php';
 ?>
 
 <!DOCTYPE html>
