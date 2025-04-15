@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+include 'verificar_login.php';
 
 ?>
 
@@ -65,13 +65,6 @@ session_start();
 
     <!-- Navigation End-->
 
-    <!-- Modal -->
-    <div id="meuModal" class="modal-container">
-        <div class="modal-content col-3">
-            <a href="php/cadastro.php">Cadastre-se</a>
-            <a href="php/login.pho">Entrar</a>
-            <button id="fecharModal">Fechar</button>
-        </div>
     </div>
 
     <section class="#">
@@ -124,12 +117,61 @@ session_start();
         </div>
     </section>
 
+    <!-- Section End-->
+
+    <!-- Modal ANTES -->
+    <div id="modalAntes" class="modal-container01">
+        <div class="modal-content01">
+            <p class="conta-cadastro">Não possui uma conta?</p>
+            <a href="../PHP/login.php">Cadastre-se ou faça seu login</a>
+            <button id="fecharModalAntes">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal DEPOIS -->
+    <div id="modalDepois" class="modal-container" style="display: none;">
+        <div class="modal-content col-3">
+            <div class="user-info" style="display: flex;">
+                <div class="image-user">
+                    <img src="../imgs/usuario-de-perfil.png" alt="" width="50px">
+                </div>
+                <div class="user-name">
+                    <h4 id="nomeUsuario"><?php echo $nome_usuario; ?></h4>
+                    <a href="#" class="sair-usuario" id="btnConfirmarLogout"><span style="color: red;">Sair</span></a>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="../index.php" class="btn btn-primary">Home</a>
+                <a href="produtos.php" class="btn btn-primary">Produtos</a>
+                <a href="unidades.php" class="btn btn-primary">Unidades</a>
+                <a href="#" class="btn btn-primary">Minha conta</a>
+                <a href="#" class="btn btn-primary">Pedidos/Compras</a>
+                <a href="../admin/admin.php" class="btn btn-primary">Administrador</a>
+                <a href="#" class="btn btn-primary">Suporte</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
+    <!-- Footer End-->
+
+    <!-- Modal de confirmação de logout -->
+    <div id="modalLogout" class="modal-logout">
+        <div class="modal-logout-content">
+            <h3>Tem certeza que deseja sair?</h3>
+            <div class="modal-logout-buttons">
+                <button id="btnConfirmarLogout" class="btn-confirmar">Sim, sair</button>
+                <button id="btnCancelarLogout" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 

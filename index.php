@@ -1,6 +1,7 @@
 <?php
 // Inclui o arquivo de verificação de login
-include 'php/verificar_login_inicial.php';
+include 'php/verificar_login.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -50,9 +51,9 @@ include 'php/verificar_login_inicial.php';
                 </ul>
             </div>
             <div class="user-cart">
-                <a href="#" id="abrirModal">
-                    <img src="imgs/User.png" alt="Usuário" width="30px">
-                </a>
+                <button id="abrirModal" class="btn btn-link nav-link">
+                    <i class="fas fa-user"></i>
+                </button>
                 <a href="#">
                     <img src="imgs/Shopping cart.png" alt="Carrinho" width="30px">
                 </a>
@@ -63,7 +64,7 @@ include 'php/verificar_login_inicial.php';
     <!-- Navigation End-->
 
     <!-- Modal ANTES -->
-    <div id="modalAntes" class="modal-container01" style="display: <?php echo $usuario_logado ? 'none' : 'block'; ?>">
+    <div id="modalAntes" class="modal-container01">
         <div class="modal-content01">
             <p class="conta-cadastro">Não possui uma conta?</p>
             <a href="PHP/login.php">Cadastre-se ou faça seu login</a>
@@ -72,14 +73,14 @@ include 'php/verificar_login_inicial.php';
     </div>
 
     <!-- Modal DEPOIS -->
-    <div id="modalDepois" class="modal-container" style="display: <?php echo $usuario_logado ? 'block' : 'none'; ?>">
+    <div id="modalDepois" class="modal-container">
         <div class="modal-content col-3">
             <div class="user-info" style="display: flex;">
                 <div class="image-user">
                     <img src="imgs/usuario-de-perfil.png" alt="" width="50px">
                 </div>
                 <div class="user-name">
-                    <h4 id="nomeUsuario"><?php echo $nome_usuario; ?></h4>
+                    <h4 id="nomeUsuario">Rafael</h4>
                     <a href="./php/logout.php" class="sair-usuario"><span style="color: red;">Sair</span></a>
                 </div>
             </div>
@@ -180,6 +181,7 @@ include 'php/verificar_login_inicial.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/funcao.js"></script>
+    <script src="js/controlaModal.js"></script>
     <!--------------SCRIPTS/-------------->
 
 
