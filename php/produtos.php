@@ -1,13 +1,10 @@
 <?php
+<<<<<<< HEAD
 @session_start();
+=======
+>>>>>>> dece13274491d436920fce8e15bf8030830176e7
 
-// Verifica se o usuário está logado
-$logado = isset($_SESSION['usuario']);
-$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario']['nome'] : '';
-
-// Define a classe de exibição do modal baseado no estado de login
-$modalAntesDisplay = $logado ? 'none' : 'block';
-$modalDepoisDisplay = $logado ? 'block' : 'none';
+include 'verificar_login.php';
 ?>
 
 <!DOCTYPE html>
@@ -114,16 +111,48 @@ $modalDepoisDisplay = $logado ? 'block' : 'none';
 
     </section>
     <!-- Section End-->
+
+    <!-- Modal ANTES -->
+    <div id="modalAntes" class="modal-container01">
+        <div class="modal-content01">
+            <p class="conta-cadastro">Não possui uma conta?</p>
+            <a href="../PHP/login.php">Cadastre-se ou faça seu login</a>
+            <button id="fecharModalAntes">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal DEPOIS -->
+    <div id="modalDepois" class="modal-container" style="display: none;">
+        <div class="modal-content col-3">
+            <div class="user-info" style="display: flex;">
+                <div class="image-user">
+                    <img src="../imgs/usuario-de-perfil.png" alt="" width="50px">
+                </div>
+                <div class="user-name">
+                    <h4 id="nomeUsuario"><?php echo $nome_usuario; ?></h4>
+                    <a href="#" class="sair-usuario" id="btnConfirmarLogout"><span style="color: red;">Sair</span></a>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="../index.php" class="btn btn-primary">Home</a>
+                <a href="produtos.php" class="btn btn-primary">Produtos</a>
+                <a href="unidades.php" class="btn btn-primary">Unidades</a>
+                <a href="#" class="btn btn-primary">Minha conta</a>
+                <a href="#" class="btn btn-primary">Pedidos/Compras</a>
+                <a href="../admin/admin.php" class="btn btn-primary">Administrador</a>
+                <a href="#" class="btn btn-primary">Suporte</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
-
     <!-- Footer End-->
-
-
 
     <!-- Modal de confirmação de logout -->
     <div id="modalLogout" class="modal-logout">
@@ -142,6 +171,8 @@ $modalDepoisDisplay = $logado ? 'block' : 'none';
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
     <script src="../js/troca-modal.js"></script>
+    <script src="../js/controlaModal.js"></script>
+
     <!--------------SCRIPTS/-------------->
 </body>
 
