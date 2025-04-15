@@ -1,7 +1,3 @@
-<?php
-@session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +55,7 @@
             <form method="post" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
                 <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px; width: 800px;">
                 <button type="submit" class="botao-pesquisa" style="background: none; border: none; cursor: pointer; padding: 0; height: 30px; display: flex; align-items: center;">
-                    <img src="./lupa (3).png" style="width: 25px;" alt="">
+                    <img src="../imgs/lupa (3).png" style="width: 25px;" alt="">
                 </button>
             </form>
         </div>
@@ -149,16 +145,6 @@
     </footer>
     <!-- Footer End-->
 
-    <!-- Modal de confirmação de logout -->
-    <div id="modalLogout" class="modal-logout">
-        <div class="modal-logout-content">
-            <h3>Tem certeza que deseja sair?</h3>
-            <div class="modal-logout-buttons">
-                <button id="btnConfirmarLogout" class="btn-confirmar">Sim, sair</button>
-                <button id="btnCancelarLogout" class="btn-cancelar">Cancelar</button>
-            </div>
-        </div>
-    </div>
 
     <!--------------SCRIPTS-------------->
     <!-- Bootstrap core JS-->
