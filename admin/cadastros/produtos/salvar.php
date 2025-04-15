@@ -9,17 +9,21 @@ $id_sub = $_POST["subcategoria"];
 //echo $id_sub;
 
 if ($id == 0) {
-    $gravar = mysqli_query(
-        $conexao,
-        "INSERT INTO tb_produtos (id_subcategoria, descricao, valor, estoque) VALUES 
-                                    ('$id_sub','$produtos', '$valor', '$quantidade')"
-    );
+    $gravar = mysqli_query($conexao, "INSERT INTO tb_produtos (id_subcategoria, descricao, valor, estoque) VALUES 
+                                    ('$subcategoria', '$produto', '$valor', '$estoque')");
+    $id = mysqli_insert_id($conexao);
 } else {
     $gravar = mysqli_query(
         $conexao,
-        "UPDATE tb_produtos SET id = '$id', 
-                descricao ='$produtos', valor = '$valor', estoque ='$quantidade' WHERE id = '$id'"
+        "UPDATE tb_produtos SET id_subcategoria = '$subcategoria', 
+                descricao ='$produto',
+                valor = '$valor',
+                estoque = '$estoque' WHERE id = '$id'"
     );
+}
+
+if (isset($_FILES["foto"])) {
+    move_uploaded_file($_FILES["foto"]["tmp_name"], 'foto/' . $id . ".jpeg");
 }
 
 if ($gravar) {
