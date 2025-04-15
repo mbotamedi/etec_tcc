@@ -6,7 +6,7 @@ $consulta = isset($_POST['consulta']) ? trim($_POST['consulta']) : null;
 
 echo ($consulta);
 if ($consulta == null) {
-    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, us.senha, n.cargo, us.celular FROM tb_usuarios as us Inner Join tb_nivel_usuario as n WHERE us.id_cargo = n.id order by upper(us.nome)");;
+    $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, us.senha, n.cargo, us.celular FROM tb_usuarios as us Inner Join tb_nivel_usuario as n WHERE us.id_cargo = n.id order by upper(us.nome)");
 } else {
     $listar = mysqli_query($conexao, "SELECT us.id, us.nome, us.CPF, us.email, us.senha, n.cargo, us.celular FROM tb_usuarios as us Inner Join  tb_nivel_usuario as n WHERE us.id_cargo = n.id UPPER(us.nome) LIKE UPPER('%$consulta%')");
 }
