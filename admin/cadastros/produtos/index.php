@@ -13,7 +13,7 @@
       <div class="card-body">
         <div class="row mb-2">
           <label for="subcategoria" class="col-sm-2 col-form-label">Subcategoria:</label>
-          <div class="col-sm-7">
+          <div class="col-sm-3">
             <select class="form-select" name="subcategoria" id="subcategoria" required="">
               <!-- Opção padrão (prompt) -->
               <?php
@@ -46,35 +46,44 @@
             <input type="text" name="txtquantidade" id="txtquantidade" class="form-control">
           </div>
         </div>
-
-      </div>
-      <!--end::Body-->
-      <!--begin::Footer-->
-      <div class="card-footer">
-        <input type="hidden" name="id" id="id" value="0">
-        <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
-      </div>
-      <!--end::Footer-->
-    </form>
-    <!--end::Form-->
-  </div>
-
-  <div class="card card-primary card-outline mb-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <div class="card-title">Produtos Cadastrados</div>
-      <form id="pesquisa" class="d-flex align-items-center" style="gap: 10px;" method="post">
-        <div class="input-group">
-          <input type="text" name="consulta" id="consulta" class="form-control pesquisa-input" placeholder="Buscar produtos...">
-          <button id="btnpesquisa" type="submit" class="btn btn-outline-secondary">
-            <img src="../imgs/lupa (1).png" style="width: 20px; height: 20px;" alt="Pesquisar">
-          </button>
+        <div class="row mb-2">
+          <div class="col-sm-2">
+            <img src="/cadastros/produtos/fotos/*.jpeg" width="100" height="100>">
+          </div>
+          <div class="col-sm-10">
+            <label for="inputEmail13" class="form-label">Foto</label>
+            <input type="file" name="foto" class="form-control">
+          </div>
         </div>
-      </form>
-    </div>
-    <div class="card-body" id="listar">
-      <!-- Conteúdo será carregado aqui -->
-    </div>
+      </div>
   </div>
+  <!--end::Body-->
+  <!--begin::Footer-->
+  <div class="card-footer">
+    <input type="hidden" name="id" id="id" value="0">
+    <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
+  </div>
+  <!--end::Footer-->
+  </form>
+  <!--end::Form-->
+</div>
+
+<div class="card card-primary card-outline mb-4">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-title">Produtos Cadastrados</div>
+    <form id="pesquisa" class="d-flex align-items-center" style="gap: 10px;" method="post">
+      <div class="input-group">
+        <input type="text" name="consulta" id="consulta" class="form-control pesquisa-input" placeholder="Buscar produtos...">
+        <button id="btnpesquisa" type="submit" class="btn btn-outline-secondary">
+          <img src="../imgs/lupa (1).png" style="width: 20px; height: 20px;" alt="Pesquisar">
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="card-body" id="listar">
+    <!-- Conteúdo será carregado aqui -->
+  </div>
+</div>
 
 
 

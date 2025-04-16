@@ -180,16 +180,7 @@ include 'verificar_login.php';
     </footer>
     <!-- Footer End-->
 
-    <!-- Modal de confirmação de logout -->
-    <div id="modalLogout" class="modal-logout">
-        <div class="modal-logout-content">
-            <h3>Tem certeza que deseja sair?</h3>
-            <div class="modal-logout-buttons">
-                <button id="btnConfirmarLogout" class="btn-confirmar">Sim, sair</button>
-                <button id="btnCancelarLogout" class="btn-cancelar">Cancelar</button>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
