@@ -2,6 +2,7 @@
 // Inclui o arquivo de verificação de login
 include 'php/verificar_login.php';
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,6 +21,9 @@ include 'php/verificar_login.php';
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/inicio.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/canvaDeslogado.css">
+    <link rel="stylesheet" href="css/canvaLogado.css">
+
     <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,8 +55,8 @@ include 'php/verificar_login.php';
                 </ul>
             </div>
             <div class="user-cart">
-                <button id="abrirModal" class="btn btn-link nav-link">
-                    <i class="fas fa-user"></i>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
+                    <img src="imgs/user.png" alt="Carrinho" width="30px">
                 </button>
                 <a href="#">
                     <img src="imgs/Shopping cart.png" alt="Carrinho" width="30px">
@@ -62,44 +66,6 @@ include 'php/verificar_login.php';
     </nav>
 
     <!-- Navigation End-->
-
-    <!-- Modal ANTES -->
-    <div id="modalAntes" class="modal-container01">
-        <div class="modal-content01">
-            <p class="conta-cadastro">Não possui uma conta?</p>
-            <a href="PHP/login.php">Cadastre-se ou faça seu login</a>
-            <button id="fecharModalAntes">Fechar</button>
-        </div>
-    </div>
-
-    <!-- Modal DEPOIS -->
-    <div id="modalDepois" class="modal-container">
-        <div class="modal-content col-3">
-            <div class="user-info" style="display: flex;">
-                <div class="image-user">
-                    <img src="imgs/usuario-de-perfil.png" alt="" width="50px">
-                </div>
-                <div class="user-name">
-                    <h4 id="nomeUsuario">Rafael</h4>
-                    <a href="./php/logout.php" class="sair-usuario"><span style="color: red;">Sair</span></a>
-                </div>
-            </div>
-
-            <div class="action-buttons">
-                <a href="./index.php" class="btn btn-primary">Home</a>
-                <a href="./php/produtos.php" class="btn btn-primary">Produtos</a>
-                <a href="./php/unidades.php" class="btn btn-primary">Unidades</a>
-                <a href="#" class="btn btn-primary">Minha conta</a>
-                <a href="#" class="btn btn-primary">Pedidos/Compras</a>
-                <a href="./admin/admin.php" class="btn btn-primary">Administrador</a>
-                <a href="#" class="btn btn-primary">Suporte</a>
-            </div>
-
-        </div>
-    </div>
-
-
-
 
     <!--CARROSEL-->
     <div class="carrosel" style="display: flex; justify-content: center;">
@@ -122,6 +88,55 @@ include 'php/verificar_login.php';
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
+        </div>
+    </div>
+
+    <!-- OFF CANVAS PARA USUARIO DESLOGADO-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="canvas-deslogado" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Não possui uma conta?</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="modal-content01">
+                <p class="modal-text">
+                    <a href="php/login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- OFF CANVAS PARA USUARIO LOGADO-->
+    <div class="offcanvas logado offcanvas-end" tabindex="-1" id="canvas-logado" aria-labelledby="offcanvasExampleLabel">
+        <div class="items-group">
+            <div class="header-offcanvasLogado">
+                <div class="group-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, <span class="nome-usuario"><?php echo isset($nome) ? $nome : ''; ?></span></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="botao-sair">
+                    <a href="php/logout.php" class="btn-logout">Sair</a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="line">
+
+        </div>
+        <div class="items-group-2">
+            <div class="items-menu">
+                <ul class="ul-items">
+                    <li class="li-items"><a href="index.php">Home</a></li>
+                    <li class="li-items"><a href="admin/admin.php">Administrador</a></li>
+                    <li class="li-items"><a href="php/produtos.php">Produtos</a></li>
+                    <li class="li-items"><a href="php/unidades.php">Unidades</a></li>
+                    <li class="li-items"><a href="#">Minha conta</a></li>
+                    <li class="li-items"><a href="#">Pedidos/Compras</a></li>
+
+                </ul>
+            </div>
         </div>
     </div>
 
