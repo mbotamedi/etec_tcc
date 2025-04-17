@@ -1,113 +1,94 @@
-// Função para verificar se o usuário está logado
-function verificarLogin() {
-    const logado = sessionStorage.getItem('usuario_logado') === 'true';
-    const nome = sessionStorage.getItem('usuario_nome');
-    return { logado, nome };
-}
+// Este arquivo está vazio pois os modais foram removidos
 
-// Função para fazer logout
-async function fazerLogout() {
+// Função para verificar o estado de login
+async function verificarLogin() {
     try {
-        const response = await fetch('php/logout.php');
+        const response = await fetch('php/verificar_login.php');
         const data = await response.json();
-        if (data.success) {
-            // Limpa o sessionStorage
-            sessionStorage.removeItem('usuario_id');
-            sessionStorage.removeItem('usuario_nome');
-            sessionStorage.removeItem('usuario_email');
-            sessionStorage.removeItem('usuario_logado');
+
+        console.log('Resposta do servidor:', data);
+
+        if (data.logado) {
+            sessionStorage.setItem('usuario_logado', 'true');
+            sessionStorage.setItem('nome_usuario', data.nome);
+        } else {
+            sessionStorage.setItem('usuario_logado', 'false');
+            sessionStorage.removeItem('nome_usuario');
         }
-        return data;
+
+        return data.logado;
     } catch (error) {
-        console.error('Erro ao fazer logout:', error);
-        return { success: false };
+        console.error('Erro ao verificar login:', error);
+        sessionStorage.setItem('usuario_logado', 'false');
+        sessionStorage.removeItem('nome_usuario');
+        return false;
     }
 }
 
-// Função para mostrar/esconder modais
-function toggleModal(modalId, show) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = show ? 'block' : 'none';
-    }
-}
+// Função para controlar o offcanvas baseado no estado de login
+async function controlarOffcanvas() {
+    console.log('Verificando estado de login...');
 
-// Função para atualizar a exibição dos modais
-function atualizarModais() {
-    const loginStatus = verificarLogin();
+    // Verifica o login no servidor
+    const estaLogado = await verificarLogin();
+    const nomeUsuario = sessionStorage.getItem('nome_usuario');
 
-    if (loginStatus.logado) {
-        // Usuário logado - mostra modal de usuário
-        toggleModal('modalAntes', false);
-        toggleModal('modalDepois', true);
-        const nomeUsuario = document.getElementById('nomeUsuario');
-        if (nomeUsuario) {
-            nomeUsuario.textContent = loginStatus.nome;
+    // Seleciona o botão e os offcanvas
+    const botaoUsuario = document.querySelector('.btn-primary[data-bs-toggle="offcanvas"]');
+    const offcanvasDeslogado = document.querySelector('#canvas-deslogado');
+    const offcanvasLogado = document.querySelector('#canvas-logado');
+
+    // Primeiro verifica se está deslogado
+    if (!estaLogado) {
+        console.log('Usuário não logado - Configurando offcanvas deslogado');
+        // Configura para usuário não logado
+        if (botaoUsuario) {
+            botaoUsuario.setAttribute('data-bs-target', '#canvas-deslogado');
         }
+        if (offcanvasDeslogado) offcanvasDeslogado.classList.remove('d-none');
+        if (offcanvasLogado) offcanvasLogado.classList.add('d-none');
     } else {
-        // Usuário não logado - mostra modal de login
-        toggleModal('modalAntes', true);
-        toggleModal('modalDepois', false);
-    }
-}
-
-// Função principal que inicializa todos os eventos
-function inicializarModais() {
-    // Elementos principais
-    const btnUsuario = document.getElementById('abrirModal');
-    const modalLogout = document.getElementById('modalLogout');
-
-    // Botões de logout
-    const btnLogout = document.getElementById('btnLogout');
-    const btnConfirmarLogout = document.getElementById('btnConfirmarLogout');
-    const btnCancelarLogout = document.getElementById('btnCancelarLogout');
-
-    // Atualiza os modais inicialmente
-    atualizarModais();
-
-    // Evento de clique no botão de usuário
-    if (btnUsuario) {
-        btnUsuario.addEventListener('click', () => {
-            atualizarModais();
-        });
-    }
-
-    // Evento de abrir modal de logout
-    if (btnLogout) {
-        btnLogout.addEventListener('click', () => {
-            toggleModal('modalLogout', true);
-        });
-    }
-
-    // Evento de confirmar logout
-    if (btnConfirmarLogout) {
-        btnConfirmarLogout.addEventListener('click', async () => {
-            const resultado = await fazerLogout();
-            if (resultado.success) {
-                toggleModal('modalLogout', false);
-                atualizarModais(); // Atualiza os modais após o logout
-            }
-        });
-    }
-
-    // Evento de cancelar logout
-    if (btnCancelarLogout) {
-        btnCancelarLogout.addEventListener('click', () => {
-            toggleModal('modalLogout', false);
-        });
-    }
-
-    // Fechar modais ao clicar fora
-    window.addEventListener('click', (e) => {
-        if (e.target === modalLogout) {
-            toggleModal('modalLogout', false);
+        console.log('Usuário logado - Configurando offcanvas logado');
+        // Configura para usuário logado
+        if (botaoUsuario) {
+            botaoUsuario.setAttribute('data-bs-target', '#canvas-logado');
         }
-    });
+        if (offcanvasDeslogado) offcanvasDeslogado.classList.add('d-none');
+        if (offcanvasLogado) {
+            offcanvasLogado.classList.remove('d-none');
+            const nomeElement = offcanvasLogado.querySelector('#nomeUsuario');
+            if (nomeElement) nomeElement.textContent = nomeUsuario;
+        }
+    }
 }
 
-// Inicializa tudo quando o documento estiver carregado
-document.addEventListener('DOMContentLoaded', inicializarModais);
+// Função para inicializar o offcanvas
+function inicializarOffcanvas() {
+    console.log('Iniciando inicialização do offcanvas...');
 
+    // Aguarda um pequeno delay para garantir que o DOM está pronto
+    setTimeout(() => {
+        const usuarioLogado = sessionStorage.getItem('usuario_logado');
+        const targetId = usuarioLogado === 'true' ? '#canvas-logado' : '#canvas-deslogado';
+
+        console.log('Target ID para inicialização:', targetId);
+
+        // Inicializa o offcanvas apenas se o elemento existir
+        const offcanvasElement = document.querySelector(targetId);
+        if (offcanvasElement) {
+            const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+            console.log('Offcanvas inicializado com sucesso');
+        } else {
+            console.log('Elemento offcanvas não encontrado:', targetId);
+        }
+    }, 100);
+}
+
+// Executa quando a página carrega
+document.addEventListener('DOMContentLoaded', controlarOffcanvas);
+
+// Executa quando o sessionStorage muda
+window.addEventListener('storage', controlarOffcanvas);
 
 
 

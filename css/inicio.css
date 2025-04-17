@@ -1,14 +1,15 @@
-.items > a {
+.items>a {
   text-decoration: none;
   color: white;
   font-size: 20px;
-  transform: scale(1.02);
-  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  display: block;
+  padding: 10px 15px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.items > a:hover {
+.items>a:hover {
   color: rgb(255, 157, 0);
-  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .buy-actions {
@@ -18,7 +19,6 @@
 
 /*-------------ESTILO DO MODAL-------------*/
 .modal-container01 {
-<<<<<<< HEAD
   display: none;
   position: absolute;
   top: 80px;
@@ -30,43 +30,25 @@
   z-index: 1000;
   width: 280px;
   max-height: 200px;
-  opacity: 0;
   overflow: hidden;
-  transition: opacity 0.3s ease-in-out;
-  gap: 20px;
 }
 
 .modal-container {
-  display: block;
+  display: none;
   position: absolute;
   top: 80px;
-  right: 0;
+  right: 40px;
   z-index: 1000;
-=======
-    display: none;
-    position: absolute;
-    top: 80px;
-    right: 40px;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 10px;
-    z-index: 1000;
-    width: 280px;
-    max-height: 200px;
-    overflow: hidden;
-}
-
-.modal-container {
-    display: none;
-    position: absolute;
-    top: 80px;
-    right: 40px;
-    z-index: 1000;
->>>>>>> dece13274491d436920fce8e15bf8030830176e7
 }
 
 /* Estilo base para links e botões do modal */
+.modal-content01 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
 .modal-content01 a,
 .modal-content01 button {
   text-decoration: none;
@@ -79,11 +61,14 @@
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 20px;
   width: 300px;
+  gap: 15px;
 }
 
 .modal-content a {
@@ -178,11 +163,11 @@
     padding: 10px;
   }
 
-  .menu li > a {
+  .menu li>a {
     color: white;
   }
 
-  .menu > a {
+  .menu>a {
     color: white;
   }
 
@@ -194,7 +179,7 @@
     color: white;
   }
 
-  li > a {
+  li>a {
     color: white;
     text-decoration: none;
     padding: 10px;
@@ -280,7 +265,7 @@
     transform: rotate(45deg) translate(-5px, -6px);
   }
 
-  .menu-toggle.active + .menu {
+  .menu-toggle.active+.menu {
     display: block;
   }
 }
@@ -332,7 +317,6 @@
 }
 
 .modal-logout {
-<<<<<<< HEAD
   display: none;
   position: fixed;
   top: 0;
@@ -351,103 +335,44 @@
   background-color: white;
   padding: 20px;
   border-radius: 5px;
-  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
 }
 
 .modal-logout-content h3 {
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .modal-logout-buttons {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-=======
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-}
-
-.modal-logout-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    width: 300px;
-}
-
-.modal-logout-content h3 {
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.modal-logout-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
->>>>>>> dece13274491d436920fce8e15bf8030830176e7
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .btn-confirmar,
 .btn-cancelar {
-<<<<<<< HEAD
-  padding: 10px 20px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .btn-confirmar {
-  background-color: #ff0000;
+  background-color: #dc3545;
   color: white;
 }
 
 .btn-confirmar:hover {
-  background-color: #cc0000;
+  background-color: #c82333;
 }
 
 .btn-cancelar {
-  background-color: #ccc;
-  color: #333;
+  background-color: #6c757d;
+  color: white;
 }
 
 .btn-cancelar:hover {
-  background-color: #999;
+  background-color: #5a6268;
 }
-=======
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-confirmar {
-    background-color: #dc3545;
-    color: white;
-}
-
-.btn-confirmar:hover {
-    background-color: #c82333;
-}
-
-.btn-cancelar {
-    background-color: #6c757d;
-    color: white;
-}
-
-.btn-cancelar:hover {
-    background-color: #5a6268;
-}
->>>>>>> dece13274491d436920fce8e15bf8030830176e7

@@ -1,0 +1,67 @@
+.modal-content01 {
+    padding: 20px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-link {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.modal-link:hover {
+    text-decoration: underline;
+}
+
+.modal-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+.modal-text :hover {
+    color: #ffac28;
+}
+
+
+.btn-fechar {
+    padding: 8px 16px;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-fechar:hover {
+    background-color: #c82333;
+}
+
+/*--------------------------------------------------------------------------------------------------------*/
+
+/*FONTE DAS TAGS*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Inter', sans-serif;
+}
+
+p,
+span,
+a,
+li,
+ul,
+ol {
+    font-family: 'Segoe UI', sans-serif;
+}
