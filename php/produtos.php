@@ -1,3 +1,9 @@
+<?php
+
+
+include 'verificar_login.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +15,8 @@
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/mediaQuery.css">
+    <link rel="stylesheet" href="../css/canvaDeslogado.css">
+    <link rel="stylesheet" href="../css/canvaLogado.css">
     <!-- Favicon-->
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -42,9 +50,9 @@
                 </ul>
             </div>
             <div class="user-cart">
-                <a href="#" id="abrirModal">
-                    <img src="../imgs/User.png" alt="Usuário" width="30px">
-                </a>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
+                    <img src="../imgs/user.png" alt="Carrinho" width="30px">
+                </button>
                 <a href="#">
                     <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
                 </a>
@@ -55,11 +63,61 @@
             <form method="post" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
                 <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px; width: 800px;">
                 <button type="submit" class="botao-pesquisa" style="background: none; border: none; cursor: pointer; padding: 0; height: 30px; display: flex; align-items: center;">
-                    <img src="../imgs/lupa (3).png" style="width: 25px;" alt="">
+                    <img src="./lupa (3).png" style="width: 25px;" alt="">
                 </button>
             </form>
         </div>
     </nav>
+
+    <!-- OFF CANVAS PARA LOGIN E CADASTRO-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Não possui uma conta?</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="modal-content01">
+                <p class="modal-text">
+                    <a href="php/login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- OFF CANVAS PARA USUARIO LOGADO-->
+    <div class="offcanvas logado offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="items-group">
+            <div class="header-offcanvasLogado">
+                <div class="group-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, Rafael</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="botao-sair">
+                    <a href="php/logout.php" class="btn-logout">Sair</a>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="line">
+            
+        </div>
+        <div class="items-group-2">
+            <div class="items-menu">
+                <ul class="ul-items">
+                    <li class="li-items"><a href="index.php">Home</a></li>
+                    <li class="li-items"><a href="admin/admin.php">Administrador</a></li>
+                    <li class="li-items"><a href="php/produtos.php">Produtos</a></li>
+                    <li class="li-items"><a href="php/unidades.php">Unidades</a></li>
+                    <li class="li-items"><a href="#">Minha conta</a></li>
+                    <li class="li-items"><a href="#">Pedidos/Compras</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+   
 
     <!-- Navigation End-->
     <!-- Section-->
@@ -103,39 +161,7 @@
     </section>
     <!-- Section End-->
 
-    <!-- Modal ANTES -->
-    <div id="modalAntes" class="modal-container01">
-        <div class="modal-content01">
-            <p class="conta-cadastro">Não possui uma conta?</p>
-            <a href="../PHP/login.php">Cadastre-se ou faça seu login</a>
-            <button id="fecharModalAntes">Fechar</button>
-        </div>
-    </div>
 
-    <!-- Modal DEPOIS -->
-    <div id="modalDepois" class="modal-container" style="display: none;">
-        <div class="modal-content col-3">
-            <div class="user-info" style="display: flex;">
-                <div class="image-user">
-                    <img src="../imgs/usuario-de-perfil.png" alt="" width="50px">
-                </div>
-                <div class="user-name">
-                    <h4 id="nomeUsuario"><?php echo $nome_usuario; ?></h4>
-                    <a href="#" class="sair-usuario" id="btnConfirmarLogout"><span style="color: red;">Sair</span></a>
-                </div>
-            </div>
-
-            <div class="action-buttons">
-                <a href="../index.php" class="btn btn-primary">Home</a>
-                <a href="produtos.php" class="btn btn-primary">Produtos</a>
-                <a href="unidades.php" class="btn btn-primary">Unidades</a>
-                <a href="#" class="btn btn-primary">Minha conta</a>
-                <a href="#" class="btn btn-primary">Pedidos/Compras</a>
-                <a href="../admin/admin.php" class="btn btn-primary">Administrador</a>
-                <a href="#" class="btn btn-primary">Suporte</a>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -145,6 +171,16 @@
     </footer>
     <!-- Footer End-->
 
+    <!-- Modal de confirmação de logout -->
+    <div id="modalLogout" class="modal-logout">
+        <div class="modal-logout-content">
+            <h3>Tem certeza que deseja sair?</h3>
+            <div class="modal-logout-buttons">
+                <button id="btnConfirmarLogout" class="btn-confirmar">Sim, sair</button>
+                <button id="btnCancelarLogout" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
     <!--------------SCRIPTS-------------->
     <!-- Bootstrap core JS-->
