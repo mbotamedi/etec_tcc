@@ -1,6 +1,6 @@
 <?php
         // Inclui o arquivo de conexão
-        include("includes/conexao.php");
+        include("conexao.php");
 
         // Executa a consulta usando MySQLi
         $query = "SELECT * FROM tb_produtos order by descricao limit 3";
@@ -17,7 +17,7 @@
 
 <?php
         // Inclui o arquivo de conexão
-        include("includes/conexao.php");
+        include("conexao.php");
 
         // Executa a consulta usando MySQLi
         $query = "SELECT * FROM tb_usuarios";

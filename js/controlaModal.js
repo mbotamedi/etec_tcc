@@ -3,7 +3,7 @@
 // Função para verificar o estado de login
 async function verificarLogin() {
     try {
-        const response = await fetch('php/verificar_login.php');
+        const response = await fetch('verificar_login.php');
         const data = await response.json();
 
         console.log('Resposta do servidor:', data);

@@ -1,5 +1,6 @@
 <?php
 @session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>Cantina Três Irmãos</title>
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/navbar.css">
@@ -44,7 +45,7 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="../index.php">INICIO</a></li>
+                    <li><a href="index.php">INICIO</a></li>
                     <li><a href="produtos.php">PEÇA AGORA</a></li>
                     <li><a href="unidades.php">UNIDADES</a></li>
                 </ul>
@@ -76,8 +77,8 @@
         </div>
     </nav>
 
-    <!-- OFF CANVAS PARA LOGIN E CADASTRO-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <!-- OFF CANVAS PARA USUARIO DESLOGADO-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="canvas-deslogado" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">Não possui uma conta?</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -85,7 +86,7 @@
         <div class="offcanvas-body">
             <div class="modal-content01">
                 <p class="modal-text">
-                    <a href="php/login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
+                    <a href="login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
                 </p>
             </div>
         </div>
@@ -93,15 +94,26 @@
     </div>
 
     <!-- OFF CANVAS PARA USUARIO LOGADO-->
-    <div class="offcanvas logado offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas logado offcanvas-end" tabindex="-1" id="canvas-logado" aria-labelledby="offcanvasExampleLabel">
         <div class="items-group">
             <div class="header-offcanvasLogado">
                 <div class="group-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, Rafael</h5>
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, <span class="nome-usuario"><?php 
+                    if (isset($_SESSION['nome'])) {
+                        echo $_SESSION['nome'];
+                    } else {
+                        echo '<script>
+                            const nomeUsuario = sessionStorage.getItem("nome_usuario");
+                            if (nomeUsuario) {
+                                document.querySelector(".nome-usuario").textContent = nomeUsuario;
+                            }
+                        </script>';
+                    }
+                ?></span></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="botao-sair">
-                    <a href="php/logout.php" class="btn-logout">Sair</a>
+                    <a href="logout.php" class="btn-logout">Sair</a>
                 </div>
 
             </div>
@@ -114,9 +126,9 @@
             <div class="items-menu">
                 <ul class="ul-items">
                     <li class="li-items"><a href="index.php">Home</a></li>
-                    <li class="li-items"><a href="admin/admin.php">Administrador</a></li>
-                    <li class="li-items"><a href="php/produtos.php">Produtos</a></li>
-                    <li class="li-items"><a href="php/unidades.php">Unidades</a></li>
+                    <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
+                    <li class="li-items"><a href="produtos.php">Produtos</a></li>
+                    <li class="li-items"><a href="unidades.php">Unidades</a></li>
                     <li class="li-items"><a href="#">Minha conta</a></li>
                     <li class="li-items"><a href="#">Pedidos/Compras</a></li>
 
