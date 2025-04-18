@@ -1,3 +1,6 @@
+<?php
+@session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +29,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
+    <!---Carrinho--->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 
 </head>
 
@@ -47,9 +53,16 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
                     <img src="../imgs/user.png" alt="Carrinho" width="30px">
                 </button>
-                <a href="#">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
                     <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
-                </a>
+                    <?php
+                    // Contar itens no carrinho, com verificação para evitar erros
+                    $quantidadeItens = isset($_SESSION["carrinho"]) && is_array($_SESSION["carrinho"]) ? count($_SESSION["carrinho"]) : 0;
+                    if ($quantidadeItens > 0) {
+                        echo '<span class="cart-badge">' . $quantidadeItens . '</span>';
+                    }
+                    ?>
+                </button>
             </div>
         </div>
 
@@ -144,7 +157,7 @@
 
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
+                                <a href="javascript:void(0)" onclick="addToCart(<?= $produto['id'] ?>, document.getElementById('quant_<?= $produto['id'] ?>').value)" class="btn btn-outline-primary mt-auto buy-button">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -154,8 +167,19 @@
 
     </section>
     <!-- Section End-->
-
-
+    <!-- Offcanvas para o Carrinho de Compras -->
+    <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrinho de Compras</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <?php
+            @session_start();
+            include("../carrinho/carrinho.php"); // Inclui a lógica do carrinho diretamente
+            ?>
+        </div>
+    </div>
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -181,8 +205,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
-    <script src="../js/troca-modal.js"></script>
+    <script src="../js/carrinho.js"></script>
     <script src="../js/controlaModal.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("openCart") === "true") {
+                var offcanvasElement = document.getElementById("offcanvasCart");
+                var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                offcanvas.show();
+            }
+        });
+    </script>
 
     <!--------------SCRIPTS/-------------->
 </body>

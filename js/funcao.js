@@ -59,23 +59,3 @@ function process(change, inputId) {
   if (value < 0) value = 0; // Impede valores negativos
   input.value = value;
 }
-
-//Carrinho
-
-// Função para atualizar o carrinho via AJAX
-function atualizarCarrinho() {
-  fetch("../carrinho/carrinho.php")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector(".offcanvas-body").innerHTML = data;
-    });
-}
-
-// Atualiza o badge do carrinho
-function atualizarBadgeCarrinho() {
-  fetch("../carrinho/getCartCount.php") // Você precisará criar este arquivo
-    .then((response) => response.text())
-    .then((count) => {
-      document.querySelector(".badge.bg-danger").textContent = count;
-    });
-}

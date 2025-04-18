@@ -12788,3 +12788,47 @@ fieldset:disabled .btn {
   color: #e0680c !important;
   /* Cor do texto ao passar o mouse */
 }
+
+/* carrinho */
+
+.cart-badge {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    background-color:rgba(114, 220, 53, 0.8); /* color*/
+    color: #fff; /* Texto branco */
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 50%; /* Círculo */
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#offcanvasCart {
+  width: 680px !important; /* Aumente para o valor desejado, ex.: 600px */
+}
+
+/*.offcanvas-cart-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.table {
+  width: 100%;
+  font-size: 14px;
+}
+
+.table img {
+  max-width: 60px;
+}
+
+.btn-danger,
+.btn-primary {
+  padding: 5px 10px;
+  font-size: 12px;
+}*/
