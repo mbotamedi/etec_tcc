@@ -26,5 +26,9 @@ if (isset($_SESSION["carrinho"][$id])) {
 // Reindexar o array para evitar índices inconsistentes
 $_SESSION["carrinho"] = array_values($_SESSION["carrinho"]);
 
-header("Location: ../php/produtos.php?openCart=true");
+// Determinar a página de origem
+$pagina_origem = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '../php/produtos.php';
+
+// Redirecionar para a página de origem com o parâmetro openCart=true
+header("Location: $pagina_origem?openCart=true");
 ?>

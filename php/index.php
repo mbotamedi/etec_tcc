@@ -184,7 +184,7 @@ include 'verificar_login.php';
 
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-outline-primary mt-auto buy-button ">Comprar</button>
+                                <a href="javascript:void(0)" onclick="addToCart(<?= $produto['id'] ?>, document.getElementById('quant_<?= $produto['id'] ?>').value)" class="btn btn-outline-primary mt-auto buy-button">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -220,6 +220,7 @@ include 'verificar_login.php';
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
     <script src="../js/controlaModal.js"></script>
+    <script src="../js/carrinho.js"></script>
     <!--------------SCRIPTS/-------------->
 
 

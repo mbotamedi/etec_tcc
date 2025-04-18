@@ -29,15 +29,11 @@ if (!$produto_existe) {
     $_SESSION["carrinho"][] = $produto_data; // Adiciona ao carrinho
 }
 
-header("Location: ../php/produtos.php?openCart=true");
+// Determinar a página de origem
+$pagina_origem = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '../php/produtos.php';
+
+// Redirecionar para a página de origem com o parâmetro openCart=true
+header("Location: $pagina_origem?openCart=true");
 ?>
 
-// Em vez de redirecionar, retorna um script para abrir o offcanvas
-/*echo "<script>
-    window.history.back(); // Volta para a página anterior (produtos.php)
-    document.addEventListener('DOMContentLoaded', function() {
-        var offcanvasElement = document.getElementById('offcanvasCart');
-        var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-        offcanvas.show();
-    });
-</script>";*/
+
