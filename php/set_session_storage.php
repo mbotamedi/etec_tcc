@@ -10,6 +10,7 @@
             const id = urlParams.get('id');
             const nome = urlParams.get('nome');
             const email = urlParams.get('email');
+            const urlRetorno = urlParams.get('url_retorno') || '../index.php';
 
             // Armazena os dados no sessionStorage
             sessionStorage.setItem('usuario_id', id);
@@ -17,8 +18,8 @@
             sessionStorage.setItem('usuario_email', email);
             sessionStorage.setItem('usuario_logado', 'true');
 
-            // Redireciona para a página inicial
-            window.location.href = '../index.php';
+           // Redireciona para a URL de retorno
+           window.location.href = urlRetorno;
         }
     </script>
 </head>

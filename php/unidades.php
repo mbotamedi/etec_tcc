@@ -1,7 +1,6 @@
 <?php
-
 include 'verificar_login.php';
-
+$tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +130,7 @@ include 'verificar_login.php';
     <!-- OFF CANVAS PARA USUARIO DESLOGADO-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="canvas-deslogado" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Não possui uma conta?</h5>
+            <!---<h5 class="offcanvas-title" id="offcanvasExampleLabel">Não possui uma conta?</h5>-->
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -165,13 +164,24 @@ include 'verificar_login.php';
         <div class="items-group-2">
             <div class="items-menu">
                 <ul class="ul-items">
-                    <li class="li-items"><a href="index.php">Home</a></li>
-                    <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
-                    <li class="li-items"><a href="produtos.php">Produtos</a></li>
-                    <li class="li-items"><a href="unidades.php">Unidades</a></li>
-                    <li class="li-items"><a href="#">Minha conta</a></li>
-                    <li class="li-items"><a href="#">Pedidos/Compras</a></li>
-
+                    <?php
+                        $menu ='
+                        <li class="li-items"><a href="index.php">Home</a></li>
+                        <li class="li-items"><a href="produtos.php">Produtos</a></li>
+                        <li class="li-items"><a href="unidades.php">Unidades</a></li>
+                        <li class="li-items"><a href="#">Minha conta</a></li>
+                        <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
+                        if ($tipo !== "cliente"){
+                            $menu ='
+                                <li class="li-items"><a href="index.php">Home</a></li>
+                                <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
+                                <li class="li-items"><a href="produtos.php">Produtos</a></li>
+                                <li class="li-items"><a href="unidades.php">Unidades</a></li>
+                                <li class="li-items"><a href="#">Minha conta</a></li>
+                                <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
+                        }
+                     echo $menu;
+                    ?>
                 </ul>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
 @session_start();
-
+$tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,13 +125,24 @@
         <div class="items-group-2">
             <div class="items-menu">
                 <ul class="ul-items">
-                    <li class="li-items"><a href="index.php">Home</a></li>
-                    <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
-                    <li class="li-items"><a href="produtos.php">Produtos</a></li>
-                    <li class="li-items"><a href="unidades.php">Unidades</a></li>
-                    <li class="li-items"><a href="#">Minha conta</a></li>
-                    <li class="li-items"><a href="#">Pedidos/Compras</a></li>
-
+                <?php
+                        $menu ='
+                        <li class="li-items"><a href="index.php">Home</a></li>
+                        <li class="li-items"><a href="produtos.php">Produtos</a></li>
+                        <li class="li-items"><a href="unidades.php">Unidades</a></li>
+                        <li class="li-items"><a href="#">Minha conta</a></li>
+                        <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
+                        if ($tipo !== "cliente"){
+                            $menu ='
+                                <li class="li-items"><a href="index.php">Home</a></li>
+                                <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
+                                <li class="li-items"><a href="produtos.php">Produtos</a></li>
+                                <li class="li-items"><a href="unidades.php">Unidades</a></li>
+                                <li class="li-items"><a href="#">Minha conta</a></li>
+                                <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
+                        }
+                     echo $menu;
+                    ?>
                 </ul>
             </div>
         </div>
@@ -186,9 +197,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <?php
-            @session_start();
-            include("../carrinho/carrinho.php"); // Inclui a lógica do carrinho diretamente
+        <?php
+            if (isset($_SESSION["carrinho"]) && !empty($_SESSION["carrinho"])) {
+                echo "<h6>Itens no Carrinho:</h6>";
+                foreach ($_SESSION["carrinho"] as $item) {
+                    echo "<p>" . htmlspecialchars($item['descricao']) . " - Quantidade: " . $item['quantidade'] . " - R$ " . number_format($item['valor'] * $item['quantidade'], 2, ',', '.') . "</p>";
+                }
+                echo '<a href="../carrinho/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>';
+            } else {
+                echo "<p>Seu carrinho está vazio.</p>";
+            }
             ?>
         </div>
     </div>

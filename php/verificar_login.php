@@ -11,6 +11,7 @@ $response = array(
 if (isset($_SESSION['usuario']) && isset($_SESSION['usuario']['nome'])) {
     $response['logado'] = true;
     $response['nome'] = $_SESSION['usuario']['nome'];
+    $response['tipo'] = $_SESSION['usuario']['tipo'];
     $nome = $_SESSION['usuario']['nome'];
 } else {
     $nome = '';
