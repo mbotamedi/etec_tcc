@@ -12,7 +12,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cantina Três Irmãos - Produtos</title>
-    
+
     <!-- Importação de estilos -->
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
@@ -20,11 +20,11 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/mediaQuery.css">
     <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
-    
+
     <!-- Favicon e ícones -->
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    
+
     <!-- Importação de fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             <div class="logo">
                 <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
-            
+
             <!-- Menu principal -->
             <div class="menu">
                 <ul>
@@ -49,14 +49,14 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     <li><a href="unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
-            
+
             <!-- Botões de usuário e carrinho -->
             <div class="user-cart">
                 <!-- Botão do usuário -->
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
                     <img src="../imgs/user.png" alt="Carrinho" width="30px">
                 </button>
-                
+
                 <!-- Botão do carrinho com contador de itens -->
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
                     <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
@@ -103,18 +103,18 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             <div class="header-offcanvasLogado">
                 <div class="group-header">
                     <!-- Exibe o nome do usuário logado -->
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, <span class="nome-usuario"><?php 
-                        if (isset($_SESSION['nome'])) {
-                            echo $_SESSION['nome'];
-                        } else {
-                            echo '<script>
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, <span class="nome-usuario"><?php
+                                                                                                                    if (isset($_SESSION['nome'])) {
+                                                                                                                        echo $_SESSION['nome'];
+                                                                                                                    } else {
+                                                                                                                        echo '<script>
                                 const nomeUsuario = sessionStorage.getItem("nome_usuario");
                                 if (nomeUsuario) {
                                     document.querySelector(".nome-usuario").textContent = nomeUsuario;
                                 }
                             </script>';
-                        }
-                    ?></span></h5>
+                                                                                                                    }
+                                                                                                                    ?></span></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="botao-sair">
@@ -134,7 +134,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                         <li class="li-items"><a href="unidades.php">Unidades</a></li>
                         <li class="li-items"><a href="#">Minha conta</a></li>
                         <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
-                    
+
                     // Se não for cliente, adiciona opção de administrador
                     if ($tipo !== "cliente") {
                         $menu = '
@@ -201,16 +201,8 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
         <div class="offcanvas-body">
             <?php
-            // Exibe os itens do carrinho
-            if (isset($_SESSION["carrinho"]) && !empty($_SESSION["carrinho"])) {
-                echo "<h6>Itens no Carrinho:</h6>";
-                foreach ($_SESSION["carrinho"] as $item) {
-                    echo "<p>" . htmlspecialchars($item['descricao']) . " - Quantidade: " . $item['quantidade'] . " - R$ " . number_format($item['valor'] * $item['quantidade'], 2, ',', '.') . "</p>";
-                }
-                echo '<a href="../carrinho/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>';
-            } else {
-                echo "<p>Seu carrinho está vazio.</p>";
-            }
+            @session_start();
+            include("../carrinho/carrinho.php"); // Inclui a lógica do carrinho diretamente
             ?>
         </div>
     </div>
@@ -261,4 +253,5 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         });
     </script>
 </body>
+
 </html>
