@@ -235,6 +235,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
     <script src="../js/controlaModal.js"></script>
+    <script src="../js/carrinho.js"></script>
 </body>
 
 </html>
