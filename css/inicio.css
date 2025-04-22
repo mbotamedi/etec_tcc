@@ -1,0 +1,378 @@
+.items>a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  display: block;
+  padding: 10px 15px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.items>a:hover {
+  color: rgb(255, 157, 0);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.buy-actions {
+  display: flex;
+  gap: 30px;
+}
+
+/*-------------ESTILO DO MODAL-------------*/
+.modal-container01 {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1000;
+  width: 280px;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.modal-container {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  z-index: 1000;
+}
+
+/* Estilo base para links e botões do modal */
+.modal-content01 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.modal-content01 a,
+.modal-content01 button {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 20px;
+  width: 300px;
+  gap: 15px;
+}
+
+.modal-content a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-container01.show {
+  opacity: 1;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.user-name {
+  margin-left: 10px;
+}
+
+.action-buttons tex {
+  margin-top: 20px;
+}
+
+.cadastro-login {
+  margin-top: 20px;
+}
+
+.conta-cadastro {
+  margin-bottom: 10px;
+}
+
+.produtos-Destaques {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.barra-pesquisa {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pesquisa-input {
+  width: 300px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.aaa {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .produtos-Destaques {
+    margin-top: 20px;
+  }
+
+  .text-center {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  .menu li>a {
+    color: white;
+  }
+
+  .menu>a {
+    color: white;
+  }
+
+  .menu a:hover {
+    color: #ff9d00;
+  }
+
+  .fa-solid {
+    color: white;
+  }
+
+  li>a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+
+  .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .bar2 {
+    opacity: 0;
+  }
+
+  .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .menu-toggle:hover .bar1 {
+    background-color: #ff9d00;
+  }
+
+  .menu-toggle:hover .bar2 {
+    background-color: #ff9d00;
+  }
+
+  .menu-toggle:hover .bar3 {
+    background-color: #ff9d00;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  .menu li {
+    list-style: none;
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+  }
+
+  .menu a:hover {
+    color: #ff9d00;
+  }
+
+  .menu-toggle.active .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .menu-toggle.active .bar2 {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .menu-toggle.active+.menu {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  .menu li {
+    list-style: none;
+  }
+}
+
+.modal-container01 a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.modal-container01 a:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-container01 button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-container01 button:hover {
+  background-color: #e0e0e0;
+}
+
+.modal-logout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-logout-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.modal-logout-content h3 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modal-logout-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-confirmar,
+.btn-cancelar {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-confirmar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-confirmar:hover {
+  background-color: #c82333;
+}
+
+.btn-cancelar {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #5a6268;
+}
