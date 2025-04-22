@@ -14,11 +14,11 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Cantina Três Irmãos</title>
-    
+
     <!-- Favicon e ícones -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    
+
     <!-- Importação de estilos -->
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
@@ -50,7 +50,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             <div class="logo">
                 <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
-            
+
             <!-- Menu principal -->
             <div class="menu">
                 <ul>
@@ -59,14 +59,14 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     <li><a href="unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
-            
+
             <!-- Botões de usuário e carrinho -->
             <div class="user-cart">
                 <!-- Botão do usuário -->
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvas-deslogado" aria-controls="canvas-deslogado" style="background-color: transparent; border: none;">
                     <img src="../imgs/user.png" alt="Usuário" width="30px">
                 </button>
-                
+
                 <!-- Botão do carrinho com contador de itens -->
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
                     <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
@@ -140,22 +140,22 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             <div class="items-menu">
                 <ul class="ul-items">
                     <?php
-                        $menu ='
+                    $menu = '
                         <li class="li-items"><a href="index.php">Home</a></li>
                         <li class="li-items"><a href="produtos.php">Produtos</a></li>
                         <li class="li-items"><a href="unidades.php">Unidades</a></li>
                         <li class="li-items"><a href="#">Minha conta</a></li>
                         <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
-                        if ($tipo !== "cliente"){
-                            $menu ='
+                    if ($tipo !== "cliente") {
+                        $menu = '
                                 <li class="li-items"><a href="index.php">Home</a></li>
                                 <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
                                 <li class="li-items"><a href="produtos.php">Produtos</a></li>
                                 <li class="li-items"><a href="unidades.php">Unidades</a></li>
                                 <li class="li-items"><a href="#">Minha conta</a></li>
                                 <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
-                        }
-                     echo $menu;
+                    }
+                    echo $menu;
                     ?>
                 </ul>
             </div>
@@ -199,7 +199,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                             </div>
                             <!-- Botão de compra -->
                             <div class="text-center">
-                                <button type="submit" class="btn btn-outline-primary mt-auto buy-button">Comprar</button>
+                                <a href="javascript:void(0)" onclick="addToCart(<?= $produto['id'] ?>, document.getElementById('quant_<?= $produto['id'] ?>').value)" class="btn btn-outline-primary mt-auto buy-button">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -236,4 +236,5 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <script src="../js/funcao.js"></script>
     <script src="../js/controlaModal.js"></script>
 </body>
+
 </html>
