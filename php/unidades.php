@@ -1,8 +1,8 @@
 <?php
+// Inclui o arquivo de verificação de login
 include 'verificar_login.php';
 $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -40,37 +40,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 <body>
 
     <!-- Navigation-->
-    <!-- Navigation-->
-    <nav class="navbar">
-        <div class="nav-top">
-            <div class="logo">
-                <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="index.php">INICIO</a></li>
-                    <li><a href="produtos.php">PEÇA AGORA</a></li>
-                    <li><a href="unidades.php">UNIDADES</a></li>
-                </ul>
-            </div>
-            <div class="user-cart">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                    <img src="../imgs/user.png" alt="Carrinho" width="30px">
-                </button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
-                    <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
-                    <?php
-                    // Contar itens no carrinho, com verificação para evitar erros
-                    $quantidadeItens = isset($_SESSION["carrinho"]) && is_array($_SESSION["carrinho"]) ? count($_SESSION["carrinho"]) : 0;
-                    if ($quantidadeItens > 0) {
-                        echo '<span class="cart-badge">' . $quantidadeItens . '</span>';
-                    }
-                    ?>
-                </button>
-            </div>
-        </div>
-    </nav>
-
+    <?php include("navbar.php"); ?>
     <!-- Navigation End-->
 
     </div>
@@ -127,95 +97,15 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
     <!-- Section End-->
 
-    <!-- OFF CANVAS PARA USUARIO DESLOGADO-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="canvas-deslogado" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <!---<h5 class="offcanvas-title" id="offcanvasExampleLabel">Não possui uma conta?</h5>-->
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="modal-content01">
-                <p class="modal-text">
-                    <a href="login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- OFF CANVAS PARA USUARIO LOGADO-->
-    <div class="offcanvas logado offcanvas-end" tabindex="-1" id="canvas-logado" aria-labelledby="offcanvasExampleLabel">
-        <div class="items-group">
-            <div class="header-offcanvasLogado">
-                <div class="group-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bem vindo, <span class="nome-usuario"><?php echo isset($nome) ? $nome : ''; ?></span></h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="botao-sair">
-                    <a href="logout.php" class="btn-logout">Sair</a>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="line">
-
-        </div>
-        <div class="items-group-2">
-            <div class="items-menu">
-                <ul class="ul-items">
-                    <?php
-                        $menu ='
-                        <li class="li-items"><a href="index.php">Home</a></li>
-                        <li class="li-items"><a href="produtos.php">Produtos</a></li>
-                        <li class="li-items"><a href="unidades.php">Unidades</a></li>
-                        <li class="li-items"><a href="#">Minha conta</a></li>
-                        <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
-                        if ($tipo !== "cliente"){
-                            $menu ='
-                                <li class="li-items"><a href="index.php">Home</a></li>
-                                <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
-                                <li class="li-items"><a href="produtos.php">Produtos</a></li>
-                                <li class="li-items"><a href="unidades.php">Unidades</a></li>
-                                <li class="li-items"><a href="#">Minha conta</a></li>
-                                <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
-                        }
-                     echo $menu;
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Offcanvas para o Carrinho de Compras -->
-    <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrinho de Compras</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <?php
-            @session_start();
-            include("../carrinho/carrinho.php"); // Inclui a lógica do carrinho diretamente
-            ?>
-        </div>
-    </div>
-
-
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
-        </div>
-    </footer>
-    <!-- Footer End-->
+    <!---Footer--->
+    <?php include("footer.php"); ?>
+    <!---Footer End--->
+    
 
 
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
     <!--------------SCRIPTS-------------->
 

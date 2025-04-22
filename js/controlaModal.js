@@ -91,30 +91,6 @@ document.addEventListener('DOMContentLoaded', controlarOffcanvas);
 window.addEventListener('storage', controlarOffcanvas);
 
 
-/*-----------------------------------------------------------------------------------------------------------*/
 
-//CONTROLE SOBRE O MODAL DE CONFIRMAÇÃO DE LOGOUT
 
-// Função para abrir o modal de logout
-//Função essa para abrir somente quando o usuario clicar no botao de "sair" do offcanvas
-function abrirModalLogout() {
-    const modalLogout = document.getElementById('modalLogout');
-    const btnConfirmar = document.getElementById('btnConfirmarLogout');
-    const btnCancelar = document.getElementById('btnCancelarLogout');
 
-    if (modalLogout) {              
-        modalLogout.style.display = 'block';
-    }
-
-    if (btnConfirmar) {
-        btnConfirmar.addEventListener('click', function() {
-            window.location.href = 'logout.php';    
-        });
-    }
-
-    if (btnCancelar) {
-        btnCancelar.addEventListener('click', function() {
-            modalLogout.style.display = 'none';
-        });
-    }
-}
