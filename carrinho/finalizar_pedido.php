@@ -1,7 +1,7 @@
 <?php
 include("../includes/conexao.php");
-include '../php/verificar_login.php';
-$tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
+include("../php/verificar_login.php");
+
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
@@ -69,6 +69,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,17 +90,20 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             margin: 0 auto;
             padding: 20px;
         }
-        .endereco-list, .tipo-entrega-options {
+
+        .endereco-list,
+        .tipo-entrega-options {
             margin-bottom: 20px;
         }
+
         .endereco-item {
             padding: 10px;
             border: 1px solid #ddd;
             margin-bottom: 10px;
         }
 
-        
-        
+
+
         .btn-finalizar {
             background-color: #28a745;
             color: white;
@@ -108,9 +112,11 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             border-radius: 5px;
             cursor: pointer;
         }
+
         .btn-finalizar:hover {
             background-color: #218838;
         }
+
         .tipo-entrega-option {
             display: flex;
             align-items: center;
@@ -120,20 +126,22 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             border-radius: 5px;
             cursor: pointer;
         }
+
         .tipo-entrega-option input {
             margin-right: 10px;
         }
+
         .tipo-entrega-option.active {
             border-color: #28a745;
             background-color: #f8f9fa;
         }
+
         #endereco-section {
             display: none;
         }
-
-        
     </style>
 </head>
+
 <body>
     <?php include("../php/navbar.php"); ?>
 
@@ -147,13 +155,13 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             <form method="POST" action="finalizar_pedido.php">
                 <div class="tipo-entrega-options">
                     <label class="tipo-entrega-option">
-                        <input type="radio" name="tipo_entrega" value="retirada" checked onclick="toggleEndereco(false)"> 
+                        <input type="radio" name="tipo_entrega" value="retirada" checked onclick="toggleEndereco(false)">
                         <div>
                             <strong>Retirar na Cantina</strong>
                             <p>Você pode retirar seu pedido no balcão da cantina</p>
                         </div>
                     </label>
-                    
+
                     <label class="tipo-entrega-option">
                         <input type="radio" name="tipo_entrega" value="entrega" onclick="toggleEndereco(true)">
                         <div>
@@ -171,8 +179,8 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                                 <div class="endereco-item">
                                     <input type="radio" name="id_endereco" value="<?= $endereco['id'] ?>" required>
                                     <label>
+                                        Tipo: <strong><?= htmlspecialchars($endereco['descricao']) ?><br></strong>
                                         <?= htmlspecialchars($endereco['endereco']) ?>, <?= htmlspecialchars($endereco['numero']) ?><br>
-                                        Compl: <?= htmlspecialchars($endereco['descricao']) ?><br>
                                         Bairro: <?= htmlspecialchars($endereco['bairro']) ?><br>
                                         CEP: <?= htmlspecialchars($endereco['cep']) ?><br>
                                         Cidade: <?= htmlspecialchars($endereco['nome_cidade']) ?> - <?= htmlspecialchars($endereco['sigla_estado']) ?>
@@ -198,12 +206,12 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <script src="../js/controlaModal.js"></script>
     <script src="../js/carrinho.js"></script>
     <script>
-         function toggleEndereco(show) {
+        function toggleEndereco(show) {
             const enderecoSection = document.getElementById('endereco-section');
             const enderecoInputs = enderecoSection.querySelectorAll('input[type="radio"]');
-            
+
             enderecoSection.style.display = show ? 'block' : 'none';
-            
+
             // Remove a obrigatoriedade se estiver oculto
             enderecoInputs.forEach(input => {
                 input.required = show;
@@ -211,4 +219,5 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
         }
     </script>
 </body>
+
 </html>

@@ -2,7 +2,8 @@
 @session_start();
 include("../includes/conexao.php");
 
-$id_pedido = isset($_GET['id_pedido']) ? (int)$_GET['id_pedido'] : 0;
+
+    $id_pedido = isset($_GET['id_pedido']) ? (int)$_GET['id_pedido'] : 0;
 
 // Verifica se o pedido existe
 $query_pedido = "SELECT p.*, c.nome FROM tb_pedidos p 
