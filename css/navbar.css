@@ -1,0 +1,91 @@
+.items {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.791);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.buy-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.items a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.user-cart {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    font-family: '', sans-serif;
+}
+
+.menu li a:hover {
+    color: #cb874b;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 50%;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: rgba(255, 255, 255, 0.9);
+}
