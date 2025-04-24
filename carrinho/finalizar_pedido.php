@@ -23,7 +23,7 @@ if (!isset($_SESSION["carrinho"]) || count($_SESSION["carrinho"]) <= 0) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo_entrega = $_POST['tipo_entrega']; // 'entrega' ou 'retirada'
     $id_endereco = $_POST["id_endereco"];
-    $id_endereco_value = ($tipo_entrega == 'entrega') ? $_POST['id_endereco'] : "NULL";
+    $id_endereco_value = ($tipo_entrega == 'entrega' && !empty($id_endereco)) ? "'$id_endereco'" : "NULL";
 
     // Insere o pedido na tabela tb_pedidos
     $emissao = date('Y-m-d');
