@@ -22,7 +22,8 @@ if (!isset($_SESSION["carrinho"]) || count($_SESSION["carrinho"]) <= 0) {
 // Processa a finalização do pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo_entrega = $_POST['tipo_entrega']; // 'entrega' ou 'retirada'
-    $id_endereco = ($tipo_entrega == 'entrega') ? $_POST['id_endereco'] : NULL;
+    $id_endereco = $_POST["id_endereco"];
+    $id_endereco_value = ($tipo_entrega == 'entrega') ? $_POST['id_endereco'] : "NULL";
 
     // Insere o pedido na tabela tb_pedidos
     $emissao = date('Y-m-d');
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega) 
-                     VALUES ('$id_cliente', '$id_endereco', '$emissao', '$valor_total', '$tipo_entrega')";
+                 VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega')";
     mysqli_query($conexao, $query_pedido);
     $id_pedido = mysqli_insert_id($conexao);
 
