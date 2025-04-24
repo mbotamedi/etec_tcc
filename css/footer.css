@@ -1,0 +1,9 @@
+.info-footer{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.ul-content{
+    list-style: none;
+}
