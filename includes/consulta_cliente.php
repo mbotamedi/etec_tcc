@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/conexao.php");
+include("conexao.php");
 
 $email = $_POST["email"];
 $senha = $_POST["senha"];
@@ -27,7 +27,7 @@ if (mysqli_num_rows($listar_usuarios) > 0) {
         unset($_SESSION['url_retorno']); // Limpa a URL de retorno
         
         // Redireciona para uma página intermediária que configura o sessionStorage
-        header("Location: set_session_storage.php?id=" . $row['id'] . "&nome=" . urlencode($row['nome']) . "&email=" . urlencode($row['email']) . "&tipo=" . $row['tipo']);
+        header("Location: ../php/set_session_storage.php?id=" . $row['id'] . "&nome=" . urlencode($row['nome']) . "&email=" . urlencode($row['email']) . "&tipo=" . $row['tipo']);
         exit;
     } else {
         header("Location: ../php/cadastro.php"); // Senha incorreta
@@ -50,7 +50,7 @@ elseif (mysqli_num_rows($listar_clientes) > 0) {
         unset($_SESSION['url_retorno']); // Limpa a URL de retorno
         
         // Redireciona para uma página intermediária que configura o sessionStorage
-        header("Location: set_session_storage.php?id=" . $row['id'] . "&nome=" . urlencode($row['nome']) . "&email=" . urlencode($row['email']) . "&tipo=" . $row['tipo']);
+        header("Location: ../php/set_session_storage.php?id=" . $row['id'] . "&nome=" . urlencode($row['nome']) . "&email=" . urlencode($row['email']) . "&tipo=" . $row['tipo']);
         exit;
     } else {
         header("Location: ../php/cadastro.php"); // Senha incorreta

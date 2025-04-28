@@ -26,7 +26,7 @@
             <div class="user-icon">
                 <img src="../imgs/usuario-de-perfil.png" alt="" width="80px">
             </div>
-            <form action="consulta_cliente.php" method="POST">
+            <form action="../includes/consulta_cliente.php" method="POST">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
@@ -41,7 +41,7 @@
             </form>
             <div class="information">
 
-                <p>Não tem conta? <a href="cadastro.php">Cadastre-se</a></p>
+                <p>Não tem conta? <a href="../php/cadastro.php">Cadastre-se</a></p>
             </div>
         </div>
     </div>
