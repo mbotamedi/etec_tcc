@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include ("../includes/consulta_pedidos.php");
+include("../includes/consulta_pedidos.php");
 
 // Verifica se o usuário está logado como cliente
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
@@ -44,31 +44,62 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
             background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
             background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
         }
+
         .pedido-card {
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
             margin-bottom: 20px;
         }
+
         .pedido-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
         .badge-status {
             font-size: 0.8rem;
             padding: 5px 10px;
             border-radius: 20px;
         }
+
         .btn-detalhes {
             background-color: #f6d365;
             border: none;
             color: #333;
         }
+
         .btn-detalhes:hover {
             background-color: #f8c537;
             color: #000;
         }
     </style>
+    <style>
+        /* Estilos para o modal de detalhes */
+        #modalDetalhes .modal-dialog {
+            max-width: 900px;
+        }
+
+        #modalDetalhes .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        #modalDetalhes .info-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #modalDetalhes .info-label {
+            font-weight: bold;
+            color: #555;
+            min-width: 180px;
+            display: inline-block;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -93,7 +124,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header bg-warning">
@@ -124,8 +155,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                                                         <?= ucfirst($pedido['tipo_entrega']) ?>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-detalhes" 
-                                                                onclick="detalhesPedido(<?= $pedido['id'] ?>)">
+                                                        <button class="btn btn-sm btn-detalhes"
+                                                            onclick="detalhesPedido(<?= $pedido['id'] ?>)">
                                                             <i class="bi bi-eye-fill"></i> Detalhes
                                                         </button>
                                                     </td>
@@ -178,28 +209,62 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
-    
+
+
     <script>
-        // Função para carregar detalhes do pedido via AJAX
-        function detalhesPedido(idPedido) {
-            // Mostra o modal
-            var modal = new bootstrap.Modal(document.getElementById('modalDetalhes'));
-            modal.show();
-            
-            // Carrega o conteúdo via AJAX
-            fetch(`../php/detalhes_pedido.php?id=${idPedido}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('detalhesPedidoContent').innerHTML = data;
-                })
-                .catch(error => {
-                    document.getElementById('detalhesPedidoContent').innerHTML = `
-                        <div class="alert alert-danger">
-                            Ocorreu um erro ao carregar os detalhes do pedido.
-                        </div>
-                    `;
-                });
+        // Função melhorada para carregar detalhes do pedido
+        async function detalhesPedido(idPedido) {
+            try {
+                // 1. Mostrar o modal com spinner
+                const modal = new bootstrap.Modal(document.getElementById('modalDetalhes'));
+                const modalBody = document.getElementById('detalhesPedidoContent');
+
+                modalBody.innerHTML = `
+        <div class="text-center py-4">
+            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+            <p class="mt-3">Carregando detalhes do pedido...</p>
+        </div>
+        `;
+
+                modal.show();
+
+                // 2. Fazer a requisição AJAX
+                const response = await fetch(`../php/detalhes_pedidos.php?id=${idPedido}`);
+
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+
+                const data = await response.text();
+
+                // 3. Inserir os dados no modal
+                modalBody.innerHTML = data;
+
+                // 4. Ajustar a barra de scroll se necessário
+                if (modalBody.scrollHeight > modalBody.clientHeight) {
+                    modalBody.style.paddingRight = '1rem';
+                }
+
+            } catch (error) {
+                console.error('Erro:', error);
+                const modalBody = document.getElementById('detalhesPedidoContent');
+                if (modalBody) {
+                    modalBody.innerHTML = `
+        <div class="alert alert-danger">
+            <h5>Erro ao carregar detalhes</h5>
+            <p>${error.message}</p>
+            <button onclick="detalhesPedido(${idPedido})" class="btn btn-warning btn-sm mt-2">
+                Tentar novamente
+            </button>
+        </div>
+        `;
+                }
+            }
         }
     </script>
+
 </body>
+
 </html>
