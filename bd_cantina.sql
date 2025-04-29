@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 24/04/2025 às 17:35
+-- Tempo de geração: 29/04/2025 às 18:46
 -- Versão do servidor: 11.3.2-MariaDB
 -- Versão do PHP: 8.3.6
 
@@ -5710,10 +5710,10 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha`) VALUES
-(1, 'Marcelo Botamedi', '555.444.222-20', 'botamedi@gmail.com', '(17) 98189-0306', ''),
-(2, 'Marcos Botamedi', '555.888.777-34', 'botamedi@superbol.com', '(17) 98189-7852', '123'),
-(3, 'Marcos', '255.887.777-80', 'marcos@gmail.com', '(17) 99995-5555', '123'),
-(4, 'Maria', '555.444.888-20', 'maria@gmail.com', '(17) 98456-2358', '123');
+(1, 'Marcos Botamedi', '555.444.222-20', 'bota@gmail.com', '(17) 98189-0306', ''),
+(2, 'Giberto Botamedi', '555.888.777-34', 'botamedi@superbol.com', '(17) 98189-7852', '123'),
+(3, 'Marcos Silva Santos', '255.887.777-80', 'marcos@gmail.com', '(17) 99995-5555', '123'),
+(4, 'Maria Hernandes Silva', '555.444.888-20', 'maria@gmail.com', '(17) 98456-2358', '123');
 
 -- --------------------------------------------------------
 
@@ -5782,7 +5782,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos` (
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_endereco` (`id_endereco`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos`
@@ -5795,7 +5795,8 @@ INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_t
 (4, 4, 1, '2025-04-23', 28.10, 'entrega'),
 (5, 4, 1, '2025-04-23', 7.50, 'entrega'),
 (6, 4, 1, '2025-04-23', 45.00, 'retirada'),
-(7, 4, 1, '2025-04-24', 30.00, 'retirada');
+(7, 4, 1, '2025-04-24', 30.00, 'retirada'),
+(10, 4, NULL, '2025-04-24', 52.50, 'retirada');
 
 -- --------------------------------------------------------
 
@@ -5813,7 +5814,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
   PRIMARY KEY (`id`),
   KEY `id_pedidos` (`id_pedidos`),
   KEY `id_produtos` (`id_produtos`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos_itens`
@@ -5829,7 +5830,9 @@ INSERT INTO `tb_pedidos_itens` (`id`, `id_pedidos`, `id_produtos`, `qtd`, `valor
 (7, 5, 66, 1, 7.50),
 (8, 6, 50, 6, 7.50),
 (9, 7, 64, 2, 6.00),
-(10, 7, 54, 1, 18.00);
+(10, 7, 54, 1, 18.00),
+(11, 10, 66, 4, 7.50),
+(12, 10, 50, 3, 7.50);
 
 -- --------------------------------------------------------
 
@@ -5905,7 +5908,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (47, 4, 'MINHOCAS FINI', 7.50, 50, '../assets/img/finiMinhocas.jpg ', 'assets/img/finiMinhocas.jpg '),
 (48, 4, 'BALA GELATINA AMORAS FINI', 7.50, 50, '../assets/img/Bala Fini amora.jpg ', 'assets/img/Bala Fini amora.jpg '),
 (49, 4, 'BALA GELATINA BEIJOS FINI', 7.50, 50, '../assets/img/bala gelatina fini.jpg ', 'assets/img/bala gelatina fini.jpg '),
-(50, 4, 'BALA GELATINA FINIBURGUERS FINI', 7.50, 44, '../assets/img/Bala Gelatina Finiburguers Fini.jpg ', 'assets/img/Bala Gelatina Finiburguers Fini.jpg '),
+(50, 4, 'BALA GELATINA FINIBURGUERS FINI', 7.50, 41, '../assets/img/Bala Gelatina Finiburguers Fini.jpg ', 'assets/img/Bala Gelatina Finiburguers Fini.jpg '),
 (51, 4, 'BALA GELATINAS POLVO FINI', 7.50, 50, '../assets/img/Bala Gelatinas Polvo 80g FINI.jpg ', 'assets/img/Bala Gelatinas Polvo 80g FINI.jpg '),
 (52, 3, 'SONHO DE VALSA', 2.50, 100, '../assets/img/sonhodevalsa.jpeg ', 'assets/img/sonhodevalsa.jpeg '),
 (53, 3, 'OURO BRANCO', 2.50, 100, '../assets/img/ouro branco.jpeg ', 'assets/img/ouro branco.jpeg '),
@@ -5921,7 +5924,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (63, 12, 'COCA-COLA 500ML', 6.99, 30, '../assets/img/coca-cola 500ml.jpeg', 'assets/img/coca-cola 500ml.jpeg'),
 (64, 16, 'BARRA NUTRY BOLO_CHOCOLATE', 6.00, 98, '../assets/img/Barra Nutry bolo_chocolate.jpg ', 'assets/img/Barra Nutry bolo_chocolate.jpg '),
 (65, 4, 'BALA FINI TUBES', 7.50, 46, '../assets/img/Bala fini tubes.jpg ', 'assets/img/Bala fini tubes.jpg '),
-(66, 4, 'BALA FINI BANANA', 7.50, 46, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
+(66, 4, 'BALA FINI BANANA', 7.50, 42, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
 (67, 4, 'AROS DE MORANGO AZEDINHOS 80G', 7.50, 50, '../assets/img/Aros de Morango Azedinhos 80g - Fini.jpg ', 'assets/img/Aros de Morango Azedinhos 80g - Fini.jpg '),
 (68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 41, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg '),
 (131, 3, 'BOMBOM AERO', 2.80, 78, '../assets/img//bombom lacta aero.jpg ', 'assets/img/bombom lacta aero.jpg ');
@@ -5998,6 +6001,30 @@ INSERT INTO `tb_usuarios` (`id`, `id_cargo`, `nome`, `CPF`, `email`, `senha`, `C
 -- --------------------------------------------------------
 
 --
+-- Estrutura stand-in para view `vw_pedidos_cliente`
+-- (Veja abaixo para a visão atual)
+--
+DROP VIEW IF EXISTS `vw_pedidos_cliente`;
+CREATE TABLE IF NOT EXISTS `vw_pedidos_cliente` (
+`nome` varchar(100)
+,`endereco` varchar(100)
+,`numero` varchar(15)
+,`bairro` varchar(100)
+,`nome_cidade` varchar(120)
+,`sigla_estado` varchar(2)
+,`cep` varchar(10)
+,`qtd` int(11)
+,`valor_untiario` decimal(10,2)
+,`subtotal_item` decimal(20,2)
+,`produto` varchar(100)
+,`emissao` date
+,`valor_total` decimal(10,2)
+,`tipo_entrega` varchar(20)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura stand-in para view `vw_subcategorias`
 -- (Veja abaixo para a visão atual)
 --
@@ -6007,6 +6034,16 @@ CREATE TABLE IF NOT EXISTS `vw_subcategorias` (
 ,`categorias` varchar(100)
 ,`subcategorias` varchar(100)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para view `vw_pedidos_cliente`
+--
+DROP TABLE IF EXISTS `vw_pedidos_cliente`;
+
+DROP VIEW IF EXISTS `vw_pedidos_cliente`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_pedidos_cliente`  AS SELECT `cli`.`nome` AS `nome`, `en`.`endereco` AS `endereco`, `en`.`numero` AS `numero`, `en`.`bairro` AS `bairro`, `cid`.`nome_cidade` AS `nome_cidade`, `cid`.`sigla_estado` AS `sigla_estado`, `en`.`cep` AS `cep`, `it`.`qtd` AS `qtd`, `it`.`valor_untiario` AS `valor_untiario`, `it`.`qtd`* `it`.`valor_untiario` AS `subtotal_item`, `prd`.`descricao` AS `produto`, `pe`.`emissao` AS `emissao`, `pe`.`valor_total` AS `valor_total`, `pe`.`tipo_entrega` AS `tipo_entrega` FROM (((((`tb_clientes` `cli` left join `tb_cliente_endereco` `en` on(`cli`.`id` = `en`.`id_cliente`)) join `tb_pedidos` `pe` on(`pe`.`id_cliente` = `cli`.`id`)) join `tb_pedidos_itens` `it` on(`it`.`id_pedidos` = `pe`.`id`)) join `tb_produtos` `prd` on(`prd`.`id` = `it`.`id_produtos`)) join `tb_cidades` `cid` on(`cid`.`codigo_cidade` = `en`.`id_cidade`)) ORDER BY `pe`.`emissao` DESC, `cli`.`nome` ASC LIMIT 0, 25 ;
 
 -- --------------------------------------------------------
 
