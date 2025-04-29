@@ -79,7 +79,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
                         <li class="li-items"><a href="../index.php">Home</a></li>
                         <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
                         <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>
-                        <li class="li-items"><a href="../php/conta.php">Minha conta</a></li>
+                        <li class="li-items"><a href="conta.php">Minha conta</a></li>
                         <li class="li-items"><a href="../carrinho/pedidos_cliente.php">Pedidos/Compras</a></li>';
                     if ($tipo !== "cliente") {
                         $menu = '
@@ -87,7 +87,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
                             <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
                             <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
                             <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>
-                            <li class="li-items"><a href="#">Minha conta</a></li>
+                            <li class="li-items"><a href="conta.php">Minha conta</a></li>
                             <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
                     }
                     echo $menu;

@@ -90,7 +90,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     para a comunidade do IMESB. Venha nos visitar e aproveite nossas delícias!</p>
             </div>
             <div class="foto01-cantina">
-                <img src="../imgs/foto01_cantina.png" alt="Logo" width="">
+                <img src="../imgs/cantinaImesb.jpg" alt="Logo" style="width: 100%; height: 100%;">
             </div>
         </div>
     </section>
