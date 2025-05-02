@@ -1,12 +1,12 @@
 <?php
-include("../includes/conexao.php");
-include("../php/verificar_login.php");
+include("../../includes/conexao.php");
+include("../../php/verificar_login.php");
 
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
     $_SESSION['url_retorno'] = 'finalizar_pedido.php';
-    header("Location: ../php/login.php");
+    header("Location: ../../php/login.php");
     exit;
 }
 
@@ -15,7 +15,7 @@ $id_cliente = $usuario['id'];
 
 // Verifica se há itens no carrinho
 if (!isset($_SESSION["carrinho"]) || count($_SESSION["carrinho"]) <= 0) {
-    header("Location: ../php/produtos.php?erro=carrinho_vazio");
+    header("Location: ../../php/produtos.php?erro=carrinho_vazio");
     exit;
 }
 
@@ -75,12 +75,12 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Pedido - Cantina Três Irmãos</title>
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="../css/inicio.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/canvaDeslogado.css">
-    <link rel="stylesheet" href="../css/canvaLogado.css">
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <link rel="stylesheet" href="../../css/inicio.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/canvaDeslogado.css">
+    <link rel="stylesheet" href="../../css/canvaLogado.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -150,7 +150,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
         <div class="container-finalizar">
             <h2>Finalizando Pedido</h2>
             <h3>Resumo do Carrinho</h3>
-            <?php include("../carrinho/carrinho.php"); ?>
+            <?php include("../carrinho.php"); ?>
 
             <h3>Escolha a Forma de Recebimento</h3>
             <form method="POST" action="finalizar_pedido.php">
@@ -202,10 +202,10 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <?php include("../php/footer.php"); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/funcao.js"></script>
-    <script src="../js/controlaModal.js"></script>
-    <script src="../js/carrinho.js"></script>
+    <script src="../../js/scripts.js"></script>
+    <script src="../../js/funcao.js"></script>
+    <script src="../../js/controlaModal.js"></script>
+    <script src="../../js/carrinho.js"></script>
     <script>
         function toggleEndereco(show) {
             const enderecoSection = document.getElementById('endereco-section');

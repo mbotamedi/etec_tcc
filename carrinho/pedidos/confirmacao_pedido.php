@@ -1,6 +1,6 @@
 <?php
 @session_start();
-include("../includes/conexao.php");
+include("../../includes/conexao.php");
 
 
     $id_pedido = isset($_GET['id_pedido']) ? (int)$_GET['id_pedido'] : 0;
@@ -13,7 +13,7 @@ $result_pedido = mysqli_query($conexao, $query_pedido);
 $pedido = mysqli_fetch_assoc($result_pedido);
 
 if (!$pedido) {
-    header("Location: produtos.php?erro=pedido_nao_encontrado");
+    header("Location: ../../php/produtos.php?erro=pedido_nao_encontrado");
     exit;
 }
 ?>
@@ -24,10 +24,10 @@ if (!$pedido) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmação de Pedido - Cantina Três Irmãos</title>
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="../css/inicio.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <link rel="stylesheet" href="../../css/inicio.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,16 +62,16 @@ if (!$pedido) {
             <p>Obrigado, <?= htmlspecialchars($pedido['nome']) ?>!</p>
             <p>Seu pedido nº <?= $id_pedido ?> foi realizado com sucesso.</p>
             <p>Você receberá uma confirmação por e-mail em breve.</p>
-            <a href="../php/produtos.php" class="btn-continuar">Continuar Comprando</a>
+            <a href="../../php/produtos.php" class="btn-continuar">Continuar Comprando</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <?php include("../php/footer.php"); ?>
+    <?php include("../../php/footer.php"); ?>
 
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
+    <script src="../../js/scripts.js"></script>
 </body>
 </html>

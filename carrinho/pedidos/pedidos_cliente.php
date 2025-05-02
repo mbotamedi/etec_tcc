@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-include("../includes/consulta_pedidos.php");
+include("../../includes/consulta_pedidos.php");
 
 // Verifica se o usuário está logado como cliente
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
-    header("Location: login.php");
+    header("Location: ../../php/login.php");
     exit();
 }
 
@@ -19,14 +19,14 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cantina Três Irmãos - Meus Pedidos</title>
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="../css/inicio.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/mediaQuery.css">
-    <link rel="stylesheet" href="../css/canvaDeslogado.css">
-    <link rel="stylesheet" href="../css/canvaLogado.css">
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <link rel="stylesheet" href="../../css/inicio.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/mediaQuery.css">
+    <link rel="stylesheet" href="../../css/canvaDeslogado.css">
+    <link rel="stylesheet" href="../../css/canvaLogado.css">
     <!-- Favicon-->
-    <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
+    <link rel="icon" type="../../image/x-icon" href="../../assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!--FONTS-------->
@@ -104,7 +104,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
 
 <body>
     <!-- Navigation-->
-    <?php include("../php/navbar.php"); ?>
+    <?php include("../../php/navbar.php"); ?>
     <!-- Navigation End-->
 
     <section class="py-5">
@@ -118,9 +118,9 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                         </div>
                         <div class="list-group list-group-flush">
                             <a href="pedidos_cliente.php" class="list-group-item list-group-item-action active">Meus Pedidos</a>
-                            <a href="../php/conta.php" class="list-group-item list-group-item-action">Meus Dados</a>
+                            <a href="../../php/conta.php" class="list-group-item list-group-item-action">Meus Dados</a>
                             <a href="enderecos_cliente.php" class="list-group-item list-group-item-action">Meus Endereços</a>
-                            <a href="../php/logout.php" class="list-group-item list-group-item-action text-danger">Sair</a>
+                            <a href="../../php/logout.php" class="list-group-item list-group-item-action text-danger">Sair</a>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                             <?php else: ?>
                                 <div class="alert alert-info">
                                     Você ainda não realizou nenhum pedido.
-                                    <a href="../index.php" class="alert-link">Ir para a loja</a>
+                                    <a href="../../index.php" class="alert-link">Ir para a loja</a>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -202,13 +202,13 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     </div>
 
     <!---Footer--->
-    <?php include("../php/footer.php"); ?>
+    <?php include("../../php/footer.php"); ?>
 
     <!--------------SCRIPTS-------------->
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/funcao.js"></script>
+    <script src="../../js/scripts.js"></script>
+    <script src="../../js/funcao.js"></script>
 
 
     <script>

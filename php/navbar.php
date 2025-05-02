@@ -1,6 +1,6 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
-$is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page == 'confirmacao_pedido.php');
+$is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php');
 ?>
 
 <?php if (!$is_finalizar_pedido): ?>
@@ -112,21 +112,21 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">
-                <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
+                <img src="../../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="../index.php">INICIO</a></li>
-                    <li><a href="../php/produtos.php">PEÇA AGORA</a></li>
-                    <li><a href="../php/unidades.php">UNIDADES</a></li>
+                    <li><a href="../../index.php">INICIO</a></li>
+                    <li><a href="../../php/produtos.php">PEÇA AGORA</a></li>
+                    <li><a href="../../php/unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
             <div class="user-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo isset($_SESSION['usuario']) ? 'canvas-logado' : 'canvas-deslogado'; ?>" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                    <img src="../imgs/user.png" alt="Usuário" width="30px">
+                    <img src="../../imgs/user.png" alt="Usuário" width="30px">
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
-                    <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
+                    <img src="../../imgs/Shopping cart.png" alt="Carrinho" width="30px">
                     <?php
                     $quantidadeItens = isset($_SESSION["carrinho"]) && is_array($_SESSION["carrinho"]) ? count($_SESSION["carrinho"]) : 0;
                     if ($quantidadeItens > 0) {
@@ -147,7 +147,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
         <div class="offcanvas-body">
             <div class="modal-content01">
                 <p class="modal-text">
-                    <a href="../php/login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
+                    <a href="../../php/login.php" class="modal-link">Acesse sua conta ou cadastre-se</a>
                 </p>
             </div>
         </div>
@@ -170,7 +170,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="botao-sair">
-                    <a href="../php/logout.php" class="btn-logout">Sair</a>
+                    <a href="../../php/logout.php" class="btn-logout">Sair</a>
                 </div>
             </div>
         </div>
@@ -181,17 +181,17 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
                     <?php
                     $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
                     $menu = '
-                        <li class="li-items"><a href="../index.php">Home</a></li>
-                        <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
-                        <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>
-                        <li class="li-items"><a href="../php/conta.php">Minha conta</a></li>
-                        <li class="li-items"><a href="../carrinho/pedidos_cliente.php">Pedidos/Compras</a></li>';
+                        <li class="li-items"><a href="../../index.php">Home</a></li>
+                        <li class="li-items"><a href="../../php/produtos.php">Produtos</a></li>
+                        <li class="li-items"><a href="../../php/unidades.php">Unidades</a></li>
+                        <li class="li-items"><a href="../../php/conta.php">Minha conta</a></li>
+                        <li class="li-items"><a href="../../carrinho/pedidos_cliente.php">Pedidos/Compras</a></li>';
                     if ($tipo !== "cliente") {
                         $menu = '
-                            <li class="li-items"><a href="../index.php">Home</a></li>
-                            <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
-                            <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
-                            <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>
+                            <li class="li-items"><a href="../../index.php">Home</a></li>
+                            <li class="li-items"><a href="../../admin/admin.php">Administrador</a></li>
+                            <li class="li-items"><a href="../../php/produtos.php">Produtos</a></li>
+                            <li class="li-items"><a href="../../php/unidades.php">Unidades</a></li>
                             <li class="li-items"><a href="#">Minha conta</a></li>
                             <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
                     }
@@ -209,7 +209,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <?php include("../carrinho/carrinho.php"); ?>
+            <?php include("../carrinho.php"); ?>
         </div>
     </div>
 <?php endif; ?>
