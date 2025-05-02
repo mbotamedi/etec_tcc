@@ -91,7 +91,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     <li class="li-items"><a href="produtos.php">Produtos</a></li>
                     <li class="li-items"><a href="unidades.php">Unidades</a></li>
                     <li class="li-items"><a href="../php/conta.php">Minha conta</a></li>
-                    <li class="li-items"><a href="../carrinho/pedidos_cliente.php">Pedidos/Compras</a></li>';
+                    <li class="li-items"><a href="../carrinho/pedidos/pedidos_cliente.php">Pedidos/Compras</a></li>';
                 if ($tipo !== "cliente") {
                     $menu = '
                         <li class="li-items"><a href="index.php">Home</a></li>

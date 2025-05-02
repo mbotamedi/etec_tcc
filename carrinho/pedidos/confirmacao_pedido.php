@@ -3,7 +3,7 @@
 include("../../includes/conexao.php");
 
 
-    $id_pedido = isset($_GET['id_pedido']) ? (int)$_GET['id_pedido'] : 0;
+$id_pedido = isset($_GET['id_pedido']) ? (int)$_GET['id_pedido'] : 0;
 
 // Verifica se o pedido existe
 $query_pedido = "SELECT p.*, c.nome FROM tb_pedidos p 
@@ -20,6 +20,7 @@ if (!$pedido) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +40,7 @@ if (!$pedido) {
             padding: 20px;
             text-align: center;
         }
+
         .btn-continuar {
             background-color: #007bff;
             color: white;
@@ -47,14 +49,16 @@ if (!$pedido) {
             border-radius: 5px;
             text-decoration: none;
         }
+
         .btn-continuar:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
+
 <body>
     <!-- Inclui a navegação -->
-    <?php include("../php/navbar.php"); ?>
+    <?php include("../../php/navbar.php"); ?>
 
     <section class="py-5">
         <div class="container-confirmacao">
@@ -74,4 +78,5 @@ if (!$pedido) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../js/scripts.js"></script>
 </body>
+
 </html>

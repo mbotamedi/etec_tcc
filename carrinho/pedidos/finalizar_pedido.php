@@ -81,7 +81,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <link rel="stylesheet" href="../../css/navbar.css">
     <link rel="stylesheet" href="../../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../../css/canvaLogado.css">
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
