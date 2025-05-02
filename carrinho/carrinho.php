@@ -1,6 +1,10 @@
 <?php
 @session_start();
 
+$current_page = basename($_SERVER['PHP_SELF']); // Obtém o nome da página atual
+$is_finalizar_pedido = ($current_page == 'finalizar_pedido.php');
+
+
 if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     echo '<h3>Nenhum item no carrinho</h3>';
 } else {
@@ -120,7 +124,12 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
 
         echo '<tr>';
         echo '<td>' . $value["descricao"] . '</td>';
-        echo '<td><img src="' . $value["imagem"] . '" alt="' . htmlspecialchars($value["descricao"]) . '"></td>';
+        if (!$is_finalizar_pedido) {
+            echo '<td><img src="' . $value["imagem"] . '" alt="' . htmlspecialchars($value["descricao"]) . '"></td>';
+        } else {
+            echo '<td><img src="../' . $value["imagem"] . '" alt="' . htmlspecialchars($value["descricao"]) . '"></td>';
+        }
+
         echo '<td>' . number_format($value["valor"], 2, ',', '.') . '</td>';
         echo '<td class="qtd-controls">
                 <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=subtrair">−</a>
@@ -141,22 +150,19 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     echo '</table>';
 }
 ?>
-<?php
-$current_page = basename($_SERVER['PHP_SELF']); // Obtém o nome da página atual
-$is_finalizar_pedido = ($current_page == 'finalizar_pedido.php');
 
-if (!$is_finalizar_pedido): ?>
+<?php if (!$is_finalizar_pedido): ?>
     <div class="offcanvas-cart-buttons" style="margin-top: 20px; text-align: center;">
         <button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar Comprando</button>
         <?php if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0): ?>
-            <a href="../carrinho/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>
+            <a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>
         <?php endif; ?>
     </div>
 <?php else: ?>
     <div class="offcanvas-cart-buttons" style="margin-top: 20px; text-align: center; display: none;">
         <button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar Comprando</button>
         <?php if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0): ?>
-            <a href="../carrinho/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>
+            <a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>
         <?php endif; ?>
     </div>
 <?php endif; ?>
