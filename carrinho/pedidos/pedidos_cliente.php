@@ -8,8 +8,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     header("Location: ../../php/login.php");
     exit();
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,19 +23,21 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     <link rel="stylesheet" href="../../css/mediaQuery.css">
     <link rel="stylesheet" href="../../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../../css/canvaLogado.css">
-    <!-- Favicon-->
-    <link rel="icon" type="../../image/x-icon" href="../../assets/favicon.ico" />
-    <!-- Bootstrap icons-->
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
+    <!-- Bootstrap icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!--FONTS-------->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <!---Carrinho--->
+    <!-- Font Awesome para carrinho -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .gradient-custom {
             background: #f6d365;
@@ -73,39 +73,156 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
             background-color: #f8c537;
             color: #000;
         }
-    </style>
-    <style>
-        /* Estilos para o modal de detalhes */
-        #modalDetalhes .modal-dialog {
-            max-width: 900px;
+
+        /* Estilos para a janela flutuante */
+        .floating-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: auto;
+            display: none;
+            font-size: 0.9em;
+            /* Reduz o tamanho da fonte para 90% do padrão (ajuste conforme necessário) */
+            ;
         }
 
-        #modalDetalhes .modal-body {
-            max-height: 70vh;
-            overflow-y: auto;
+        .floating-window-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .floating-window-header {
+            background-color: #ffc107;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .floating-window-title {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .floating-window-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .floating-window-close:hover {
+            color: #000;
+        }
+
+        .floating-window-body {
             padding: 20px;
+            overflow-y: auto;
+            max-height: 80vh;
+            min-height: 300px;
         }
 
-        #modalDetalhes .info-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+        .floating-window-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #e0e0e0;
+            text-align: right;
         }
 
-        #modalDetalhes .info-label {
-            font-weight: bold;
-            color: #555;
-            min-width: 180px;
-            display: inline-block;
+        .floating-window .table-responsive {
+            overflow-x: auto;
+            max-height: none;
+            /* Remova qualquer restrição de altura */
+        }
+
+        .floating-window .table {
+            width: 100%;
+            min-width: 600px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .floating-window .table tbody tr {
+            display: table-row !important;
+            visibility: visible !important;
+            height: auto !important;
+            opacity: 1 !important;
+            position: relative;
+        }
+
+        .floating-window .table td,
+        .floating-window .table th {
+            padding: 8px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+            /* Garante que a fonte nas células da tabela também seja ajustada */
+        }
+
+        .floating-window .table img {
+            max-width: 60px;
+            height: auto;
+        }
+
+        .floating-window .table {
+            display: table-row !important;
+            visibility: visible !important;
+        }
+
+        .floating-window-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .floating-window {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .floating-window-body {
+                padding: 20px;
+                overflow-y: auto;
+                max-height: 70vh;
+                /* Ajuste para garantir que o conteúdo não seja cortado */
+                flex-grow: 1;
+            }
+
+            .floating-window .table {
+                width: 100%;
+                min-width: 600px;
+            }
+
+            .floating-window .table img {
+                max-width: 60px;
+                height: auto;
+            }
         }
     </style>
-
 </head>
 
 <body>
-    <!-- Navigation-->
+    <!-- Navigation -->
     <?php include("../../php/navbar.php"); ?>
-    <!-- Navigation End-->
+    <!-- Navigation End -->
 
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
@@ -155,8 +272,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                                                         <?= ucfirst($pedido['tipo_entrega']) ?>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-detalhes"
-                                                            onclick="detalhesPedido(<?= $pedido['id'] ?>)">
+                                                        <button class="btn btn-sm btn-detalhes" onclick="detalhesPedido(<?= $pedido['id'] ?>, event)">
                                                             <i class="bi bi-eye-fill"></i> Detalhes
                                                         </button>
                                                     </td>
@@ -178,93 +294,116 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
         </div>
     </section>
 
-    <!-- Modal para detalhes do pedido -->
-    <div class="modal fade" id="modalDetalhes" tabindex="-1" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="modalDetalhesLabel">Detalhes do Pedido</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="detalhesPedidoContent">
-                    <!-- Conteúdo será carregado via AJAX -->
-                    <div class="text-center">
-                        <div class="spinner-border text-warning" role="status">
-                            <span class="visually-hidden">Carregando...</span>
-                        </div>
+    <!-- Janela flutuante para detalhes do pedido -->
+    <div id="floatingWindow" class="floating-window" style="display: none;">
+        <div class="floating-window-content">
+            <div class="floating-window-header">
+                <h5 class="floating-window-title">Detalhes do Pedido</h5>
+                <button type="button" class="floating-window-close" onclick="closeFloatingWindow()">×</button>
+            </div>
+            <div class="floating-window-body" id="detalhesPedidoContent">
+                <div class="text-center py-4">
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Carregando...</span>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
+            </div>
+            <div class="floating-window-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeFloatingWindow()">Fechar</button>
             </div>
         </div>
     </div>
 
-    <!---Footer--->
+    <!-- Footer -->
     <?php include("../../php/footer.php"); ?>
 
-    <!--------------SCRIPTS-------------->
-    <!-- Bootstrap core JS-->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../js/scripts.js"></script>
     <script src="../../js/funcao.js"></script>
 
-
     <script>
-        // Função melhorada para carregar detalhes do pedido
-        async function detalhesPedido(idPedido) {
+        async function detalhesPedido(idPedido, event) {
+            event.preventDefault();
             try {
-                // 1. Mostrar o modal com spinner
-                const modal = new bootstrap.Modal(document.getElementById('modalDetalhes'));
-                const modalBody = document.getElementById('detalhesPedidoContent');
+                console.log('Carregando detalhes do pedido ID:', idPedido);
+                const floatingWindow = document.getElementById('floatingWindow');
+                const floatingWindowBody = document.getElementById('detalhesPedidoContent');
+                const backdrop = document.createElement('div');
+                backdrop.className = 'floating-window-backdrop';
+                document.body.appendChild(backdrop);
 
-                modalBody.innerHTML = `
-        <div class="text-center py-4">
-            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
-                <span class="visually-hidden">Carregando...</span>
+                floatingWindowBody.innerHTML = `
+            <div class="text-center py-4">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+                <p>Carregando detalhes...</p>
             </div>
-            <p class="mt-3">Carregando detalhes do pedido...</p>
-        </div>
         `;
 
-                modal.show();
+                floatingWindow.style.display = 'block';
+                backdrop.style.display = 'block';
 
-                // 2. Fazer a requisição AJAX
-                const response = await fetch(`../php/detalhes_pedidos.php?id=${idPedido}`);
+                const url = `detalhes_pedidos.php?id=${idPedido}`;
+                console.log('Requisição para:', url);
+                const response = await fetch(url, {
+                    cache: 'no-store'
+                });
+
+                console.log('Status da resposta:', response.status);
+                const data = await response.text();
+                console.log('Conteúdo retornado (primeiros 1000 caracteres):', data.substring(0, 1000));
+                console.log('Número de linhas <tr> no HTML retornado:', (data.match(/<tr>/g) || []).length);
 
                 if (!response.ok) {
-                    throw new Error(`Erro HTTP: ${response.status}`);
+                    throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`);
                 }
 
-                const data = await response.text();
-
-                // 3. Inserir os dados no modal
-                modalBody.innerHTML = data;
-
-                // 4. Ajustar a barra de scroll se necessário
-                if (modalBody.scrollHeight > modalBody.clientHeight) {
-                    modalBody.style.paddingRight = '1rem';
+                if (!data.trim()) {
+                    throw new Error('Resposta vazia do servidor');
                 }
 
+                floatingWindowBody.innerHTML = data;
+
+                setTimeout(() => {
+                    const rows = floatingWindowBody.querySelectorAll('.table tbody tr');
+                    console.log('Número de <tr> renderizados:', rows.length);
+                    rows.forEach((row, index) => {
+                        row.style.display = 'table-row';
+                        row.style.visibility = 'visible';
+                        row.style.opacity = '1';
+                        console.log(`Linha ${index + 1} visível:`, window.getComputedStyle(row).display !== 'none' && window.getComputedStyle(row).visibility !== 'hidden');
+                        console.log(`Conteúdo da linha ${index + 1}:`, row.innerHTML.substring(0, 200));
+                    });
+                    console.log('Forçando exibição das linhas');
+                }, 100);
+
+                if (floatingWindowBody.scrollHeight > floatingWindowBody.clientHeight) {
+                    floatingWindowBody.style.paddingRight = '1rem';
+                }
             } catch (error) {
                 console.error('Erro:', error);
-                const modalBody = document.getElementById('detalhesPedidoContent');
-                if (modalBody) {
-                    modalBody.innerHTML = `
-        <div class="alert alert-danger">
-            <h5>Erro ao carregar detalhes</h5>
-            <p>${error.message}</p>
-            <button onclick="detalhesPedido(${idPedido})" class="btn btn-warning btn-sm mt-2">
-                Tentar novamente
-            </button>
-        </div>
+                floatingWindowBody.innerHTML = `
+            <div class="alert alert-danger">
+                <h5>Erro ao carregar detalhes</h5>
+                <p>${error.message}</p>
+                <p>URL: ${url}</p>
+                <button onclick="detalhesPedido(${idPedido}, event)" class="btn btn-warning btn-sm mt-2">
+                    Tentar novamente
+                </button>
+            </div>
         `;
-                }
             }
         }
-    </script>
 
+        function closeFloatingWindow() {
+            const floatingWindow = document.getElementById('floatingWindow');
+            const backdrop = document.querySelector('.floating-window-backdrop');
+            if (floatingWindow) floatingWindow.style.display = 'none';
+            if (backdrop) backdrop.remove();
+        }
+    </script>
 </body>
 
 </html>
