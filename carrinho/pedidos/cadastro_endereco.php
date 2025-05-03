@@ -36,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Obtém cidades para o select
 $query_estado = "SELECT DISTINCT codigo_estado, sigla_estado FROM tb_cidades";
 $result_estado = mysqli_query($conexao, $query_estado);
-$query_cidades = "SELECT codigo_cidade, nome_cidade FROM tb_cidades";
-$result_cidades = mysqli_query($conexao, $query_cidades);
+
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +129,7 @@ $result_cidades = mysqli_query($conexao, $query_cidades);
                 </div>
                 <div class="form-group">
                     <label for="id_estado">Estado:</label>
-                    <select id="id_estado" name="id_estado" required>
+                    <select id="id_estado" name="id_estado" required onchange="carregarCidades()">
                         <?php while ($estado = mysqli_fetch_assoc($result_estado)): ?>
                             <option value="<?= $estado['codigo_estado'] ?>">
                                 <?= htmlspecialchars($estado['sigla_estado']) ?>
@@ -141,11 +140,7 @@ $result_cidades = mysqli_query($conexao, $query_cidades);
                 <div class="form-group">
                     <label for="id_cidade">Cidade:</label>
                     <select id="id_cidade" name="id_cidade" required>
-                        <?php while ($cidade = mysqli_fetch_assoc($result_cidades)): ?>
-                            <option value="<?= $cidade['codigo_cidade'] ?>">
-                                <?= htmlspecialchars($cidade['nome_cidade']) ?>
-                            </option>
-                        <?php endwhile; ?>
+                        <option value="0">Selecione a Cidade</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -161,6 +156,31 @@ $result_cidades = mysqli_query($conexao, $query_cidades);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../js/scripts.js"></script>
+    <script>
+        function carregarCidades() {
+            const estadoSelect = document.getElementById('id_estado');
+            const cidadeSelect = document.getElementById('id_cidade');
+            const codigoEstado = estadoSelect.value;
+
+            // Limpa o select de cidades
+            cidadeSelect.innerHTML = '<option value="">Selecione uma cidade</option>';
+
+            if (codigoEstado) {
+                // Faz uma requisição AJAX para buscar as cidades
+                fetch(`buscar_cidades.php?codigo_estado=${codigoEstado}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(cidade => {
+                            const option = document.createElement('option');
+                            option.value = cidade.codigo_cidade;
+                            option.textContent = cidade.nome_cidade;
+                            cidadeSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Erro ao carregar cidades:', error));
+            }
+        }
+    </script>
 </body>
 
 </html>
