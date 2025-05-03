@@ -1,8 +1,6 @@
 <?php
-
 include("../../includes/conexao.php");
 include("../../php/verificar_login.php");
-
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
@@ -26,46 +24,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_endereco = $_POST["id_endereco"];
     $id_endereco_value = ($tipo_entrega == 'entrega' && !empty($id_endereco)) ? "'$id_endereco'" : "NULL";
 
-    // Insere o pedido na tabela tb_pedidos
-    $emissao = date('Y-m-d');
-    $valor_total = 0;
+    // Validação
+    if ($tipo_entrega == 'entrega' && empty($id_endereco)) {
+        $erro = "Por favor, selecione ou cadastre um endereço para entrega.";
+    } else {
+        // Insere o pedido na tabela tb_pedidos
+        $emissao = date('Y-m-d');
+        $valor_total = 0;
 
-    foreach ($_SESSION["carrinho"] as $item) {
-        $valor_total += $item['valor'] * $item['qtd'];
-    }
+        foreach ($_SESSION["carrinho"] as $item) {
+            $valor_total += $item['valor'] * $item['qtd'];
+        }
 
-    // Se for retirada, pode adicionar um valor fixo ou desconto (opcional)
-    if ($tipo_entrega == 'retirada') {
-        //$valor_total -= 5.00; // Exemplo de desconto para retirada
-    }
+        // Se for retirada, pode adicionar um valor fixo ou desconto (opcional)
+        if ($tipo_entrega == 'retirada') {
+            //$valor_total -= 5.00; // Exemplo de desconto para retirada
+        }
 
-    $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega) 
-                 VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega')";
-    mysqli_query($conexao, $query_pedido);
-    $id_pedido = mysqli_insert_id($conexao);
+        $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega) 
+                     VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega')";
+        mysqli_query($conexao, $query_pedido);
+        $id_pedido = mysqli_insert_id($conexao);
 
-    // Insere os itens do pedido
-    foreach ($_SESSION["carrinho"] as $item) {
-        $id_produto = $item['id'];
-        $qtd = $item['qtd'];
-        $valor_unitario = $item['valor'];
+        // Insere os itens do pedido
+        foreach ($_SESSION["carrinho"] as $item) {
+            $id_produto = $item['id'];
+            $qtd = $item['qtd'];
+            $valor_unitario = $item['valor'];
 
-        $query_item = "INSERT INTO tb_pedidos_itens (id_pedidos, id_produtos, qtd, valor_untiario) 
+            $query_item = "INSERT INTO tb_pedidos_itens (id_pedidos, id_produtos, qtd, valor_untiario) 
                        VALUES ('$id_pedido', '$id_produto', '$qtd', '$valor_unitario')";
-        mysqli_query($conexao, $query_item);
+            mysqli_query($conexao, $query_item);
 
-        // Atualiza o estoque
-        $query_estoque = "UPDATE tb_produtos SET estoque = estoque - $qtd WHERE id = '$id_produto'";
-        mysqli_query($conexao, $query_estoque);
+            // Atualiza o estoque
+            $query_estoque = "UPDATE tb_produtos SET estoque = estoque - $qtd WHERE id = '$id_produto'";
+            mysqli_query($conexao, $query_estoque);
+        }
+
+        unset($_SESSION['carrinho']);
+        header("Location: confirmacao_pedido.php?id_pedido=$id_pedido");
+        exit;
     }
-
-    unset($_SESSION['carrinho']);
-    header("Location: confirmacao_pedido.php?id_pedido=$id_pedido");
-    exit;
 }
 
 // Obtém os endereços do cliente
-$query_enderecos = "SELECT en.id, en.endereco, en.numero, en.descricao, en.bairro, en.cep, ci.nome_cidade , ci.sigla_estado FROM tb_cliente_endereco as en inner join tb_cidades as ci on en.id_cidade = ci.codigo_cidade WHERE en.id_cliente = '$id_cliente'";
+$query_enderecos = "SELECT en.id, en.endereco, en.numero, en.descricao, en.bairro, en.cep, ci.nome_cidade, ci.sigla_estado 
+                    FROM tb_cliente_endereco as en 
+                    INNER JOIN tb_cidades as ci ON en.id_cidade = ci.codigo_cidade 
+                    WHERE en.id_cliente = '$id_cliente'";
 $result_enderecos = mysqli_query($conexao, $query_enderecos);
 ?>
 
@@ -104,8 +110,6 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             margin-bottom: 10px;
         }
 
-
-
         .btn-finalizar {
             background-color: #28a745;
             color: white;
@@ -141,6 +145,11 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
         #endereco-section {
             display: none;
         }
+
+        .erro {
+            color: red;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -150,6 +159,9 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <section class="py-5">
         <div class="container-finalizar">
             <h2>Finalizando Pedido</h2>
+            <?php if (isset($erro)): ?>
+                <p class="erro"><?= htmlspecialchars($erro) ?></p>
+            <?php endif; ?>
             <h3>Resumo do Carrinho</h3>
             <?php include("../carrinho.php"); ?>
 
@@ -176,7 +188,8 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 <div id="endereco-section">
                     <h3>Selecione o Endereço de Entrega</h3>
                     <div class="endereco-list">
-                        <?php if (mysqli_num_rows($result_enderecos) > 0): ?>
+                        <?php
+                        if (mysqli_num_rows($result_enderecos) > 0): ?>
                             <?php while ($endereco = mysqli_fetch_assoc($result_enderecos)): ?>
                                 <div class="endereco-item">
                                     <input type="radio" name="id_endereco" value="<?= $endereco['id'] ?>" required>
@@ -190,7 +203,13 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                                 </div>
                             <?php endwhile; ?>
                         <?php else: ?>
-                            <p>Nenhum endereço cadastrado. <a href="../carrinho/cadastro_endereco.php">Cadastrar Endereço</a></p>
+                            <p>Nenhum endereço cadastrado. <a href="../cadastro_endereco.php?retorno=finalizar_pedido.php">Cadastrar novo endereço</a></p>
+                            <?php
+                            if ($_POST['tipo_entrega'] === 'entrega') {
+                                header("Location: ../cadastro_endereco.php?retorno=finalizar_pedido.php");
+                                exit;
+                            }
+                            ?>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -218,8 +237,13 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             enderecoInputs.forEach(input => {
                 input.required = show;
             });
+
+            // Redireciona para cadastro se escolher entrega e não houver endereços
+            if (show && enderecoSection.querySelectorAll('input[type="radio"]').length === 0) {
+                window.location.href = '../cadastro_endereco.php?retorno=finalizar_pedido.php';
+            }
         }
     </script>
 </body>
 
-</html>
+</html>e'

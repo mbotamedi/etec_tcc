@@ -1,7 +1,8 @@
 <!-- Footer-->
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
-$is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php');
+$is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php');
+
 ?>
 <?php if (!$is_finalizar_pedido): ?>
 
@@ -94,5 +95,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
                 <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
             </div>
         <?php endif; ?>
+
+
         </footer>
         <!-- Footer End-->
