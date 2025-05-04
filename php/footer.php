@@ -6,6 +6,7 @@ $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php' || $current_page
 
 <!-- Footer-->
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php');
@@ -53,6 +54,8 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                 </ul>
             </div>
 =======
+=======
+>>>>>>> Stashed changes
  
 
 
