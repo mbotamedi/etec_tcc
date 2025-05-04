@@ -49,6 +49,8 @@ $result_estado = mysqli_query($conexao, $query_estado);
     <link rel="stylesheet" href="../../css/styles.css" />
     <link rel="stylesheet" href="../../css/inicio.css">
     <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/canvaDeslogado.css">
+    <link rel="stylesheet" href="../../css/canvaLogado.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:wght@100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:wght@300..900&display=swap" rel="stylesheet">

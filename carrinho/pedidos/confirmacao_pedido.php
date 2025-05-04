@@ -28,6 +28,8 @@ if (!$pedido) {
     <link rel="stylesheet" href="../../css/styles.css" />
     <link rel="stylesheet" href="../../css/inicio.css">
     <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/canvaDeslogado.css">
+    <link rel="stylesheet" href="../../css/canvaLogado.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
