@@ -104,10 +104,46 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             margin-bottom: 20px;
         }
 
+        /* Centralizar os rádios e texto dentro de cada endereço */
         .endereco-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 10px;
             border: 1px solid #ddd;
             margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .endereco-item input[type="radio"] {
+            margin-right: 10px;
+            /* Espaçamento entre o rádio e o texto */
+        }
+
+        .endereco-item label {
+            flex: 1;
+            /* Permite que o label ocupe o espaço restante */
+            text-align: left;
+            /* Mantém o texto do label alinhado à esquerda dentro do flex */
+        }
+
+        /* Ajuste responsivo */
+        @media (max-width: 767.98px) {
+            .endereco-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .endereco-item input[type="radio"] {
+                margin-bottom: 5px;
+                /* Espaçamento abaixo do rádio em telas menores */
+                margin-right: 0;
+            }
+
+            .endereco-item label {
+                text-align: center;
+                /* Centraliza o texto em telas menores */
+            }
         }
 
         .btn-finalizar {
