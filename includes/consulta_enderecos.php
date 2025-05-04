@@ -19,7 +19,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
 $id_cliente = mysqli_real_escape_string($conexao, $_SESSION['usuario']['id']);
 
 $query = "SELECT 
-            e.endereco, e.numero, e.complemento, e.bairro, e.cep,
+            e.id, e.descricao, e.endereco, e.numero, e.complemento, e.bairro, e.cep,
             c.nome_cidade, c.sigla_estado
           FROM 
             tb_cliente_endereco e

@@ -178,13 +178,74 @@
     
 }
 
+/* Estilos para a tabela de Meus Endereços */
 #secaoEnderecos .table th,
 #secaoEnderecos .table td {
-    font-size: 0.9rem;
-    padding: 10px;
     vertical-align: middle;
+    padding: 12px;
+    
+}
+#secaoEnderecos .table td {
+    font-size:small;
+    
 }
 
+/* Alinhamento específico para cada coluna */
+#secaoEnderecos .table th:nth-child(1),
+#secaoEnderecos .table td:nth-child(1) {
+    text-align: center; /* Descrição */
+}
+
+#secaoEnderecos .table th:nth-child(2),
+#secaoEnderecos .table td:nth-child(2) {
+    text-align: start; /* Endereço */
+    width: 20%;
+}
+
+#secaoEnderecos .table th:nth-child(3),
+#secaoEnderecos .table td:nth-child(3) {
+    text-align: center; /* Complemento */
+    width: 1%;
+}
+
+#secaoEnderecos .table th:nth-child(4),
+#secaoEnderecos .table td:nth-child(4) {
+    text-align: start; /* Bairro */
+}
+
+#secaoEnderecos .table th:nth-child(5),
+#secaoEnderecos .table td:nth-child(5) {
+    text-align: start; /* Cidade/UF */
+}
+
+#secaoEnderecos .table th:nth-child(6),
+#secaoEnderecos .table td:nth-child(6) {
+    text-align: start; /* CEP */
+    width: 15%;
+    
+}
+
+#secaoEnderecos .table th:nth-child(7),
+#secaoEnderecos .table td:nth-child(7) {
+    text-align: start; /* Ações */
+}
+
+/* Estilização dos cabeçalhos */
+#secaoEnderecos .table th {
+    background-color: #dadbdbb9; /* Cor amarela do bg-warning */
+    color: #080808;
+    font-weight: 600;
+}
+
+/* Hover na tabela */
 #secaoEnderecos .table-hover tbody tr:hover {
     background-color: #f8f9fa;
+}
+
+/* Ajustar responsividade */
+@media (max-width: 767.98px) {
+    #secaoEnderecos .table th,
+    #secaoEnderecos .table td {
+        padding: 8px;
+    }
 }

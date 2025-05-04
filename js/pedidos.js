@@ -111,81 +111,136 @@ function mostrarPedidos() {
 }
 
 function mostrarEnderecos() {
-    document.getElementById('secaoPedidos').style.display = 'none';
-    document.getElementById('secaoEnderecos').style.display = 'block';
-    
-    document.querySelector('a[href="javascript:void(0);"][onclick="mostrarPedidos()"]').classList.remove('active');
-    document.querySelector('a[href="javascript:void(0);"][onclick="mostrarEnderecos()"]').classList.add('active');
-    
-    const contentDiv = document.getElementById('enderecosContent');
-    contentDiv.innerHTML = `
+  document.getElementById("secaoPedidos").style.display = "none";
+  document.getElementById("secaoEnderecos").style.display = "block";
+
+  document
+    .querySelector('a[href="javascript:void(0);"][onclick="mostrarPedidos()"]')
+    .classList.remove("active");
+  document
+    .querySelector(
+      'a[href="javascript:void(0);"][onclick="mostrarEnderecos()"]'
+    )
+    .classList.add("active");
+
+  const contentDiv = document.getElementById("enderecosContent");
+  contentDiv.innerHTML = `
         <div class="text-center py-4">
             <div class="spinner-border text-warning" role="status">
                 <span class="visually-hidden">Carregando...</span>
             </div>
         </div>
     `;
-    
-    fetch('../../includes/consulta_enderecos.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                contentDiv.innerHTML = `
+
+  fetch("../../includes/consulta_enderecos.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        contentDiv.innerHTML = `
                     <div class="alert alert-danger">
                         ${data.error}
                     </div>
                 `;
-                return;
-            }
+        return;
+      }
 
-            if (data.enderecos.length === 0) {
-                contentDiv.innerHTML = `
+      let html = `
+                <div class="mb-3">
+                    <a href="cadastro_endereco.php" class="btn btn-primary">Cadastrar Novo Endereço</a>
+                </div>
+            `;
+
+      if (data.enderecos.length === 0) {
+        html += `
                     <div class="alert alert-info">
                         Você ainda não cadastrou nenhum endereço.
-                        <a href="enderecos_cliente.php" class="alert-link">Cadastrar endereço</a>
+                        <a href="cadastro_endereco.php" class="alert-link">Cadastrar endereço</a>
                     </div>
                 `;
-                return;
-            }
+        contentDiv.innerHTML = html;
+        return;
+      }
 
-            let html = `
+      html += `
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th>Descrição</th>
                                 <th>Endereço</th>
+                                <th>Complemento</th>
                                 <th>Bairro</th>
                                 <th>Cidade/UF</th>
                                 <th>CEP</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
             `;
-            
-            data.enderecos.forEach(endereco => {
-                html += `
+
+      data.enderecos.forEach((endereco) => {
+        html += `
                     <tr>
-                        <td>${endereco.endereco}, ${endereco.numero}${endereco.complemento ? ' - ' + endereco.complemento : ''}</td>
+                        <td>${endereco.descricao}</td>
+                        <td>${endereco.endereco}, ${endereco.numero}</td>
+                        <td>${
+                          endereco.complemento ? endereco.complemento : ""
+                        }</td>
                         <td>${endereco.bairro}</td>
-                        <td>${endereco.nome_cidade}/${endereco.sigla_estado}</td>
+                        <td>${endereco.nome_cidade}/${
+          endereco.sigla_estado
+        }</td>
                         <td>${endereco.cep}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="excluirEndereco(${
+                              endereco.id
+                            })">Excluir</button>
+                        </td>
                     </tr>
                 `;
-            });
+      });
 
-            html += `
+      html += `
                         </tbody>
                     </table>
                 </div>
             `;
-            
-            contentDiv.innerHTML = html;
-        })
-        .catch(error => {
-            contentDiv.innerHTML = `
+
+      contentDiv.innerHTML = html;
+    })
+    .catch((error) => {
+      contentDiv.innerHTML = `
                 <div class="alert alert-danger">
                     Erro ao carregar endereços: ${error.message}
                 </div>
             `;
-        });
+    });
+}
+
+async function excluirEndereco(idEndereco) {
+  if (!confirm("Tem certeza que deseja excluir este endereço?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch("../../includes/excluir_endereco.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `id_endereco=${idEndereco}`,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert("Endereço excluído com sucesso!");
+      // Recarregar a lista de endereços
+      mostrarEnderecos();
+    } else {
+      alert("Erro: " + data.error);
+    }
+  } catch (error) {
+    alert("Erro ao excluir endereço: " + error.message);
+  }
 }

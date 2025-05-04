@@ -57,8 +57,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                         </div>
                         <div class="list-group list-group-flush">
                             <a href="javascript:void(0);" class="list-group-item list-group-item-action active" onclick="mostrarPedidos()">Meus Pedidos</a>
-                            <a href="../../php/conta.php" class="list-group-item list-group-item-action">Meus Dados</a>
                             <a href="javascript:void(0);" class="list-group-item list-group-item-action" onclick="mostrarEnderecos()">Meus Endereços</a>
+                            <a href="../../php/conta.php" class="list-group-item list-group-item-action">Meus Dados</a>
                             <a href="../../php/logout.php" class="list-group-item list-group-item-action text-danger">Sair</a>
                         </div>
                     </div>
