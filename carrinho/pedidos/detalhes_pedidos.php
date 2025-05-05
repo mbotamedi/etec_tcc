@@ -4,10 +4,21 @@ ob_start();
 session_start();
 include("../../includes/conexao.php");
 
-if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
-    die("Acesso negado.");
-}
+// Verifica se é um administrador
+$is_admin = isset($_GET['admin']) && $_GET['admin'] == '1';
 
+// Verifica permissões
+if ($is_admin) {
+    // Para administradores, exige sessão válida e tipo 'admin'
+    if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'admin') {
+        die("Acesso negado para administradores.");
+    }
+} else {
+    // Para clientes, exige sessão válida e tipo 'cliente'
+    if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
+        die("Acesso negado para clientes.");
+    }
+}
 if (!isset($_GET['id'])) {
     die("Pedido não especificado.");
 }

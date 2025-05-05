@@ -1,10 +1,16 @@
+<?php
+// Inclui o arquivo de verificação de login
+include '../php/verificar_login.php';
+$tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
+?>
+
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <!--begin::Head-->
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Loja ETEC</title>
+  <title>Cantina Três Irmãos</title>
   <!--begin::Primary Meta Tags-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="title" content="AdminLTE v4 | Dashboard" />
@@ -27,7 +33,7 @@
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
-    integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
+    integrity="sha256-dZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
     crossorigin="anonymous" />
   <!--end::Third Party Plugin(OverlayScrollbars)-->
   <!--begin::Third Party Plugin(Bootstrap Icons)-->
@@ -72,13 +78,10 @@
               <i class="bi bi-list"></i>
             </a>
           </li>
-
         </ul>
         <!--end::Start Navbar Links-->
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
-
-
           <!--begin::Fullscreen Toggle-->
           <li class="nav-item">
             <a class="nav-link" href="#" data-lte-toggle="fullscreen">
@@ -87,34 +90,54 @@
             </a>
           </li>
           <!--end::Fullscreen Toggle-->
-          <!--begin::User Menu Dropdown-->
+          <!--begin::User Menu Dropdown breakthroughs -->
           <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <img
-                src="../assets/img/user2-160x160.jpg"
+                src="../assets/img/avatar.png"
                 class="user-image rounded-circle shadow"
                 alt="User Image" />
-              <span class="d-none d-md-inline">Marcelo Botamedi</span>
+              <span class="d-none d-md-inline">
+                <?php
+                if (isset($_SESSION['usuario']['nome'])) {
+                  echo htmlspecialchars($_SESSION['usuario']['nome']);
+                } else {
+                  echo 'Usuário';
+                }
+                ?>
+              </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-              <!--begin::User Image-->
+              <!--begin::User Header-->
               <li class="user-header text-bg-primary">
                 <img
-                  src="../assets/img/user2-160x160.jpg"
+                  src="../assets/img/avatar.png"
                   class="rounded-circle shadow"
                   alt="User Image" />
                 <p>
-                  Botamedi - Web Developer
-                  <small>Member since Nov. 2023</small>
+                  <?php
+                  if (isset($_SESSION['usuario']['nome'])) {
+                    echo htmlspecialchars($_SESSION['usuario']['nome']);
+                  } else {
+                    echo 'Usuário';
+                  }
+                  ?>
+                  <small><?php include("../includes/consulta_date.php"); ?></small>
                 </p>
               </li>
-              <!--end::User Image-->
-              <!--begin::Menu Footer-->
-              <li class="user-footer">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+              <!--end::User Header-->
+              <!--begin::User Body-->
+              <li class="user-body">
+                <?php include('perfil.php'); ?>
               </li>
-              <!--end::Menu Footer-->
+              <!--end::User Body-->
+              <!--begin::User Footer-->
+              <li class="user-footer d-flex justify-content-between">
+                <a href="../php/logout.php" class="btn btn-default btn-sm float-end">
+                  <i class="bi bi-box-arrow-right me-1"></i> Sair
+                </a>
+              </li>
+              <!--end::User Footer-->
             </ul>
           </li>
           <!--end::User Menu Dropdown-->
@@ -187,8 +210,7 @@
                 </li>
               </ul>
             </li>
-
-            <li class="nav-item">
+            <!---<li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon bi bi-box-seam-fill"></i>
                 <p>
@@ -198,14 +220,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./widgets/small-box.html" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Pedidos</p>
-                  </a>
-                </li>
-              </ul>
+                  <a href="?pg=Pedidos" class="nav-link">
+            <i class="nav-icon bi bi-circle"></i>
+            <p>Pedidos</p>
+            </a>
             </li>
-
+          </ul>
+          </li>--->
           </ul>
           <!--end::Sidebar Menu-->
         </nav>
@@ -229,12 +250,12 @@
             }
             ?>
             <div class="col-sm-6">
-              <h3 class="mb-0"><?php echo $paginaAtual; ?></h3>
+              <h3 class="mb-0"><?php echo htmlspecialchars($paginaAtual); ?></h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-end">
                 <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php echo $paginaAtual; ?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($paginaAtual); ?></li>
               </ol>
             </div>
           </div>
@@ -243,10 +264,8 @@
         <!--end::Container-->
       </div>
       <!--end::App Content Header-->
-
       <?php
       if (isset($_GET["pg"])) {
-
         switch ($_GET["pg"]) {
           case "Categorias":
             $incluir = "cadastros/categorias/index.php";
@@ -260,23 +279,22 @@
           case "Usuarios":
             $incluir = "cadastros/usuarios/index.php";
             break;
-          default:
-            $incluir = "cards.php";
+          case "Detalhes":
+            $incluir = "../carrinho/pedidos/detalhes_pedido.php";
             break;
         }
         include($incluir);
       } else {
         include("cards.php");
+        include("pedidos_admin.php");
       }
       ?>
-
       <!--end::App Content-->
     </main>
     <!--end::App Main-->
     <!--begin::Footer-->
     <footer class="app-footer">
       <!--begin::To the end-->
-      <!---<div class="float-end d-none d-sm-inline">Desenvolvido na ETEC de Bebedouro</div>--->
       <!--end::To the end-->
     </footer>
     <!--end::Footer-->
@@ -288,22 +306,23 @@
     src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
     integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
     crossorigin="anonymous"></script>
-  <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+  <!--end::Third Party Plugin(OverlayScrollbars)-->
+  <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
-  <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+  <!--end::Required Plugin(popperjs for Bootstrap 5)-->
+  <!--begin::Required Plugin(Bootstrap 5)-->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
-
-
-
-  <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+  <!--end::Required Plugin(Bootstrap 5)-->
+  <!--begin::Required Plugin(AdminLTE)-->
   <script src="../js/adminlte.js"></script>
-  <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+  <!--end::Required Plugin(AdminLTE)-->
+  <!--begin::OverlayScrollbars Configure-->
   <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
     const Default = {
@@ -346,9 +365,6 @@
       cardHeader.style.cursor = 'move';
     });
   </script>
-
-
-
 </body>
 <!--end::Body-->
 

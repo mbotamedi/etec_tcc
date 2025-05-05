@@ -87,7 +87,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                             <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
                             <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
                             <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>
-                            <li class="li-items"><a href="conta.php">Minha conta</a></li>
+                            <li class="li-items"><a href="#">Minha conta</a></li>
                             <li class="li-items"><a href="#">Pedidos/Compras</a></li>';
                     }
                     echo $menu;
