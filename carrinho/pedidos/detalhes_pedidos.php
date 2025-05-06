@@ -5,69 +5,98 @@ session_start();
 include("../../includes/conexao.php");
 
 // Verifica se é um administrador
-$is_admin = isset($_GET['admin']) && $_GET['admin'] == '1';
+$is_admin = isset($_GET['admin']) && $_GET['admin'] == 1;
 
 // Verifica permissões
 if ($is_admin) {
-    // Para administradores, exige sessão válida e tipo 'admin'
-    if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'admin') {
-        die("Acesso negado para administradores.");
+    // Para administradores, exige sessão válida e tipo 'usuario'
+    if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'usuario') {
+        echo '<div class="alert alert-danger">Acesso negado para administradores.</div>';
+        exit;
     }
 } else {
     // Para clientes, exige sessão válida e tipo 'cliente'
     if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
-        die("Acesso negado para clientes.");
+        echo '<div class="alert alert-danger">Acesso negado para clientes.</div>';
+        exit;
     }
 }
-if (!isset($_GET['id'])) {
-    die("Pedido não especificado.");
+
+// Verifica se o ID do pedido foi fornecido
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    echo '<div class="alert alert-danger">ID do pedido inválido.</div>';
+    exit;
 }
 
 $id_pedido = mysqli_real_escape_string($conexao, $_GET['id']);
-$id_cliente = $_SESSION['usuario']['id'];
 
-$verifica_pedido = mysqli_query($conexao, "SELECT id FROM tb_pedidos WHERE id = '$id_pedido' AND id_cliente = '$id_cliente'");
-if (mysqli_num_rows($verifica_pedido) == 0) {
-    die("Pedido não encontrado ou não pertence a este cliente.");
+// Verifica se o pedido existe e, para clientes, se pertence ao cliente logado
+if (!$is_admin) {
+    $id_cliente = $_SESSION['usuario']['id'];
+    $verifica_pedido = mysqli_query($conexao, "SELECT id FROM tb_pedidos WHERE id = '$id_pedido' AND id_cliente = '$id_cliente'");
+    if (mysqli_num_rows($verifica_pedido) == 0) {
+        echo '<div class="alert alert-danger">Pedido não encontrado ou não pertence a este cliente.</div>';
+        exit;
+    }
+} else {
+    // Para administradores, apenas verifica se o pedido existe
+    $verifica_pedido = mysqli_query($conexao, "SELECT id FROM tb_pedidos WHERE id = '$id_pedido'");
+    if (mysqli_num_rows($verifica_pedido) == 0) {
+        echo '<div class="alert alert-danger">Pedido não encontrado.</div>';
+        exit;
+    }
 }
 
-$query_pedido = "SELECT 
-                    p.*, 
-                    e.endereco, e.numero, e.descricao,
-                    e.bairro, e.cep,
-                    c.nome_cidade, c.sigla_estado
-                 FROM 
-                    tb_pedidos p
-                 LEFT JOIN 
-                    tb_cliente_endereco e ON p.id_endereco = e.id
-                 LEFT JOIN 
-                    tb_cidades c ON e.id_cidade = c.codigo_cidade
-                 WHERE 
-                    p.id = '$id_pedido'";
+// Consulta para o pedido específico
+$query_pedido = "
+    SELECT 
+        p.*, 
+        e.endereco, e.numero, e.descricao, e.complemento,
+        e.bairro, e.cep,
+        c.nome_cidade, c.sigla_estado,
+        cl.nome AS cliente
+    FROM 
+        tb_pedidos p
+    LEFT JOIN 
+        tb_cliente_endereco e ON p.id_endereco = e.id
+    LEFT JOIN 
+        tb_cidades c ON e.id_cidade = c.codigo_cidade
+    LEFT JOIN 
+        tb_clientes cl ON p.id_cliente = cl.id
+    WHERE 
+        p.id = '$id_pedido'";
 $resultado_pedido = mysqli_query($conexao, $query_pedido);
-if (!$resultado_pedido) {
-    die("Erro na consulta do pedido: " . mysqli_error($conexao));
+
+if (!$resultado_pedido || mysqli_num_rows($resultado_pedido) == 0) {
+    echo '<div class="alert alert-danger">Erro na consulta do pedido: ' . mysqli_error($conexao) . '</div>';
+    exit;
 }
+
 $pedido = mysqli_fetch_assoc($resultado_pedido);
 
-$query_itens = "SELECT 
-                    pi.*, 
-                    pr.descricao, pr.imagem1
-                FROM 
-                    tb_pedidos_itens pi
-                JOIN 
-                    tb_produtos pr ON pi.id_produtos = pr.id
-                WHERE 
-                    pi.id_pedidos = '$id_pedido'";
+// Consulta para os itens do pedido
+$query_itens = "
+    SELECT 
+        pi.*, 
+        pr.descricao, pr.imagem1
+    FROM 
+        tb_pedidos_itens pi
+    JOIN 
+        tb_produtos pr ON pi.id_produtos = pr.id
+    WHERE 
+        pi.id_pedidos = '$id_pedido'";
 $resultado_itens = mysqli_query($conexao, $query_itens);
+
 if (!$resultado_itens) {
-    die("Erro na consulta dos itens: " . mysqli_error($conexao));
+    echo '<div class="alert alert-danger">Erro na consulta dos itens: ' . mysqli_error($conexao) . '</div>';
+    exit;
 }
 
 $itens = [];
 while ($row = mysqli_fetch_assoc($resultado_itens)) {
     $itens[] = $row;
 }
+
 error_log("Número de itens encontrados: " . count($itens));
 ?>
 
@@ -77,6 +106,9 @@ error_log("Número de itens encontrados: " . count($itens));
         <ul class="list-group mb-4">
             <li class="list-group-item">
                 <strong>Nº Pedido:</strong> #<?= str_pad($pedido['id'], 6, '0', STR_PAD_LEFT) ?>
+            </li>
+            <li class="list-group-item">
+                <strong>Cliente:</strong> <?= htmlspecialchars($pedido['cliente']) ?>
             </li>
             <li class="list-group-item">
                 <strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($pedido['emissao'])) ?>
@@ -126,9 +158,7 @@ error_log("Número de itens encontrados: " . count($itens));
                             <td>R$ <?= number_format($item['valor_untiario'], 2, ',', '.') ?></td>
                             <td>R$ <?= number_format($item['qtd'] * $item['valor_untiario'], 2, ',', '.') ?></td>
                         </tr>
-                    <?php endforeach;
-                    error_log("Número de itens renderizados: $itemCount");
-                    ?>
+                    <?php endforeach; ?>
                 </tbody>
                 <tfoot>
                     <tr>
@@ -139,27 +169,28 @@ error_log("Número de itens encontrados: " . count($itens));
             </table>
         </div>
     </div>
-</div>
-<div class="col-md-4">
-    <h5>Endereço de Entrega</h5>
-    <?php if ($pedido['tipo_entrega'] == 'entrega' && !empty($pedido['endereco'])): ?>
-        <address class="list-group mb-4">
-            <div class="list-group-item">
-                <?= $pedido['endereco'] ?>, <?= $pedido['numero'] ?>
-                <?= !empty($pedido['complemento']) ? ' - ' . $pedido['complemento'] : '' ?>
-            </div>
-            <div class="list-group-item"><?= $pedido['bairro'] ?></div>
-            <div class="list-group-item">
-                <?= $pedido['nome_cidade'] ?>/<?= $pedido['sigla_estado'] ?>
-            </div>
-            <div class="list-group-item">CEP: <?= $pedido['cep'] ?></div>
-        </address>
-    <?php else: ?>
-        <div class="alert alert-info">Retirada no local</div>
-    <?php endif; ?>
+    <div class="col-md-4">
+        <h5>Endereço de Entrega</h5>
+        <?php if ($pedido['tipo_entrega'] == 'entrega' && !empty($pedido['endereco'])): ?>
+            <address class="list-group mb-4">
+                <div class="list-group-item">
+                    <?= htmlspecialchars($pedido['endereco']) ?>, <?= htmlspecialchars($pedido['numero']) ?>
+                    <?= !empty($pedido['complemento']) ? ' - ' . htmlspecialchars($pedido['complemento']) : '' ?>
+                </div>
+                <div class="list-group-item"><?= htmlspecialchars($pedido['bairro']) ?></div>
+                <div class="list-group-item">
+                    <?= htmlspecialchars($pedido['nome_cidade']) ?>/<?= htmlspecialchars($pedido['sigla_estado']) ?>
+                </div>
+                <div class="list-group-item">CEP: <?= htmlspecialchars($pedido['cep']) ?></div>
+            </address>
+        <?php else: ?>
+            <div class="alert alert-info">Retirada no local</div>
+        <?php endif; ?>
+    </div>
 </div>
 
 <?php
+error_log("Número de itens renderizados: $itemCount");
 $output = ob_get_clean();
 echo $output;
 ?>

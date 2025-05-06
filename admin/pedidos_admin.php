@@ -218,12 +218,12 @@ if (!$mostrar_detalhes) {
                                                             <?php
                                                             if ($row['tipo_entrega'] === 'entrega' && $row['endereco']) {
                                                                 echo htmlspecialchars(
-                                                                    $row['endereco'] . ', ' . 
-                                                                    $row['numero'] . ', ' . 
-                                                                    $row['bairro'] . ', ' . 
-                                                                    $row['nome_cidade'] . ' - ' . 
-                                                                    $row['sigla_estado'] . ', CEP: ' . 
-                                                                    $row['cep']
+                                                                    $row['endereco'] . ', ' .
+                                                                        $row['numero'] . ', ' .
+                                                                        $row['bairro'] . ', ' .
+                                                                        $row['nome_cidade'] . ' - ' .
+                                                                        $row['sigla_estado'] . ', CEP: ' .
+                                                                        $row['cep']
                                                                 );
                                                             } else {
                                                                 echo 'Retirada no local';
