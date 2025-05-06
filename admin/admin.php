@@ -221,12 +221,12 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="?pg=Pedidos" class="nav-link">
-            <i class="nav-icon bi bi-circle"></i>
-            <p>Pedidos</p>
-            </a>
-            </li>
-          </ul>
-          </li>--->
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>Pedidos</p>
+                  </a>
+                </li>
+              </ul>
+              </li>--->
           </ul>
           <!--end::Sidebar Menu-->
         </nav>
@@ -279,8 +279,11 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
           case "Usuarios":
             $incluir = "cadastros/usuarios/index.php";
             break;
+          case "Pedidos":
+            $incluir = "pedidos_admin.php";
+            break;
           case "Detalhes":
-            $incluir = "../carrinho/pedidos/detalhes_pedido.php";
+            $incluir = "detalhes_pedidos_admin.php";
             break;
         }
         include($incluir);
@@ -365,6 +368,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
       cardHeader.style.cursor = 'move';
     });
   </script>
+
 </body>
 <!--end::Body-->
 
