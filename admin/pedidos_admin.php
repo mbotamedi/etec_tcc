@@ -43,7 +43,7 @@ include('../includes/consulta_pedido_admin.php');
                         <td class="text-center">R$ <?php echo number_format($row['valor_total'], 2, ',', '.'); ?></td>
                         <td class="text-center"><?php echo htmlspecialchars($row['tipo_entrega'] === 'entrega' ? 'Entrega' : 'Retirada'); ?></td>
                         <td class="text-center">
-                            <a href="?pg=Detalhes&admin=1&id_pedido=<?php echo $row['id_pedido']; ?>" class="btn btn-info btn-sm">
+                            <a href="?pg=Detalhes&id=<?php echo $row['id_pedido']; ?>" class="btn btn-info btn-sm">
                                 <i class="bi bi-eye"></i> Detalhes
                             </a>
                         </td>
