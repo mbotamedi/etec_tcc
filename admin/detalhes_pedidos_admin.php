@@ -84,7 +84,8 @@ error_log("Número de itens encontrados: " . count($itens));
             <h5>Informações do Pedido</h5>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <strong>Nº Pedido:</strong> #<?= str_pad($pedido['id'], 6, '0', STR_PAD_LEFT) ?>
+                    <strong>Nº Pedido:</strong> #<?= str_pad($pedido['id'], 4, '0', STR_PAD_LEFT) ?>
+
                 </li>
                 <li class="list-group-item">
                     <strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($pedido['emissao'])) ?>
