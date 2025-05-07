@@ -51,4 +51,3 @@ $query_enderecos = "SELECT
 $resultado_enderecos = mysqli_query($conexao, $query_enderecos);
 $enderecos = mysqli_fetch_all($resultado_enderecos, MYSQLI_ASSOC);
 ?>
-

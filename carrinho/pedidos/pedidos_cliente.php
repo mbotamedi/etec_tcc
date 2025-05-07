@@ -24,6 +24,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     <link rel="stylesheet" href="../../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../../css/canvaLogado.css">
     <link rel="stylesheet" href="../../css/telaFlutuante.css">
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <!-- Bootstrap icons -->
