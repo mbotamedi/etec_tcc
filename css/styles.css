@@ -12775,10 +12775,18 @@ fieldset:disabled .btn {
   width: 50px;
   text-align: center;
 }
-
 .buy-button {
   margin: 10px;
-  /*width: 100%;*/
+  border-radius: px;
+  border-color: #ffc107;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background-color: #ff8c00;
+  transform: scale(1.02);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* Efeito hover no botão */

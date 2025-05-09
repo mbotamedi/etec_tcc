@@ -2131,10 +2131,12 @@ progress {
   border-radius: var(--bs-border-radius);
   box-shadow: var(--bs-box-shadow-inset);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-color: #052c65;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
+    border-color: #1617195d;
   }
 }
 .form-control[type=file] {

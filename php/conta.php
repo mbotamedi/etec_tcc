@@ -23,7 +23,6 @@ if (!$resultado || mysqli_num_rows($resultado) == 0) {
 
 $cliente = mysqli_fetch_assoc($resultado);
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,6 +36,8 @@ $cliente = mysqli_fetch_assoc($resultado);
     <link rel="stylesheet" href="../css/mediaQuery.css">
     <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
+    <link rel="stylesheet" href="../css/conta.css">
+
     <!-- Favicon-->
     <link rel="icon" type="../image/x-icon" href="../assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -65,6 +66,109 @@ $cliente = mysqli_fetch_assoc($resultado);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
         }
+
+        .user-profile-section {
+            background-color: #f4f5f7;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .profile-card {
+            border-radius: 0.5rem;
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            padding: 2rem;
+            text-align: center;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-content {
+            padding: 2rem;
+            background-color: white;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+
+        .info-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border: 2px solid #f6d365;
+            border-radius: 50%;
+            background-color: #f3c747;
+        }
+
+        .info-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            color: #6c757d;
+            padding: 0.5rem 0;
+            display: block;
+        }
+
+        .btn-save {
+            background-color: #f6d365;
+            border: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .btn-save:hover {
+            background-color: #f3c747;
+            color: #333;
+        }
+
+        .btn-change-photo {
+            background-color: white;
+            color: #333;
+            border: none;
+            font-weight: 500;
+        }
+
+        .btn-change-photo:hover {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 
@@ -73,40 +177,38 @@ $cliente = mysqli_fetch_assoc($resultado);
     <?php include("navbar.php"); ?>
     <!-- Navigation End-->
 
-    <section class="vh-100" style="background-color: #f4f5f7;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-120">
-                <div class="col col-lg-10 mb-4 mb-lg-2">
-                    <div class="card mb-3" style="border-radius: .5rem;">
-                        <div class="row g-0">
-                            <div class="col-md-4 gradient-custom text-center text-white"
-                                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                <img src="https://cdn-icons-png.flaticon.com/128/848/848006.png"
-                                    alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                                <h5><?php echo htmlspecialchars($cliente['nome']); ?></h5>
-                                <p>Cliente</p>
-                                <!---<a href="editar_perfil.php"><i class="far fa-edit mb-5"></i></a>--->
+    <section class="user-profile-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card profile-card mb-4">
+                        <div class="profile-header gradient-custom">
+                            <img src="../imgs/fotoPerfil.jpg" alt="Foto do usuário" class="profile-pic">
+                            <h2 class="profile-name"><?php echo htmlspecialchars($cliente['nome']); ?></h2>
+                            <button id="carregarFoto" class="btn btn-change-photo btn-sm">
+                                <i class="bi bi-camera-fill"></i> Alterar foto
+                            </button>
+                        </div>
+
+                        <div class="profile-content">
+                            <div class="info-section">
+                                <h4 class="info-title">Informações da Conta</h4>
+                                <div class="info-item">
+                                    <span class="info-label">Email</span>
+                                    <span class="info-value"><?php echo htmlspecialchars($cliente['email']); ?></span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Telefone</span>
+                                    <span class="info-value"><?php echo htmlspecialchars($cliente['telefone']); ?></span>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card-body p-4">
-                                    <h6>Informação sobre sua Conta</h6>
-                                    <hr class="mt-0 mb-4">
-                                    <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>Email</h6>
-                                            <p class="text-muted"><?php echo htmlspecialchars($cliente['email']); ?></p>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Telefone</h6>
-                                            <p class="text-muted"><?php echo htmlspecialchars($cliente['telefone']); ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>CPF/CNPJ</h6>
-                                            <p class="text-muted"><?php echo htmlspecialchars($cliente['cnpj_cpf']); ?></p>
-                                        </div>
-                                    </div>
+
+                            
+
+                            <div class="info-section">
+                                <div class="info-item">
+                                    <span class="info-label">CPF/CNPJ</span>
+                                    <span class="info-value"><?php echo htmlspecialchars($cliente['cnpj_cpf']); ?></span>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +217,7 @@ $cliente = mysqli_fetch_assoc($resultado);
             </div>
         </div>
     </section>
+
     <!---Footer--->
     <?php include("footer.php"); ?>
 
@@ -124,4 +227,5 @@ $cliente = mysqli_fetch_assoc($resultado);
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
 </body>
+
 </html>

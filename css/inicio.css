@@ -136,6 +136,25 @@
   display: none;
 }
 
+.campo {
+  background-color: #ff9d00da;
+  border-radius: 2px;
+  border: none;
+  transition: all 0.3s ease;
+  /* Adiciona transição suave */
+  cursor: pointer;
+  /* Muda cursor para indicar elemento clicável */
+}
+
+.campo:hover {
+  background-color: #ff8c00;
+  /* Cor ligeiramente mais escura no hover */
+  transform: translateY(-2px);
+  /* Efeito de levantar levemente */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Sombra sutil */
+}
+
 @media (max-width: 767px) {
   .produtos-Destaques {
     margin-top: 20px;
