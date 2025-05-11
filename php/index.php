@@ -9,7 +9,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    
+
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Cantina Três Irmãos</title>
@@ -43,7 +43,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
 <body>
     <!-- Navigation-->
-    
+
     <?php include("navbar.php"); ?>
 
     <!-- Navigation End-->
@@ -113,11 +113,10 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                 <?php endforeach; ?>
             </div>
         </div>
-
     </section>
     <!-- Footer-->
-   <!---Footer--->
-   <?php include("footer.php"); ?>
+    <!---Footer--->
+    <?php include("footer.php"); ?>
     <!---Footer End--->
 
     <!--------------SCRIPTS-------------->

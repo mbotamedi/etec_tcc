@@ -8,16 +8,10 @@ function process(change, inputId) {
     input.value = value;
   }
 }
-
 function addToCart(produtoId, quantidade) {
-  // Verifica se a quantidade é válida
-  if (quantidade <= 0) {
-    alert("Por favor, selecione uma quantidade válida.");
-    return;
-  }
-
+    quantidade = 1;
+    
   // Redireciona para o addCarrinho.php com o ID do produto e a quantidade
   window.location.href = `../carrinho/addCarrinho.php?id_produto=${produtoId}&qtd=${quantidade}`;
 }
-
 
