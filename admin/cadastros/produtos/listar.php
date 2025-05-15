@@ -62,10 +62,10 @@ echo '</tbody>
             type: 'HEAD',
             success: function() {
                 //arquivo existe
-                $('#produto_foto').attr("src", '../../../assets/fotos' + id + '.png');
+                $('#produto_foto').attr("src", '../assets/fotos/' + id + '.png');
             },
             error: function() {
-                $('#produto_foto').attr("src", '../../../assets/fotos/semfoto.png');
+                $('#produto_foto').attr("src", '../assets/fotos/semfoto.png');
             }
         });
 
