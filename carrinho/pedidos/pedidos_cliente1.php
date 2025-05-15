@@ -42,7 +42,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                             <h5 class="mb-0">Minha Conta</h5>
                         </div>
                         <div class="list-group list-group-flush">
-                            <a href="javascript:void(0);" class="list-group-item list-group-item-action  active" onclick="mostrarPedidos()">Meus Pedidos</a>
+                            <a href="javascript:void(0);" class="list-group-item list-group-item-action" onclick="mostrarPedidos()">Meus Pedidos</a>
                             <a href="javascript:void(0);" class="list-group-item list-group-item-action" onclick="mostrarEnderecos()">Meus Endereços</a>
                             <a href="javascript:void(0);" class="list-group-item list-group-item-action" onclick="mostrarConta()">Meus Dados</a>
                             <a href="../../php/logout.php" class="list-group-item list-group-item-action text-danger">Sair</a>
@@ -118,12 +118,15 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                     <!-- Seção de conta -->
                     <div id="conta" class="card" style="display: none;">
                         <div class="card-header bg-warning">
-                            <h3 class="mb-0">Meus Dados</h3>
+                            <h3>Meus Dados</h3>
                         </div>
                         <div class="card-body">
-                            <div>
-                                <?php include('../../php/conta.php'); ?>
+                            <div class="text-center py-4">
+                                <div>
+                                    <?php include('../../php/conta.php'); ?>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
