@@ -1,4 +1,5 @@
 <?php
+include('../php/config.php');
 include('../includes/consulta_pedido_admin.php');
 ?>
 <!-- Exibição da lista de pedidos -->

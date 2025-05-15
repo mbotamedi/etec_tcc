@@ -1,5 +1,5 @@
-<?php 
- 
+<?php
+    include('../php/config.php');
  $id = $_SESSION['usuario']['nome'];
 //echo $id;
 include('../includes/conexao.php'); 

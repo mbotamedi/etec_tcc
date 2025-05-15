@@ -88,7 +88,8 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-img-container">
-                                <img src="../imgs/<?= $produto['imagem'] ?>" alt="<?= htmlspecialchars($produto['descricao']) ?>" style="max-height: 100%; max-width: 100%;">
+                                <?php $foto = '../assets/fotos/' . $produto["id"] . '.png'; ?>
+                                <img class="card-img-top" src="<?php echo $foto ?>" style=" padding-top: 5px; width:200px; height:200px; margin:auto" alt="<?php echo htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="card-body p-4">
                                 <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>

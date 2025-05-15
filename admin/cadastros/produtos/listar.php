@@ -57,6 +57,18 @@ echo '</tbody>
         $("#txtquantidade").val(estoque);
         $("#id").val(id);
 
+        $.ajax({
+            url: 'http://localhost/etec_tcc/assets/fotos/' + id + '.png',
+            type: 'HEAD',
+            success: function() {
+                //arquivo existe
+                $('#produto_foto').attr("src", '../../../assets/fotos' + id + '.png');
+            },
+            error: function() {
+                $('#produto_foto').attr("src", '../../../assets/fotos/semfoto.png');
+            }
+        });
+
     });
 
 

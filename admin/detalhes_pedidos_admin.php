@@ -1,7 +1,8 @@
 <?php
-//header('Content-Type: text/html; charset=utf-8');
+
 ob_start();
-//session_start();
+
+include('../php/config.php');
 include("../includes/conexao.php");
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'usuario') {

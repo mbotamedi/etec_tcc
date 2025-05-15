@@ -1,3 +1,6 @@
+<?php
+include('../php/config.php');
+?>
 <!--begin::App Content-->
 <div class="app-content">
     <!--begin::Container-->

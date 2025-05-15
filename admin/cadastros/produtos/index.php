@@ -48,7 +48,7 @@
         </div>
         <div class="row mb-2">
           <div class="col-sm-2">
-            <img src="../assets/img/sem-foto.png" width="100" height="100>">
+            <img src="../assets/fotos/sem-foto.png" width="100" height="100>">
           </div>
           <div class="col-sm-10">
             <label for="inputEmail13" class="form-label">Foto</label>

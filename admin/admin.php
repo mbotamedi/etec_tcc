@@ -2,6 +2,7 @@
 // Inclui o arquivo de verificação de login
 include '../php/verificar_login.php';
 $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
+include '../php/config.php';
 ?>
 
 <!doctype html>
