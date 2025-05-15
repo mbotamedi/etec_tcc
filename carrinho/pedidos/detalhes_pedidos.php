@@ -56,6 +56,7 @@ if (!$resultado_itens) {
 $itens = [];
 while ($row = mysqli_fetch_assoc($resultado_itens)) {
     $itens[] = $row;
+    //print_r($itens);
 }
 error_log("Número de itens encontrados: " . count($itens));
 ?>
@@ -109,10 +110,11 @@ error_log("Número de itens encontrados: " . count($itens));
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <?php if (!empty($item['imagem1'])): ?>
-                                            <img src="<?php echo "../../" . $item['imagem1']; ?>" alt="<?php echo htmlspecialchars($item['descricao']); ?>" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.src='../../assets/img/no-image.png';">
+                                        <?php if (!empty($item['id'])):
+                                            $foto = '../../assets/fotos/' . $item["id_produtos"] . '.png'; ?>
+                                            <img src="<?php echo $foto ?>" alt="<?php echo htmlspecialchars($item['descricao']); ?>" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.src='../../assets/foto/.png';">
                                         <?php else: ?>
-                                            <img src="../../assets/img/no-image.png" alt="Sem imagem" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
+                                            <img src="../../assets/fotos/semfoto.png" alt="Sem imagem" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
                                         <?php endif; ?>
                                         <span><?= htmlspecialchars($item['descricao']) ?></span>
                                     </div>

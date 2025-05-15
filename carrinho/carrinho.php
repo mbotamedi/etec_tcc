@@ -121,13 +121,15 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     $total = 0;
     foreach ($_SESSION["carrinho"] as $key => $value) {
         $valprodutos = $value["valor"] * $value["qtd"];
-
+        $foto = '../assets/fotos/' . $value["id"] . '.png';
         echo '<tr>';
-        echo '<td>' . $value["descricao"] . '</td>';
+        echo '<td>' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '</td>';
         if (!$is_finalizar_pedido) {
-            echo '<td><img src="' . $value["imagem"] . '" alt="' . htmlspecialchars($value["descricao"]) . '"></td>';
+            // Para páginas que não são finalizar_pedido.php
+            echo '<td><img class="card-img-top" src="' . htmlspecialchars($foto, ENT_QUOTES, 'UTF-8') . '" style="max-width:70px; height:auto; margin:auto" alt="' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '"></td>';
         } else {
-            echo '<td><img src="../' . $value["imagem"] . '" alt="' . htmlspecialchars($value["descricao"]) . '"></td>';
+            // Para finalizar_pedido.php
+            echo '<td><img src="../' . htmlspecialchars($value["imagem"], ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '"></td>';
         }
 
         echo '<td>' . number_format($value["valor"], 2, ',', '.') . '</td>';

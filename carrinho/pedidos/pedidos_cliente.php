@@ -57,7 +57,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                             <h5 class="mb-0">Minha Conta</h5>
                         </div>
                         <div class="list-group list-group-flush">
-                            <a href="javascript:void(0);" class="list-group-item list-group-item-action active" onclick="mostrarPedidos()">Meus Pedidos</a>
+                            <a class="list-group-item list-group-item-action ">Meus Pedidos</a>
                             <a href="javascript:void(0);" class="list-group-item list-group-item-action" onclick="mostrarEnderecos()">Meus Endereços</a>
                             <a href="../../php/conta.php" class="list-group-item list-group-item-action">Meus Dados</a>
                             <a href="../../php/logout.php" class="list-group-item list-group-item-action text-danger">Sair</a>
@@ -152,17 +152,31 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
                 <button type="button" class="btn btn-secondary" onclick="closeFloatingWindow()">Fechar</button>
             </div>
         </div>
-    </div>
-    <div class="floating-window-backdrop" style="display: none;"></div>
+        <div class="floating-window-backdrop" style="display: none;"></div>
 
-    <!-- Footer -->
-    <?php include("../../php/footer.php"); ?>
+        <!-- Footer -->
+        <?php include("../../php/footer.php"); ?>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/scripts.js"></script>
-    <script src="../../js/funcao.js"></script>
-    <script src="../../js/pedidos.js"></script>
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../../js/scripts.js"></script>
+        <script src="../../js/funcao.js"></script>
+        <script src="../../js/pedidos.js"></script>
+        <script>
+            // Função para fechar a janela flutuante
+            function closeFloatingWindow() {
+                console.log("Função closeFloatingWindow chamada");
+                const floatingWindow = document.getElementById("floatingWindow");
+                const backdrop = document.querySelector(".floating-window-backdrop");
+
+                if (floatingWindow && backdrop) {
+                    floatingWindow.style.display = "none";
+                    backdrop.style.display = "none";
+                } else {
+                    console.log("Erro: Elementos não encontrados.");
+                }
+            }
+        </script>
 </body>
 
 </html>
