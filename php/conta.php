@@ -190,7 +190,7 @@ $resultado_enderecos = mysqli_query($conexao, $query_enderecos);
                                 <span class="info-label">CPF/CNPJ</span>
                                 <span class="info-value"><?php echo htmlspecialchars($cliente['cnpj_cpf']); ?></span>
                             </div>
-                            <button class="btn btn-edit" onclick="window.location.href='editar_conta.php'">Editar Dados</button>
+                            <button class="btn btn-edit" onclick="window.location.href='../../php/dados_Cliente/alterar_dados.php'">Editar Dados</button>
                         </div>
 
 
