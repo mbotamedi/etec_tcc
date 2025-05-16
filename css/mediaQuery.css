@@ -1,107 +1,91 @@
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-    }
-}
+/* ----------- CELULAR (≤576px) ----------- */
 
-@media (max-width: 480px) {
-    .container {
-        width: 100%;
-    }
-}
-
-/* Media Queries para Navbar */
-@media (max-width: 768px) {
-    .nav-top {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .menu ul {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-
-    .user-cart {
-        margin-top: 10px;
-    }
-
-    .search-bar {
-        width: 100%;
-    }
-
-    .search-bar input {
-        width: 100%;
-    }
-}
-
-/* Media Queries para Cards de Produtos */
-@media (max-width: 1200px) {
-    .row-cols-xl-4 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 992px) {
-    .row-cols-md-3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .row-cols-2 {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        margin-bottom: 20px;
-    }
-}
-
-/* Media Queries para Footer */
-@media (max-width: 768px) {
-    footer {
-        padding: 20px 0;
-    }
-
-    footer .container {
-        text-align: center;
-    }
-}
-
-/* Media Queries para Modais */
 @media (max-width: 576px) {
-    .modal-content {
-        width: 90%;
-        margin: 10% auto;
-    }
-
-    .modal-logout-content {
-        width: 90%;
-    }
-}
-
-/* Media Queries para Seções */
-@media (max-width: 768px) {
-    section {
-        padding: 20px 0;
-    }
-
     .container {
-        padding: 0 15px;
+        width: 100%;
     }
-}
+    
+    .produtos-Destaques{
+        font-size: 25px;
+        
+    }
+    
+    .col-md-4.mb-4 {
+        max-width: 600px;
+        max-height: 400px;
+        padding: 5;
+    }
 
-/* Media Queries para Quantidade de Produtos */
-@media (max-width: 576px) {
-    .quantity-controls {
+    .card-text{
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+    }
+    .card-title{
+        font-size: 12px;
+    }
+
+    .card h-100{
+        padding: 0;
+    }
+
+    /*---NAVBAR----*/
+
+    .menu{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+
+    .menu li a {
+        font-size: 15px;
+    }
+
+    .logo > img{
+        width: 80px !important;
+    }
+
+    .menu > ul{
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .pesquisa-input{
+        width: 250px !important;
+    }
+
+    .carrosel{
+        margin: 100px;
+    }
+
+    /*-----FOOTER-------*/
+
+    .info-footer {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+        text-align: center;
+        text-align: center;
     }
 
-    .qtd-label {
-        margin-bottom: 10px;
+    .ul-content{
+        margin: 0;
+        padding: 0;
     }
+
+    .information-divs > h2{
+        font-size: 25px;
+    }
+
 }
+/* ----------- TABLET (≤992px) ----------- */
 
+
+/* ----------- NOTEBOOK (≤1200px) ----------- */

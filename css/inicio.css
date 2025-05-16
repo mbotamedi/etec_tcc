@@ -12,6 +12,7 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+
 .buy-actions {
   display: flex;
   gap: 30px;
@@ -155,15 +156,6 @@
   /* Sombra sutil */
 }
 
-@media (max-width: 767px) {
-  .produtos-Destaques {
-    margin-top: 20px;
-  }
-
-  .text-center {
-    margin-top: 20px;
-  }
-}
 
 @media (max-width: 767px) {
   .menu-toggle {

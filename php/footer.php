@@ -20,6 +20,10 @@ $is_finalizar_pedido =
     }
 </style>
 
+<head>
+    <link rel="stylesheet" href="../css/mediaQuery.css" />
+</head>
+
 <?php if (!$is_finalizar_pedido): ?>
     <footer class="py-5 bg-dark">
         <div class="info-footer">
@@ -53,14 +57,14 @@ $is_finalizar_pedido =
     <footer class="py-5 bg-dark">
         <div class="info-footer">
             <div class="information-divs">
-                <h2 style="color: white;">Sobre nós</h2>
+                <h2 style="color: white;" class="ul-title">Sobre nós</h2>
                 <ul class="ul-content">
                     <li><a href="../../php/unidades.php">Nossa história</a></li>
                     <li><a href="../../php/termos_Uso.php">Termos de uso</a></li>
                 </ul>
             </div>
             <div class="information-divs">
-                <h2 style="color: white;">Dúvidas</h2>
+                <h2 style="color: white;" class="ul-title">Dúvidas</h2>
                 <ul class="ul-content">
                     <li><a href="../../php/compra_segura.php">É seguro comprar?</a></li>
                     <li><a href="../../php/info_pedidos.php">Como funciona os Pedidos</a></li>
@@ -68,7 +72,7 @@ $is_finalizar_pedido =
                 </ul>
             </div>
             <div class="information-divs">
-                <h2 style="color: white;">Atendimento</h2>
+                <h2 style="color: white;" class="ul-title">Atendimento</h2>
                 <ul class="ul-content">
                     <li><a href="../../php/faleConosco.php">Fale conosco</a></li>
                 </ul>
