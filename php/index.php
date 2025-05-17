@@ -115,7 +115,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             </div>
         </div>
     </section>
-    <!-- Footer-->
+
     <!---Footer--->
     <?php include("footer.php"); ?>
     <!---Footer End--->
