@@ -1,68 +1,51 @@
 <?php
 @session_start();
 
-$current_page = basename($_SERVER['PHP_SELF']); // Obtém o nome da página atual
+$current_page = basename($_SERVER['PHP_SELF']);
 $is_finalizar_pedido = ($current_page == 'finalizar_pedido.php');
-
 
 if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     echo '<h3>Nenhum item no carrinho</h3>';
 } else {
-    // Contagem de itens no carrinho
     $totalItens = count($_SESSION["carrinho"]);
 
     echo '<style>
-            .table-carrinho {
-                width: 100%;
-                border-collapse: collapse;
-                background-color: #fff;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
-            .table-carrinho th, .table-carrinho td {
-                padding: 12px;
-                text-align: center;
-                vertical-align: middle;
-                border-bottom: 1px solid #e0e0e0;
-            }
-            .table-carrinho th {
-                background-color: rgba(41, 167, 29, 0.1);
-                color: #333;
-                font-size: 16px;
-                font-weight: 600;
-            }
-            .table-carrinho td {
-                font-size: 14px;
-                color: #555;
-            }
-            .table-carrinho th.descricao { width: 20%; }
-            .table-carrinho th.imagem { width: 15%; }
-            .table-carrinho th.valor-unitario { width: 20%; }
-            .table-carrinho th.quantidade { width: 5%; }
-            .table-carrinho th.valor-total { width: 20%; }
-            .table-carrinho img {
-                max-width: 70px;
-                height: auto;
-                border-radius: 8px;
-                border: 1px solid #e0e0e0;
-            }
-            .table-carrinho .deleta {
-                color: rgba(70, 53, 220, 0.85);
-                font-size: 16px;
-                transition: color 0.3s ease;
-                margin-left: 20px;
-                
-            }
-            .table-carrinho .deleta:hover {
-                color: rgba(18, 9, 43, 0.9);
-            }
-            .table-carrinho .qtd-controls {
+            .cart-item {
                 display: flex;
-                padding: 50px;
+                flex-direction: column;
+                width: 300px;
+                padding: 10px;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                background-color: #fff;
+            }
+            .cart-item .top-row {
+                display: flex;
                 align-items: center;
-                justify-content: center;
+                margin-bottom: 10px;
+            }
+            .cart-item img {
+                max-width: 50px;
+                height: auto;
+                margin-right: 10px;
+            }
+            .cart-item .description {
+                font-size: 12px;
+                color: #333;
+                flex: 1;
+            }
+            .cart-item .bottom-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .cart-item .quantity-controls {
+                display: flex;
+                align-items: center;
                 gap: 5px;
             }
-            .table-carrinho .qtd-controls a {
+            .cart-item .quantity-controls a {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -73,31 +56,52 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
                 font-size: 14px;
                 font-weight: 600;
                 text-decoration: none;
-                border-radius: 4px;
                 border: 1px solid #e0e0e0;
+                border-radius: 4px;
                 transition: background-color 0.3s ease, color 0.3s ease;
             }
-            .table-carrinho .qtd-controls a:hover {
-                background-color: rgba(41, 167, 29, 0.9);
-                color: #fff;
-                border-color: rgba(41, 167, 29, 0.9);
+            .cart-item .quantity-controls a:hover {
+                background-color: #ddd;
+                color: #000;
             }
-            .table-carrinho .qtd-controls span {
+            .cart-item .quantity-controls span {
                 font-size: 14px;
                 color: #333;
                 min-width: 20px;
                 text-align: center;
             }
-            .table-carrinho .total-row td {
-                font-size: 16px;
-                font-weight: 700;
-                color: #333;
+            .cart-item .unit-price {
+                font-size: 12px;
+                color: #666;
             }
-            h2 {
-                font-size: 18px;
-                color: rgba(41, 167, 29, 0.9);
-                margin-bottom: 20px;
-                font-weight: 500;
+            .total-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 14px;
+                font-weight: 600;
+                color: #333;
+                margin-top: 20px;
+                padding: 0;
+            }
+            .offcanvas-cart-buttons {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 20px; /* Aumentado o espaço entre os botões */
+                margin-bottom: 10px;
+                
+                
+            }
+            .close-btn {
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: #777;
+            }
+            .close-btn:hover {
+                color: #000;
             }
             h3 {
                 font-size: 18px;
@@ -105,66 +109,59 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
                 text-align: center;
                 margin-top: 20px;
             }
-             
           </style>';
 
-    // Exibir o título com a contagem de itens
-    echo '<h2>Quantidade no Carrinho (' . $totalItens . ' ' . ($totalItens == 1 ? 'item' : 'itens') . ')</h2> 
-          <table class="table table-carrinho">
-              <tr>
-                  <th class="descricao">Descrição</th>
-                  <th class="imagem">Imagem</th>
-                  <th class="valor-unitario">Valor Un.</th>
-                  <th class="quantidade">Qtd.</th>
-                  <th class="valor-total">Valor Total</th>
-              </tr>';
+    echo '<div>';
+
     $total = 0;
     foreach ($_SESSION["carrinho"] as $key => $value) {
         $valprodutos = $value["valor"] * $value["qtd"];
         $foto = '../assets/fotos/' . $value["id"] . '.png';
-        echo '<tr>';
-        echo '<td>' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '</td>';
-        if (!$is_finalizar_pedido) {
-            // Para páginas que não são finalizar_pedido.php
-            echo '<td><img class="card-img-top" src="' . htmlspecialchars($foto, ENT_QUOTES, 'UTF-8') . '" style="max-width:70px; height:auto; margin:auto" alt="' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '"></td>';
-        } else {
-            // Para finalizar_pedido.php
-            echo '<td><img src="../' . htmlspecialchars($foto, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '"></td>';
-        }
 
-        echo '<td>' . number_format($value["valor"], 2, ',', '.') . '</td>';
-        echo '<td class="qtd-controls">
+        echo '<div class="cart-item">';
+        echo '<div class="top-row">';
+        if (!$is_finalizar_pedido) {
+            echo '<img src="' . htmlspecialchars($foto, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '">';
+        } else {
+            echo '<img src="../' . htmlspecialchars($foto, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '">';
+        }
+        echo '<div class="description">' . htmlspecialchars($value["descricao"], ENT_QUOTES, 'UTF-8') . '</div>';
+        echo '</div>';
+        echo '<div class="bottom-row">';
+        echo '<div class="quantity-controls">
                 <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=subtrair">−</a>
                 <span>' . $value["qtd"] . '</span>
                 <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=somar">+</a>
-              </td>';
-        echo '<td>' . number_format($valprodutos, 2, ',', '.') . ' 
-              <a href="../carrinho/delCarrinho.php?id=' . $key . '"><i class="fas fa-trash deleta"></i></a>
-             </td>';
-        echo '</tr>';
+              </div>';
+        echo '<div class="unit-price">R$' . number_format($value["valor"], 2, ',', '.') . ' (unitário)</div>';
+        echo '</div>';
+        echo '</div>';
+
         $total = $total + $valprodutos;
     }
-    echo '<tr class="total-row">
-            <td colspan="3"></td>
-            <td><strong>Total:</strong></td>
-            <td>' . number_format($total, 2, ',', '.') . '</td>
-          </tr>';
-    echo '</table>';
+
+    echo '<div class="total-row">';
+    echo '<span>Total:</span>';
+    echo '<span>R$' . number_format($total, 2, ',', '.') . '</span>';
+    echo '</div>';
+
+    // Botões dentro do cart-container, após o total-row
+    if (!$is_finalizar_pedido) {
+        echo '<div class="offcanvas-cart-buttons">';
+        echo '<button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar</button>';
+        if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0) {
+            echo '<a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar</a>';
+        }
+        echo '</div>';
+    } else {
+        echo '<div class="offcanvas-cart-buttons" style="display: none;">';
+        echo '<button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar</button>';
+        if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0) {
+            echo '<a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar</a>';
+        }
+        echo '</div>';
+    }
+
+    echo '</div>';
 }
 ?>
-
-<?php if (!$is_finalizar_pedido): ?>
-    <div class="offcanvas-cart-buttons" style="margin-top: 20px; text-align: center;">
-        <button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar Comprando</button>
-        <?php if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0): ?>
-            <a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>
-        <?php endif; ?>
-    </div>
-<?php else: ?>
-    <div class="offcanvas-cart-buttons" style="margin-top: 20px; text-align: center; display: none;">
-        <button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar Comprando</button>
-        <?php if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0): ?>
-            <a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar Pedido</a>
-        <?php endif; ?>
-    </div>
-<?php endif; ?>

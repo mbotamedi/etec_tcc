@@ -12817,7 +12817,7 @@ fieldset:disabled .btn {
 }
 
 #offcanvasCart {
-  width: 680px !important; /* Aumente para o valor desejado, ex.: 600px */
+  width: 330px !important; /* Aumente para o valor desejado, ex.: 600px */
 }
 
 /*.offcanvas-cart-buttons {
