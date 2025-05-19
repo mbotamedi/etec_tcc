@@ -1,37 +1,47 @@
 /* ----------- CELULAR (≤576px) ----------- */
 
 @media (max-width: 576px) {
+
+    /*------BODY--------*/
+
     .container {
         width: 100%;
+        margin-top: 50px;
     }
-    
-    .produtos-Destaques{
+
+    .produtos-Destaques {
         font-size: 25px;
-        
+
     }
-    
+
     .col-md-4.mb-4 {
         max-width: 600px;
         max-height: 400px;
         padding: 5;
     }
 
-    .card-text{
+    .card-text {
         font-size: 10px;
         margin: 0;
         padding: 0;
     }
-    .card-title{
+
+    .card-title {
         font-size: 12px;
     }
 
-    .card h-100{
+    .card h-100 {
         padding: 0;
     }
 
+    .sobre-cantina {
+        margin: 0;
+    }
+    
+
     /*---NAVBAR----*/
 
-    .menu{
+    .menu {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,23 +53,21 @@
         font-size: 15px;
     }
 
-    .logo > img{
+    .logo>img {
         width: 80px !important;
     }
 
-    .menu > ul{
+    .menu>ul {
         display: flex;
         justify-content: center;
         margin: 0;
     }
 
-    .pesquisa-input{
+    .pesquisa-input {
         width: 250px !important;
     }
 
-    .carrosel{
-        margin: 100px;
-    }
+
 
     /*-----FOOTER-------*/
 
@@ -75,16 +83,17 @@
         text-align: center;
     }
 
-    .ul-content{
+    .ul-content {
         margin: 0;
         padding: 0;
     }
 
-    .information-divs > h2{
+    .information-divs>h2 {
         font-size: 25px;
     }
 
 }
+
 /* ----------- TABLET (≤992px) ----------- */
 
 

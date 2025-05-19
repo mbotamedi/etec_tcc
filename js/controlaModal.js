@@ -84,6 +84,7 @@ function inicializarOffcanvas() {
     }, 100);
 }
 
+
 // Executa quando a página carrega
 document.addEventListener('DOMContentLoaded', controlarOffcanvas);
 

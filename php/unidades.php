@@ -23,6 +23,8 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
+    <link rel="stylesheet" href="../css/mediaQuery.css">
+    
     <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
