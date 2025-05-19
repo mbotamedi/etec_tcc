@@ -134,6 +134,7 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
                 <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=somar">+</a>
               </div>';
         echo '<div class="unit-price">R$' . number_format($value["valor"], 2, ',', '.') . ' (unitário)</div>';
+        echo '<div><a href="../carrinho/delCarrinho.php?id=' . $key . '"><i class="fas fa-trash deleta"></i></a></div>';
         echo '</div>';
         echo '</div>';
 
