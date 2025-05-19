@@ -93,6 +93,20 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
+        .cart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centraliza os itens filhos horizontalmente */
+            width: 100%;
+            /* Garante que o contêiner ocupe a largura disponível */
+            max-width: 340px;
+            /* Limita a largura para corresponder aos itens do carrinho */
+            margin: 0 auto;
+            /* Garante centralização no contêiner pai */
+            padding-top: 10px;
+        }
+
         .container-finalizar {
             max-width: 800px;
             margin: 0 auto;
@@ -199,7 +213,9 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 <p class="erro"><?= htmlspecialchars($erro) ?></p>
             <?php endif; ?>
             <h3>Resumo do Carrinho</h3>
-            <?php include("../carrinho.php"); ?>
+            <div class="cart-container">
+                <?php include("../carrinho.php"); ?>
+            </div>
 
             <h3>Escolha a Forma de Recebimento</h3>
             <form method="POST" action="finalizar_pedido.php">
