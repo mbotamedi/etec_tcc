@@ -15,14 +15,15 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
             <div class="logo">
                 <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
-            <div class="menu">
+            <div class="menu" id="menu">
                 <ul>
                     <li><a href="../index.php" class="titulo">INICIO</a></li>
                     <li><a href="../php/produtos.php" class="titulo">PEÇA AGORA</a></li>
                     <li><a href="../php/unidades.php" class="titulo">UNIDADES</a></li>
                 </ul>
             </div>
-            <div class="user-cart">
+
+            <div class="user-cart" id="user-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo isset($_SESSION['usuario']) ? 'canvas-logado' : 'canvas-deslogado'; ?>" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
                     <img src="../imgs/user.png" alt="Usuário" width="30px">
                 </button>

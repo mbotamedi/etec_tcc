@@ -1,0 +1,63 @@
+BOTAO TRES BARRAS: 
+
+
+<button class="menu-toggle" aria-label="Menu">
+   <span class="menu-bar"></span>
+   <span class="menu-bar"></span>
+   <span class="menu-bar"></span>
+</button>
+
+<style>
+    .menu-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+  width: 30px;
+  padding: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.menu-bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #333;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+/* Animação quando ativo */
+.menu-toggle.active .menu-bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.menu-toggle.active .menu-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .menu-bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Efeito hover */
+.menu-toggle:hover .menu-bar {
+  background: #555;
+}
+
+/* Opcional: para dark mode */
+@media (prefers-color-scheme: white) {
+  .menu-bar {
+    background: #1d22;
+  }
+  
+  .menu-toggle:hover .menu-bar {
+    background: #fff;
+  }
+}
+</style>

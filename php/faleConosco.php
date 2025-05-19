@@ -166,7 +166,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         $email    = $_POST["txtemail"];
         $mensagem = $_POST["txtmensagem"];
         //Conecta com o Banco de dados         
-        include("../email.php");
+        include("./email.php");
     }
 
     ?>

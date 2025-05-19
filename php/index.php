@@ -44,19 +44,17 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
 <body>
     <!-- Navigation-->
-
     <?php include("navbar.php"); ?>
-
     <!-- Navigation End-->
 
-    <div class="carrosel" style="display: flex; justify-content: center;">
+    <div class="carousel-container">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="../imgs/promocoes_notebook/promo01.jpg" alt="Promoção 1" class="d-block w-100">
                 </div>
-                <div class="carousel-item active">
-                    <img src="../imgs/promocoes_notebook/promo02.jpg" class="d-block w-100">
+                <div class="carousel-item">
+                    <img src="../imgs/promocoes_notebook/promo02.jpg" alt="Promoção 2" class="d-block w-100">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
