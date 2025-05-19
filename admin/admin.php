@@ -211,7 +211,7 @@ include '../php/config.php';
                 </li>
               </ul>
             </li>
-            <!---<li class="nav-item">
+            <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon bi bi-box-seam-fill"></i>
                 <p>
@@ -227,7 +227,7 @@ include '../php/config.php';
                   </a>
                 </li>
               </ul>
-              </li>--->
+            </li>
           </ul>
           <!--end::Sidebar Menu-->
         </nav>
@@ -281,16 +281,16 @@ include '../php/config.php';
             $incluir = "cadastros/usuarios/index.php";
             break;
           case "Pedidos":
-            $incluir = "pedidos_admin.php";
+            $incluir = "gerenciamento/pedidos_admin.php";
             break;
           case "Detalhes":
-            $incluir = "detalhes_pedidos_admin.php";
+            $incluir = "gerenciamento/detalhes_pedidos_admin.php";
             break;
         }
         include($incluir);
       } else {
         include("cards.php");
-        include("pedidos_admin.php");
+        include("gerenciamento/pdv.php");
       }
       ?>
       <!--end::App Content-->
