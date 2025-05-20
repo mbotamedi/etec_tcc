@@ -11,17 +11,16 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <title>É seguro comprar? - Cantina Três Irmãos</title>
     <link rel="stylesheet" href="../css/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/inicio.css">
+    <link rel="stylesheet" href="../css/canvaLogado.css">
+
+    
+    
+    
     <style>
-        body {
-            background-color: #f9f9f9;
-            font-family: 'Inter', sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
 
         .container-seguro {
             max-width: 960px;
