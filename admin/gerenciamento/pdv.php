@@ -19,6 +19,7 @@ if (!isset($_SESSION['carrinho_pdv'])) {
 
 // Adiciona produto ao carrinho
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
+    error_log("POST recebido: " . print_r($_POST, true)); // Adiciona log para depuração
     $id_produto = $_POST['id_produto'];
     $quantidade = (int)$_POST['quantidade'];
 
@@ -98,7 +99,7 @@ if (isset($_POST['finalizar'])) {
 
     // Limpa o carrinho
     $_SESSION['carrinho_pdv'] = [];
-    header("Location: pdv_simples.php?sucesso=1");
+    header("Location: pdv.php?sucesso=1");
     exit;
 }
 
@@ -156,8 +157,8 @@ if (isset($_POST['cancelar'])) {
         }
 
         .btn-excluir {
-            font-size: 0.8rem;
-            padding: 2px 5px;
+            font-size: 0.5rem;
+            padding: 3px 5px;
         }
 
         .cantina-label {
@@ -189,39 +190,7 @@ if (isset($_POST['cancelar'])) {
         <div class="row">
             <!-- Formulário no lado esquerdo -->
             <div class="col-md-6 form-section">
-                <form method="POST" action="">
-                    <div class="row mb-3 align-items-end">
-                        <div class="col-12">
-                            <label for="id_produto" class="form-label">Buscar Produto (Cantina Três Irmãos):</label>
-                            <select name="id_produto" id="id_produto" class="form-select" required>
-                                <option value="">Selecione um produto...</option>
-                                <?php
-                                // Reset o ponteiro do resultado para poder usar novamente
-                                mysqli_data_seek($result_produtos, 0);
-                                while ($produto = mysqli_fetch_assoc($result_produtos)) {
-                                    echo "<option value='{$produto['id']}'>{$produto['descricao']}";
-                                    /*echo "<option value='{$produto['id']}'>{$produto['descricao']} - R$ " . number_format($produto['valor'], 2, ',', '.') . " (Estoque: {$produto['estoque']})</option>";*/
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="quantidade" class="form-label">Quantidade:</label>
-                            <input type="number" name="quantidade" id="quantidade" class="form-control" value="1" min="1" required>
-                        </div>
-                        <!--<div class="col-md-6">
-                            <label for="min_quantidade" class="form-label">Estoque Mínimo:</label>
-                            <input type="number" name="min_quantidade" id="min_quantidade" class="form-control" value="<?= $min_quantidade ?>" min="0" placeholder="Mínimo">
-                        </div>--->
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" name="adicionar" class="btn btn-primary w-100">Adicionar</button>
-                        </div>
-                    </div>
-                </form>
+                <?php include('prod_pdv.php'); ?>
             </div>
 
             <!-- Cupom no lado direito -->
@@ -245,12 +214,13 @@ if (isset($_POST['cancelar'])) {
                                 <span>
                                     <form method="POST" action="" style="display:inline;">
                                         <input type="hidden" name="descricao" value="<?= htmlspecialchars($item['descricao']) ?>">
-                                        <button type="submit" name="excluir" class="btn btn-danger btn-excluir">Excluir</button>
+                                        <button type="submit" name="excluir" class="btn btn-secondary btn-excluir bi-trash "></button>
+
                                     </form>
                                 </span>
                             </div>
                         <?php endforeach; ?>
-                        <div class="cupom-item total">
+                        <div class=" cupom-item total">
                             <span>Total Cupom R$</span>
                             <span></span>
                             <span></span>

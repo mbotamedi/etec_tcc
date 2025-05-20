@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = "Por favor, selecione ou cadastre um endereço para entrega.";
     } else {
         // Insere o pedido na tabela tb_pedidos
-        $emissao = date('Y-m-d');
+        $emissao = date('Y-m-d H:i:s');
         $valor_total = 0;
 
         foreach ($_SESSION["carrinho"] as $item) {
