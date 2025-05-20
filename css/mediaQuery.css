@@ -9,6 +9,11 @@
         margin-top: 50px;
     }
 
+    .terms-container {
+        margin-top: 80px;
+
+    }
+
     .produtos-Destaques {
         font-size: 25px;
 
@@ -37,7 +42,15 @@
     .sobre-cantina {
         margin: 0;
     }
-    
+
+    .container-contato{
+        margin-top: 80px;
+    }
+
+    .w-100{
+        margin-top: 50px;
+    }
+
 
     /*---NAVBAR----*/
 
@@ -91,6 +104,7 @@
     .information-divs>h2 {
         font-size: 25px;
     }
+
 
 }
 
