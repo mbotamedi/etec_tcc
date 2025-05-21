@@ -16,12 +16,15 @@ if (!isset($_GET['id'])) {
 $id_pedido = mysqli_real_escape_string($conexao, $_GET['id']);
 $id_cliente = $_SESSION['usuario']['id'];
 
-$verifica_pedido = mysqli_query($conexao, "SELECT id FROM tb_pedidos WHERE id = '$id_pedido'");
+$verifica_pedido = mysqli_query($conexao, "SELECT id, id_cliente FROM tb_pedidos WHERE id = '$id_pedido'");
 if (mysqli_num_rows($verifica_pedido) == 0) {
     die("Pedido não encontrado ou não pertence a este cliente.");
 }
 
-$query_pedido = "SELECT 
+$dados = mysqli_fetch_assoc($verifica_pedido);
+
+if (!$dados['id_cliente'] == null) {
+    $query_pedido = "SELECT 
                     cli.nome, p.*, 
                     e.endereco, e.numero, e.descricao,
                     e.bairro, e.cep,
@@ -36,6 +39,10 @@ $query_pedido = "SELECT
                     tb_cidades c ON e.id_cidade = c.codigo_cidade
                  WHERE 
                     p.id = '$id_pedido'";
+} else {
+    $query_pedido = "SELECT  p.*, e.endereco, e.numero, e.descricao, e.bairro, e.cep, c.nome_cidade, c.sigla_estado 
+    FROM tb_pedidos p  LEFT JOIN tb_cliente_endereco e ON p.id_endereco = e.id LEFT JOIN tb_cidades c ON e.id_cidade = c.codigo_cidade where tipo_user ='pdv'";
+}
 $resultado_pedido = mysqli_query($conexao, $query_pedido);
 if (!$resultado_pedido) {
     die("Erro na consulta do pedido: " . mysqli_error($conexao));
@@ -92,7 +99,8 @@ error_log("Número de itens encontrados: " . count($itens));
                     <strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($pedido['emissao'])) ?>
                 </li>
                 <li class="list-group-item">
-                    <strong>Cliente:</strong> <?= $pedido['nome']  ?>
+                    <strong>Cliente:</strong> <?= $pedido['nome'] ?? 'PDV' ?>
+
                 </li>
                 <li class="list-group-item">
                     <strong>Valor Total:</strong> R$ <?= number_format($pedido['valor_total'], 2, ',', '.') ?>
