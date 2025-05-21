@@ -17,7 +17,6 @@ echo '<table class="table table-striped">';
 echo '<thead>
             <tr>
                 <th>ID</th>
-                <th>SubCategoria</th>
                 <th>Descrição</th>
                 <th>Valor</th>
                 <th>Quantidade</th>
