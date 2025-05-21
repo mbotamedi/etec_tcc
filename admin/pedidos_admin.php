@@ -21,7 +21,7 @@ include('../includes/consulta_pedido_admin.php');
                 <?php while ($row = mysqli_fetch_assoc($resultado)): ?>
                     <tr>
                         <td class="text-center"><?php echo htmlspecialchars($row['id_pedido']); ?></td>
-                        <td><?php echo htmlspecialchars($row['cliente'] ?? 'Cliente não informado'); ?></td>
+                        <td><?php echo htmlspecialchars($row['cliente'] ?? 'PDV'); ?></td>
                         <td>
                             <?php
                             if ($row['tipo_entrega'] === 'entrega' && $row['endereco']) {
