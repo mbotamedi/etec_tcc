@@ -85,10 +85,9 @@ if (isset($_POST['finalizar'])) {
     $id_cliente = $_SESSION['usuario']['id'];
     $emissao = date('Y-m-d H:i:s');
     $tipo_entrega = 'retirada';
-    $tipo = 'pdv';
 
     // Insere o pedido
-    $query_pedido = "INSERT INTO tb_pedidos (id_cliente, emissao, valor_total, tipo_entrega, tipo_user) VALUES ('$id_cliente', '$emissao', '$total', '$tipo_entrega','$tipo')";
+    $query_pedido = "INSERT INTO tb_pedidos (id_cliente, emissao, valor_total, tipo_entrega) VALUES ('$id_cliente', '$emissao', '$total', '$tipo_entrega')";
     mysqli_query($conexao, $query_pedido);
     $id_pedido = mysqli_insert_id($conexao);
 
@@ -97,65 +96,26 @@ if (isset($_POST['finalizar'])) {
         $query_item = "INSERT INTO tb_pedidos_itens (id_pedidos, id_produtos, qtd, valor_untiario) VALUES ('$id_pedido', '{$item['id']}', '{$item['quantidade']}', '{$item['valor_unitario']}')";
         mysqli_query($conexao, $query_item);
     }
-    // Busca o estoque atual
-    $query = "SELECT estoque FROM tb_produtos WHERE id = '$id_produto'";
-    $result = mysqli_query($conexao, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $produto = mysqli_fetch_assoc($result);
-        $novo_estoque = $produto['estoque'] - $quantidade;
-
-        // Atualiza o estoque
-        $update_query = "UPDATE tb_produtos SET estoque = '$novo_estoque' WHERE id = '$id_produto'";
-        if (!mysqli_query($conexao, $update_query)) {
-            error_log("Erro ao atualizar estoque do produto ID $id_produto: " . mysqli_error($conexao));
-        }
-    } else {
-        error_log("Produto ID $id_produto não encontrado no banco de dados.");
-    }
-
 
     // Limpa o carrinho
     $_SESSION['carrinho_pdv'] = [];
-    // Exibe mensagem e recarrega
-    echo "<script>alert('Venda cancelada com sucesso!'); window.location.href = 'admin.php';</script>";
+    header("Location: pdv.php?sucesso=1");
     exit;
 }
 
 // Cancela a venda
 if (isset($_POST['cancelar'])) {
-    if (!empty($_SESSION['carrinho_pdv'])) {
-        foreach ($_SESSION['carrinho_pdv'] as $item) {
-            // Sanitiza o ID do produto para evitar injeção SQL
-            $id_produto = mysqli_real_escape_string($conexao, $item['id']);
-            $quantidade = (int)$item['quantidade'];
-
-            // Busca o estoque atual
-            $query = "SELECT estoque FROM tb_produtos WHERE id = '$id_produto'";
-            $result = mysqli_query($conexao, $query);
-
-            if ($result && mysqli_num_rows($result) > 0) {
-                $produto = mysqli_fetch_assoc($result);
-                $novo_estoque = $produto['estoque'] + $quantidade;
-
-                // Atualiza o estoque
-                $update_query = "UPDATE tb_produtos SET estoque = '$novo_estoque' WHERE id = '$id_produto'";
-                if (!mysqli_query($conexao, $update_query)) {
-                    error_log("Erro ao atualizar estoque do produto ID $id_produto: " . mysqli_error($conexao));
-                }
-            } else {
-                error_log("Produto ID $id_produto não encontrado no banco de dados.");
-            }
-        }
+    foreach ($_SESSION['carrinho_pdv'] as $item) {
+        $query = "SELECT estoque FROM tb_produtos WHERE id = '{$item['id']}'";
+        $result = mysqli_query($conexao, $query);
+        $produto = mysqli_fetch_assoc($result);
+        $novo_estoque = $produto['estoque'] + $item['quantidade'];
+        $update_query = "UPDATE tb_produtos SET estoque = '$novo_estoque' WHERE id = '{$item['id']}'";
+        mysqli_query($conexao, $update_query);
     }
-
-    // Limpa o carrinho
-    // Limpa o carrinho
     $_SESSION['carrinho_pdv'] = [];
-    // Exibe mensagem e redireciona para admin.php
-    echo "<script>alert('Venda cancelada com sucesso!'); window.location.href = 'admin.php';</script>";
-    // Alternativa: recarregar pdv.php
-    // echo "<script>alert('Venda cancelada com sucesso!'); window.location.reload();</script>";
+    // Ajuste do redirecionamento para evitar saída antes do header
+    header("Location:admin.php"); // Ajustado para voltar ao admin.php
     exit;
 }
 ?>
@@ -287,11 +247,9 @@ if (isset($_POST['cancelar'])) {
                 <?php endif; ?>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

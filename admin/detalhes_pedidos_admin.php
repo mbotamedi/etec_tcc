@@ -1,8 +1,7 @@
 <?php
-
+//header('Content-Type: text/html; charset=utf-8');
 ob_start();
-
-include('../php/config.php');
+//session_start();
 include("../includes/conexao.php");
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'usuario') {
@@ -44,7 +43,7 @@ $pedido = mysqli_fetch_assoc($resultado_pedido);
 
 $query_itens = "SELECT 
                     pi.*, 
-                    pr.descricao, pr.id
+                    pr.descricao, pr.imagem1
                 FROM 
                     tb_pedidos_itens pi
                 JOIN 
@@ -125,16 +124,17 @@ error_log("Número de itens encontrados: " . count($itens));
                         $itemCount = 0;
                         foreach ($itens as $item):
                             $itemCount++;
-                            // Calcula o caminho da imagem para cada item
-                            $foto = '../assets/fotos/' . $item['id'] . '.png';
                         ?>
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            <img src="<?= $foto ?>" alt="<?= htmlspecialchars($item['descricao']) ?>" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.src='../assets/img/no-image.png';">
-                                            <span><?= htmlspecialchars($item['descricao']) ?></span>
-                                        </div>
+                                        <?php if (!empty($item['imagem1'])): ?>
+                                            <img src="<?php echo "../" . $item['imagem1']; ?>" alt="<?php echo htmlspecialchars($item['descricao']); ?>" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.src='../assets/img/no-image.png';">
+                                        <?php else: ?>
+                                            <img src="../assets/img/no-image.png" alt="Sem imagem" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
+                                        <?php endif; ?>
+                                        <span><?= htmlspecialchars($item['descricao']) ?></span>
+                                    </div>
                                 </td>
                                 <td><?= $item['qtd'] ?></td>
                                 <td>R$ <?= number_format($item['valor_untiario'], 2, ',', '.') ?></td>
