@@ -124,21 +124,20 @@ error_log("Número de itens encontrados: " . count($itens));
                         $itemCount = 0;
                         foreach ($itens as $item):
                             $itemCount++;
+                            // Calcula o caminho da imagem para cada item
+                            $foto = '../assets/fotos/' . $item['id'] . '.png';
                         ?>
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <?php if (!empty($item['imagem1'])): ?>
-                                            <img src="<?php echo "../" . $item['imagem1']; ?>" alt="<?php echo htmlspecialchars($item['descricao']); ?>" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.src='../assets/img/no-image.png';">
-                                        <?php else: ?>
-                                            <img src="../assets/img/no-image.png" alt="Sem imagem" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
-                                        <?php endif; ?>
-                                        <span><?= htmlspecialchars($item['descricao']) ?></span>
-                                    </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?= $foto ?>" alt="<?= htmlspecialchars($item['descricao']) ?>" class="img-product rounded" style="max-width: 100%; max-height: 80px; object-fit: cover;" onerror="this.src='../assets/img/no-image.png';">
+                                            <span><?= htmlspecialchars($item['descricao']) ?></span>
+                                        </div>
                                 </td>
-                                <td><?= $item['qtd'] ?></td>
-                                <td>R$ <?= number_format($item['valor_untiario'], 2, ',', '.') ?></td>
-                                <td>R$ <?= number_format($item['qtd'] * $item['valor_untiario'], 2, ',', '.') ?></td>
+                                <td class="text-center align-middle"><?= $item['qtd'] ?></td>
+                                <td class="text-center align-middle">R$ <?= number_format($item['valor_untiario'], 2, ',', '.') ?></td>
+                                <td class="text-center align-middle">R$ <?= number_format($item['qtd'] * $item['valor_untiario'], 2, ',', '.') ?></td>
                             </tr>
                         <?php endforeach;
                         error_log("Número de itens renderizados: $itemCount");

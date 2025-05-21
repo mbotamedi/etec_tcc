@@ -56,13 +56,42 @@ if (!$resultado_itens) {
 $itens = [];
 while ($row = mysqli_fetch_assoc($resultado_itens)) {
     $itens[] = $row;
-    //print_r($itens);
 }
 error_log("Número de itens encontrados: " . count($itens));
 ?>
 
 <!-- Início do layout ajustado -->
 <div class="container">
+    <style>
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table .img-product {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 75px;
+            object-fit: cover;
+        }
+
+        .table td.text-center {
+            text-align: center;
+        }
+
+        .table td.text-center img {
+            margin: 0 auto;
+        }
+
+        .table td.text-center span {
+            max-width: 150px;
+            word-wrap: break-word;
+            text-align: center;
+            display: block;
+        }
+    </style>
+
     <!-- Linha com Informações do Pedido e Itens do Pedido lado a lado -->
     <div class="row mb-4">
         <!-- Seção 1: Informações do Pedido (coluna à esquerda) -->
@@ -95,6 +124,7 @@ error_log("Número de itens encontrados: " . count($itens));
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Imagem</th>
                             <th>Produto</th>
                             <th>Quantidade</th>
                             <th>Valor Unitário</th>
@@ -108,20 +138,20 @@ error_log("Número de itens encontrados: " . count($itens));
                             $itemCount++;
                         ?>
                             <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <?php if (!empty($item['id'])):
-                                            $foto = '../../assets/fotos/' . $item["id_produtos"] . '.png'; ?>
-                                            <img src="<?php echo $foto ?>" alt="<?php echo htmlspecialchars($item['descricao']); ?>" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.src='../../assets/foto/.png';">
-                                        <?php else: ?>
-                                            <img src="../../assets/fotos/semfoto.png" alt="Sem imagem" class="img-product rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
-                                        <?php endif; ?>
-                                        <span><?= htmlspecialchars($item['descricao']) ?></span>
-                                    </div>
+                                <td class="text-center align-middle">
+                                    <?php if (!empty($item['id'])):
+                                        $foto = '../../assets/fotos/' . $item["id_produtos"] . '.png'; ?>
+                                        <img src="<?php echo $foto ?>" alt="<?php echo htmlspecialchars($item['descricao']); ?>" class="img-product rounded" onerror="this.src='../../assets/fotos/semfoto.png';">
+                                    <?php else: ?>
+                                        <img src="../../assets/fotos/semfoto.png" alt="Sem imagem" class="img-product rounded">
+                                    <?php endif; ?>
                                 </td>
-                                <td><?= $item['qtd'] ?></td>
-                                <td>R$ <?= number_format($item['valor_untiario'], 2, ',', '.') ?></td>
-                                <td>R$ <?= number_format($item['qtd'] * $item['valor_untiario'], 2, ',', '.') ?></td>
+                                <td class="text-center align-middle">
+                                    <span><?= htmlspecialchars($item['descricao']) ?></span>
+                                </td>
+                                <td class="text-center align-middle"><?= $item['qtd'] ?></td>
+                                <td class="text-center align-middle">>R$ <?= number_format($item['valor_untiario'], 2, ',', '.') ?></td>
+                                <td class="text-center align-middle">>R$ <?= number_format($item['qtd'] * $item['valor_untiario'], 2, ',', '.') ?></td>
                             </tr>
                         <?php endforeach;
                         error_log("Número de itens renderizados: $itemCount");
@@ -129,7 +159,7 @@ error_log("Número de itens encontrados: " . count($itens));
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                            <td colspan="4" class="text-end"><strong>Total:</strong></td>
                             <td><strong>R$ <?= number_format($pedido['valor_total'], 2, ',', '.') ?></strong></td>
                         </tr>
                     </tfoot>
