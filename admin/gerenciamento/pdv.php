@@ -82,13 +82,14 @@ foreach ($_SESSION['carrinho_pdv'] as $item) {
 
 // Finaliza a venda
 if (isset($_POST['finalizar'])) {
-    $id_cliente = $_SESSION['usuario']['id'];
+    //$id_cliente = $_SESSION['usuario']['id'];
+
     $emissao = date('Y-m-d H:i:s');
     $tipo_entrega = 'retirada';
     $tipo = 'pdv';
 
     // Insere o pedido
-    $query_pedido = "INSERT INTO tb_pedidos (id_cliente, emissao, valor_total, tipo_entrega, tipo_user) VALUES ('$id_cliente', '$emissao', '$total', '$tipo_entrega','$tipo')";
+    $query_pedido = "INSERT INTO tb_pedidos (emissao, valor_total, tipo_entrega, tipo_user) VALUES ( '$emissao', '$total', '$tipo_entrega','$tipo')";
     mysqli_query($conexao, $query_pedido);
     $id_pedido = mysqli_insert_id($conexao);
 
@@ -97,23 +98,6 @@ if (isset($_POST['finalizar'])) {
         $query_item = "INSERT INTO tb_pedidos_itens (id_pedidos, id_produtos, qtd, valor_untiario) VALUES ('$id_pedido', '{$item['id']}', '{$item['quantidade']}', '{$item['valor_unitario']}')";
         mysqli_query($conexao, $query_item);
     }
-    // Busca o estoque atual
-    $query = "SELECT estoque FROM tb_produtos WHERE id = '$id_produto'";
-    $result = mysqli_query($conexao, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $produto = mysqli_fetch_assoc($result);
-        $novo_estoque = $produto['estoque'] - $quantidade;
-
-        // Atualiza o estoque
-        $update_query = "UPDATE tb_produtos SET estoque = '$novo_estoque' WHERE id = '$id_produto'";
-        if (!mysqli_query($conexao, $update_query)) {
-            error_log("Erro ao atualizar estoque do produto ID $id_produto: " . mysqli_error($conexao));
-        }
-    } else {
-        error_log("Produto ID $id_produto não encontrado no banco de dados.");
-    }
-
 
     // Limpa o carrinho
     $_SESSION['carrinho_pdv'] = [];

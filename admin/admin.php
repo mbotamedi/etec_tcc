@@ -255,7 +255,7 @@ include '../php/config.php';
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-end">
-                <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="admin.php">Inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($paginaAtual); ?></li>
               </ol>
             </div>
