@@ -86,10 +86,10 @@ if (isset($_POST['finalizar'])) {
 
     $emissao = date('Y-m-d H:i:s');
     $tipo_entrega = 'retirada';
-    $tipo = 'pdv';
+    $tipo = 'PDV';
 
     // Insere o pedido
-    $query_pedido = "INSERT INTO tb_pedidos (emissao, valor_total, tipo_entrega, tipo_user) VALUES ( '$emissao', '$total', '$tipo_entrega','$tipo')";
+    $query_pedido = "INSERT INTO tb_pedidos (emissao, valor_total, tipo_entrega, tipo_pedido) VALUES ( '$emissao', '$total', '$tipo_entrega','$tipo')";
     mysqli_query($conexao, $query_pedido);
     $id_pedido = mysqli_insert_id($conexao);
 

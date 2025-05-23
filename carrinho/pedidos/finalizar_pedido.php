@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo_entrega = $_POST['tipo_entrega']; // 'entrega' ou 'retirada'
     $id_endereco = $_POST["id_endereco"];
     $id_endereco_value = ($tipo_entrega == 'entrega' && !empty($id_endereco)) ? "'$id_endereco'" : "NULL";
-
+    $id_pedido = "WEB";
     // Validação
     if ($tipo_entrega == 'entrega' && empty($id_endereco)) {
         $erro = "Por favor, selecione ou cadastre um endereço para entrega.";
@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //$valor_total -= 5.00; // Exemplo de desconto para retirada
         }
 
-        $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega) 
-                     VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega')";
+        $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega, tipo_pedido) 
+                     VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega', '$id_pedido')";
         mysqli_query($conexao, $query_pedido);
         $id_pedido = mysqli_insert_id($conexao);
 
