@@ -33,6 +33,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
 <body>
     <?php include("../../php/navbar.php"); ?>
 
+
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row">
