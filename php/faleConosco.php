@@ -37,7 +37,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         }
 
         .container-contato {
-            max-width: 800px;
+            max-width: 600px;
             margin: 40px auto;
             padding: 30px;
             background: #ffffff;
