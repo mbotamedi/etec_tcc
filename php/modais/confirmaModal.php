@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalLogout" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+<!-- <div class="modal fade" id="modalLogout" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-warning">
@@ -33,4 +33,4 @@
         window.location.href = '../../php/logout.php';
     });
 });
-</script>
+</script> -->

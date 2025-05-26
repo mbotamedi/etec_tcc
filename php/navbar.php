@@ -72,7 +72,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="botao-sair">
-                    <a href="#" class="btn-logout" data-bs-toggle="modal" data-bs-target="#modalLogout">Sair</a>
+                    <a href="logout.php" class="btn-logout">Sair</a>
                 </div>
             </div>
         </div>
@@ -166,7 +166,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="botao-sair">
-                    <a href="#" class="btn-logout" data-bs-toggle="modal" >Sair</a>
+                    <a href="logout.php" class="btn-logout">Sair</a>
                 </div>
             </div>
         </div>
