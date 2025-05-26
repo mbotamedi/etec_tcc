@@ -74,30 +74,42 @@ function mostrarEnderecos() {
      });
  }
 
- function excluirEndereco(id) {
-   if (confirm("Tem certeza que deseja excluir este endereço?")) {
-     fetch("excluir_endereco.php", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/x-www-form-urlencoded",
-       },
-       body: `id_endereco=${id}`,
-     })
-       .then((response) => response.json())
-       .then((data) => {
-         if (data.success) {
-           alert(data.success);
-           carregarEnderecos();
-         } else {
-           alert(data.error);
-         }
-       })
-       .catch((error) => {
-         console.error("Erro ao excluir endereço:", error);
-         alert("Erro ao excluir endereço.");
-       });
-   }
- }
+ function excluirEndereco(id_endereco) {
+    if (confirm('Tem certeza que deseja excluir este endereço?')) {
+        fetch('../../includes/excluir_endereco.php', {  // Ajuste o caminho
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id_endereco=${encodeURIComponent(id_endereco)}`
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status} ${response.statusText}`);
+            }
+            return response.text().then(text => {
+                console.log('Resposta bruta:', text); // Log para depuração
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Resposta não é JSON válido: ' + text);
+                }
+            });
+        })
+        .then(data => {
+            if (data.success) {
+                alert(data.success);
+                location.reload(); // Ou atualizar a lista de endereços dinamicamente
+            } else {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao excluir endereço:', error);
+            alert('Erro ao excluir endereço: ' + error.message);
+        });
+    }
+}
 
 function mostrarConta() {
     resetHeaderStyles();

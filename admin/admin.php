@@ -227,6 +227,22 @@ include '../php/config.php';
                   </a>
                 </li>
               </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="?pg=Caixa" class="nav-link">
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>Caixa</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="?pg=Relatorio" class="nav-link">
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>Relatório</p>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
           <!--end::Sidebar Menu-->
@@ -285,6 +301,12 @@ include '../php/config.php';
             break;
           case "Detalhes":
             $incluir = "gerenciamento/detalhes_pedidos_admin.php";
+            break;
+          case "Caixa":
+            $incluir = "gerenciamento/caixa/index.php";
+            break;
+          case "Relatorio":
+            $incluir = "gerenciamento/caixa/relatorio_caixa.php";
             break;
         }
         include($incluir);

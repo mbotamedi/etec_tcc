@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 05/05/2025 às 22:25
+-- Tempo de geração: 26/05/2025 às 17:36
 -- Versão do servidor: 11.3.2-MariaDB
 -- Versão do PHP: 8.3.6
 
@@ -65,6 +65,33 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_gravaSubcategoria` (IN `pid` IN
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_caixa`
+--
+
+DROP TABLE IF EXISTS `tb_caixa`;
+CREATE TABLE IF NOT EXISTS `tb_caixa` (
+  `id_caixa` int(11) NOT NULL AUTO_INCREMENT,
+  `data_abertura` datetime NOT NULL,
+  `valor_abertura` decimal(10,2) NOT NULL,
+  `data_fechamento` datetime DEFAULT NULL,
+  `valor_fechamento` decimal(10,2) DEFAULT NULL,
+  `observacoes` text DEFAULT NULL,
+  `diferenca` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id_caixa`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_caixa`
+--
+
+INSERT INTO `tb_caixa` (`id_caixa`, `data_abertura`, `valor_abertura`, `data_fechamento`, `valor_fechamento`, `observacoes`, `diferenca`) VALUES
+(1, '2025-05-23 15:29:09', 100.00, '2025-05-23 18:00:00', 138.70, 'Caixa tudo OK', 0.00),
+(2, '2025-05-26 09:52:45', 100.00, '2025-05-26 12:57:00', 118.90, 'Caixa ok', 0.00),
+(3, '2025-05-26 13:16:30', 50.00, '2025-05-26 13:39:21', 52.40, 'Caixa ok', 0.00);
 
 -- --------------------------------------------------------
 
@@ -5710,8 +5737,8 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha`) VALUES
-(1, 'Marcos Botamedi', '555.444.222-20', 'bota@gmail.com', '(17) 98189-0306', ''),
-(2, 'Giberto Botamedi', '555.888.777-34', 'botamedi@superbol.com', '(17) 98189-7852', '123'),
+(1, 'Marcos Botamedi', '555.444.222-20', 'bota@gmail.com', '(17) 98189-0306', '123'),
+(2, 'Giberto Silva', '666.785.888-05', 'gib@bol.com', '(17) 98189-7852', '123'),
 (3, 'Marcos Silva Santos', '255.887.777-80', 'marcos@gmail.com', '(17) 99995-5555', '123'),
 (4, 'Maria Hernandes Silva', '555.444.888-20', 'maria@gmail.com', '(17) 98456-2358', '123');
 
@@ -5734,17 +5761,59 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_endereco` (
   `id_cidade` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_cliente_endereco`
 --
 
 INSERT INTO `tb_cliente_endereco` (`id`, `id_cliente`, `descricao`, `endereco`, `numero`, `bairro`, `complemento`, `cep`, `id_cidade`) VALUES
-(1, 4, 'Casa', 'Rua  Tiburcio Gonçalves Filhos', '183', 'Centro', NULL, '14700-470', 3506102),
+(1, 4, 'Casa', 'Rua  Tiburcio Gonçalves Filhos', '183', 'Centro', 'Casa', '14700-470', 3506102),
 (3, 3, 'Casa', 'Rua Brandão Veras', '4568', 'Jd. de Lucia', 'Casa', '14740456', 1100015),
-(4, 4, 'Residência', 'Rua Frei Antonio Alve Filho', '798', 'Centro', 'Casa', '14700000', 3506102),
-(5, 3, 'Comercial', 'Rua Coronel do João Manoel', '456', 'Jardim Alvorada', 'Casa', '14701-020', 3506201);
+(5, 3, 'Comercial', 'Rua Coronel do João Manoel', '456', 'Jardim Alvorada', 'Casa', '14701-020', 3506201),
+(6, 2, 'Casa', 'Rua Alves de Toledo', '20', 'Centro', 'Casa', '1470000', 3501004);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_movimentacoes_caixa`
+--
+
+DROP TABLE IF EXISTS `tb_movimentacoes_caixa`;
+CREATE TABLE IF NOT EXISTS `tb_movimentacoes_caixa` (
+  `id_movimento` int(11) NOT NULL AUTO_INCREMENT,
+  `id_caixa` int(11) NOT NULL,
+  `tipo` enum('ENTRADA','SAIDA') NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `data_movimento` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_movimento`),
+  KEY `id_caixa` (`id_caixa`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_movimentacoes_caixa`
+--
+
+INSERT INTO `tb_movimentacoes_caixa` (`id_movimento`, `id_caixa`, `tipo`, `descricao`, `valor`, `data_movimento`) VALUES
+(1, 1, 'ENTRADA', 'Pedido PDV #65', 17.00, '2025-05-23 16:28:02'),
+(2, 1, 'ENTRADA', 'Pedido PDV #66', 7.20, '2025-05-23 16:33:14'),
+(3, 1, 'ENTRADA', 'Pedido PDV #67', 4.50, '2025-05-23 16:37:02'),
+(4, 1, 'ENTRADA', 'ok', 10.00, '2025-05-23 16:43:41'),
+(5, 1, 'ENTRADA', 'oktes', 10.00, '2025-05-23 16:45:45'),
+(6, 1, 'ENTRADA', 'oktes', 10.00, '2025-05-23 16:46:42'),
+(7, 1, 'SAIDA', 'ok Test 1', 10.00, '2025-05-23 16:47:15'),
+(8, 1, 'ENTRADA', 'ok Test 2', 10.00, '2025-05-23 16:51:43'),
+(9, 1, 'ENTRADA', 'ok Test 3', 10.00, '2025-05-23 16:53:41'),
+(10, 1, 'SAIDA', 'ok Test 4', 30.00, '2025-05-23 16:55:52'),
+(11, 2, 'ENTRADA', 'Pedido PDV #68', 34.70, '2025-05-26 09:54:22'),
+(12, 2, 'ENTRADA', 'Pedido PDV #69', 24.20, '2025-05-26 09:55:06'),
+(13, 2, 'SAIDA', 'Pagar fornecedor de Salgados', 40.00, '2025-05-26 09:58:36'),
+(14, 3, 'ENTRADA', 'Pedido PDV #70', 32.40, '2025-05-26 13:17:36'),
+(15, 3, 'ENTRADA', 'Pedido PDV #71', 10.00, '2025-05-26 13:17:59'),
+(16, 3, 'SAIDA', 'Pagamento  Fornecedor', 100.00, '2025-05-26 13:20:26'),
+(17, 3, 'ENTRADA', 'Dinheiro', 10.00, '2025-05-26 13:33:50'),
+(18, 3, 'ENTRADA', 'pagamento de salgado cida', 50.00, '2025-05-26 13:38:34');
 
 -- --------------------------------------------------------
 
@@ -5778,32 +5847,77 @@ INSERT INTO `tb_nivel_usuario` (`id`, `cargo`, `descricao`) VALUES
 DROP TABLE IF EXISTS `tb_pedidos`;
 CREATE TABLE IF NOT EXISTS `tb_pedidos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_cliente` int(11) NOT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
   `id_endereco` int(11) DEFAULT NULL,
-  `emissao` date NOT NULL,
+  `emissao` datetime NOT NULL,
   `valor_total` decimal(10,2) NOT NULL DEFAULT 0.00,
   `tipo_entrega` varchar(20) NOT NULL,
+  `tipo_pedido` enum('PDV','WEB') NOT NULL DEFAULT 'WEB',
+  `metodo_pagamento` enum('DINHEIRO','CARTAO','PIX','ONLINE') NOT NULL DEFAULT 'ONLINE',
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_endereco` (`id_endereco`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos`
 --
 
-INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_total`, `tipo_entrega`) VALUES
-(1, 4, 1, '2025-04-21', 15.00, 'entrega'),
-(2, 4, 1, '2025-04-22', 60.00, 'entrega'),
-(3, 4, NULL, '2025-04-23', 22.50, 'retirada'),
-(4, 4, 1, '2025-04-23', 28.10, 'entrega'),
-(5, 4, 1, '2025-04-23', 7.50, 'entrega'),
-(6, 4, 1, '2025-04-23', 45.00, 'retirada'),
-(7, 4, 1, '2025-04-24', 30.00, 'retirada'),
-(10, 4, NULL, '2025-04-24', 52.50, 'retirada'),
-(11, 4, NULL, '2025-05-02', 60.00, 'retirada'),
-(12, 3, 3, '2025-05-03', 30.00, 'entrega'),
-(13, 3, 3, '2025-05-04', 41.20, 'entrega');
+INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_total`, `tipo_entrega`, `tipo_pedido`, `metodo_pagamento`) VALUES
+(1, 4, 1, '2025-04-21 00:00:00', 15.00, 'entrega', 'WEB', 'ONLINE'),
+(2, 4, 1, '2025-04-22 00:00:00', 60.00, 'entrega', 'WEB', 'ONLINE'),
+(3, 4, NULL, '2025-04-23 00:00:00', 22.50, 'retirada', 'WEB', 'ONLINE'),
+(4, 4, 1, '2025-04-23 00:00:00', 28.10, 'entrega', 'WEB', 'ONLINE'),
+(5, 4, 1, '2025-04-23 00:00:00', 7.50, 'entrega', 'WEB', 'ONLINE'),
+(6, 4, 1, '2025-04-23 00:00:00', 45.00, 'retirada', 'WEB', 'ONLINE'),
+(7, 4, 1, '2025-04-24 00:00:00', 30.00, 'retirada', 'WEB', 'ONLINE'),
+(10, 4, NULL, '2025-04-24 00:00:00', 52.50, 'retirada', 'WEB', 'ONLINE'),
+(11, 4, NULL, '2025-05-02 00:00:00', 60.00, 'retirada', 'WEB', 'ONLINE'),
+(12, 3, 3, '2025-05-03 00:00:00', 30.00, 'entrega', 'WEB', 'ONLINE'),
+(13, 3, 3, '2025-05-04 00:00:00', 41.20, 'entrega', 'WEB', 'ONLINE'),
+(14, 2, NULL, '2025-05-15 00:00:00', 8.10, 'retirada', 'WEB', 'ONLINE'),
+(15, 4, NULL, '2025-05-19 00:00:00', 30.00, 'retirada', 'WEB', 'ONLINE'),
+(16, 4, 1, '2025-05-19 00:00:00', 7.50, 'entrega', 'WEB', 'ONLINE'),
+(17, 4, 1, '2025-05-19 00:00:00', 15.00, 'entrega', 'WEB', 'ONLINE'),
+(18, 1, NULL, '2025-05-19 00:00:00', 37.50, 'retirada', 'WEB', 'ONLINE'),
+(19, 1, NULL, '2025-05-20 00:00:00', 7.20, 'retirada', 'WEB', 'ONLINE'),
+(20, 1, NULL, '2025-05-20 00:00:00', 3.30, 'retirada', 'WEB', 'ONLINE'),
+(21, 1, NULL, '2025-05-20 00:00:00', 0.00, 'retirada', 'WEB', 'ONLINE'),
+(22, 1, NULL, '2025-05-20 00:00:00', 7.20, 'retirada', 'WEB', 'ONLINE'),
+(23, 1, NULL, '2025-05-20 00:00:00', 6.50, 'retirada', 'WEB', 'ONLINE'),
+(24, 1, NULL, '2025-05-20 00:00:00', 6.00, 'retirada', 'WEB', 'ONLINE'),
+(25, 1, NULL, '2025-05-20 00:00:00', 13.50, 'retirada', 'WEB', 'ONLINE'),
+(26, 1, NULL, '2025-05-20 20:06:47', 12.00, 'retirada', 'WEB', 'ONLINE'),
+(27, 1, NULL, '2025-05-20 19:21:19', 12.20, 'retirada', 'WEB', 'ONLINE'),
+(28, 1, NULL, '2025-05-20 19:28:57', 12.50, 'retirada', 'WEB', 'ONLINE'),
+(29, 1, NULL, '2025-05-20 19:33:09', 9.50, 'retirada', 'WEB', 'ONLINE'),
+(30, 1, NULL, '2025-05-20 19:33:15', 0.00, 'retirada', 'WEB', 'ONLINE'),
+(45, 1, NULL, '2025-05-20 21:19:07', 8.00, 'retirada', 'PDV', 'DINHEIRO'),
+(46, 1, NULL, '2025-05-20 21:19:34', 3.30, 'retirada', 'PDV', 'DINHEIRO'),
+(47, 1, NULL, '2025-05-20 21:30:46', 3.30, 'retirada', 'PDV', 'DINHEIRO'),
+(48, 1, NULL, '2025-05-20 21:51:33', 5.00, 'retirada', 'PDV', 'DINHEIRO'),
+(50, NULL, NULL, '2025-05-21 14:44:15', 4.00, 'retirada', 'PDV', 'DINHEIRO'),
+(51, NULL, NULL, '2025-05-21 14:46:36', 8.00, 'retirada', 'PDV', 'DINHEIRO'),
+(52, NULL, NULL, '2025-05-21 14:47:49', 7.20, 'retirada', 'PDV', 'DINHEIRO'),
+(53, NULL, NULL, '2025-05-21 14:48:26', 13.50, 'retirada', 'PDV', 'DINHEIRO'),
+(54, NULL, NULL, '2025-05-21 15:01:20', 25.00, 'retirada', 'PDV', 'DINHEIRO'),
+(55, NULL, NULL, '2025-05-21 15:05:38', 5.00, 'retirada', 'PDV', 'DINHEIRO'),
+(56, NULL, NULL, '2025-05-21 15:09:50', 5.00, 'retirada', 'PDV', 'DINHEIRO'),
+(57, NULL, NULL, '2025-05-21 15:21:01', 15.00, 'retirada', 'PDV', 'DINHEIRO'),
+(58, NULL, NULL, '2025-05-21 18:56:24', 3.30, 'retirada', 'PDV', 'DINHEIRO'),
+(59, 4, NULL, '2025-05-23 08:55:12', 13.50, 'retirada', 'WEB', 'ONLINE'),
+(60, 4, NULL, '2025-05-23 11:01:02', 7.50, 'retirada', 'WEB', 'ONLINE'),
+(61, 2, NULL, '2025-05-23 12:43:52', 15.00, 'retirada', 'WEB', 'ONLINE'),
+(62, 2, 6, '2025-05-23 13:38:55', 7.50, 'entrega', 'WEB', 'ONLINE'),
+(63, 2, 6, '2025-05-23 15:03:53', 7.50, 'entrega', 'WEB', 'ONLINE'),
+(64, 2, NULL, '2025-05-23 16:17:11', 6.00, 'retirada', 'WEB', 'ONLINE'),
+(65, NULL, NULL, '2025-05-23 16:28:02', 17.00, 'retirada', 'PDV', 'DINHEIRO'),
+(66, NULL, NULL, '2025-05-23 16:33:14', 7.20, 'retirada', 'PDV', 'DINHEIRO'),
+(67, NULL, NULL, '2025-05-23 16:37:02', 4.50, 'retirada', 'PDV', 'DINHEIRO'),
+(68, NULL, NULL, '2025-05-26 09:54:22', 34.70, 'retirada', 'PDV', 'DINHEIRO'),
+(69, NULL, NULL, '2025-05-26 09:55:06', 24.20, 'retirada', 'PDV', 'DINHEIRO'),
+(70, NULL, NULL, '2025-05-26 13:17:36', 32.40, 'retirada', 'PDV', 'DINHEIRO'),
+(71, NULL, NULL, '2025-05-26 13:17:59', 10.00, 'retirada', 'PDV', 'CARTAO');
 
 -- --------------------------------------------------------
 
@@ -5821,7 +5935,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
   PRIMARY KEY (`id`),
   KEY `id_pedidos` (`id_pedidos`),
   KEY `id_produtos` (`id_produtos`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos_itens`
@@ -5847,7 +5961,67 @@ INSERT INTO `tb_pedidos_itens` (`id`, `id_pedidos`, `id_produtos`, `qtd`, `valor
 (17, 12, 67, 2, 7.50),
 (18, 13, 66, 4, 7.50),
 (19, 13, 57, 2, 4.20),
-(20, 13, 131, 1, 2.80);
+(20, 13, 131, 1, 2.80),
+(21, 14, 132, 1, 5.30),
+(22, 14, 131, 1, 2.80),
+(23, 15, 68, 2, 7.50),
+(24, 15, 67, 2, 7.50),
+(25, 16, 68, 1, 7.50),
+(26, 17, 66, 1, 7.50),
+(27, 17, 68, 1, 7.50),
+(28, 18, 66, 5, 7.50),
+(29, 19, 2, 1, 7.20),
+(30, 20, 1, 1, 3.30),
+(31, 22, 2, 1, 7.20),
+(32, 23, 3, 1, 6.50),
+(33, 24, 15, 1, 6.00),
+(34, 25, 66, 1, 7.50),
+(35, 25, 37, 1, 6.00),
+(36, 26, 15, 2, 6.00),
+(37, 27, 2, 1, 7.20),
+(38, 27, 4, 1, 5.00),
+(39, 28, 5, 2, 4.00),
+(40, 28, 6, 1, 4.50),
+(41, 29, 4, 1, 5.00),
+(42, 29, 6, 1, 4.50),
+(43, 45, 5, 2, 4.00),
+(44, 46, 1, 1, 3.30),
+(45, 47, 1, 1, 3.30),
+(46, 48, 4, 1, 5.00),
+(47, 50, 5, 1, 4.00),
+(48, 51, 5, 2, 4.00),
+(49, 52, 2, 1, 7.20),
+(50, 53, 6, 3, 4.50),
+(51, 54, 17, 5, 5.00),
+(52, 55, 17, 1, 5.00),
+(53, 56, 17, 1, 5.00),
+(54, 57, 17, 1, 5.00),
+(55, 57, 17, 2, 5.00),
+(56, 58, 1, 1, 3.30),
+(57, 59, 35, 1, 6.00),
+(58, 59, 65, 1, 7.50),
+(59, 60, 66, 1, 7.50),
+(60, 61, 68, 1, 7.50),
+(61, 61, 51, 1, 7.50),
+(62, 62, 66, 1, 7.50),
+(63, 63, 66, 1, 7.50),
+(64, 64, 32, 1, 6.00),
+(65, 65, 5, 1, 4.00),
+(66, 65, 3, 1, 6.50),
+(67, 65, 3, 1, 6.50),
+(68, 66, 2, 1, 7.20),
+(69, 67, 6, 1, 4.50),
+(70, 68, 2, 1, 7.20),
+(71, 68, 6, 3, 4.50),
+(72, 68, 7, 2, 7.00),
+(73, 69, 5, 2, 4.00),
+(74, 69, 57, 1, 4.20),
+(75, 69, 32, 2, 6.00),
+(76, 70, 4, 2, 5.00),
+(77, 70, 58, 2, 4.20),
+(78, 70, 7, 2, 7.00),
+(79, 71, 5, 1, 4.00),
+(80, 71, 16, 1, 6.00);
 
 -- --------------------------------------------------------
 
@@ -5867,30 +6041,30 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `descricao` (`descricao`),
   KEY `id_subcategoria` (`id_subcategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_produtos`
 --
 
 INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoque`, `imagem`, `imagem1`) VALUES
-(1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.30, 90, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
-(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 30, '../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
-(3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 15, '../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
-(4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 30, '../assets/img/iogurte.jpg', 'assets/img/iogurte.jpg'),
-(5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 20, '../assets/img/bolo.jpg', 'assets/img/bolo.jpg'),
-(6, 8, 'CASQUINHA DE SORVETE', 4.50, 40, '../assets/img/sorvete.jpg', 'assets/img/sorvete.jpg'),
-(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 25, '../assets/img/sanduiche.jpg', 'assets/img/sanduiche.jpg'),
+(1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.30, 84, '../assets/img/agua.jpg', 'assets/img/agua.jpg'),
+(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 24, '../assets/img/chagelado.jpg', 'assets/img/chagelado.jpg'),
+(3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 12, '../assets/img/saladadefrutas.jpg', 'assets/img/saladadefrutas.jpg'),
+(4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 23, '../assets/img/iogurte.jpg', 'assets/img/iogurte.jpg'),
+(5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 8, 'fatia-de-bolo-de-chocolate.jpg', 'assets/img/bolo.jpg'),
+(6, 8, 'CASQUINHA DE SORVETE', 4.50, 30, '../assets/img/sorvete.jpg', 'assets/img/sorvete.jpg'),
+(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 20, '../assets/img/sanduiche.jpg', 'assets/img/sanduiche.jpg'),
 (8, 10, 'CACHORRO-QUENTE SIMPLES', 7.50, 25, '../assets/img/hotdog.jpg', 'assets/img/hotdog.jpg'),
 (9, 13, 'SALGADINHO ASSADO RECHEADO COM QUEIJO', 7.50, 50, '../assets/img/salgadinho-queijo.jpg', 'assets/img/salgadinho-queijo.jpg'),
 (10, 14, 'COXINHA DE FRANGO', 4.00, 30, '../assets/img/coxinha.jpg', 'assets/img/coxinha.jpg'),
 (11, 14, 'PASTEL ASSADO COM RECHEIO DE CARNE', 5.00, 40, '../assets/img/pastel.jpg', 'assets/img/pastel.jpg'),
-(12, 13, 'PÃO DE QUEIJO TRADICIONAL', 2.50, 100, '../assets/img/paodequeijo.jpg', 'assets/img/paodequeijo.jpg'),
+(12, 13, 'PÃO DE QUEIJO TRADICIONAL', 2.50, 99, '../assets/img/paodequeijo.jpg', 'assets/img/paodequeijo.jpg'),
 (13, 14, 'PIPOCA DOCE OU SALGADA', 2.50, 50, '../assets/img/pipoca.jpg', 'assets/img/pipoca.jpg'),
 (14, 13, 'FATIA DE TORTA DE FRANGO', 5.50, 15, '../assets/img/torta.jpg', 'assets/img/torta.jpg'),
-(15, 13, 'FATIA DE PIZZA DE MUSSARELA', 6.00, 10, '../assets/img/pizza.jpg', 'assets/img/pizza.jpg'),
-(16, 15, 'SUCO NATURAL DE LARANJA', 6.00, 20, '../assets/img/suco.jpg', 'assets/img/suco.jpg'),
-(17, 3, 'KITCAT', 5.00, 30, '../assets/img/kitcat.jpg ', 'assets/img/kitcat.jpg '),
+(15, 13, 'FATIA DE PIZZA DE MUSSARELA', 6.00, 7, '../assets/img/pizza.jpg', 'assets/img/pizza.jpg'),
+(16, 15, 'SUCO NATURAL DE LARANJA', 6.00, 19, '../assets/img/suco.jpg', 'assets/img/suco.jpg'),
+(17, 3, 'KITCAT', 5.00, 20, '../assets/img/kitcat.jpg ', 'assets/img/kitcat.jpg '),
 (18, 3, 'TRENTO AVELÃ', 8.50, 50, '../assets/img/trento avelas.jpg ', 'assets/img/trento avelas.jpg '),
 (19, 3, 'TRENTO DRAK', 8.50, 50, '../assets/img/trento dark.jpg ', 'assets/img/trento dark.jpg '),
 (20, 3, 'TRENTO CAMARELO', 8.50, 50, '../assets/img/trento Caramelo.jpg ', 'assets/img/trento Caramelo.jpg '),
@@ -5905,14 +6079,14 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (29, 3, 'TRENTO TRUFA DE MAÇÃ', 8.50, 50, '../assets/img/trento trufa Maçã.jpg ', 'assets/img/trento trufa Maçã.jpg '),
 (30, 3, 'TRENTO TRUFA DE CHOCOLATE', 8.50, 50, '../assets/img/trento turfa de chocolate.jpg ', 'assets/img/trento turfa de chocolate.jpg '),
 (31, 16, 'BARRA NUTRY AVELÃS', 6.00, 100, '../assets/img/barra nutry avela.jpg ', 'assets/img/barra nutry avela.jpg '),
-(32, 16, 'BARRA NUTRY BANANA', 6.00, 100, '../assets/img/barra nutry banana.jpg ', 'assets/img/barra nutry banana.jpg '),
+(32, 16, 'BARRA NUTRY BANANA', 6.00, 97, '../assets/img/barra nutry banana.jpg ', 'assets/img/barra nutry banana.jpg '),
 (33, 16, 'BARRA NUTRY CAJÚ', 6.00, 100, '../assets/img/barra nutry caju.jpg ', 'assets/img/barra nutry caju.jpg '),
 (34, 16, 'BARRA NUTRY CAPPUCINO', 6.00, 100, '../assets/img/barra nutry cappuccino.jpg ', 'assets/img/barra nutry cappuccino.jpg '),
-(35, 16, 'BARRA NUTRY COCO', 6.00, 100, '../assets/img/barra nutry coco.jpg ', 'assets/img/barra nutry coco.jpg '),
+(35, 16, 'BARRA NUTRY COCO', 6.00, 99, '../assets/img/barra nutry coco.jpg ', 'assets/img/barra nutry coco.jpg '),
 (36, 16, 'BARRA NUTRY COOKIES', 6.00, 100, '../assets/img/barra nutry cookies.jpg ', 'assets/img/barra nutry cookies.jpg '),
-(37, 16, 'BARRA NUTRY FRUTAS- VERMELHAS', 6.00, 100, '../assets/img/barra nutry frutas-vermelhas.jpg ', 'assets/img/barra nutry frutas-vermelhas.jpg '),
+(37, 16, 'BARRA NUTRY FRUTAS- VERMELHAS', 6.00, 99, '../assets/img/barra nutry frutas-vermelhas.jpg ', 'assets/img/barra nutry frutas-vermelhas.jpg '),
 (38, 16, 'BARRA NUTRY MORANGO', 6.00, 100, '../assets/img/barra nutry morango.jpg ', 'assets/img/barra nutry morango.jpg '),
-(39, 6, 'BISCOITO  NIKITO CHOCOLATE ', 18.00, 30, '../assets/img/nikito chocolate.jpeg ', 'assets/img/nikito chocolate.jpeg '),
+(39, 6, 'BISCOITO  NIKITO CHOCOLATE ', 18.00, 29, '../assets/img/nikito chocolate.jpeg ', 'assets/img/nikito chocolate.jpeg '),
 (40, 6, 'BISCOITO  NIKITO DOCE DE LEITE', 18.00, 30, '../assets/img/nikito doce leite.jpeg ', 'assets/img/nikito doce leite.jpeg '),
 (41, 6, 'BISCOITO  NIKITO MORANGO', 18.00, 30, '../assets/img/nikito morango.jpeg ', 'assets/img/nikito morango.jpeg '),
 (42, 4, 'TUBES FINI AZEDINHOS FURTAS SILVESTE', 7.50, 50, '../assets/img/tubes fini azedinhos fru_silveste.jpg ', 'assets/img/tubes fini azedinhos fru_silveste.jpg '),
@@ -5924,25 +6098,26 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (48, 4, 'BALA GELATINA AMORAS FINI', 7.50, 50, '../assets/img/Bala Fini amora.jpg ', 'assets/img/Bala Fini amora.jpg '),
 (49, 4, 'BALA GELATINA BEIJOS FINI', 7.50, 50, '../assets/img/bala gelatina fini.jpg ', 'assets/img/bala gelatina fini.jpg '),
 (50, 4, 'BALA GELATINA FINIBURGUERS FINI', 7.50, 41, '../assets/img/Bala Gelatina Finiburguers Fini.jpg ', 'assets/img/Bala Gelatina Finiburguers Fini.jpg '),
-(51, 4, 'BALA GELATINAS POLVO FINI', 7.50, 50, '../assets/img/Bala Gelatinas Polvo 80g FINI.jpg ', 'assets/img/Bala Gelatinas Polvo 80g FINI.jpg '),
+(51, 4, 'BALA GELATINAS POLVO FINI', 7.50, 49, '../assets/img/Bala Gelatinas Polvo 80g FINI.jpg ', 'assets/img/Bala Gelatinas Polvo 80g FINI.jpg '),
 (52, 3, 'SONHO DE VALSA', 2.50, 100, '../assets/img/sonhodevalsa.jpeg ', 'assets/img/sonhodevalsa.jpeg '),
 (53, 3, 'OURO BRANCO', 2.50, 100, '../assets/img/ouro branco.jpeg ', 'assets/img/ouro branco.jpeg '),
-(54, 3, 'BIS XTRA', 18.00, 49, '../assets/img/Bis.jpeg ', 'assets/img/Bis.jpeg '),
+(54, 3, 'BIS XTRA', 18.00, 57, '../assets/img/Bis.jpeg ', 'assets/img/Bis.jpeg '),
 (55, 2, 'CHÁ MATE LEÃO LIMÃO', 3.19, 30, '../assets/img/cha mate limão.jpeg ', 'assets/img/cha mate limão.jpeg '),
 (56, 2, 'CHÁ MATE LEÃO PESSEGO', 3.19, 30, '../assets/img/cha mate pessego.jpeg ', 'assets/img/cha mate pessego.jpeg '),
-(57, 11, 'COCA-COLA', 4.20, 18, '../assets/img/coca-cola.jpeg', 'assets/img/coca-cola.jpeg'),
-(58, 11, 'COCA-COLA ZERO', 4.20, 20, '../assets/img/coca-cola zero.jpeg', 'assets/img/coca-cola zero.jpeg'),
+(57, 11, 'COCA-COLA', 4.20, 17, '../assets/img/coca-cola.jpeg', 'assets/img/coca-cola.jpeg'),
+(58, 11, 'COCA-COLA ZERO', 4.20, 18, '../assets/img/coca-cola zero.jpeg', 'assets/img/coca-cola zero.jpeg'),
 (59, 11, 'SPRITE', 3.69, 15, '../assets/img/sprite.jpeg', 'assets/img/sprite.jpeg'),
 (60, 11, 'FANTA LARANJA', 4.70, 20, '../assets/img/fanta.jpeg', 'assets/img/fanta.jpeg'),
 (61, 11, 'FANTA UVA', 3.99, 20, '../assets/img/fanta uva.jpeg', 'assets/img/fanta uva.jpeg'),
 (62, 12, 'COCA-COLA ZERO 500ML', 6.99, 30, '../assets/img/coca-cola zero 500ml.jpeg', 'assets/img/coca-cola zero 500ml.jpeg'),
 (63, 12, 'COCA-COLA 500ML', 6.99, 30, '../assets/img/coca-cola 500ml.jpeg', 'assets/img/coca-cola 500ml.jpeg'),
 (64, 16, 'BARRA NUTRY BOLO_CHOCOLATE', 6.00, 98, '../assets/img/Barra Nutry bolo_chocolate.jpg ', 'assets/img/Barra Nutry bolo_chocolate.jpg '),
-(65, 4, 'BALA FINI TUBES', 7.50, 44, '../assets/img/Bala fini tubes.jpg ', 'assets/img/Bala fini tubes.jpg '),
-(66, 4, 'BALA FINI BANANA', 7.50, 31, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
-(67, 4, 'AROS DE MORANGO AZEDINHOS 80G', 7.50, 47, '../assets/img/Aros de Morango Azedinhos 80g - Fini.jpg ', 'assets/img/Aros de Morango Azedinhos 80g - Fini.jpg '),
-(68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 41, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg '),
-(131, 3, 'BOMBOM AERO', 2.80, 77, '../assets/img//bombom lacta aero.jpg ', 'assets/img/bombom lacta aero.jpg ');
+(65, 4, 'BALA FINI TUBES', 7.50, 42, '../assets/img/Bala fini tubes.jpg ', 'assets/img/Bala fini tubes.jpg '),
+(66, 4, 'BALA FINI BANANA', 7.50, 16, '../assets/img/Bala  Bananas fini.jpg ', 'assets/img/Bala  Bananas fini.jpg '),
+(67, 4, 'AROS DE MORANGO AZEDINHOS 80G', 7.50, 45, '../assets/img/Aros de Morango Azedinhos 80g - Fini.jpg ', 'assets/img/Aros de Morango Azedinhos 80g - Fini.jpg '),
+(68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 36, '../assets/img/Bala  Escovinhas Fini.jpg ', 'assets/img/Bala  Escovinhas Fini.jpg '),
+(131, 3, 'BOMBOM AERO', 2.80, 71, '../assets/img//bombom lacta aero.jpg ', 'assets/img/bombom lacta aero.jpg '),
+(132, 3, 'DIAMANTE NEGRO', 5.30, 98, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6033,7 +6208,7 @@ CREATE TABLE IF NOT EXISTS `vw_pedidos_cliente` (
 ,`valor_untiario` decimal(10,2)
 ,`subtotal_item` decimal(20,2)
 ,`produto` varchar(100)
-,`emissao` date
+,`emissao` datetime
 ,`valor_total` decimal(10,2)
 ,`tipo_entrega` varchar(20)
 );

@@ -41,7 +41,7 @@ if (!$dados['id_cliente'] == null) {
                     p.id = '$id_pedido'";
 } else {
     $query_pedido = "SELECT  p.*, e.endereco, e.numero, e.descricao, e.bairro, e.cep, c.nome_cidade, c.sigla_estado 
-    FROM tb_pedidos p  LEFT JOIN tb_cliente_endereco e ON p.id_endereco = e.id LEFT JOIN tb_cidades c ON e.id_cidade = c.codigo_cidade where tipo_user ='pdv'";
+    FROM tb_pedidos p  LEFT JOIN tb_cliente_endereco e ON p.id_endereco = e.id LEFT JOIN tb_cidades c ON e.id_cidade = c.codigo_cidade where tipo_pedido ='PDV'";
 }
 $resultado_pedido = mysqli_query($conexao, $query_pedido);
 if (!$resultado_pedido) {
