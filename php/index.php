@@ -62,11 +62,14 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
     </div>
 
+    
+
     <!-- Section-->
     <section class="py-5">
 
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
+            <?php require_once 'modais/confirmaModal.php'; ?>
         </div>
 
         <div class="container px-4 px-lg-5 mt-5">
