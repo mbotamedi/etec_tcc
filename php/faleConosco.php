@@ -175,7 +175,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
     ?>
 
-    <?php include('zap.php') ?>
+<?php include("./zap.php")?>
 
     <?php include("footer.php"); ?>
 </body>

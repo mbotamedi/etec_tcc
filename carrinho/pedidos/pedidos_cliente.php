@@ -154,6 +154,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     </div>
 
     <?php include("../../php/footer.php"); ?>
+    <?php include("../../php/zap.php")?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../js/scripts.js"></script>

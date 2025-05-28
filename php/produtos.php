@@ -117,6 +117,10 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         });
     </script>
 
+<?php
+    include("./zap.php")
+    ?>
+
     <!--------------SCRIPTS/-------------->
 </body>
 
