@@ -208,4 +208,3 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     </div>
 
 <?php endif; ?>
-
