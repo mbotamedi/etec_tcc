@@ -33,20 +33,40 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
             width: 50px;
         }
     }
+
+    .mensagem{
+        padding: 5px;
+        background-color: #40ce00;
+        border-radius: 10px;
+        padding-top: 10px;
+        font-family: monospace; 
+        color: white;
+    }
 </style>
 
 <?php if (!$paginaSelecionada): ?>
 
-    <div class="whatsapp-float">
-        <a href="https://wa.me/SEUNUMERO" target="_blank" rel="noopener">
-            <img src="../imgs/zapImg.png" alt="WhatsApp">
-        </a>
+    <div class="container">
+
+        <div class="whatsapp-float">
+            <div class="mensagem">
+                <p>FALE PELO WHATSAPP</p>
+            </div>
+            <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
+                <img src="../imgs/zapImg.png" alt="WhatsApp">
+            </a>
+        </div>
     </div>
 
 <?php else: ?>
-    <div class="whatsapp-float">
-        <a href="https://wa.me/SEUNUMERO" target="_blank" rel="noopener">
-            <img src="../../imgs/zapImg.png" alt="WhatsApp">
-        </a>
+    <div class="container">
+        <div class="whatsapp-float">
+            <div class="mensagem">
+                <p>FALE PELO WHATSAPP</p>
+            </div>
+            <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
+                <img src="../../imgs/zapImg.png" alt="WhatsApp">
+            </a>
+        </div>
     </div>
 <?php endif; ?>
