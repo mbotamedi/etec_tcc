@@ -1,3 +1,8 @@
+<?php 
+@session_start();
+$tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 

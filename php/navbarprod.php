@@ -1,7 +1,7 @@
 <?php
 //@session_start();
 // Inclui o arquivo de verificação de login
-include 'verificar_login.php';
+@session_start();
 $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
 ?>
 

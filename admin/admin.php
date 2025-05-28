@@ -1,6 +1,5 @@
 <?php
 // Inclui o arquivo de verificação de login
-include '../php/verificar_login.php';
 $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
 include '../php/config.php';
 ?>
@@ -11,7 +10,7 @@ include '../php/config.php';
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Cantina Três Irmãos</title>
+  <title>Cantina</title>
   <!--begin::Primary Meta Tags-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="title" content="AdminLTE v4 | Dashboard" />
@@ -161,7 +160,7 @@ include '../php/config.php';
             class="brand-image opacity-75 shadow" />
           <!--end::Brand Image-->
           <!--begin::Brand Text-->
-          <span class="brand-text fw-light">Cantina 3 Irmãos</span>
+          <span class="brand-text fw-light">Cantina</span>
           <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->

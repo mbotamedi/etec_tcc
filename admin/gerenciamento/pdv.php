@@ -273,7 +273,7 @@ if (isset($_POST['cancelar'])) {
             <div class="col-md-6">
                 <?php if (!empty($_SESSION['carrinho_pdv'])): ?>
                     <div class="cupom">
-                        <h3>Cantina Três Irmãos</h3>
+                        <h3>Cantina</h3>
                         <div class="cupom-item">
                             <span>Descrição</span>
                             <span>Qtde</span>

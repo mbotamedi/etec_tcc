@@ -1,6 +1,6 @@
 <?php
+session_start();
 include("../../includes/conexao.php");
-include("../../php/verificar_login.php");
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
