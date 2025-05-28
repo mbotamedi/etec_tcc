@@ -107,6 +107,9 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                 <?php endforeach; ?>
             </div>
         </div>
+        <?php
+    include("./zap.php")
+    ?>
     </section>
 
     <!---Footer--->

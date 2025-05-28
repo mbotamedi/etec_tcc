@@ -1,3 +1,7 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']);
+$paginaSelecionada = ($current_page == 'pedidos_cliente.php');
+?>
 <style>
     .whatsapp-float {
         position: fixed;
@@ -8,7 +12,8 @@
     }
 
     .whatsapp-float img {
-        width: 60px; /* Ajuste o tamanho conforme necessário */
+        width: 60px;
+        /* Ajuste o tamanho conforme necessário */
         height: auto;
     }
 
@@ -23,14 +28,25 @@
             bottom: 15px;
             right: 15px;
         }
+
         .whatsapp-float img {
             width: 50px;
         }
     }
 </style>
 
-<div class="whatsapp-float">
-    <a href="https://wa.me/SEUNUMERO" target="_blank" rel="noopener">
-        <img src="../imgs/zapImg.png" alt="WhatsApp">
-    </a>
-</div>  
+<?php if (!$paginaSelecionada): ?>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/SEUNUMERO" target="_blank" rel="noopener">
+            <img src="../imgs/zapImg.png" alt="WhatsApp">
+        </a>
+    </div>
+
+<?php else: ?>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/SEUNUMERO" target="_blank" rel="noopener">
+            <img src="../../imgs/zapImg.png" alt="WhatsApp">
+        </a>
+    </div>
+<?php endif; ?>
