@@ -26,6 +26,7 @@ $cliente = mysqli_fetch_assoc($resultado_cliente);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,29 +42,35 @@ $cliente = mysqli_fetch_assoc($resultado_cliente);
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
         }
+
         .form-title {
             font-weight: 600;
             margin-bottom: 1.5rem;
             text-align: center;
         }
+
         .btn-save {
             background-color: #f6d365;
             border: none;
             color: #333;
             font-weight: 600;
         }
+
         .btn-save:hover {
             background-color: #f3c747;
         }
+
         .btn-cancel {
             background-color: #6c757d;
             color: white;
         }
+
         .btn-cancel:hover {
             background-color: #5a6268;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
@@ -87,7 +94,7 @@ $cliente = mysqli_fetch_assoc($resultado_cliente);
                 </div>
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-save">Salvar Alterações</button>
-                    <a href="conta.php" class="btn btn-cancel">Cancelar</a>
+                    <a href="../../carrinho/pedidos/pedidos_cliente.php" class="btn btn-cancel">Cancelar</a>
                 </div>
             </form>
         </div>
@@ -95,4 +102,5 @@ $cliente = mysqli_fetch_assoc($resultado_cliente);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
