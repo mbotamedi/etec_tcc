@@ -29,13 +29,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
     $produto = mysqli_fetch_assoc($result);
 
     if ($produto && $quantidade > 0) {
-        $item = [
-            'id' => $produto['id'],
-            'descricao' => $produto['descricao'],
-            'quantidade' => $quantidade,
-            'valor_unitario' => $produto['valor']
-        ];
-        $_SESSION['carrinho_pdv'][] = $item;
+        $ja_existe = false;
+        foreach ($_SESSION['carrinho_pdv'] as &$item) {
+            if ($item['id'] == $produto['id']) {
+                $item['quantidade'] += $quantidade;
+                $ja_existe = true;
+                break;
+            }
+        }
+        unset($item); // <- IMPORTANTE para evitar sobrescrever outros itens
+        if (!$ja_existe) {
+            $_SESSION['carrinho_pdv'][] = [
+                'id' => $produto['id'],
+                'descricao' => $produto['descricao'],
+                'quantidade' => $quantidade,
+                'valor_unitario' => $produto['valor']
+            ];
+        }
     } else {
         echo "<script>alert('Produto inválido ou quantidade insuficiente.');</script>";
     }
@@ -43,16 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
 
 // Exclui produto do carrinho
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['excluir'])) {
-    $descricao = mysqli_real_escape_string($conexao, $_POST['descricao']);
+    $id_excluir = (int)$_POST['id'];
 
     foreach ($_SESSION['carrinho_pdv'] as $index => $item) {
-        if ($item['descricao'] === $descricao) {
+        if ($item['id'] == $id_excluir) {
             unset($_SESSION['carrinho_pdv'][$index]);
             $_SESSION['carrinho_pdv'] = array_values($_SESSION['carrinho_pdv']); // Reindexa o array
             break;
         }
     }
 }
+
 
 // Filtra produtos por quantidade mínima (se aplicável)
 $min_quantidade = isset($_POST['min_quantidade']) ? (int)$_POST['min_quantidade'] : 0;
@@ -229,8 +240,9 @@ if (isset($_POST['cancelar'])) {
         }
 
         .form-section {
-            padding-right: 20px;
-            border-right: 1px solid #dee2e6;
+            padding-right: 30px;
+            /* Aumentado para mais espaço */
+            border-right: 1px solid rgb(150, 153, 156);
         }
 
         .tipo-entrega-option {
@@ -245,6 +257,18 @@ if (isset($_POST['cancelar'])) {
 
         .tipo-entrega-option input {
             margin-right: 10px;
+        }
+
+        .fundo {
+            background-color: rgba(197, 201, 198, 0.42);
+            border-radius: 10px;
+            border: 20px;
+        }
+
+        /* Adiciona espaço entre as colunas */
+        .row {
+            --bs-gutter-x: 3rem;
+            /* Aumenta o espaço horizontal entre as colunas */
         }
 
         @media (max-width: 768px) {
@@ -265,12 +289,12 @@ if (isset($_POST['cancelar'])) {
 
         <div class="row">
             <!-- Formulário no lado esquerdo -->
-            <div class="col-md-6 form-section">
+            <div class="col-md-6 form-section fundo">
                 <?php include('prod_pdv.php'); ?>
             </div>
 
             <!-- Cupom no lado direito -->
-            <div class="col-md-6">
+            <div class="col-md-6 fundo">
                 <?php if (!empty($_SESSION['carrinho_pdv'])): ?>
                     <div class="cupom">
                         <h3>Cantina</h3>
@@ -289,7 +313,7 @@ if (isset($_POST['cancelar'])) {
                                 <span>R$ <?= number_format($item['quantidade'] * $item['valor_unitario'], 2, ',', '.') ?></span>
                                 <span>
                                     <form method="POST" action="" style="display:inline;">
-                                        <input type="hidden" name="descricao" value="<?= htmlspecialchars($item['descricao']) ?>">
+                                        <input type="hidden" name="id" value="<?= $item['id'] ?>">
                                         <button type="submit" name="excluir" class="btn btn-secondary btn-excluir bi-trash"></button>
                                     </form>
                                 </span>

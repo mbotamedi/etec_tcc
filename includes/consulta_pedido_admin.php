@@ -1,11 +1,16 @@
 <?php
 include('conexao.php');
 
+// Inicializa variáveis de filtro
+$nome = isset($_POST['nome']) ? mysqli_real_escape_string($conexao, trim($_POST['nome'])) : '';
+$data_inicio = isset($_POST['data_inicio']) ? $_POST['data_inicio'] : '';
+$data_fim = isset($_POST['data_fim']) ? $_POST['data_fim'] : '';
+
 // Verifica se está na página de detalhes
 $mostrar_detalhes = isset($_GET['pg']) && $_GET['pg'] === 'detalhes' && isset($_GET['id_pedido']);
 
 if (!$mostrar_detalhes) {
-    // Consulta para todos os pedidos do sistema com detalhes agregados por pedido
+    // Monta a consulta base
     $query = "
         SELECT 
             p.id AS id_pedido,
@@ -13,6 +18,7 @@ if (!$mostrar_detalhes) {
             p.emissao,
             p.valor_total,
             p.tipo_entrega,
+            p.tipo_pedido,
             e.endereco,
             e.numero,
             e.bairro,
@@ -25,9 +31,36 @@ if (!$mostrar_detalhes) {
         LEFT JOIN tb_cliente_endereco e ON p.id_endereco = e.id
         LEFT JOIN tb_cidades cid ON e.id_cidade = cid.codigo_cidade
         LEFT JOIN tb_pedidos_itens pi ON p.id = pi.id_pedidos
+    ";
+
+    // Condições dinâmicas
+    $where = [];
+    if (!empty($nome)) {
+        // Se o nome for "PDV", incluir pedidos onde c.nome é NULL
+        if (strtoupper(trim($nome)) === 'PDV') {
+            $where[] = "(c.nome LIKE '%PDV%' OR c.nome IS NULL)";
+        } else {
+            $where[] = "c.nome LIKE '%$nome%'";
+        }
+    }
+    if (!empty($data_inicio)) {
+        $where[] = "p.emissao >= '$data_inicio'";
+    }
+    if (!empty($data_fim)) {
+        $where[] = "p.emissao <= '$data_fim'";
+    }
+
+    // Adiciona WHERE se houver condições
+    if (!empty($where)) {
+        $query .= " WHERE " . implode(" AND ", $where);
+    }
+
+    // Agrupamento e ordenação
+    $query .= "
         GROUP BY p.id, c.nome, p.emissao, p.valor_total, p.tipo_entrega, e.endereco, e.numero, e.bairro, e.cep, cid.nome_cidade, cid.sigla_estado
         ORDER BY p.emissao DESC
     ";
+
     $resultado = mysqli_query($conexao, $query);
 
     // Verifica se a consulta foi bem-sucedida
@@ -44,7 +77,7 @@ if (!$mostrar_detalhes) {
             $query_itens = "
                 SELECT 
                     pi.*, 
-                    pr.descricao, pr.imagem1
+                    pr.descricao
                 FROM 
                     tb_pedidos_itens pi
                 JOIN 
@@ -64,10 +97,9 @@ if (!$mostrar_detalhes) {
         mysqli_data_seek($resultado, 0); // Resetar o ponteiro do resultado
     }
 } else {
-    // Lógica para exibir detalhes do pedido (mantida para compatibilidade)
+    // Lógica para exibir detalhes do pedido (mantida sem alterações)
     $id_pedido = mysqli_real_escape_string($conexao, $_GET['id_pedido']);
 
-    // Consulta para o pedido específico
     $query_pedido = "
         SELECT 
             p.*, 
@@ -92,11 +124,10 @@ if (!$mostrar_detalhes) {
     } else {
         $pedido = mysqli_fetch_assoc($resultado_pedido);
 
-        // Consulta para os itens do pedido
         $query_itens = "
             SELECT 
                 pi.*, 
-                pr.descricao, pr.imagem1
+                pr.descricao
             FROM 
                 tb_pedidos_itens pi
             JOIN 
