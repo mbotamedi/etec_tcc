@@ -2,9 +2,10 @@
 include('conexao.php');
 
 // Inicializa variáveis de filtro
-$nome = isset($_POST['nome']) ? mysqli_real_escape_string($conexao, trim($_POST['nome'])) : '';
-$data_inicio = isset($_POST['data_inicio']) ? $_POST['data_inicio'] : '';
-$data_fim = isset($_POST['data_fim']) ? $_POST['data_fim'] : '';
+
+$nome = isset($_GET['nome']) ? mysqli_real_escape_string($conexao, trim($_GET['nome'])) : '';
+$data_inicio = isset($_GET['data_inicio']) ? $_GET['data_inicio'] : '';
+$data_fim = isset($_GET['data_fim']) ? $_GET['data_fim'] : '';
 
 // Verifica se está na página de detalhes
 $mostrar_detalhes = isset($_GET['pg']) && $_GET['pg'] === 'detalhes' && isset($_GET['id_pedido']);

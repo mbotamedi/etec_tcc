@@ -3,7 +3,9 @@ include('../php/config.php');
 include('../includes/consulta_pedido_admin.php');
 ?>
 <!-- Exibição da lista de pedidos -->
-<form method="post" action="" style="margin-bottom: 20px;">
+<form method="get" action="" style="margin-bottom: 20px;">
+    <input type="hidden" name="pg" value="Pedidos">
+
     <label for="nome">Nome:</label>
     <input type="text" name="nome" id="nome">
 
