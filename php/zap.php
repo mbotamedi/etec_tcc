@@ -8,21 +8,21 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
         bottom: 20px;
         right: 20px;
         z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         transition: all 0.3s ease;
     }
 
     .whatsapp-float img {
         width: 60px;
-        /* Ajuste o tamanho conforme necessário */
         height: auto;
     }
 
-    /* Efeito hover opcional */
     .whatsapp-float:hover {
         transform: scale(1.1);
     }
 
-    /* Versão para mobile */
     @media (max-width: 768px) {
         .whatsapp-float {
             bottom: 15px;
@@ -30,39 +30,51 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
         }
 
         .whatsapp-float img {
-            width: 50px;
+            width: 40px;
         }
     }
 
-    .mensagem{
-        padding: 5px;
+    .mensagem {
         background-color: #40ce00;
-        border-radius: 10px;
-        padding-top: 10px;
-        font-family: monospace; 
         color: white;
+        font-family: monospace;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        position: relative;
+        max-width: 130px;
+        text-align: center;
+    }
+
+    .mensagem::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-top-color: #40ce00;
     }
 </style>
 
 <?php if (!$paginaSelecionada): ?>
-
     <div class="container">
-
         <div class="whatsapp-float">
             <div class="mensagem">
-                <p>FALE PELO WHATSAPP</p>
+                FALE PELO WHATSAPP
             </div>
             <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
                 <img src="../imgs/zapImg.png" alt="WhatsApp">
             </a>
         </div>
     </div>
-
 <?php else: ?>
     <div class="container">
         <div class="whatsapp-float">
             <div class="mensagem">
-                <p>FALE PELO WHATSAPP</p>
+                FALE PELO WHATSAPP
             </div>
             <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
                 <img src="../../imgs/zapImg.png" alt="WhatsApp">
