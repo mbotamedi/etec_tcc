@@ -165,7 +165,7 @@ $resultado_enderecos = mysqli_query($conexao, $query_enderecos);
             <div class="col-lg-8">
                 <div class="card profile-card mb-4">
                     <div class="profile-header">
-                        <img src="../../imgs/fotoPerfil.jpg" alt="Foto do usuário" class="profile-pic">
+                        <img src="../../assets/img/fotoPerfil.jpg" alt="Foto do usuário" class="profile-pic">
                         <h2 class="profile-name"><?php echo htmlspecialchars($cliente['nome']); ?></h2>
                         <button id="carregarFoto" class="btn btn-outline-light btn-sm">
                             <i class="bi bi-camera-fill"></i> Alterar foto

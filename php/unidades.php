@@ -24,7 +24,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
     <link rel="stylesheet" href="../css/mediaQuery.css">
-    
+
     <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +51,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         <div class="container-info col-12">
             <div class="container col-12" style="display: flex;">
                 <div class="foto01-cantina">
-                    <img src="../imgs/cantina.jpg" alt="Logo" style="width: 100%; height: 100%;">
+                    <img src="../assets/img/cantina.jpg" alt="Logo" style="width: 100%; height: 100%;">
                 </div>
 
                 <div class="sobre-cantina">
@@ -92,7 +92,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     para a comunidade do IMESB. Venha nos visitar e aproveite nossas delícias!</p>
             </div>
             <div class="foto01-cantina">
-                <img src="../imgs/cantinaImesb.jpg" alt="Logo" style="width: 100%; height: 100%;">
+                <img src="../assets/img/cantinaImesb.jpg" alt="Logo" style="width: 100%; height: 100%;">
             </div>
         </div>
     </section>
@@ -105,7 +105,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     include("./zap.php")
     ?>
     <!---Footer End--->
-    
+
 
 
 

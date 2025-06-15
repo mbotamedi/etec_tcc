@@ -53,16 +53,16 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../imgs/promocoes_notebook/promo01.jpg" alt="Promoção 1" class="d-block w-100">
+                    <img src="../assets/img/promocoes_notebook/promo01.jpg" alt="Promoção 1" class="d-block w-100">
                 </div>
                 <div class="carousel-item active">
-                    <img src="../imgs/promocoes_notebook/promo02.jpg" class="d-block w-100">
+                    <img src="../assets/img/promocoes_notebook/promo02.jpg" class="d-block w-100">
                 </div>
             </div>
         </div>
     </div>
 
-    
+
 
     <!-- Section-->
     <section class="py-5">
@@ -108,8 +108,8 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             </div>
         </div>
         <?php
-    include("./zap.php")
-    ?>
+        include("./zap.php")
+        ?>
     </section>
 
     <!---Footer--->

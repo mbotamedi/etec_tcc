@@ -1,5 +1,5 @@
 <?php
-    session_start(); // Inicia a sessão para armazenar mensagens
+session_start(); // Inicia a sessão para armazenar mensagens
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/cadastro.css">
-    <link rel="shortcut icon" href="../imgs/logo_copia01.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/img/logo_copia01.png" type="image/x-icon">
     <title>Cantina Três Irmãos - Cadastre-se</title>
 </head>
 
@@ -27,17 +27,17 @@
                 <div class="barra-laranja"></div>
             </div>
             <div class="user-icon">
-                <img src="../imgs/usuario-de-perfil.png" alt="" width="50px">
+                <img src="../assets/img/usuario-de-perfil.png" alt="" width="50px">
             </div>
             <!-- Exibe a mensagem de erro, se houver -->
             <?php
-                
-                if (isset($_SESSION['erro_senha'])) {
-                    echo "<p id='erro-msg' style='color: red;'>" . $_SESSION['erro_senha'] . "</p>";
-                    // Limpa a mensagem após exibir
-                    unset($_SESSION['erro_senha']);
-                }
-                ?>
+
+            if (isset($_SESSION['erro_senha'])) {
+                echo "<p id='erro-msg' style='color: red;'>" . $_SESSION['erro_senha'] . "</p>";
+                // Limpa a mensagem após exibir
+                unset($_SESSION['erro_senha']);
+            }
+            ?>
 
             <form name="cadastro" id="cadastro" action="../includes/salvar.php" method="POST">
                 <div class="form-group">
@@ -48,7 +48,7 @@
                     <label for="email">E-mail:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-               <div class="form-group">
+                <div class="form-group">
                     <label for="celular">Celular:</label>
                     <input type="tel" id="celular" name="celular" required pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
                         placeholder="(99) 99999-9999" maxlength="15" oninput="mascaraTelefone(this)">
@@ -75,11 +75,12 @@
             </div>
         </div>
     </div>
-   
+
 </body>
 
 <script src="../js/funcao.js"></script>
 
 
 </body>
+
 </html>

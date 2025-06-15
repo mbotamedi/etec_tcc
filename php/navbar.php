@@ -13,7 +13,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">
-                <img src="../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
+                <img src="../assets/img/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
             <div class="menu" id="menu">
                 <ul>
@@ -25,10 +25,10 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
 
             <div class="user-cart" id="user-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo isset($_SESSION['usuario']) ? 'canvas-logado' : 'canvas-deslogado'; ?>" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                    <img src="../imgs/user.png" alt="Usuário" width="30px">
+                    <img src="../assets/img/user.png" alt="Usuário" width="30px">
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
-                    <img src="../imgs/Shopping cart.png" alt="Carrinho" width="30px">
+                    <img src="../assets/img/Shopping cart.png" alt="Carrinho" width="30px">
                     <?php
                     $quantidadeItens = isset($_SESSION["carrinho"]) && is_array($_SESSION["carrinho"]) ? count($_SESSION["carrinho"]) : 0;
                     if ($quantidadeItens > 0) {
@@ -116,7 +116,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">
-                <img src="../../imgs/logo_copia01.png" alt="Logo Cantina" width="100px">
+                <img src="../../assets/img/logo_copia01.png" alt="Logo Cantina" width="100px">
             </div>
             <div class="menu">
                 <ul>
@@ -127,7 +127,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
             </div>
             <div class="user-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo isset($_SESSION['usuario']) ? 'canvas-logado' : 'canvas-deslogado'; ?>" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                    <img src="../../imgs/user.png" alt="Usuário" width="30px">
+                    <img src="../../assets/img/user.png" alt="Usuário" width="30px">
                 </button>
 
             </div>

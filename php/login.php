@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/login.css">
     <title>Cantina Três Irmãos - Já é nosso Cliente?</title>
-    <link rel="shortcut icon" href="../imgs/logo_copia01.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/img/logo_copia01.png" type="image/x-icon">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
                 <div class="barra-laranja"></div>
             </div>
             <div class="user-icon">
-                <img src="../imgs/usuario-de-perfil.png" alt="" width="80px">
+                <img src="../assets/img/usuario-de-perfil.png" alt="" width="80px">
             </div>
             <form action="../includes/consulta_cliente.php" method="POST">
                 <div class="form-group">

@@ -66,7 +66,7 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
                 FALE PELO WHATSAPP
             </div>
             <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
-                <img src="../imgs/zapImg.png" alt="WhatsApp">
+                <img src="../assets/img/zapImg.png" alt="WhatsApp">
             </a>
         </div>
     </div>
@@ -77,7 +77,7 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
                 FALE PELO WHATSAPP
             </div>
             <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
-                <img src="../../imgs/zapImg.png" alt="WhatsApp">
+                <img src="../../assets/img/zapImg.png" alt="WhatsApp">
             </a>
         </div>
     </div>

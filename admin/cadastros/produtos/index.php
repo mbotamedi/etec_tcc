@@ -75,7 +75,7 @@
       <div class="input-group">
         <input type="text" name="consulta" id="consulta" class="form-control pesquisa-input" placeholder="Buscar produtos...">
         <button id="btnpesquisa" type="submit" class="btn btn-outline-secondary">
-          <img src="../imgs/lupa (1).png" style="width: 20px; height: 20px;" alt="Pesquisar">
+          <img src="../assets/img/lupa (1).png" style="width: 20px; height: 20px;" alt="Pesquisar">
         </button>
       </div>
     </form>
