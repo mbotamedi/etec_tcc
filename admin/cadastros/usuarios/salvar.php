@@ -4,7 +4,7 @@ $nome = $_POST["txtnome"];
 $cpf = $_POST["txtcpf"];
 $email = $_POST["txtemail"];
 $celular = $_POST["txtcelular"];
-$celular = preg_replace('/[^0-9]/', '', $celular); // remove tudo que não for número
+/*$celular = preg_replace('/[^0-9]/', '', $celular); // remove tudo que não for número*/
 $senha = $_POST["txtsenha"];
 $id_cargo = $_POST["id_cargo"];
 
