@@ -49,7 +49,7 @@
         <div class="row mb-2">
           <label for="txtcargo" class="col-sm-2 col-form-label">Cargo</label>
           <div class="col-sm-10">
-            <select class="form-select" name="subcategoria" id="subcategoria" required="">
+            <select class="form-select" name="id_cargo" id="id_cargo" required="">
               <!-- Opção padrão (prompt) -->
               <?php
               include_once("../includes/conexao.php");
