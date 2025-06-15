@@ -41,7 +41,7 @@ $pedido = mysqli_fetch_assoc($resultado_pedido);
 
 $query_itens = "SELECT 
                     pi.*, 
-                    pr.descricao, pr.imagem1
+                    pr.descricao
                 FROM 
                     tb_pedidos_itens pi
                 JOIN 
