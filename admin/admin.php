@@ -155,7 +155,7 @@ include '../php/config.php';
         <a href="index.php" class="brand-link">
           <!--begin::Brand Image-->
           <img
-            src="../imgs/logo_copia01.png"
+            src="../assets/img/logo_copia01.png"
             alt=" Cantina Logo"
             class="brand-image opacity-75 shadow" />
           <!--end::Brand Image-->
@@ -206,6 +206,18 @@ include '../php/config.php';
                   <a href="?pg=Usuarios" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Usuários</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="?pg=Banner" class="nav-link">
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>Promoção Banner</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="?pg=ProdutoPromocao" class="nav-link">
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>Produto em Promoção</p>
                   </a>
                 </li>
               </ul>
@@ -294,6 +306,12 @@ include '../php/config.php';
             break;
           case "Usuarios":
             $incluir = "cadastros/usuarios/index.php";
+            break;
+          case "Banner":
+            $incluir = "cadastros/banner/index.php";
+            break;
+          case "ProdutoPromocao":
+            $incluir = "cadastros/produto_promocao/index.php";
             break;
           case "Pedidos":
             $incluir = "gerenciamento/pedidos_admin.php";

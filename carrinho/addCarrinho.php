@@ -20,7 +20,7 @@ if ($aplicar_desconto) {
     // Se veio da index.php, verifica se há promoção individual.
     $query = "
         SELECT 
-            p.id, p.descricao, p.estoque, p.imagem,
+            p.id, p.descricao, p.estoque,
             IF(pro.desconto IS NOT NULL, p.valor - (p.valor * pro.desconto), p.valor) AS valor_final
         FROM 
             tb_produtos p
@@ -31,7 +31,7 @@ if ($aplicar_desconto) {
     ";
 } else {
     // Se veio de qualquer outra página (como produtos.php), pega o preço normal.
-    $query = "SELECT id, descricao, valor AS valor_final, estoque, imagem FROM tb_produtos WHERE id = $id_produto";
+    $query = "SELECT id, descricao, valor AS valor_final, estoque FROM tb_produtos WHERE id = $id_produto";
 }
 
 $result_produto = mysqli_query($conexao, $query);
