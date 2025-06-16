@@ -52,24 +52,28 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <div class="carrosel" style="display: flex; justify-content: center;">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
+
                 <div class="carousel-item active">
-                    <img src="../assets/img/promocoes_notebook/promo01.jpg" alt="Promoção 1" class="d-block w-100">
+                    <a href="../carrinho/addPromocao.php?id_promo=1" title="Adicionar promoção ao carrinho">
+                        <img src="../assets/img/promocoes_notebook/promo01.jpg" alt="Promoção Coxinhas e Refrigerante" class="d-block w-100">
+                    </a>
                 </div>
-                <div class="carousel-item active">
-                    <img src="../assets/img/promocoes_notebook/promo02.jpg" class="d-block w-100">
+
+                <div class="carousel-item">
+                    <a href="../carrinho/addPromocao.php?id_promo=2" title="Adicionar promoção ao carrinho">
+                        <img src="../assets/img/promocoes_notebook/promo02.jpg" alt="Promoção 2 Lanche e Refrigerante" class="d-block w-100">
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
-
-
 
     <!-- Section-->
     <section class="py-5">
 
         <div class="titulo-pricipal">
             <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
-            <?php require_once 'modais/confirmaModal.php'; ?>
         </div>
 
         <div class="container px-4 px-lg-5 mt-5">
@@ -86,7 +90,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                             </div>
                             <div class="card-body p-4">
                                 <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
-                                <p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>
+
                                 <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
                                 <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
                             </div>
@@ -107,9 +111,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php
-        include("./zap.php")
-        ?>
     </section>
 
     <!---Footer--->

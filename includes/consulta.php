@@ -3,7 +3,7 @@
         include("conexao.php");
 
         // Executa a consulta usando MySQLi
-        $query = "SELECT * FROM tb_produtos order by descricao limit 3";
+        $query = "SELECT pr.id,pr.descricao ,pr.valor - (pr.valor * pro_pro.desconto) as valor, pr.estoque FROM tb_produto_pro pro_pro left join tb_produtos pr on pro_pro.id_produto = pr.id limit 3";
         $resultado = mysqli_query($conexao, $query);
 
         // Verifica se a consulta foi bem-sucedida

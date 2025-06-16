@@ -12,11 +12,25 @@
 
     // Executa a consulta usando MySQLi
     if ($consulta == null){
-        $pesquisa = mysqli_query($conexao,"SELECT * FROM tb_produtos order by descricao");
+    $pesquisa = mysqli_query($conexao, "SELECT 
+                        pr.id, pr.descricao, pr.valor AS valor_original, pr.estoque,
+                        (pr.valor - (pr.valor * pro.desconto)) as valor_promocional,
+                        pro.desconto
+                    FROM 
+                        tb_produtos pr
+                    LEFT JOIN 
+                        tb_produto_pro pro ON pr.id = pro.id_produto order by descricao");
 
     }else {
-        // Se houver consulta, usa UPPER para buscar sem diferenciar maiúsculas e minúsculas
-        $pesquisa = mysqli_query($conexao, "SELECT * FROM tb_produtos WHERE descricao LIKE UPPER ('%$consulta%') ");
+    // Se houver consulta, usa UPPER para buscar sem diferenciar maiúsculas e minúsculas
+    $pesquisa = mysqli_query($conexao, "SELECT 
+                        pr.id, pr.descricao, pr.valor AS valor_original, pr.estoque,
+                        (pr.valor - (pr.valor * pro.desconto)) as valor_promocional,
+                        pro.desconto
+                    FROM 
+                        tb_produtos pr
+                    LEFT JOIN 
+                        tb_produto_pro pro ON pr.id = pro.id_produto WHERE descricao LIKE UPPER ('%$consulta%') ");
     }
 
      // Verifica se a consulta foi bem-sucedida

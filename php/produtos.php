@@ -1,8 +1,3 @@
-<?php 
-@session_start();
-$tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,6 +45,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                 <?php
                 include("../includes/pesquisa.php");
                 foreach ($produtos as $produto):
+                    $em_promocao = !is_null($produto['desconto']);
                 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
@@ -60,7 +56,12 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                             <div class="card-body p-4">
                                 <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
                                 <!---<p class="card-text"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></p>--->
-                                <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
+                                <?php if ($em_promocao): ?>
+                                        <span class="text-muted text-decoration-line-through">R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?></span>
+                                        <span style="color:red; font-weight:bold;">R$ <?= number_format($produto['valor_promocional'], 2, ',', '.') ?></span>
+                                    <?php else: ?>
+                                        R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?>
+                                    <?php endif; ?>
                                 <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
                             </div>
                             <div class="quantity-controls">
@@ -116,10 +117,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             }
         });
     </script>
-
-<?php
-    include("./zap.php")
-    ?>
 
     <!--------------SCRIPTS/-------------->
 </body>

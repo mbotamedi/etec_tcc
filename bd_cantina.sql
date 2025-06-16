@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 15/06/2025 às 00:20
+-- Tempo de geração: 16/06/2025 às 19:24
 -- Versão do servidor: 11.3.2-MariaDB
 -- Versão do PHP: 8.3.6
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `user_id` int(11) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `payment`
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `tb_caixa` (
   `observacoes` text DEFAULT NULL,
   `diferenca` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id_caixa`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_caixa`
@@ -114,7 +114,8 @@ CREATE TABLE IF NOT EXISTS `tb_caixa` (
 INSERT INTO `tb_caixa` (`id_caixa`, `data_abertura`, `valor_abertura`, `data_fechamento`, `valor_fechamento`, `observacoes`, `diferenca`) VALUES
 (1, '2025-05-23 15:29:09', 100.00, '2025-05-23 18:00:00', 138.70, 'Caixa tudo OK', 0.00),
 (2, '2025-05-26 09:52:45', 100.00, '2025-05-26 12:57:00', 118.90, 'Caixa ok', 0.00),
-(3, '2025-05-26 13:16:30', 50.00, '2025-05-26 13:39:21', 52.40, 'Caixa ok', 0.00);
+(3, '2025-05-26 13:16:30', 50.00, '2025-05-26 13:39:21', 52.40, 'Caixa ok', 0.00),
+(4, '2025-06-14 21:57:48', 100.00, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -135,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `tb_categorias` (
 --
 
 INSERT INTO `tb_categorias` (`id`, `descricao`) VALUES
+(10, 'Promoções'),
 (9, 'cereais'),
 (2, 'choccolate'),
 (7, 'chá'),
@@ -5784,7 +5786,7 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_endereco` (
   `id_cidade` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_cliente_endereco`
@@ -5812,7 +5814,7 @@ CREATE TABLE IF NOT EXISTS `tb_movimentacoes_caixa` (
   `data_movimento` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_movimento`),
   KEY `id_caixa` (`id_caixa`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_movimentacoes_caixa`
@@ -5836,7 +5838,8 @@ INSERT INTO `tb_movimentacoes_caixa` (`id_movimento`, `id_caixa`, `tipo`, `descr
 (15, 3, 'ENTRADA', 'Pedido PDV #71', 10.00, '2025-05-26 13:17:59'),
 (16, 3, 'SAIDA', 'Pagamento  Fornecedor', 100.00, '2025-05-26 13:20:26'),
 (17, 3, 'ENTRADA', 'Dinheiro', 10.00, '2025-05-26 13:33:50'),
-(18, 3, 'ENTRADA', 'pagamento de salgado cida', 50.00, '2025-05-26 13:38:34');
+(18, 3, 'ENTRADA', 'pagamento de salgado cida', 50.00, '2025-05-26 13:38:34'),
+(19, 4, 'ENTRADA', 'Pedido PDV #73', 15.50, '2025-06-14 21:58:07');
 
 -- --------------------------------------------------------
 
@@ -5880,7 +5883,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos` (
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_endereco` (`id_endereco`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos`
@@ -5915,10 +5918,10 @@ INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_t
 (28, 1, NULL, '2025-05-20 19:28:57', 12.50, 'retirada', 'WEB', 'ONLINE'),
 (29, 1, NULL, '2025-05-20 19:33:09', 9.50, 'retirada', 'WEB', 'ONLINE'),
 (30, 1, NULL, '2025-05-20 19:33:15', 0.00, 'retirada', 'WEB', 'ONLINE'),
-(45, 1, NULL, '2025-05-20 21:19:07', 8.00, 'retirada', 'PDV', 'DINHEIRO'),
-(46, 1, NULL, '2025-05-20 21:19:34', 3.30, 'retirada', 'PDV', 'DINHEIRO'),
-(47, 1, NULL, '2025-05-20 21:30:46', 3.30, 'retirada', 'PDV', 'DINHEIRO'),
-(48, 1, NULL, '2025-05-20 21:51:33', 5.00, 'retirada', 'PDV', 'DINHEIRO'),
+(45, 1, NULL, '2025-05-20 21:19:07', 8.00, 'retirada', 'WEB', 'DINHEIRO'),
+(46, 1, NULL, '2025-05-20 21:19:34', 3.30, 'retirada', 'WEB', 'DINHEIRO'),
+(47, 1, NULL, '2025-05-20 21:30:46', 3.30, 'retirada', 'WEB', 'DINHEIRO'),
+(48, 1, NULL, '2025-05-20 21:51:33', 5.00, 'retirada', 'WEB', 'DINHEIRO'),
 (50, NULL, NULL, '2025-05-21 14:44:15', 4.00, 'retirada', 'PDV', 'DINHEIRO'),
 (51, NULL, NULL, '2025-05-21 14:46:36', 8.00, 'retirada', 'PDV', 'DINHEIRO'),
 (52, NULL, NULL, '2025-05-21 14:47:49', 7.20, 'retirada', 'PDV', 'DINHEIRO'),
@@ -5941,7 +5944,8 @@ INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_t
 (69, NULL, NULL, '2025-05-26 09:55:06', 24.20, 'retirada', 'PDV', 'DINHEIRO'),
 (70, NULL, NULL, '2025-05-26 13:17:36', 32.40, 'retirada', 'PDV', 'DINHEIRO'),
 (71, NULL, NULL, '2025-05-26 13:17:59', 10.00, 'retirada', 'PDV', 'CARTAO'),
-(72, 4, NULL, '2025-05-26 21:26:42', 7.50, 'retirada', 'WEB', 'ONLINE');
+(72, 4, NULL, '2025-05-26 21:26:42', 7.50, 'retirada', 'WEB', 'ONLINE'),
+(73, NULL, NULL, '2025-06-14 21:58:07', 15.50, 'retirada', 'PDV', 'DINHEIRO');
 
 -- --------------------------------------------------------
 
@@ -5959,7 +5963,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
   PRIMARY KEY (`id`),
   KEY `id_pedidos` (`id_pedidos`),
   KEY `id_produtos` (`id_produtos`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos_itens`
@@ -6046,7 +6050,10 @@ INSERT INTO `tb_pedidos_itens` (`id`, `id_pedidos`, `id_produtos`, `qtd`, `valor
 (78, 70, 7, 2, 7.00),
 (79, 71, 5, 1, 4.00),
 (80, 71, 16, 1, 6.00),
-(81, 72, 66, 1, 7.50);
+(81, 72, 66, 1, 7.50),
+(82, 73, 5, 1, 4.00),
+(83, 73, 6, 1, 4.50),
+(84, 73, 7, 1, 7.00);
 
 -- --------------------------------------------------------
 
@@ -6064,7 +6071,7 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `descricao` (`descricao`),
   KEY `id_subcategoria` (`id_subcategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_produtos`
@@ -6075,9 +6082,9 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 24),
 (3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 12),
 (4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 23),
-(5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 8),
-(6, 8, 'CASQUINHA DE SORVETE', 4.50, 30),
-(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 20),
+(5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 7),
+(6, 8, 'CASQUINHA DE SORVETE', 4.50, 29),
+(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 19),
 (8, 10, 'CACHORRO-QUENTE SIMPLES', 7.50, 25),
 (9, 13, 'SALGADINHO ASSADO RECHEADO COM QUEIJO', 7.50, 50),
 (10, 14, 'COXINHA DE FRANGO', 4.00, 30),
@@ -6145,6 +6152,82 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `tb_produto_pro`
+--
+
+DROP TABLE IF EXISTS `tb_produto_pro`;
+CREATE TABLE IF NOT EXISTS `tb_produto_pro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_produto` int(11) NOT NULL,
+  `desconto` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_produto` (`id_produto`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_produto_pro`
+--
+
+INSERT INTO `tb_produto_pro` (`id`, `id_produto`, `desconto`) VALUES
+(10, 69, 0.1),
+(11, 17, 0.05),
+(12, 57, 0.05);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_promocao_itens`
+--
+
+DROP TABLE IF EXISTS `tb_promocao_itens`;
+CREATE TABLE IF NOT EXISTS `tb_promocao_itens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_promocao` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `Vl_pro` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_promocao` (`id_promocao`),
+  KEY `id_produto` (`id_produto`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_promocao_itens`
+--
+
+INSERT INTO `tb_promocao_itens` (`id`, `id_promocao`, `id_produto`, `quantidade`, `Vl_pro`) VALUES
+(1, 1, 10, 2, 3.5),
+(2, 1, 57, 1, 8),
+(3, 2, 7, 1, 6.5),
+(4, 2, 57, 1, 4.5);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_promocoes_banner`
+--
+
+DROP TABLE IF EXISTS `tb_promocoes_banner`;
+CREATE TABLE IF NOT EXISTS `tb_promocoes_banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  `valor_promocional` decimal(10,2) NOT NULL,
+  `imagem_banner` varchar(255) DEFAULT NULL,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_promocoes_banner`
+--
+
+INSERT INTO `tb_promocoes_banner` (`id`, `descricao`, `valor_promocional`, `imagem_banner`, `ativo`) VALUES
+(1, 'Promo: Coxinhas + 1 Refri Lata', 15.00, 'promo01.jpg', 1),
+(2, 'Promo: 2 Lanche Natural + Refri Lata', 18.00, 'promo02.jpg', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `tb_subcategorias`
 --
 
@@ -6178,7 +6261,8 @@ INSERT INTO `tb_subcategorias` (`id`, `id_categoria`, `descricao`) VALUES
 (13, 3, 'Assados'),
 (14, 3, 'Fritos'),
 (15, 4, 'Natural'),
-(16, 9, 'Barra');
+(16, 9, 'Barra'),
+(17, 10, 'Pacotes Promocionais');
 
 -- --------------------------------------------------------
 
@@ -6199,7 +6283,7 @@ CREATE TABLE IF NOT EXISTS `tb_usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `fk_id_cargo` (`id_cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_usuarios`
@@ -6210,7 +6294,8 @@ INSERT INTO `tb_usuarios` (`id`, `id_cargo`, `nome`, `CPF`, `email`, `senha`, `C
 (2, 2, 'funcionario', '234.567.890-12', 'funcionario@gmail.com', '123', '(21) 99876-5432', '2025-03-24 14:32:59'),
 (3, 3, 'user', '345.678.901-23', 'user@gmail.com', '123', '(31) 98765-1234', '2025-04-04 14:32:59'),
 (5, 3, 'Pedro Santos', '567.890.123-45', 'pedro.santos@email.com', '123', '(51) 98765-3456', '2025-04-30 14:32:59'),
-(6, 2, 'Carlos Marinho', '554.655.666-82', 'marinho@gmail.com', '123', '(17)99125-5589', '2025-05-04 14:32:59');
+(6, 2, 'Carlos Marinho', '554.655.666-82', 'marinho@gmail.com', '123', '(17)99125-5589', '2025-05-04 14:32:59'),
+(8, 1, 'Maria', '257.000.000-00', 'silva@gmaila.com', '123', '(55) 56565-6556', '2025-06-15 03:37:27');
 
 -- --------------------------------------------------------
 
@@ -6287,29 +6372,10 @@ ALTER TABLE `tb_pedidos`
   ADD CONSTRAINT `tb_pedidos_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `tb_cliente_endereco` (`id`);
 
 --
--- Restrições para tabelas `tb_pedidos_itens`
---
-ALTER TABLE `tb_pedidos_itens`
-  ADD CONSTRAINT `tb_pedidos_itens_ibfk_1` FOREIGN KEY (`id_pedidos`) REFERENCES `tb_pedidos` (`id`),
-  ADD CONSTRAINT `tb_pedidos_itens_ibfk_2` FOREIGN KEY (`id_produtos`) REFERENCES `tb_produtos` (`id`);
-
---
 -- Restrições para tabelas `tb_produtos`
 --
 ALTER TABLE `tb_produtos`
   ADD CONSTRAINT `tb_produtos_ibfk_1` FOREIGN KEY (`id_subcategoria`) REFERENCES `tb_subcategorias` (`id`);
-
---
--- Restrições para tabelas `tb_subcategorias`
---
-ALTER TABLE `tb_subcategorias`
-  ADD CONSTRAINT `tb_subcategoria_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categorias` (`id`);
-
---
--- Restrições para tabelas `tb_usuarios`
---
-ALTER TABLE `tb_usuarios`
-  ADD CONSTRAINT `fk_id_cargo` FOREIGN KEY (`id_cargo`) REFERENCES `tb_nivel_usuario` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
