@@ -6162,16 +6162,16 @@ CREATE TABLE IF NOT EXISTS `tb_produto_pro` (
   `desconto` float NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_produto` (`id_produto`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_produto_pro`
 --
 
 INSERT INTO `tb_produto_pro` (`id`, `id_produto`, `desconto`) VALUES
-(10, 69, 0.1),
-(11, 17, 0.05),
-(12, 57, 0.05);
+(1, 69, 0.1),
+(2, 17, 0.05),
+(3, 57, 0.05);
 
 -- --------------------------------------------------------
 

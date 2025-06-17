@@ -11,26 +11,39 @@
     <form name="FrmCadastro" id="FrmCadastro" action="cadastros/produto_promocao/salvar.php" method="post">
       <!--begin::Body-->
       <div class="card-body">
+        
+        <div class="row mb-2">
+          <label for="txtpro" class="col-sm-2 col-form-label">Código da Promoção</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtpro" id="txtpro" class="form-control">
+          </div>
+        </div>
         <div class="row mb-2">
           <label for="txtcod" class="col-sm-2 col-form-label">Código do Produtos</label>
           <div class="col-sm-10">
             <input type="text" name="txtcod" id="txtcod" class="form-control">
           </div>
         </div>
-
         <div class="row mb-2">
-          <label for="txtdesconto" class="col-sm-2 col-form-label">Desconto</label>
-          <div class="col-sm-10">
-            <input type="text" name="txtdesconto" id="txtdesconto" class="form-control">
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <label for="txtprodutos" class="col-sm-2 col-form-label">Descrição (Opicional P/ Cadastro)</label>
+          <label for="txtprodutos" class="col-sm-2 col-form-label">Descrição </label>
           <div class="col-sm-10">
             <input type="text" name="txtprodutos" id="txtprodutos" class="form-control">
           </div>
         </div>
+
+        <div class="row mb-2">
+          <label for="txtqtd" class="col-sm-2 col-form-label">Quantidade</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtqtd" id="txtqtd" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label for="txtvl" class="col-sm-2 col-form-label">Valor</label>
+          <div class="col-sm-10">
+            <input type="text" name="txtvl" id="txtvl" class="form-control">
+          </div>
+        </div>
+
         <div class="row mb-2">
           <div class="col-sm-2">
             <img id="produto_foto" src="../assets/fotos/sem-foto.png" class="img-fluid">
@@ -82,7 +95,7 @@
       e.preventDefault();
       var pesquisa = $('#consulta').val();
       //alert(pesquisa);
-      $.post('cadastros/produto_promocao/listar.php', {
+      $.post('cadastros/banner/listar.php', {
         consulta: pesquisa
       }, function(retorno) {
         $("#listar").html(retorno);
@@ -93,45 +106,56 @@
     $("#btnSalvar").click(function() {
       /*$("#txtSubCategoria").css("border-color", "#CCC");*/
 
+      if ($("#txtpro").val() == '') {
+        $("#txtpro").css("border-color", "red");
+        alert("Favor Preencha o campo Código da Promoção");
+        $("#txtpro").focus();
+        return false;
+      }
+
       if ($("#txtcod").val() == '') {
         $("#txtcod").css("border-color", "red");
-        alert("Favor Preencha o campo Descrição do Produtos");
+        alert("Favor Preencha o campo Código do Produtos");
         $("#txtcod").focus();
         return false;
       }
 
-      /*if ($("#txtprodutos").val() == '') {
+      if ($("#txtprodutos").val() == '') {
         $("#txtprodutos").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
         $("#txtprodutos").focus();
         return false;
-      }*/
-
-      if ($("#txtdesconto").val() == '') {
-        $("#txtdesconto").css("border-color", "red");
+      }
+      
+      if ($("#txtqtd").val() == '') {
+        $("#txtqtd").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
-        $("#txtdesconto").focus();
+        $("#txtqtd").focus();
         return false;
       }
 
-
-
+      if ($("#txtvl").val() == '') {
+        $("#txtvl").css("border-color", "red");
+        alert("Favor Preencha o campo Descrição do Produtos");
+        $("#txtvl").focus();
+        return false;
+      }
 
       $('#FrmCadastro').ajaxForm(function(retorno) {
         // alert(retorno);
         mostraDialogo(retorno, 'info', 3000);
         $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-        $("#listar").load("cadastros/produto_promocao/listar.php");
+        $("#listar").load("cadastros/banner/listar.php");
         $("#id").val(0);
         $('#FrmCadastro')[0].reset();
-        $("#txtprodutos").focus();
+        $("#txtqtd").focus();
       });
 
     })
 
 
     $("#listar").html('<div class="spinner-border" role="status"><span class="sr-only"></span></div>');
-    $("#listar").load("cadastros/produto_promocao/listar.php");
+    $("#listar").load("cadastros/banner/listar.php");
 
   });
 </script>

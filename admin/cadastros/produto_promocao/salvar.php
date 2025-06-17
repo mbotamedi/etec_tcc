@@ -1,29 +1,30 @@
 <?php
 include("../../../includes/conexao.php");
-$produto = $_POST["txtprodutos"];
-$valor = $_POST["txtvalor"];
-$qtd = $_POST["txtquantidade"];
-$id        = $_POST["id"];
-$id_sub = $_POST["subcategoria"];
 
-//echo $id_sub;
+$desconto = $_POST["txtdesconto"];
+$desconto = (float) $desconto;
+$desc = $desconto / 100;
+
+$id = $_POST["id"];
+$id_cod   = $_POST["txtcod"];
+$id_cod = (int) $id_cod;
+
+
 
 if ($id == 0) {
-    $gravar = mysqli_query($conexao, "INSERT INTO tb_produtos (id_subcategoria, descricao, valor, estoque) VALUES 
-                                    ('$id_sub', '$produto', '$valor', '$qtd')");
+    $gravar = mysqli_query($conexao, "INSERT INTO tb_produto_pro (id_produto, desconto) VALUES 
+                                    ('$id_cod', '$desc')");
     $id = mysqli_insert_id($conexao);
 } else {
     $gravar = mysqli_query(
         $conexao,
-        "UPDATE tb_produtos SET id_subcategoria = '$id_sub ', 
-                descricao ='$produto',
-                valor = '$valor',
-                estoque = '$qtd' WHERE id = '$id'"
+        "UPDATE tb_produto_pro SET id_produto ='$id_cod',desconto = '$desc'  WHERE id = '$id'"
+
     );
 }
 
 if (isset($_FILES["foto"])) {
-    move_uploaded_file($_FILES["foto"]["tmp_name"], '../../../assets/fotos/' . $id . ".png");
+    move_uploaded_file($_FILES["foto"]["tmp_name"], '../../../assets/fotos/' . $id_cod . ".png");
 }
 
 if ($gravar) {
