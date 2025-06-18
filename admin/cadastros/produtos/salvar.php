@@ -22,9 +22,9 @@ if ($id == 0) {
     );
 }
 
-if (isset($_FILES["foto"])) {
+/*if (isset($_FILES["foto"])) {
     move_uploaded_file($_FILES["foto"]["tmp_name"], '../../../assets/fotos/' . $id . ".png");
-}
+}*/
 
 if ($gravar) {
     echo "Dados salvos com sucesso";

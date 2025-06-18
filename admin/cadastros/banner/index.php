@@ -8,10 +8,10 @@
     </div>
     <!--end::Header-->
     <!--begin::Form-->
-    <form name="FrmCadastro" id="FrmCadastro" action="cadastros/produto_promocao/salvar.php" method="post">
+    <form name="FrmCadastro" id="FrmCadastro" action="cadastros/banner/salvar.php" method="post" enctype="multipart/form-data">
       <!--begin::Body-->
       <div class="card-body">
-        
+
         <div class="row mb-2">
           <label for="txtpro" class="col-sm-2 col-form-label">Código da Promoção</label>
           <div class="col-sm-10">
@@ -48,19 +48,56 @@
           <div class="col-sm-2">
             <img id="produto_foto" src="../assets/fotos/sem-foto.png" class="img-fluid">
           </div>
+          <div class="card-footer">
+            <input type="hidden" name="id" id="id" value="0">
+            <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
+          </div>
         </div>
       </div>
   </div>
-  <!--end::Body-->
-  <!--begin::Footer-->
-  <div class="card-footer">
-    <input type="hidden" name="id" id="id" value="0">
-    <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
-  </div>
-  <!--end::Footer-->
   </form>
   <!--end::Form-->
 </div>
+
+<?php
+include("../includes/conexao.php");
+$query = "Select  ban.id from tb_promocoes_banner as ban";
+$banner = mysqli_query($conexao, $query);
+
+?>
+<form name="Banner" id="Banner" action="cadastros/banner/banner_img.php" method="post" enctype="multipart/form-data">
+  <div class="app-content" style="padding: 20px;">
+    <div class="row">
+      <!-- Select de Código do Banner -->
+      <div class="col-md-6">
+        <label for="cod_banner" class="form-label">Código do Banner</label>
+        <select name="cod_banner" id="cod_banner" class="form-select">
+          <option value="">Selecione Cod Banner</option>
+          <?php
+          include("../includes/conexao.php");
+          $query = "SELECT ban.id FROM tb_promocoes_banner AS ban";
+          $banner = mysqli_query($conexao, $query);
+
+          while ($b = mysqli_fetch_assoc($banner)) :
+          ?>
+            <option value="<?php echo $b['id']; ?>"><?php echo $b['id']; ?></option>
+          <?php endwhile; ?>
+        </select>
+      </div>
+
+      <!-- Input de Foto -->
+      <div class="col-md-6">
+        <label for="foto" class="form-label">Foto do Banner</label>
+        <input type="file" name="foto" id="foto" class="form-control">
+      </div>
+      <div class="card-footer" style="padding-top: 20px;padding-right: 20px;">
+        <input type="hidden" name="id" id="id" value="0">
+        <button type="submit" class="btn btn-success float-end" id="btnSalvar">Salvar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
 
 <div class="card card-primary card-outline mb-4">
   <div class="card-header d-flex justify-content-between align-items-center">
@@ -80,8 +117,6 @@
 </div>
 
 
-
-</div>
 
 
 
@@ -126,7 +161,7 @@
         $("#txtprodutos").focus();
         return false;
       }
-      
+
       if ($("#txtqtd").val() == '') {
         $("#txtqtd").css("border-color", "red");
         alert("Favor Preencha o campo Descrição do Produtos");
@@ -148,6 +183,7 @@
         $("#listar").load("cadastros/banner/listar.php");
         $("#id").val(0);
         $('#FrmCadastro')[0].reset();
+        $('#Banner')[0].reset();
         $("#txtqtd").focus();
       });
 

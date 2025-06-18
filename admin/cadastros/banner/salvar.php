@@ -6,7 +6,16 @@ $cod_pro   = $_POST["txtcod"];
 $cod_promocao = $_POST["txtpro"];
 $qtd = $_POST["txtqtd"];
 $vl = $_POST["txtvl"];
-
+/*echo $id;
+echo "<br>";
+echo 'Produto: ' . $cod_pro;
+echo "<br>";
+echo 'Promoção: ' . $cod_promocao;
+echo "<br>";
+echo 'Quantidade: ' . $qtd;
+echo "<br>";
+echo 'Valor: ' . $vl;
+print_r($_FILES["foto"]);*/
 
 if ($id == 0) {
     $gravar = mysqli_query($conexao, "INSERT INTO tb_promocao_itens (id_promocao, id_produto, quantidade, Vl_pro) VALUES 
@@ -15,17 +24,18 @@ if ($id == 0) {
 } else {
     $gravar = mysqli_query(
         $conexao,
-        "UPDATE tb_promocao_itens SET id_promocao ='$cod_promocao', id_produto ='$id_cod', quantidade ='$qtd', Vl_pro ='$vl'  WHERE id = '$id'"
+        "UPDATE tb_promocao_itens SET id_promocao ='$cod_promocao', id_produto ='$cod_pro', quantidade ='$qtd', Vl_pro ='$vl'  WHERE id = '$id'"
 
     );
 }
 
-if (isset($_FILES["foto"])) {
-    move_uploaded_file($_FILES["foto"]["tmp_name"], '../../../assets/fotos/' . $cod_pro . ".png");
-}
+/*if (isset($_FILES["foto"])) {
+    move_uploaded_file($_FILES["foto"]["tmp_name"], '../../../assets/img/promocoes_notebook/promo' . $cod_promocao . ".jpg");
+}*/
 
 if ($gravar) {
     echo "Dados salvos com sucesso";
 } else {
-    echo "Erro ao tentar Gravar SubCategoria";
+    echo "Erro ao tentar Gravar ";
 }
+

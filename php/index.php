@@ -55,13 +55,13 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
                 <div class="carousel-item active">
                     <a href="../carrinho/addPromocao.php?id_promo=1" title="Adicionar promoção ao carrinho">
-                        <img src="../assets/img/promocoes_notebook/promo01.jpg" alt="Promoção Coxinhas e Refrigerante" class="d-block w-100">
+                        <img src="../assets/img/promocoes_notebook/promo1.jpg" alt="Promoção Coxinhas e Refrigerante" class="d-block w-100">
                     </a>
                 </div>
 
                 <div class="carousel-item">
                     <a href="../carrinho/addPromocao.php?id_promo=2" title="Adicionar promoção ao carrinho">
-                        <img src="../assets/img/promocoes_notebook/promo02.jpg" alt="Promoção 2 Lanche e Refrigerante" class="d-block w-100">
+                        <img src="../assets/img/promocoes_notebook/promo2.jpg" alt="Promoção 2 Lanche e Refrigerante" class="d-block w-100">
                     </a>
                 </div>
 
