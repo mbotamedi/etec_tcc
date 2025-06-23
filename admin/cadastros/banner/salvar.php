@@ -6,16 +6,6 @@ $cod_pro   = $_POST["txtcod"];
 $cod_promocao = $_POST["txtpro"];
 $qtd = $_POST["txtqtd"];
 $vl = $_POST["txtvl"];
-/*echo $id;
-echo "<br>";
-echo 'Produto: ' . $cod_pro;
-echo "<br>";
-echo 'Promoção: ' . $cod_promocao;
-echo "<br>";
-echo 'Quantidade: ' . $qtd;
-echo "<br>";
-echo 'Valor: ' . $vl;
-print_r($_FILES["foto"]);*/
 
 if ($id == 0) {
     $gravar = mysqli_query($conexao, "INSERT INTO tb_promocao_itens (id_promocao, id_produto, quantidade, Vl_pro) VALUES 
