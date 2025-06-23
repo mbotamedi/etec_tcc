@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 23/06/2025 às 19:52
+-- Tempo de geração: 23/06/2025 às 20:45
 -- Versão do servidor: 11.3.2-MariaDB
 -- Versão do PHP: 8.3.6
 
@@ -5791,7 +5791,7 @@ CREATE TABLE IF NOT EXISTS `tb_movimentacoes_caixa` (
   `data_movimento` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_movimento`),
   KEY `id_caixa` (`id_caixa`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_movimentacoes_caixa`
@@ -5816,7 +5816,9 @@ INSERT INTO `tb_movimentacoes_caixa` (`id_movimento`, `id_caixa`, `tipo`, `descr
 (16, 3, 'SAIDA', 'Pagamento  Fornecedor', 100.00, '2025-05-26 13:20:26'),
 (17, 3, 'ENTRADA', 'Dinheiro', 10.00, '2025-05-26 13:33:50'),
 (18, 3, 'ENTRADA', 'pagamento de salgado cida', 50.00, '2025-05-26 13:38:34'),
-(19, 4, 'ENTRADA', 'Pedido PDV #73', 15.50, '2025-06-14 21:58:07');
+(19, 4, 'ENTRADA', 'Pedido PDV #73', 15.50, '2025-06-14 21:58:07'),
+(20, 4, 'ENTRADA', 'Pedido PDV #75', 7.20, '2025-06-23 17:03:12'),
+(21, 4, 'ENTRADA', 'Pedido PDV #86', 13.00, '2025-06-23 17:40:07');
 
 -- --------------------------------------------------------
 
@@ -5859,14 +5861,16 @@ CREATE TABLE IF NOT EXISTS `tb_payments` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_pedidos` (`id_pedidos`),
   UNIQUE KEY `uk_reference_id` (`reference_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_payments`
 --
 
 INSERT INTO `tb_payments` (`id`, `id_pedidos`, `reference_id`, `status`, `response_data`, `created_at`, `updated_at`) VALUES
-(1, 74, 'PEDIDO_74_1750708138', 'PAID', '{\"id\":\"ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\",\"reference_id\":\"PEDIDO_74_1750708138\",\"created_at\":\"2025-06-23T16:48:59.232-03:00\",\"customer\":{\"name\":\"Maria Hernandes Silva\",\"email\":\"maria@gmail.com\",\"tax_id\":\"98164251062\"},\"items\":[{\"name\":\"Pedido #74\",\"quantity\":1,\"unit_amount\":1155}],\"qr_codes\":[{\"id\":\"QRCO_3530FA62-0EB8-409A-AD72-651841044B85\",\"expiration_date\":\"2025-06-23T17:48:58.000-03:00\",\"amount\":{\"value\":1155},\"text\":\"00020101021226850014br.gov.bcb.pix2563api-h.pagseguro.com\\/pix\\/v2\\/3530FA62-0EB8-409A-AD72-651841044B8527600016BR.COM.PAGSEGURO01363530FA62-0EB8-409A-AD72-651841044B85520489995303986540511.555802BR5922Marcelo Cunha Botamedi6009Bebedouro62070503***630469A7\",\"arrangements\":[\"PIX\"],\"links\":[{\"rel\":\"QRCODE.PNG\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_3530FA62-0EB8-409A-AD72-651841044B85\\/png\",\"media\":\"image\\/png\",\"type\":\"GET\"},{\"rel\":\"QRCODE.BASE64\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_3530FA62-0EB8-409A-AD72-651841044B85\\/base64\",\"media\":\"text\\/plain\",\"type\":\"GET\"}]}],\"notification_urls\":[\"https:\\/\\/4a02-2804-14d-8470-8151-c0e5-5f9d-d572-ca6d.ngrok-free.app\\/etec_tcc\\/pgseguro\\/notificacao.php\"],\"links\":[{\"rel\":\"SELF\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\",\"media\":\"application\\/json\",\"type\":\"GET\"},{\"rel\":\"PAY\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\\/pay\",\"media\":\"application\\/json\",\"type\":\"POST\"}],\"http_code\":201}', '2025-06-23 19:48:58', '2025-06-23 19:49:19');
+(1, 74, 'PEDIDO_74_1750708138', 'PAID', '{\"id\":\"ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\",\"reference_id\":\"PEDIDO_74_1750708138\",\"created_at\":\"2025-06-23T16:48:59.232-03:00\",\"customer\":{\"name\":\"Maria Hernandes Silva\",\"email\":\"maria@gmail.com\",\"tax_id\":\"98164251062\"},\"items\":[{\"name\":\"Pedido #74\",\"quantity\":1,\"unit_amount\":1155}],\"qr_codes\":[{\"id\":\"QRCO_3530FA62-0EB8-409A-AD72-651841044B85\",\"expiration_date\":\"2025-06-23T17:48:58.000-03:00\",\"amount\":{\"value\":1155},\"text\":\"00020101021226850014br.gov.bcb.pix2563api-h.pagseguro.com\\/pix\\/v2\\/3530FA62-0EB8-409A-AD72-651841044B8527600016BR.COM.PAGSEGURO01363530FA62-0EB8-409A-AD72-651841044B85520489995303986540511.555802BR5922Marcelo Cunha Botamedi6009Bebedouro62070503***630469A7\",\"arrangements\":[\"PIX\"],\"links\":[{\"rel\":\"QRCODE.PNG\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_3530FA62-0EB8-409A-AD72-651841044B85\\/png\",\"media\":\"image\\/png\",\"type\":\"GET\"},{\"rel\":\"QRCODE.BASE64\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_3530FA62-0EB8-409A-AD72-651841044B85\\/base64\",\"media\":\"text\\/plain\",\"type\":\"GET\"}]}],\"notification_urls\":[\"https:\\/\\/4a02-2804-14d-8470-8151-c0e5-5f9d-d572-ca6d.ngrok-free.app\\/etec_tcc\\/pgseguro\\/notificacao.php\"],\"links\":[{\"rel\":\"SELF\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\",\"media\":\"application\\/json\",\"type\":\"GET\"},{\"rel\":\"PAY\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\\/pay\",\"media\":\"application\\/json\",\"type\":\"POST\"}],\"http_code\":201}', '2025-06-23 19:48:58', '2025-06-23 19:49:19'),
+(2, 82, 'PEDIDO_82_1750710261', 'PAID', '{\"id\":\"ORDE_FADD2D93-D8A4-4E0F-BE10-67B976F6837D\",\"reference_id\":\"PEDIDO_82_1750710261\",\"created_at\":\"2025-06-23T17:24:22.079-03:00\",\"customer\":{\"name\":\"Maria Hernandes Silva\",\"email\":\"maria@gmail.com\",\"tax_id\":\"98164251062\"},\"items\":[{\"name\":\"Pedido #82\",\"quantity\":1,\"unit_amount\":1100}],\"qr_codes\":[{\"id\":\"QRCO_A8B7DA9D-26EA-4DAB-B2B9-D30227B34AA5\",\"expiration_date\":\"2025-06-23T18:24:21.000-03:00\",\"amount\":{\"value\":1100},\"text\":\"00020101021226850014br.gov.bcb.pix2563api-h.pagseguro.com\\/pix\\/v2\\/A8B7DA9D-26EA-4DAB-B2B9-D30227B34AA527600016BR.COM.PAGSEGURO0136A8B7DA9D-26EA-4DAB-B2B9-D30227B34AA5520489995303986540511.005802BR5922Marcelo Cunha Botamedi6009Bebedouro62070503***6304214C\",\"arrangements\":[\"PIX\"],\"links\":[{\"rel\":\"QRCODE.PNG\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_A8B7DA9D-26EA-4DAB-B2B9-D30227B34AA5\\/png\",\"media\":\"image\\/png\",\"type\":\"GET\"},{\"rel\":\"QRCODE.BASE64\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_A8B7DA9D-26EA-4DAB-B2B9-D30227B34AA5\\/base64\",\"media\":\"text\\/plain\",\"type\":\"GET\"}]}],\"notification_urls\":[\"https:\\/\\/4a02-2804-14d-8470-8151-c0e5-5f9d-d572-ca6d.ngrok-free.app\\/etec_tcc\\/pgseguro\\/notificacao.php\"],\"links\":[{\"rel\":\"SELF\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_FADD2D93-D8A4-4E0F-BE10-67B976F6837D\",\"media\":\"application\\/json\",\"type\":\"GET\"},{\"rel\":\"PAY\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_FADD2D93-D8A4-4E0F-BE10-67B976F6837D\\/pay\",\"media\":\"application\\/json\",\"type\":\"POST\"}],\"http_code\":201}', '2025-06-23 20:24:21', '2025-06-23 20:24:58'),
+(3, 84, 'PEDIDO_84_1750710696', 'PAID', '{\"id\":\"ORDE_AD4C7813-75A6-42AA-9AAA-0580F8657B0C\",\"reference_id\":\"PEDIDO_84_1750710696\",\"created_at\":\"2025-06-23T17:31:37.471-03:00\",\"customer\":{\"name\":\"Maria Hernandes Silva\",\"email\":\"maria@gmail.com\",\"tax_id\":\"98164251062\"},\"items\":[{\"name\":\"Pedido #84\",\"quantity\":1,\"unit_amount\":750}],\"qr_codes\":[{\"id\":\"QRCO_941AB83F-C0E2-4012-9D10-66FD5A13F122\",\"expiration_date\":\"2025-06-23T18:31:36.000-03:00\",\"amount\":{\"value\":750},\"text\":\"00020101021226850014br.gov.bcb.pix2563api-h.pagseguro.com\\/pix\\/v2\\/941AB83F-C0E2-4012-9D10-66FD5A13F12227600016BR.COM.PAGSEGURO0136941AB83F-C0E2-4012-9D10-66FD5A13F12252048999530398654047.505802BR5922Marcelo Cunha Botamedi6009Bebedouro62070503***6304CA23\",\"arrangements\":[\"PIX\"],\"links\":[{\"rel\":\"QRCODE.PNG\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_941AB83F-C0E2-4012-9D10-66FD5A13F122\\/png\",\"media\":\"image\\/png\",\"type\":\"GET\"},{\"rel\":\"QRCODE.BASE64\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_941AB83F-C0E2-4012-9D10-66FD5A13F122\\/base64\",\"media\":\"text\\/plain\",\"type\":\"GET\"}]}],\"notification_urls\":[\"https:\\/\\/4a02-2804-14d-8470-8151-c0e5-5f9d-d572-ca6d.ngrok-free.app\\/etec_tcc\\/pgseguro\\/notificacao.php\"],\"links\":[{\"rel\":\"SELF\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_AD4C7813-75A6-42AA-9AAA-0580F8657B0C\",\"media\":\"application\\/json\",\"type\":\"GET\"},{\"rel\":\"PAY\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_AD4C7813-75A6-42AA-9AAA-0580F8657B0C\\/pay\",\"media\":\"application\\/json\",\"type\":\"POST\"}],\"http_code\":201}', '2025-06-23 20:31:36', '2025-06-23 20:31:56');
 
 -- --------------------------------------------------------
 
@@ -5888,7 +5892,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos` (
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_endereco` (`id_endereco`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos`
@@ -5927,31 +5931,43 @@ INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_t
 (46, 1, NULL, '2025-05-20 21:19:34', 3.30, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
 (47, 1, NULL, '2025-05-20 21:30:46', 3.30, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
 (48, 1, NULL, '2025-05-20 21:51:33', 5.00, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
-(50, NULL, NULL, '2025-05-21 14:44:15', 4.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(51, NULL, NULL, '2025-05-21 14:46:36', 8.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(52, NULL, NULL, '2025-05-21 14:47:49', 7.20, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(53, NULL, NULL, '2025-05-21 14:48:26', 13.50, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(54, NULL, NULL, '2025-05-21 15:01:20', 25.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(55, NULL, NULL, '2025-05-21 15:05:38', 5.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(56, NULL, NULL, '2025-05-21 15:09:50', 5.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(57, NULL, NULL, '2025-05-21 15:21:01', 15.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(58, NULL, NULL, '2025-05-21 18:56:24', 3.30, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(50, NULL, NULL, '2025-05-21 14:44:15', 4.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(51, NULL, NULL, '2025-05-21 14:46:36', 8.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(52, NULL, NULL, '2025-05-21 14:47:49', 7.20, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(53, NULL, NULL, '2025-05-21 14:48:26', 13.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(54, NULL, NULL, '2025-05-21 15:01:20', 25.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(55, NULL, NULL, '2025-05-21 15:05:38', 5.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(56, NULL, NULL, '2025-05-21 15:09:50', 5.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(57, NULL, NULL, '2025-05-21 15:21:01', 15.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(58, NULL, NULL, '2025-05-21 18:56:24', 3.30, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
 (59, 4, NULL, '2025-05-23 08:55:12', 13.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
 (60, 4, NULL, '2025-05-23 11:01:02', 7.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
 (61, 2, NULL, '2025-05-23 12:43:52', 15.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
 (62, 2, 6, '2025-05-23 13:38:55', 7.50, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
 (63, 2, 6, '2025-05-23 15:03:53', 7.50, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
 (64, 2, NULL, '2025-05-23 16:17:11', 6.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
-(65, NULL, NULL, '2025-05-23 16:28:02', 17.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(66, NULL, NULL, '2025-05-23 16:33:14', 7.20, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(67, NULL, NULL, '2025-05-23 16:37:02', 4.50, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(68, NULL, NULL, '2025-05-26 09:54:22', 34.70, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(69, NULL, NULL, '2025-05-26 09:55:06', 24.20, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(70, NULL, NULL, '2025-05-26 13:17:36', 32.40, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(71, NULL, NULL, '2025-05-26 13:17:59', 10.00, 'retirada', 'PDV', 'CARTAO', 'AGUARDANDO'),
+(65, NULL, NULL, '2025-05-23 16:28:02', 17.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(66, NULL, NULL, '2025-05-23 16:33:14', 7.20, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(67, NULL, NULL, '2025-05-23 16:37:02', 4.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(68, NULL, NULL, '2025-05-26 09:54:22', 34.70, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(69, NULL, NULL, '2025-05-26 09:55:06', 24.20, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(70, NULL, NULL, '2025-05-26 13:17:36', 32.40, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(71, NULL, NULL, '2025-05-26 13:17:59', 10.00, 'retirada', 'PDV', 'CARTAO', 'PAGO'),
 (72, 4, NULL, '2025-05-26 21:26:42', 7.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
-(73, NULL, NULL, '2025-06-14 21:58:07', 15.50, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
-(74, 4, NULL, '2025-06-23 16:48:53', 11.55, 'retirada', 'WEB', 'ONLINE', 'PAGO');
+(73, NULL, NULL, '2025-06-14 21:58:07', 15.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(74, 4, NULL, '2025-06-23 16:48:53', 11.55, 'retirada', 'WEB', 'ONLINE', 'PAGO'),
+(75, NULL, NULL, '2025-06-23 17:03:12', 7.20, 'retirada', 'PDV', 'CARTAO', 'PAGO'),
+(76, NULL, NULL, '2025-06-23 17:07:13', 10.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(77, NULL, NULL, '2025-06-23 17:09:54', 10.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(78, NULL, NULL, '2025-06-23 17:10:04', 10.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(79, NULL, NULL, '2025-06-23 17:10:55', 10.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(80, NULL, NULL, '2025-06-23 17:20:28', 10.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(81, NULL, NULL, '2025-06-23 17:21:30', 10.50, 'retirada', 'PDV', 'DINHEIRO', 'PAGO'),
+(82, 4, NULL, '2025-06-23 17:24:06', 11.00, 'retirada', 'WEB', 'ONLINE', 'PAGO'),
+(83, 4, NULL, '2025-06-23 17:26:30', 7.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(84, 4, NULL, '2025-06-23 17:31:34', 7.50, 'retirada', 'WEB', 'ONLINE', 'PAGO'),
+(85, NULL, NULL, '2025-06-23 17:35:03', 6.50, 'retirada', 'PDV', 'CARTAO', 'PAGO'),
+(86, NULL, NULL, '2025-06-23 17:40:07', 13.00, 'retirada', 'PDV', 'DINHEIRO', 'PAGO');
 
 -- --------------------------------------------------------
 
@@ -5969,7 +5985,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
   PRIMARY KEY (`id`),
   KEY `id_pedidos` (`id_pedidos`),
   KEY `id_produtos` (`id_produtos`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos_itens`
@@ -6066,7 +6082,14 @@ INSERT INTO `tb_pedidos_itens` (`id`, `id_pedidos`, `id_produtos`, `qtd`, `valor
 (88, 79, 7, 1, 6.50),
 (89, 79, 57, 1, 4.50),
 (90, 74, 15, 1, 8.50),
-(91, 74, 61, 1, 3.05);
+(91, 74, 61, 1, 3.05),
+(92, 75, 2, 1, 7.20),
+(93, 82, 7, 1, 6.50),
+(94, 82, 57, 1, 4.50),
+(95, 83, 66, 1, 7.50),
+(96, 84, 65, 1, 7.50),
+(97, 86, 7, 1, 7.00),
+(98, 86, 16, 1, 6.00);
 
 -- --------------------------------------------------------
 
@@ -6092,12 +6115,12 @@ CREATE TABLE IF NOT EXISTS `tb_produtos` (
 
 INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoque`) VALUES
 (1, 1, 'GARRAFA DE ÁGUA MINERAL (500ML)', 3.30, 84),
-(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 24),
+(2, 2, 'GARRAFA DE CHÁ GELADO (1.5L)', 7.20, 23),
 (3, 15, 'MIX DE FRUTAS FRESCAS', 6.50, 12),
 (4, 5, 'IOGURTE NATURAL COM GRANOLA', 5.00, 23),
 (5, 7, 'FATIA DE BOLO DE CHOCOLATE', 4.00, 7),
 (6, 8, 'CASQUINHA DE SORVETE', 4.50, 29),
-(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 19),
+(7, 9, 'SANDUÍCHE COM PEITO DE PERU E QUEIJO', 7.00, 17),
 (8, 10, 'CACHORRO-QUENTE SIMPLES', 7.50, 25),
 (9, 13, 'SALGADINHO ASSADO RECHEADO COM QUEIJO', 7.50, 50),
 (10, 14, 'COXINHA DE FRANGO', 4.00, 30),
@@ -6106,7 +6129,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (13, 14, 'PIPOCA DOCE OU SALGADA', 2.50, 50),
 (14, 13, 'FATIA DE TORTA DE FRANGO', 5.50, 15),
 (15, 13, 'FATIA DE PIZZA DE MUSSARELA', 6.00, 6),
-(16, 15, 'SUCO NATURAL DE LARANJA', 6.00, 19),
+(16, 15, 'SUCO NATURAL DE LARANJA', 6.00, 18),
 (17, 3, 'KITCAT', 5.00, 20),
 (18, 3, 'TRENTO AVELÃ', 8.50, 50),
 (19, 3, 'TRENTO DRAK', 8.50, 50),
@@ -6147,7 +6170,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (54, 3, 'BIS XTRA', 18.00, 57),
 (55, 2, 'CHÁ MATE LEÃO LIMÃO', 3.19, 30),
 (56, 2, 'CHÁ MATE LEÃO PESSEGO', 3.19, 30),
-(57, 11, 'COCA-COLA', 4.20, 17),
+(57, 11, 'COCA-COLA', 4.20, 16),
 (58, 11, 'COCA-COLA ZERO', 4.20, 18),
 (59, 11, 'SPRITE', 3.69, 15),
 (60, 11, 'FANTA LARANJA', 4.70, 20),
@@ -6155,8 +6178,8 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (62, 12, 'COCA-COLA ZERO 500ML', 6.99, 30),
 (63, 12, 'COCA-COLA 500ML', 6.99, 30),
 (64, 16, 'BARRA NUTRY BOLO_CHOCOLATE', 6.00, 98),
-(65, 4, 'BALA FINI TUBES', 7.50, 42),
-(66, 4, 'BALA FINI BANANA', 7.50, 15),
+(65, 4, 'BALA FINI TUBES', 7.50, 41),
+(66, 4, 'BALA FINI BANANA', 7.50, 14),
 (67, 4, 'AROS DE MORANGO AZEDINHOS 80G', 7.50, 45),
 (68, 4, 'BALA  ESCOVINHAS FINI', 7.50, 36),
 (69, 3, 'BOMBOM OREO', 2.80, 71),

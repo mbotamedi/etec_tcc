@@ -125,8 +125,9 @@ if (isset($_POST['finalizar'])) {
 
             if ($estoque_valido) {
                 // Insere o pedido
-                $query_pedido = "INSERT INTO tb_pedidos (emissao, valor_total, tipo_entrega, tipo_pedido, metodo_pagamento) 
-                                 VALUES ('$emissao', '$total', '$tipo_entrega', '$tipo', '$metodo_pagamento')";
+                $status = 'PAGO';
+                $query_pedido = "INSERT INTO tb_pedidos (emissao, valor_total, tipo_entrega, tipo_pedido, metodo_pagamento, status_pagamento) 
+                                 VALUES ('$emissao', '$total', '$tipo_entrega', '$tipo', '$metodo_pagamento','$status')";
                 mysqli_query($conexao, $query_pedido);
                 $id_pedido = mysqli_insert_id($conexao);
 
@@ -284,7 +285,7 @@ if (isset($_POST['cancelar'])) {
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-4" style="padding: 20px;">
         <h2 class="text-center mb-4">Ponto de Venda</h2>
 
         <div class="row">
