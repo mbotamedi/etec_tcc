@@ -20,50 +20,123 @@ if (!isset($_SESSION["carrinho"]) || count($_SESSION["carrinho"]) <= 0) {
 
 // Processa a finalização do pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tipo_entrega = $_POST['tipo_entrega']; // 'entrega' ou 'retirada'
-    $id_endereco = $_POST["id_endereco"];
+    $tipo_entrega = mysqli_real_escape_string($conexao, $_POST['tipo_entrega']);
+    $id_endereco = mysqli_real_escape_string($conexao, $_POST['id_endereco'] ?? '');
+    
+    // --- CORREÇÃO: Tratamento para o valor do método de pagamento ---
+    // Pega o valor do formulário (minúsculo) para usar na lógica PHP
+    $metodo_pagamento_form = mysqli_real_escape_string($conexao, $_POST['metodo_pagamento'] ?? 'online');
+    // Cria uma versão em MAIÚSCULAS para ser salva no banco de dados
+    $metodo_pagamento_db = strtoupper($metodo_pagamento_form);
+    // --- FIM DA CORREÇÃO ---
+    
     $id_endereco_value = ($tipo_entrega == 'entrega' && !empty($id_endereco)) ? "'$id_endereco'" : "NULL";
-    $id_pedido = "WEB";
+    $tipo_pedido = "WEB";
+
     // Validação
     if ($tipo_entrega == 'entrega' && empty($id_endereco)) {
         $erro = "Por favor, selecione ou cadastre um endereço para entrega.";
+    } elseif (!in_array($metodo_pagamento_form, ['dinheiro', 'cartao', 'online'])) {
+        $erro = "Método de pagamento inválido.";
     } else {
-        // Insere o pedido na tabela tb_pedidos
-        $emissao = date('Y-m-d H:i:s');
-        $valor_total = 0;
-
-        foreach ($_SESSION["carrinho"] as $item) {
-            $valor_total += $item['valor'] * $item['qtd'];
+        // Verifica se há caixa aberto para pagamentos presenciais
+        $id_caixa = null;
+        if (in_array($metodo_pagamento_form, ['dinheiro', 'cartao'])) {
+            $query_caixa = "SELECT id_caixa FROM tb_caixa WHERE data_fechamento IS NULL ORDER BY id_caixa DESC LIMIT 1";
+            $result_caixa = mysqli_query($conexao, $query_caixa);
+            if (mysqli_num_rows($result_caixa) == 0) {
+                $erro = "Nenhum caixa aberto para registrar pagamento em dinheiro ou cartão.";
+            } else {
+                $id_caixa = mysqli_fetch_assoc($result_caixa)['id_caixa'];
+            }
         }
 
-        // Se for retirada, pode adicionar um valor fixo ou desconto (opcional)
-        if ($tipo_entrega == 'retirada') {
-            //$valor_total -= 5.00; // Exemplo de desconto para retirada
+        // Validação de estoque
+        if (!isset($erro)) {
+            foreach ($_SESSION["carrinho"] as $item) {
+                $id_produto = $item['id'];
+                $qtd = $item['qtd'];
+                // CORREÇÃO: Evita o warning de 'Undefined array key "nome"'
+                $nome_produto = isset($item['nome']) ? mysqli_real_escape_string($conexao, $item['nome']) : "Produto ID $id_produto";
+                
+                $query_estoque = "SELECT estoque FROM tb_produtos WHERE id = '$id_produto'";
+                $result_estoque = mysqli_query($conexao, $query_estoque);
+                if ($result_estoque && mysqli_num_rows($result_estoque) > 0) {
+                    $estoque = mysqli_fetch_assoc($result_estoque)['estoque'];
+                    if ($estoque < $qtd) {
+                        $erro = "Produto $nome_produto com estoque insuficiente.";
+                        break;
+                    }
+                } else {
+                    $erro = "Erro ao verificar estoque do produto $nome_produto.";
+                    break;
+                }
+            }
         }
 
-        $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega, tipo_pedido) 
-                     VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega', '$id_pedido')";
-        mysqli_query($conexao, $query_pedido);
-        $id_pedido = mysqli_insert_id($conexao);
+        if (!isset($erro)) {
+            $conexao->begin_transaction(); 
 
-        // Insere os itens do pedido
-        foreach ($_SESSION["carrinho"] as $item) {
-            $id_produto = $item['id'];
-            $qtd = $item['qtd'];
-            $valor_unitario = $item['valor'];
+            try {
+                $emissao = date('Y-m-d H:i:s');
+                $valor_total = 0;
 
-            $query_item = "INSERT INTO tb_pedidos_itens (id_pedidos, id_produtos, qtd, valor_untiario) 
-                       VALUES ('$id_pedido', '$id_produto', '$qtd', '$valor_unitario')";
-            mysqli_query($conexao, $query_item);
+                foreach ($_SESSION["carrinho"] as $item) {
+                    $valor_total += $item['valor'] * $item['qtd'];
+                }
+                
+                $status_pagamento = ($metodo_pagamento_form == 'online') ? 'AGUARDANDO' : 'NAO_APLICAVEL';
 
-            // Atualiza o estoque
-            $query_estoque = "UPDATE tb_produtos SET estoque = estoque - $qtd WHERE id = '$id_produto'";
-            mysqli_query($conexao, $query_estoque);
+                // Usando a variável com valor em MAIÚSCULO para o banco de dados
+                $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega, tipo_pedido, metodo_pagamento, status_pagamento) 
+                                 VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega', '$tipo_pedido', '$metodo_pagamento_db', '$status_pagamento')";
+                
+                if (!mysqli_query($conexao, $query_pedido)) {
+                    throw new Exception(mysqli_error($conexao));
+                }
+                $id_pedido = mysqli_insert_id($conexao);
+
+                foreach ($_SESSION["carrinho"] as $item) {
+                    $id_produto = mysqli_real_escape_string($conexao, $item['id']);
+                    $qtd = mysqli_real_escape_string($conexao, $item['qtd']);
+                    $valor_unitario = mysqli_real_escape_string($conexao, $item['valor']);
+
+                    $query_item = "INSERT INTO tb_pedidos_itens (id_pedidos, id_produtos, qtd, valor_untiario) 
+                                   VALUES ('$id_pedido', '$id_produto', '$qtd', '$valor_unitario')";
+                    if (!mysqli_query($conexao, $query_item)) {
+                        throw new Exception(mysqli_error($conexao));
+                    }
+
+                    $query_estoque = "UPDATE tb_produtos SET estoque = estoque - $qtd WHERE id = '$id_produto'";
+                    if (!mysqli_query($conexao, $query_estoque)) {
+                        throw new Exception(mysqli_error($conexao));
+                    }
+                }
+
+                $conexao->commit(); 
+                unset($_SESSION['carrinho']);
+
+                // Usando a variável do formulário (minúscula) para a lógica do IF
+                if ($metodo_pagamento_form === 'online') {
+                    $_SESSION['pagamento_id_pedido'] = $id_pedido;
+                    header("Location: ../../pgseguro/index.php");
+                    exit;
+                } else {
+                     if (in_array($metodo_pagamento_form, ['dinheiro', 'cartao']) && $id_caixa) {
+                        $descricao = "Pedido Web #$id_pedido";
+                        $query_mov = "INSERT INTO tb_movimentacoes_caixa (id_caixa, tipo, descricao, valor, data_movimento) 
+                                      VALUES ('$id_caixa', 'ENTRADA', '$descricao', '$valor_total', '$emissao')";
+                        mysqli_query($conexao, $query_mov);
+                    }
+                    header("Location: confirmacao_pedido.php?id_pedido=$id_pedido");
+                    exit;
+                }
+
+            } catch (Exception $e) {
+                $conexao->rollback();
+                $erro = "Ocorreu um erro ao processar seu pedido: " . $e->getMessage();
+            }
         }
-
-        unset($_SESSION['carrinho']);
-        header("Location: confirmacao_pedido.php?id_pedido=$id_pedido");
-        exit;
     }
 }
 
@@ -88,120 +161,22 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <link rel="stylesheet" href="../../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../../css/canvaLogado.css">
     <link rel="stylesheet" href="../../css/mediaQuery.css">
-
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
-        .cart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* Centraliza os itens filhos horizontalmente */
-            width: 100%;
-            /* Garante que o contêiner ocupe a largura disponível */
-            max-width: 340px;
-            /* Limita a largura para corresponder aos itens do carrinho */
-            margin: 0 auto;
-            /* Garante centralização no contêiner pai */
-            padding-top: 10px;
-        }
-
-        .container-finalizar {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .endereco-list,
-        .tipo-entrega-options {
-            margin-bottom: 20px;
-        }
-
-        /* Centralizar os rádios e texto dentro de cada endereço */
-        .endereco-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .endereco-item input[type="radio"] {
-            margin-right: 10px;
-            /* Espaçamento entre o rádio e o texto */
-        }
-
-        .endereco-item label {
-            flex: 1;
-            /* Permite que o label ocupe o espaço restante */
-            text-align: left;
-            /* Mantém o texto do label alinhado à esquerda dentro do flex */
-        }
-
-        /* Ajuste responsivo */
-        @media (max-width: 767.98px) {
-            .endereco-item {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .endereco-item input[type="radio"] {
-                margin-bottom: 5px;
-                /* Espaçamento abaixo do rádio em telas menores */
-                margin-right: 0;
-            }
-
-            .endereco-item label {
-                text-align: center;
-                /* Centraliza o texto em telas menores */
-            }
-        }
-
-        .btn-finalizar {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-finalizar:hover {
-            background-color: #218838;
-        }
-
-        .tipo-entrega-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .tipo-entrega-option input {
-            margin-right: 10px;
-        }
-
-        .tipo-entrega-option.active {
-            border-color: #28a745;
-            background-color: #f8f9fa;
-        }
-
-        #endereco-section {
-            display: none;
-        }
-
-        .erro {
-            color: red;
-            margin-bottom: 15px;
-        }
+        .cart-container { max-width: 340px; margin: 0 auto; padding-top: 10px; }
+        .container-finalizar { max-width: 800px; margin: 20px auto; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px; }
+        .endereco-list, .tipo-entrega-options { margin-bottom: 20px; }
+        .endereco-item { display: flex; align-items: flex-start; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 5px; }
+        .endereco-item input[type="radio"] { margin-right: 15px; margin-top: 5px; }
+        .endereco-item label { flex: 1; text-align: left; line-height: 1.5; }
+        .btn-finalizar { background-color: #28a745; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; }
+        .btn-finalizar:hover { background-color: #218838; }
+        .tipo-entrega-option { display: flex; align-items: center; margin-bottom: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .tipo-entrega-option:has(input:checked) { border-color: #28a745; background-color: #e9f5ec; }
+        .tipo-entrega-option input { margin-right: 10px; }
+        #endereco-section { display: none; }
+        .erro { color: #D8000C; background-color: #FFD2D2; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
     </style>
 </head>
 
@@ -219,14 +194,14 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 <?php include("../carrinho.php"); ?>
             </div>
 
-            <h3>Escolha a Forma de Recebimento</h3>
             <form method="POST" action="finalizar_pedido.php">
+                <h3>Escolha a Forma de Recebimento</h3>
                 <div class="tipo-entrega-options">
                     <label class="tipo-entrega-option">
                         <input type="radio" name="tipo_entrega" value="retirada" checked onclick="toggleEndereco(false)">
                         <div>
                             <strong>Retirar na Cantina</strong>
-                            <p>Você pode retirar seu pedido no balcão da cantina</p>
+                            <p>Você pode retirar seu pedido no balcão da cantina.</p>
                         </div>
                     </label>
 
@@ -234,7 +209,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                         <input type="radio" name="tipo_entrega" value="entrega" onclick="toggleEndereco(true)">
                         <div>
                             <strong>Entrega</strong>
-                            <p>Entregamos no endereço cadastrado</p>
+                            <p>Entregamos no endereço cadastrado.</p>
                         </div>
                     </label>
                 </div>
@@ -242,30 +217,47 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 <div id="endereco-section">
                     <h3>Selecione o Endereço de Entrega</h3>
                     <div class="endereco-list">
-                        <?php
-                        if (mysqli_num_rows($result_enderecos) > 0): ?>
+                        <?php if (mysqli_num_rows($result_enderecos) > 0): ?>
                             <?php while ($endereco = mysqli_fetch_assoc($result_enderecos)): ?>
                                 <div class="endereco-item">
-                                    <input type="radio" name="id_endereco" value="<?= $endereco['id'] ?>" required>
+                                    <input type="radio" name="id_endereco" value="<?= $endereco['id'] ?>">
                                     <label>
-                                        Tipo: <strong><?= htmlspecialchars($endereco['descricao']) ?><br></strong>
+                                        <strong><?= htmlspecialchars($endereco['descricao']) ?></strong><br>
                                         <?= htmlspecialchars($endereco['endereco']) ?>, <?= htmlspecialchars($endereco['numero']) ?><br>
-                                        Bairro: <?= htmlspecialchars($endereco['bairro']) ?><br>
-                                        CEP: <?= htmlspecialchars($endereco['cep']) ?><br>
-                                        Cidade: <?= htmlspecialchars($endereco['nome_cidade']) ?> - <?= htmlspecialchars($endereco['sigla_estado']) ?>
+                                        <?= htmlspecialchars($endereco['bairro']) ?> - CEP: <?= htmlspecialchars($endereco['cep']) ?><br>
+                                        <?= htmlspecialchars($endereco['nome_cidade']) ?> - <?= htmlspecialchars($endereco['sigla_estado']) ?>
                                     </label>
                                 </div>
                             <?php endwhile; ?>
                         <?php else: ?>
-                            <p>Nenhum endereço cadastrado. <a href="/pedidos/cadastro_endereco.php?retorno=finalizar_pedido.php">Cadastrar novo endereço</a></p>
-                            <?php
-                            if ($_POST['tipo_entrega'] === 'entrega') {
-                                header("Location: /pedidos/cadastro_endereco.php?retorno=finalizar_pedido.php");
-                                exit;
-                            }
-                            ?>
+                            <p>Nenhum endereço cadastrado. <a href="../cadastro_endereco.php?retorno=finalizar_pedido.php">Cadastrar novo endereço</a></p>
                         <?php endif; ?>
                     </div>
+                </div>
+
+                <h3>Pagamento</h3>
+                <!---<div class="tipo-entrega-options">
+                    <label class="tipo-entrega-option">
+                        <input type="radio" name="metodo_pagamento" value="dinheiro" required>
+                        <div>
+                            <strong>Dinheiro</strong>
+                            <p>Pagamento em dinheiro na entrega ou retirada.</p>
+                        </div>
+                    </label>
+                    <label class="tipo-entrega-option">
+                        <input type="radio" name="metodo_pagamento" value="cartao">
+                        <div>
+                            <strong>Cartão</strong>
+                            <p>Pagamento com cartão na entrega ou retirada.</p>
+                        </div>
+                    </label>---->
+                    <label class="tipo-entrega-option">
+                        <input type="radio" name="metodo_pagamento" value="online" checked>
+                        <div>
+                            <strong>Online</strong>
+                            <p>Pagamento via PIX ou Cartão de Crédito.</p>
+                        </div>
+                    </label>
                 </div>
 
                 <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
@@ -281,21 +273,31 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <script>
         function toggleEndereco(show) {
             const enderecoSection = document.getElementById('endereco-section');
-            const enderecoInputs = enderecoSection.querySelectorAll('input[type="radio"]');
+            const enderecoInputs = enderecoSection.querySelectorAll('input[name="id_endereco"]');
 
-            enderecoSection.style.display = show ? 'block' : 'none';
-
-            // Remove a obrigatoriedade se estiver oculto
-            enderecoInputs.forEach(input => {
-                input.required = show;
-            });
-
-            // Redireciona para cadastro se escolher entrega e não houver endereços
-            if (show && enderecoSection.querySelectorAll('input[type="radio"]').length === 0) {
-                window.location.href = '../cadastro_endereco.php?retorno=finalizar_pedido.php';
+            if (show) {
+                enderecoSection.style.display = 'block';
+                if (enderecoInputs.length > 0) {
+                    // Marca o primeiro endereço como obrigatório e selecionado por padrão
+                    enderecoInputs.forEach((input, index) => {
+                        input.required = true;
+                        if (index === 0) input.checked = true;
+                    });
+                } else {
+                    // Se não houver endereço, redireciona para o cadastro
+                    alert('Nenhum endereço cadastrado. Você será redirecionado para cadastrar um.');
+                    window.location.href = '../cadastro_endereco.php?retorno=finalizar_pedido.php';
+                }
+            } else {
+                enderecoSection.style.display = 'none';
+                enderecoInputs.forEach(input => {
+                    input.required = false;
+                    input.checked = false;
+                });
             }
         }
     </script>
 </body>
 
-</html>e'
+</html>
+<?php mysqli_close($conexao); ?>

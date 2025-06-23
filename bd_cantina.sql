@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 16/06/2025 às 19:24
+-- Tempo de geração: 23/06/2025 às 19:52
 -- Versão do servidor: 11.3.2-MariaDB
 -- Versão do PHP: 8.3.6
 
@@ -65,29 +65,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_gravaSubcategoria` (IN `pid` IN
 END$$
 
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `payment`
---
-
-DROP TABLE IF EXISTS `payment`;
-CREATE TABLE IF NOT EXISTS `payment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `valor` varchar(255) DEFAULT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'pending1',
-  `user_id` int(11) DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Despejando dados para a tabela `payment`
---
-
-INSERT INTO `payment` (`id`, `valor`, `status`, `user_id`, `created`) VALUES
-(28, '1', 'approved', 1, '2023-12-07 19:06:43');
 
 -- --------------------------------------------------------
 
@@ -5762,10 +5739,10 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`id`, `nome`, `cnpj_cpf`, `email`, `telefone`, `senha`) VALUES
-(1, 'Marcos Botamedi', '555.444.222-20', 'bota@gmail.com', '(17) 98189-0306', '123'),
-(2, 'Giberto Silva', '666.785.888-05', 'gib@bol.com', '(17) 98189-7852', '123'),
-(3, 'Marcos Silva Santos', '255.887.777-80', 'marcos@gmail.com', '(17) 99995-5555', '123'),
-(4, 'Maria Hernandes Silva', '555.444.888-20', 'maria@gmail.com', '(17) 98456-2358', '123');
+(1, 'Marcos Botamedi', '176.965.640-56', 'bota@gmail.com', '(17) 98189-0306', '123'),
+(2, 'Giberto Silva', '185.065.050-03', 'gib@bol.com', '(17) 98189-7852', '123'),
+(3, 'Marcos Silva Santos', '939.359.040-02', 'marcos@gmail.com', '(17) 99995-5555', '123'),
+(4, 'Maria Hernandes Silva', '981.642.510-62', 'maria@gmail.com', '(17) 98456-2358', '123');
 
 -- --------------------------------------------------------
 
@@ -5867,6 +5844,33 @@ INSERT INTO `tb_nivel_usuario` (`id`, `cargo`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `tb_payments`
+--
+
+DROP TABLE IF EXISTS `tb_payments`;
+CREATE TABLE IF NOT EXISTS `tb_payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pedidos` int(11) NOT NULL,
+  `reference_id` varchar(255) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `response_data` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_pedidos` (`id_pedidos`),
+  UNIQUE KEY `uk_reference_id` (`reference_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Despejando dados para a tabela `tb_payments`
+--
+
+INSERT INTO `tb_payments` (`id`, `id_pedidos`, `reference_id`, `status`, `response_data`, `created_at`, `updated_at`) VALUES
+(1, 74, 'PEDIDO_74_1750708138', 'PAID', '{\"id\":\"ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\",\"reference_id\":\"PEDIDO_74_1750708138\",\"created_at\":\"2025-06-23T16:48:59.232-03:00\",\"customer\":{\"name\":\"Maria Hernandes Silva\",\"email\":\"maria@gmail.com\",\"tax_id\":\"98164251062\"},\"items\":[{\"name\":\"Pedido #74\",\"quantity\":1,\"unit_amount\":1155}],\"qr_codes\":[{\"id\":\"QRCO_3530FA62-0EB8-409A-AD72-651841044B85\",\"expiration_date\":\"2025-06-23T17:48:58.000-03:00\",\"amount\":{\"value\":1155},\"text\":\"00020101021226850014br.gov.bcb.pix2563api-h.pagseguro.com\\/pix\\/v2\\/3530FA62-0EB8-409A-AD72-651841044B8527600016BR.COM.PAGSEGURO01363530FA62-0EB8-409A-AD72-651841044B85520489995303986540511.555802BR5922Marcelo Cunha Botamedi6009Bebedouro62070503***630469A7\",\"arrangements\":[\"PIX\"],\"links\":[{\"rel\":\"QRCODE.PNG\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_3530FA62-0EB8-409A-AD72-651841044B85\\/png\",\"media\":\"image\\/png\",\"type\":\"GET\"},{\"rel\":\"QRCODE.BASE64\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/qrcode\\/QRCO_3530FA62-0EB8-409A-AD72-651841044B85\\/base64\",\"media\":\"text\\/plain\",\"type\":\"GET\"}]}],\"notification_urls\":[\"https:\\/\\/4a02-2804-14d-8470-8151-c0e5-5f9d-d572-ca6d.ngrok-free.app\\/etec_tcc\\/pgseguro\\/notificacao.php\"],\"links\":[{\"rel\":\"SELF\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\",\"media\":\"application\\/json\",\"type\":\"GET\"},{\"rel\":\"PAY\",\"href\":\"https:\\/\\/sandbox.api.pagseguro.com\\/orders\\/ORDE_23554654-D8EE-4AF1-BB13-18DA9F0B372C\\/pay\",\"media\":\"application\\/json\",\"type\":\"POST\"}],\"http_code\":201}', '2025-06-23 19:48:58', '2025-06-23 19:49:19');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `tb_pedidos`
 --
 
@@ -5880,72 +5884,74 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos` (
   `tipo_entrega` varchar(20) NOT NULL,
   `tipo_pedido` enum('PDV','WEB') NOT NULL DEFAULT 'WEB',
   `metodo_pagamento` enum('DINHEIRO','CARTAO','PIX','ONLINE') NOT NULL DEFAULT 'ONLINE',
+  `status_pagamento` varchar(50) NOT NULL DEFAULT 'AGUARDANDO',
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_endereco` (`id_endereco`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos`
 --
 
-INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_total`, `tipo_entrega`, `tipo_pedido`, `metodo_pagamento`) VALUES
-(1, 4, 1, '2025-04-21 00:00:00', 15.00, 'entrega', 'WEB', 'ONLINE'),
-(2, 4, 1, '2025-04-22 00:00:00', 60.00, 'entrega', 'WEB', 'ONLINE'),
-(3, 4, NULL, '2025-04-23 00:00:00', 22.50, 'retirada', 'WEB', 'ONLINE'),
-(4, 4, 1, '2025-04-23 00:00:00', 28.10, 'entrega', 'WEB', 'ONLINE'),
-(5, 4, 1, '2025-04-23 00:00:00', 7.50, 'entrega', 'WEB', 'ONLINE'),
-(6, 4, 1, '2025-04-23 00:00:00', 45.00, 'retirada', 'WEB', 'ONLINE'),
-(7, 4, 1, '2025-04-24 00:00:00', 30.00, 'retirada', 'WEB', 'ONLINE'),
-(10, 4, NULL, '2025-04-24 00:00:00', 52.50, 'retirada', 'WEB', 'ONLINE'),
-(11, 4, NULL, '2025-05-02 00:00:00', 60.00, 'retirada', 'WEB', 'ONLINE'),
-(12, 3, 3, '2025-05-03 00:00:00', 30.00, 'entrega', 'WEB', 'ONLINE'),
-(13, 3, 3, '2025-05-04 00:00:00', 41.20, 'entrega', 'WEB', 'ONLINE'),
-(14, 2, NULL, '2025-05-15 00:00:00', 8.10, 'retirada', 'WEB', 'ONLINE'),
-(15, 4, NULL, '2025-05-19 00:00:00', 30.00, 'retirada', 'WEB', 'ONLINE'),
-(16, 4, 1, '2025-05-19 00:00:00', 7.50, 'entrega', 'WEB', 'ONLINE'),
-(17, 4, 1, '2025-05-19 00:00:00', 15.00, 'entrega', 'WEB', 'ONLINE'),
-(18, 1, NULL, '2025-05-19 00:00:00', 37.50, 'retirada', 'WEB', 'ONLINE'),
-(19, 1, NULL, '2025-05-20 00:00:00', 7.20, 'retirada', 'WEB', 'ONLINE'),
-(20, 1, NULL, '2025-05-20 00:00:00', 3.30, 'retirada', 'WEB', 'ONLINE'),
-(21, 1, NULL, '2025-05-20 00:00:00', 0.00, 'retirada', 'WEB', 'ONLINE'),
-(22, 1, NULL, '2025-05-20 00:00:00', 7.20, 'retirada', 'WEB', 'ONLINE'),
-(23, 1, NULL, '2025-05-20 00:00:00', 6.50, 'retirada', 'WEB', 'ONLINE'),
-(24, 1, NULL, '2025-05-20 00:00:00', 6.00, 'retirada', 'WEB', 'ONLINE'),
-(25, 1, NULL, '2025-05-20 00:00:00', 13.50, 'retirada', 'WEB', 'ONLINE'),
-(26, 1, NULL, '2025-05-20 20:06:47', 12.00, 'retirada', 'WEB', 'ONLINE'),
-(27, 1, NULL, '2025-05-20 19:21:19', 12.20, 'retirada', 'WEB', 'ONLINE'),
-(28, 1, NULL, '2025-05-20 19:28:57', 12.50, 'retirada', 'WEB', 'ONLINE'),
-(29, 1, NULL, '2025-05-20 19:33:09', 9.50, 'retirada', 'WEB', 'ONLINE'),
-(30, 1, NULL, '2025-05-20 19:33:15', 0.00, 'retirada', 'WEB', 'ONLINE'),
-(45, 1, NULL, '2025-05-20 21:19:07', 8.00, 'retirada', 'WEB', 'DINHEIRO'),
-(46, 1, NULL, '2025-05-20 21:19:34', 3.30, 'retirada', 'WEB', 'DINHEIRO'),
-(47, 1, NULL, '2025-05-20 21:30:46', 3.30, 'retirada', 'WEB', 'DINHEIRO'),
-(48, 1, NULL, '2025-05-20 21:51:33', 5.00, 'retirada', 'WEB', 'DINHEIRO'),
-(50, NULL, NULL, '2025-05-21 14:44:15', 4.00, 'retirada', 'PDV', 'DINHEIRO'),
-(51, NULL, NULL, '2025-05-21 14:46:36', 8.00, 'retirada', 'PDV', 'DINHEIRO'),
-(52, NULL, NULL, '2025-05-21 14:47:49', 7.20, 'retirada', 'PDV', 'DINHEIRO'),
-(53, NULL, NULL, '2025-05-21 14:48:26', 13.50, 'retirada', 'PDV', 'DINHEIRO'),
-(54, NULL, NULL, '2025-05-21 15:01:20', 25.00, 'retirada', 'PDV', 'DINHEIRO'),
-(55, NULL, NULL, '2025-05-21 15:05:38', 5.00, 'retirada', 'PDV', 'DINHEIRO'),
-(56, NULL, NULL, '2025-05-21 15:09:50', 5.00, 'retirada', 'PDV', 'DINHEIRO'),
-(57, NULL, NULL, '2025-05-21 15:21:01', 15.00, 'retirada', 'PDV', 'DINHEIRO'),
-(58, NULL, NULL, '2025-05-21 18:56:24', 3.30, 'retirada', 'PDV', 'DINHEIRO'),
-(59, 4, NULL, '2025-05-23 08:55:12', 13.50, 'retirada', 'WEB', 'ONLINE'),
-(60, 4, NULL, '2025-05-23 11:01:02', 7.50, 'retirada', 'WEB', 'ONLINE'),
-(61, 2, NULL, '2025-05-23 12:43:52', 15.00, 'retirada', 'WEB', 'ONLINE'),
-(62, 2, 6, '2025-05-23 13:38:55', 7.50, 'entrega', 'WEB', 'ONLINE'),
-(63, 2, 6, '2025-05-23 15:03:53', 7.50, 'entrega', 'WEB', 'ONLINE'),
-(64, 2, NULL, '2025-05-23 16:17:11', 6.00, 'retirada', 'WEB', 'ONLINE'),
-(65, NULL, NULL, '2025-05-23 16:28:02', 17.00, 'retirada', 'PDV', 'DINHEIRO'),
-(66, NULL, NULL, '2025-05-23 16:33:14', 7.20, 'retirada', 'PDV', 'DINHEIRO'),
-(67, NULL, NULL, '2025-05-23 16:37:02', 4.50, 'retirada', 'PDV', 'DINHEIRO'),
-(68, NULL, NULL, '2025-05-26 09:54:22', 34.70, 'retirada', 'PDV', 'DINHEIRO'),
-(69, NULL, NULL, '2025-05-26 09:55:06', 24.20, 'retirada', 'PDV', 'DINHEIRO'),
-(70, NULL, NULL, '2025-05-26 13:17:36', 32.40, 'retirada', 'PDV', 'DINHEIRO'),
-(71, NULL, NULL, '2025-05-26 13:17:59', 10.00, 'retirada', 'PDV', 'CARTAO'),
-(72, 4, NULL, '2025-05-26 21:26:42', 7.50, 'retirada', 'WEB', 'ONLINE'),
-(73, NULL, NULL, '2025-06-14 21:58:07', 15.50, 'retirada', 'PDV', 'DINHEIRO');
+INSERT INTO `tb_pedidos` (`id`, `id_cliente`, `id_endereco`, `emissao`, `valor_total`, `tipo_entrega`, `tipo_pedido`, `metodo_pagamento`, `status_pagamento`) VALUES
+(1, 4, 1, '2025-04-21 00:00:00', 15.00, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(2, 4, 1, '2025-04-22 00:00:00', 60.00, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(3, 4, NULL, '2025-04-23 00:00:00', 22.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(4, 4, 1, '2025-04-23 00:00:00', 28.10, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(5, 4, 1, '2025-04-23 00:00:00', 7.50, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(6, 4, 1, '2025-04-23 00:00:00', 45.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(7, 4, 1, '2025-04-24 00:00:00', 30.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(10, 4, NULL, '2025-04-24 00:00:00', 52.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(11, 4, NULL, '2025-05-02 00:00:00', 60.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(12, 3, 3, '2025-05-03 00:00:00', 30.00, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(13, 3, 3, '2025-05-04 00:00:00', 41.20, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(14, 2, NULL, '2025-05-15 00:00:00', 8.10, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(15, 4, NULL, '2025-05-19 00:00:00', 30.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(16, 4, 1, '2025-05-19 00:00:00', 7.50, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(17, 4, 1, '2025-05-19 00:00:00', 15.00, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(18, 1, NULL, '2025-05-19 00:00:00', 37.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(19, 1, NULL, '2025-05-20 00:00:00', 7.20, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(20, 1, NULL, '2025-05-20 00:00:00', 3.30, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(21, 1, NULL, '2025-05-20 00:00:00', 0.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(22, 1, NULL, '2025-05-20 00:00:00', 7.20, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(23, 1, NULL, '2025-05-20 00:00:00', 6.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(24, 1, NULL, '2025-05-20 00:00:00', 6.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(25, 1, NULL, '2025-05-20 00:00:00', 13.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(26, 1, NULL, '2025-05-20 20:06:47', 12.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(27, 1, NULL, '2025-05-20 19:21:19', 12.20, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(28, 1, NULL, '2025-05-20 19:28:57', 12.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(29, 1, NULL, '2025-05-20 19:33:09', 9.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(30, 1, NULL, '2025-05-20 19:33:15', 0.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(45, 1, NULL, '2025-05-20 21:19:07', 8.00, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
+(46, 1, NULL, '2025-05-20 21:19:34', 3.30, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
+(47, 1, NULL, '2025-05-20 21:30:46', 3.30, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
+(48, 1, NULL, '2025-05-20 21:51:33', 5.00, 'retirada', 'WEB', 'DINHEIRO', 'AGUARDANDO'),
+(50, NULL, NULL, '2025-05-21 14:44:15', 4.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(51, NULL, NULL, '2025-05-21 14:46:36', 8.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(52, NULL, NULL, '2025-05-21 14:47:49', 7.20, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(53, NULL, NULL, '2025-05-21 14:48:26', 13.50, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(54, NULL, NULL, '2025-05-21 15:01:20', 25.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(55, NULL, NULL, '2025-05-21 15:05:38', 5.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(56, NULL, NULL, '2025-05-21 15:09:50', 5.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(57, NULL, NULL, '2025-05-21 15:21:01', 15.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(58, NULL, NULL, '2025-05-21 18:56:24', 3.30, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(59, 4, NULL, '2025-05-23 08:55:12', 13.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(60, 4, NULL, '2025-05-23 11:01:02', 7.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(61, 2, NULL, '2025-05-23 12:43:52', 15.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(62, 2, 6, '2025-05-23 13:38:55', 7.50, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(63, 2, 6, '2025-05-23 15:03:53', 7.50, 'entrega', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(64, 2, NULL, '2025-05-23 16:17:11', 6.00, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(65, NULL, NULL, '2025-05-23 16:28:02', 17.00, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(66, NULL, NULL, '2025-05-23 16:33:14', 7.20, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(67, NULL, NULL, '2025-05-23 16:37:02', 4.50, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(68, NULL, NULL, '2025-05-26 09:54:22', 34.70, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(69, NULL, NULL, '2025-05-26 09:55:06', 24.20, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(70, NULL, NULL, '2025-05-26 13:17:36', 32.40, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(71, NULL, NULL, '2025-05-26 13:17:59', 10.00, 'retirada', 'PDV', 'CARTAO', 'AGUARDANDO'),
+(72, 4, NULL, '2025-05-26 21:26:42', 7.50, 'retirada', 'WEB', 'ONLINE', 'AGUARDANDO'),
+(73, NULL, NULL, '2025-06-14 21:58:07', 15.50, 'retirada', 'PDV', 'DINHEIRO', 'AGUARDANDO'),
+(74, 4, NULL, '2025-06-23 16:48:53', 11.55, 'retirada', 'WEB', 'ONLINE', 'PAGO');
 
 -- --------------------------------------------------------
 
@@ -5963,7 +5969,7 @@ CREATE TABLE IF NOT EXISTS `tb_pedidos_itens` (
   PRIMARY KEY (`id`),
   KEY `id_pedidos` (`id_pedidos`),
   KEY `id_produtos` (`id_produtos`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_pedidos_itens`
@@ -6053,7 +6059,14 @@ INSERT INTO `tb_pedidos_itens` (`id`, `id_pedidos`, `id_produtos`, `qtd`, `valor
 (81, 72, 66, 1, 7.50),
 (82, 73, 5, 1, 4.00),
 (83, 73, 6, 1, 4.50),
-(84, 73, 7, 1, 7.00);
+(84, 73, 7, 1, 7.00),
+(85, 74, 64, 1, 6.00),
+(86, 75, 15, 1, 8.50),
+(87, 75, 61, 1, 3.05),
+(88, 79, 7, 1, 6.50),
+(89, 79, 57, 1, 4.50),
+(90, 74, 15, 1, 8.50),
+(91, 74, 61, 1, 3.05);
 
 -- --------------------------------------------------------
 
@@ -6092,7 +6105,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (12, 13, 'PÃO DE QUEIJO TRADICIONAL', 2.50, 99),
 (13, 14, 'PIPOCA DOCE OU SALGADA', 2.50, 50),
 (14, 13, 'FATIA DE TORTA DE FRANGO', 5.50, 15),
-(15, 13, 'FATIA DE PIZZA DE MUSSARELA', 6.00, 7),
+(15, 13, 'FATIA DE PIZZA DE MUSSARELA', 6.00, 6),
 (16, 15, 'SUCO NATURAL DE LARANJA', 6.00, 19),
 (17, 3, 'KITCAT', 5.00, 20),
 (18, 3, 'TRENTO AVELÃ', 8.50, 50),
@@ -6138,7 +6151,7 @@ INSERT INTO `tb_produtos` (`id`, `id_subcategoria`, `descricao`, `valor`, `estoq
 (58, 11, 'COCA-COLA ZERO', 4.20, 18),
 (59, 11, 'SPRITE', 3.69, 15),
 (60, 11, 'FANTA LARANJA', 4.70, 20),
-(61, 11, 'FANTA UVA', 3.99, 20),
+(61, 11, 'FANTA UVA', 3.99, 19),
 (62, 12, 'COCA-COLA ZERO 500ML', 6.99, 30),
 (63, 12, 'COCA-COLA 500ML', 6.99, 30),
 (64, 16, 'BARRA NUTRY BOLO_CHOCOLATE', 6.00, 98),
@@ -6162,16 +6175,17 @@ CREATE TABLE IF NOT EXISTS `tb_produto_pro` (
   `desconto` float NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_produto` (`id_produto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `tb_produto_pro`
 --
 
 INSERT INTO `tb_produto_pro` (`id`, `id_produto`, `desconto`) VALUES
-(1, 69, 0.1),
+(1, 15, 0),
 (2, 17, 0.05),
-(3, 57, 0.05);
+(3, 61, 0.02),
+(4, 18, 0.02);
 
 -- --------------------------------------------------------
 
@@ -6196,8 +6210,8 @@ CREATE TABLE IF NOT EXISTS `tb_promocao_itens` (
 --
 
 INSERT INTO `tb_promocao_itens` (`id`, `id_promocao`, `id_produto`, `quantidade`, `Vl_pro`) VALUES
-(1, 1, 10, 2, 3.5),
-(2, 1, 57, 1, 8),
+(1, 1, 15, 1, 8.5),
+(2, 1, 61, 1, 3.05),
 (3, 2, 7, 1, 6.5),
 (4, 2, 57, 1, 4.5);
 
@@ -6222,8 +6236,8 @@ CREATE TABLE IF NOT EXISTS `tb_promocoes_banner` (
 --
 
 INSERT INTO `tb_promocoes_banner` (`id`, `descricao`, `valor_promocional`, `imagem_banner`, `ativo`) VALUES
-(1, 'Promo: Coxinhas + 1 Refri Lata', 15.00, 'promo01.jpg', 1),
-(2, 'Promo: 2 Lanche Natural + Refri Lata', 18.00, 'promo02.jpg', 2);
+(1, 'Banner 1', 15.00, 'promo1.jpg', 1),
+(2, 'Banner 2', 18.00, 'promo2.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -6363,6 +6377,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `tb_cliente_endereco`
   ADD CONSTRAINT `tb_cliente_endereco_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id`);
+
+--
+-- Restrições para tabelas `tb_payments`
+--
+ALTER TABLE `tb_payments`
+  ADD CONSTRAINT `fk_payments_pedidos` FOREIGN KEY (`id_pedidos`) REFERENCES `tb_pedidos` (`id`);
 
 --
 -- Restrições para tabelas `tb_pedidos`

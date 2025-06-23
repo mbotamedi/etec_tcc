@@ -112,7 +112,7 @@ error_log("Número de itens encontrados: " . count($itens));
                 </li>
                 <li class="list-group-item">
                     <strong>Status:</strong>
-                    <span class="badge bg-warning text-dark">Em processamento</span>
+                    <span class="badge bg-warning text-dark"><?= ucfirst($pedido['status_pagamento']) ?></span>
                 </li>
             </ul>
         </div>

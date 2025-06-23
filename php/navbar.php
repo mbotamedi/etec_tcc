@@ -1,6 +1,6 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
-$is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php');
+$is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php' );
 ?>
 
 <head>
@@ -166,7 +166,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="botao-sair">
-                    <a href="logout.php" class="btn-logout">Sair</a>
+                    <a href="../../php/logout.php" class="btn-logout">Sair</a>
                 </div>
             </div>
         </div>
