@@ -145,7 +145,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             <h1>Fale Conosco</h1>
         </div>
 
-        <form method="post" action="">
+        <form method="post" action="../email/email.php">
             <div class="form-group">
                 <label for="txtnome">Nome</label>
                 <input type="text" class="form-control" name="txtnome" id="txtnome" required>
@@ -164,16 +164,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             <button type="submit" class="btn-enviar">Enviar Mensagem</button>
         </form>
     </div>
-    <?php
-    if (isset($_POST["txtnome"])) {
-        $nome     = $_POST["txtnome"];
-        $email    = $_POST["txtemail"];
-        $mensagem = $_POST["txtmensagem"];
-        //Conecta com o Banco de dados         
-        include("./email.php");
-    }
-
-    ?>
+    
 
 <?php include("./zap.php")?>
 

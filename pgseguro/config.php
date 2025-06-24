@@ -9,7 +9,7 @@ define('PAGSEGURO_URL', 'https://sandbox.api.pagseguro.com');
 // Insira seu token de autenticação do PagSeguro aqui.
 // Em produção, use um token gerado na sua conta de produção.
 // IMPORTANTE: Mantenha seu token seguro e nunca o exponha no lado do cliente (JavaScript, HTML).
-define('PAGSEGURO_TOKEN', 'sua token');
+define('PAGSEGURO_TOKEN', 'sua senha');
 
 // --- CORREÇÃO IMPORTANTE ABAIXO ---
 // A URL de notificação DEVE incluir o nome da pasta do seu projeto.
