@@ -9,12 +9,15 @@ define('PAGSEGURO_URL', 'https://sandbox.api.pagseguro.com');
 // Insira seu token de autenticação do PagSeguro aqui.
 // Em produção, use um token gerado na sua conta de produção.
 // IMPORTANTE: Mantenha seu token seguro e nunca o exponha no lado do cliente (JavaScript, HTML).
-define('PAGSEGURO_TOKEN', 'sua senha');
+define('PAGSEGURO_TOKEN', '672721cb-6ad2-417f-9241-5565770ec91d182eba2e4d51b57015821ce796870f93dad6-71f2-420c-bdf6-e369fc173496');
 
 // --- CORREÇÃO IMPORTANTE ABAIXO ---
 // A URL de notificação DEVE incluir o nome da pasta do seu projeto.
 // Substitua a URL do Ngrok abaixo pela sua URL atual toda vez que iniciá-lo.
-define('PAGSEGURO_NOTIFICATION_URL', 'https://4a02-2804-14d-8470-8151-c0e5-5f9d-d572-ca6d.ngrok-free.app/etec_tcc/pgseguro/notificacao.php');
+define('PAGSEGURO_NOTIFICATION_URL', 'https://6ab3-2804-14d-8470-8151-e4d2-138e-e22d-e8a3.ngrok-free.app/etec_tcc/pgseguro/notificacao.php');
+
+// ########## ADICIONE A LINHA ABAIXO ##########
+define('BASE_URL', 'http://localhost/etec_tcc');
 
 // -- CONFIGURAÇÕES DO BANCO DE DADOS (Não são mais usadas aqui, mas mantidas por segurança) --
 //define('DB_HOST', 'sql306.infinityfree.com');

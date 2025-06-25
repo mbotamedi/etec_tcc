@@ -20,11 +20,12 @@ $is_finalizar_pedido =
     }
 </style>
 
-<head>
-    <link rel="stylesheet" href="../css/mediaQuery.css" />
-</head>
+
 
 <?php if (!$is_finalizar_pedido): ?>
+    <head>
+        <link rel="stylesheet" href="../css/mediaQuery.css" />
+    </head>
     <footer class="py-5 bg-dark">
         <div class="info-footer">
             <div class="information-divs">
@@ -54,6 +55,9 @@ $is_finalizar_pedido =
         </div>
     </footer>
 <?php else: ?>
+    <head>
+        <link rel="stylesheet" href="../../css/mediaQuery.css" />
+    </head>
     <footer class="py-5 bg-dark">
         <div class="info-footer">
             <div class="information-divs">

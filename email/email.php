@@ -26,8 +26,8 @@ try {
 	$mail->Port       = 465;
 
 	$mail->SMTPAuth   = true;
-	$mail->Username   = 'seu email';
-	$mail->Password   = 'seu password';
+	$mail->Username   = 'botamedi@gmail.com';
+	$mail->Password   = 'vtdl lbiv uali mwuv';
 
 	$mail->setFrom('botamedi@gmail.com', 'Nome do Remente');
 	$mail->addAddress($email); //Eamil para onde você vai enviar

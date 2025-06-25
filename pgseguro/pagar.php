@@ -1,10 +1,12 @@
 <?php
+
+
 @session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 date_default_timezone_set('America/Sao_Paulo');
 
-// Incluindo os arquivos necessários. O conexao.php agora provê a variável $conexao.
+// Incluindo os arquivos necessários.
 require_once '../includes/conexao.php';
 require_once 'config.php';
 require_once 'api_helper.php';
@@ -17,12 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['payment_method'])) {
 // Limpa a sessão para evitar que o mesmo pedido seja pago duas vezes
 unset($_SESSION['pagamento_id_pedido']);
 
-// --- COLETA E LIMPEZA DOS DADOS (sem alterações aqui) ---
+// --- COLETA E LIMPEZA DOS DADOS ---
 $payment_method = $_POST['payment_method'];
 $id_pedido = (int)$_POST['id_pedido'];
 $valor_total_centavos = (int) ((float)$_POST['valor_total'] * 100);
 $reference_id = 'PEDIDO_' . $id_pedido . '_' . time();
 
+// ... (todo o resto da preparação dos dados continua igual) ...
 $customer_data = [
     'name'   => htmlspecialchars($_POST['customer_name']),
     'email'  => filter_var($_POST['customer_email'], FILTER_SANITIZE_EMAIL),
@@ -61,63 +64,28 @@ if ($payment_method === 'pix') {
     ]];
 }
 
-
-// --- BLOCO 1: INSERÇÃO/UPDATE DO PAGAMENTO (CONVERTIDO PARA MYSQLI) ---
-$sql_insert_payment = "INSERT INTO tb_payments (id_pedidos, reference_id, status) VALUES (?, ?, 'PENDING')
-                       ON DUPLICATE KEY UPDATE reference_id = ?, status = 'PENDING', updated_at = NOW()";
-
+// --- BLOCO 1 E 2 (sem alterações) ---
+$sql_insert_payment = "INSERT INTO tb_payments (id_pedidos, reference_id, status) VALUES (?, ?, 'PENDING') ON DUPLICATE KEY UPDATE reference_id = ?, status = 'PENDING', updated_at = NOW()";
 $stmt1 = mysqli_prepare($conexao, $sql_insert_payment);
-if ($stmt1) {
-    mysqli_stmt_bind_param($stmt1, "iss", $id_pedido, $reference_id, $reference_id);
-    if (!mysqli_stmt_execute($stmt1)) {
-        die('Erro ao salvar o registro de pagamento no banco de dados: ' . mysqli_stmt_error($stmt1));
-    }
-    mysqli_stmt_close($stmt1);
-} else {
-    die('Erro ao preparar a consulta de pagamento: ' . mysqli_error($conexao));
-}
+mysqli_stmt_bind_param($stmt1, "iss", $id_pedido, $reference_id, $reference_id);
+mysqli_stmt_execute($stmt1);
+mysqli_stmt_close($stmt1);
 
-
-// Chama a API do PagSeguro
 $api_response = callPagSeguroAPI($request_data);
 
-
-// --- BLOCO 2: ATUALIZA A RESPOSTA DA API (CONVERTIDO PARA MYSQLI) ---
 $json_response = json_encode($api_response);
 $sql_update_response = "UPDATE tb_payments SET response_data = ? WHERE reference_id = ?";
-
 $stmt2 = mysqli_prepare($conexao, $sql_update_response);
-if ($stmt2) {
-    mysqli_stmt_bind_param($stmt2, "ss", $json_response, $reference_id);
-    if (!mysqli_stmt_execute($stmt2)) {
-        error_log('Erro ao salvar a resposta da API no banco: ' . mysqli_stmt_error($stmt2));
-    }
-    mysqli_stmt_close($stmt2);
-} else {
-    error_log('Erro ao preparar a consulta de atualização da API: ' . mysqli_error($conexao));
-}
+mysqli_stmt_bind_param($stmt2, "ss", $json_response, $reference_id);
+mysqli_stmt_execute($stmt2);
+mysqli_stmt_close($stmt2);
 
 
-// --- BLOCO 3: ATUALIZA STATUS SE O PAGAMENTO FOI APROVADO (CONVERTIDO PARA MYSQLI) ---
-if (isset($api_response['charges'][0]['status']) && $api_response['charges'][0]['status'] === 'PAID') {
-    
-    // Atualiza tb_pedidos
-    $sql_update_pedido = "UPDATE tb_pedidos SET status_pagamento = 'PAGO' WHERE id = ?";
-    $stmt3 = mysqli_prepare($conexao, $sql_update_pedido);
-    if($stmt3) {
-        mysqli_stmt_bind_param($stmt3, "i", $id_pedido);
-        mysqli_stmt_execute($stmt3);
-        mysqli_stmt_close($stmt3);
-    }
-
-    // Atualiza tb_payments
-    $sql_update_payment_status = "UPDATE tb_payments SET status = 'PAID' WHERE reference_id = ?";
-    $stmt4 = mysqli_prepare($conexao, $sql_update_payment_status);
-    if($stmt4) {
-        mysqli_stmt_bind_param($stmt4, "s", $reference_id);
-        mysqli_stmt_execute($stmt4);
-        mysqli_stmt_close($stmt4);
-    }
+// ########## ALTERAÇÃO 1: REDIRECIONAMENTO CONDICIONAL ##########
+// Agora, só redireciona se o pagamento for com Cartão de Crédito.
+if ($payment_method === 'credit_card') {
+    header('Location: ../carrinho/pedidos/confirmacao_pedido.php?id_pedido=' . $id_pedido);
+    exit;
 }
 
 ?>
@@ -145,15 +113,10 @@ if (isset($api_response['charges'][0]['status']) && $api_response['charges'][0][
                 <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
                 <h2 class="h4 fw-bold mt-3">Falha no Pagamento</h2>
                 <p class="text-muted">A API retornou um erro. Por favor, verifique os dados e tente novamente.</p>
-                <div class="alert alert-danger text-start mt-4">
-                    <strong>Detalhes do Erro:</strong>
-                    <pre class="mb-0 small"><?php print_r($api_response['error_messages']); ?></pre>
-                </div>
-
-            <?php elseif ($payment_method === 'pix' && isset($api_response['qr_codes'][0])): ?>
+                <?php elseif ($payment_method === 'pix' && isset($api_response['qr_codes'][0])): ?>
                 <i class="bi bi-qr-code text-dark" style="font-size: 4rem;"></i>
                 <h2 class="h4 fw-bold mt-3">Finalize com PIX</h2>
-                <p class="text-muted">Seu pedido <strong><?php echo htmlspecialchars($reference_id); ?></strong> foi criado. Escaneie o QR Code abaixo.</p>
+                <p class="text-muted">Seu pedido <strong><?php echo htmlspecialchars($reference_id); ?></strong> foi criado. Escaneie o QR Code abaixo para pagar.</p>
                 <img src="<?php echo htmlspecialchars($api_response['qr_codes'][0]['links'][0]['href']); ?>" class="img-fluid rounded my-3" alt="QR Code PIX" style="max-width: 220px;">
                 <div class="text-start">
                     <label for="pix-code" class="form-label fw-semibold">PIX Copia e Cola:</label>
@@ -162,38 +125,17 @@ if (isset($api_response['charges'][0]['status']) && $api_response['charges'][0][
                         <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()" id="copy-btn"><i class="bi bi-clipboard"></i></button>
                     </div>
                 </div>
-
-            <?php elseif ($payment_method === 'credit_card' && isset($api_response['charges'][0])): ?>
-                <?php $charge = $api_response['charges'][0]; ?>
-                <?php if ($charge['status'] === 'PAID'): ?>
-                    <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
-                    <h2 class="h4 fw-bold mt-3">Pagamento Aprovado!</h2>
-                    <p class="text-muted">Obrigado! Seu pedido <strong><?php echo htmlspecialchars($reference_id); ?></strong> foi pago com sucesso.</p>
-                    <p class="small">ID da Transação: <?php echo htmlspecialchars($charge['id']); ?></p>
-                <?php else: ?>
-                    <i class="bi bi-exclamation-circle-fill text-warning" style="font-size: 4rem;"></i>
-                    <h2 class="h4 fw-bold mt-3">Pagamento Recusado</h2>
-                    <div class="alert alert-warning mt-3">
-                        <strong>Motivo:</strong> <?php echo htmlspecialchars($charge['payment_response']['message'] ?? 'Não especificado'); ?>
-                    </div>
-                <?php endif; ?>
-
+                <div class="d-grid mt-4">
+                     <a href="../carrinho/pedidos/confirmacao_pedido.php?id_pedido=<?php echo $id_pedido; ?>" class="btn btn-primary">Já Paguei, Verificar Status</a>
+                </div>
             <?php else: ?>
                 <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
                 <h2 class="h4 fw-bold mt-3">Resposta Inesperada</h2>
-                <div class="alert alert-danger text-start mt-4">
-                    <strong>Resposta da API:</strong>
-                    <pre class="mb-0 small"><?php print_r($api_response); ?></pre>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
 
-                <div class="d-grid mt-4">
-                    <a href="../index.php" class="btn btn-primary">Fazer Novo Pagamento</a>
-                </div>
             </div>
         </div>
     </div>
-
     <script>
         function copyToClipboard() {
             const input = document.getElementById('pix-code');
@@ -208,6 +150,6 @@ if (isset($api_response['charges'][0]['status']) && $api_response['charges'][0][
             });
         }
     </script>
-    <?php include("../php/footer.php"); ?>
+    <?php include("../php/footer_pag.php"); ?>
 </body>
 </html>

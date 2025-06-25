@@ -3,13 +3,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
 $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php' );
 ?>
 
-<head>
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/mediaQuery.css">
-
-</head>
-
 <?php if (!$is_finalizar_pedido): ?>
+    <head>
+        <link rel="stylesheet" href="../css/navbar.css">
+        <link rel="stylesheet" href="../css/mediaQuery.css">
+
+    </head>
+
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">
@@ -113,6 +113,11 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     </div>
 
 <?php else: ?>
+    <head>
+        <link rel="stylesheet" href="../../css/navbar.css">
+        <link rel="stylesheet" href="../../css/mediaQuery.css">
+
+    </head>
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">

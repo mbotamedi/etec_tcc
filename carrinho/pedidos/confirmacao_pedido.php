@@ -1,26 +1,39 @@
 <?php
 @session_start();
 include("../../includes/conexao.php");
-
+include("../../pgseguro/config.php");
 
 $id_pedido = isset($_GET['id_pedido']) ? (int)$_GET['id_pedido'] : 0;
 
-// Verifica se o pedido existe
-$query_pedido = "SELECT p.*, c.nome FROM tb_pedidos p 
-                 JOIN tb_clientes c ON p.id_cliente = c.id 
-                 WHERE p.id = '$id_pedido'";
-$result_pedido = mysqli_query($conexao, $query_pedido);
+// Consulta o pedido e o status do pagamento inicial em uma única query
+$query_pedido = "
+    SELECT p.*, c.nome, pay.status AS payment_status
+    FROM tb_pedidos p 
+    JOIN tb_clientes c ON p.id_cliente = c.id
+    LEFT JOIN tb_payments pay ON p.id = pay.id_pedidos
+    WHERE p.id = ?
+    ORDER BY pay.id DESC 
+    LIMIT 1
+";
+
+$stmt = mysqli_prepare($conexao, $query_pedido);
+mysqli_stmt_bind_param($stmt, "i", $id_pedido);
+mysqli_stmt_execute($stmt);
+$result_pedido = mysqli_stmt_get_result($stmt);
 $pedido = mysqli_fetch_assoc($result_pedido);
 
-if (!$pedido) {
-    header("Location: ../../php/produtos.php?erro=pedido_nao_encontrado");
-    exit;
-}
+// Define o status inicial. Se não houver pagamento, considera pendente.
+$status_inicial = $pedido['payment_status'] ?? 'PENDING';
+
+
+// ########## NOVA LINHA AQUI ##########
+// O PHP monta a URL completa e correta para o script de verificação
+$url_verificacao = BASE_URL . '/pgseguro/verificar_status.php';
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,53 +45,114 @@ if (!$pedido) {
     <link rel="stylesheet" href="../../css/canvaLogado.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         .container-confirmacao {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
+            max-width: 600px; margin: 50px auto; padding: 40px; text-align: center;
+            border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background-color: #fff;
         }
-
-        .btn-continuar {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .btn-continuar:hover {
-            background-color: #0056b3;
-        }
+        .status-icon { font-size: 4rem; margin-bottom: 20px; }
+        .spinner-border { width: 4rem; height: 4rem; }
+        h2 { font-weight: bold; margin-bottom: 15px; }
+        .text-muted { font-size: 1.1rem; }
+        .btn-continuar { margin-top: 30px; display: inline-block; background-color: #007bff; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .btn-continuar:hover { background-color: #0056b3; }
+        /* Esconde as seções de status por padrão */
+        .status-section { display: none; }
     </style>
 </head>
-
 <body>
-    <!-- Inclui a navegação -->
     <?php include("../../php/navbar.php"); ?>
 
     <section class="py-5">
         <div class="container-confirmacao">
-            <h2>Pedido Confirmado!</h2>
-            <p>Obrigado, <?= htmlspecialchars($pedido['nome']) ?>!</p>
-            <p>Seu pedido nº <?= $id_pedido ?> foi realizado com sucesso.</p>
-            <p>Você receberá uma confirmação por e-mail em breve.</p>
+
+            <div id="status-pending" class="status-section">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h2 class="mt-3">Aguardando Confirmação do Pagamento</h2>
+                <p class="text-muted">Seu pedido nº <?= $id_pedido ?> foi realizado e estamos aguardando a confirmação do pagamento.</p>
+                <p>Isso pode levar alguns segundos. Por favor, não feche esta página.</p>
+            </div>
+
+            <div id="status-paid" class="status-section">
+                <i class="bi bi-check-circle-fill text-success status-icon"></i>
+                <h2>Pedido Confirmado!</h2>
+                <p class="text-muted">Obrigado, <?= htmlspecialchars($pedido['nome']) ?>! O pagamento do seu pedido nº <?= $id_pedido ?> foi aprovado.</p>
+                <p>Você receberá uma confirmação por e-mail em breve.</p>
+            </div>
+
+            <div id="status-declined" class="status-section">
+                <i class="bi bi-x-circle-fill text-danger status-icon"></i>
+                <h2>Pagamento Recusado</h2>
+                <p class="text-muted">O pagamento para o seu pedido nº <?= $id_pedido ?> não foi autorizado.</p>
+                <p>Por favor, tente novamente com outro método de pagamento ou entre em contato com seu banco.</p>
+            </div>
+
             <a href="../../php/produtos.php" class="btn-continuar">Continuar Comprando</a>
         </div>
     </section>
 
-    <!-- Footer -->
     <?php include("../../php/footer.php"); ?>
 
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const idPedido = <?= $id_pedido ?>;
+            const statusInicial = '<?= trim(strtoupper($status_inicial)) ?>';
+            
+            // ########## MUDANÇA IMPORTANTE AQUI ##########
+            // A URL agora é pega da variável que o PHP criou. Sem adivinhação!
+            const urlVerificacao = '<?= $url_verificacao ?>';
+            
+            let statusChecker; 
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/scripts.js"></script>
+            // ... (função showStatusSection continua igual) ...
+            function showStatusSection(status) {
+                document.querySelectorAll('.status-section').forEach(el => el.style.display = 'none');
+                
+                if (status === 'PAID') {
+                    document.getElementById('status-paid').style.display = 'block';
+                } else if (status === 'DECLINED' || status === 'CANCELED') {
+                    document.getElementById('status-declined').style.display = 'block';
+                } else {
+                    document.getElementById('status-pending').style.display = 'block';
+                }
+            }
+
+            async function checkStatus() {
+                try {
+                    // Usamos a URL completa que o PHP nos deu
+                    const urlCompleta = `${urlVerificacao}?id_pedido=${idPedido}`;
+                    console.log("Verificando status em:", urlCompleta);
+
+                    const response = await fetch(urlCompleta);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const statusRecebido = data.status ? data.status.trim().toUpperCase() : 'UNKNOWN';
+                    
+                    console.log(`Status recebido da API: '${statusRecebido}'`);
+
+                    if (statusRecebido === 'PAID' || statusRecebido === 'DECLINED' || statusRecebido === 'CANCELED') {
+                        console.log("Status final detectado! Parando verificação.");
+                        showStatusSection(statusRecebido);
+                        clearInterval(statusChecker);
+                    }
+                } catch (error) {
+                    console.error('Falha na verificação de status:', error);
+                    clearInterval(statusChecker);
+                }
+            }
+
+            showStatusSection(statusInicial);
+
+            if (statusInicial === 'PENDING') {
+                statusChecker = setInterval(checkStatus, 3000); 
+            }
+        });
+    </script>
 </body>
-
 </html>

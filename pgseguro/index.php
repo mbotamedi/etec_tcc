@@ -169,6 +169,6 @@ if (!$order_details) {
             toggleCreditCardFields();
         });
     </script>
-    <?php include("../php/footer.php"); ?>
+    <?php include("../php/footer_pag.php"); ?>
 </body>
 </html>
