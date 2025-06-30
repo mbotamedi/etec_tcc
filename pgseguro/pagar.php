@@ -91,6 +91,7 @@ if ($payment_method === 'credit_card') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,39 +99,57 @@ if ($payment_method === 'credit_card') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        body { background-color: #f8f9fa; }
-        .container { max-width: 550px; }
-        .card { border-radius: 0.75rem; }
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 550px;
+        }
+
+        .card {
+            border-radius: 0.75rem;
+        }
+
+        .py-5 {
+            padding-top: 0px !important;
+            padding-bottom: 3px !important;
+        }
+
+        .menu li a {
+        font-size: 12px;
+    }
     </style>
 </head>
 <?php include("../php/navbar_pag.php"); ?>
+
 <body class="py-5">
     <div class="container" style="padding: 20px;">
         <div class="card shadow-sm">
             <div class="card-body p-4 p-md-5 text-center">
 
-            <?php if (isset($api_response['error_messages'])): ?>
-                <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
-                <h2 class="h4 fw-bold mt-3">Falha no Pagamento</h2>
-                <p class="text-muted">A API retornou um erro. Por favor, verifique os dados e tente novamente.</p>
+                <?php if (isset($api_response['error_messages'])): ?>
+                    <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
+                    <h2 class="h4 fw-bold mt-3">Falha no Pagamento</h2>
+                    <p class="text-muted">A API retornou um erro. Por favor, verifique os dados e tente novamente.</p>
                 <?php elseif ($payment_method === 'pix' && isset($api_response['qr_codes'][0])): ?>
-                <i class="bi bi-qr-code text-dark" style="font-size: 4rem;"></i>
-                <h2 class="h4 fw-bold mt-3">Finalize com PIX</h2>
-                <p class="text-muted">Seu pedido <strong><?php echo htmlspecialchars($reference_id); ?></strong> foi criado. Escaneie o QR Code abaixo para pagar.</p>
-                <img src="<?php echo htmlspecialchars($api_response['qr_codes'][0]['links'][0]['href']); ?>" class="img-fluid rounded my-3" alt="QR Code PIX" style="max-width: 220px;">
-                <div class="text-start">
-                    <label for="pix-code" class="form-label fw-semibold">PIX Copia e Cola:</label>
-                    <div class="input-group">
-                        <input type="text" id="pix-code" class="form-control" value="<?php echo htmlspecialchars($api_response['qr_codes'][0]['text']); ?>" readonly>
-                        <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()" id="copy-btn"><i class="bi bi-clipboard"></i></button>
+                    <i class="bi bi-qr-code text-dark" style="font-size: 4rem;"></i>
+                    <h2 class="h4 fw-bold mt-3">Finalize com PIX</h2>
+                    <p class="text-muted">Seu pedido <strong><?php echo htmlspecialchars($reference_id); ?></strong> foi criado. Escaneie o QR Code abaixo para pagar.</p>
+                    <img src="<?php echo htmlspecialchars($api_response['qr_codes'][0]['links'][0]['href']); ?>" class="img-fluid rounded my-3" alt="QR Code PIX" style="max-width: 220px;">
+                    <div class="text-start">
+                        <label for="pix-code" class="form-label fw-semibold">PIX Copia e Cola:</label>
+                        <div class="input-group">
+                            <input type="text" id="pix-code" class="form-control" value="<?php echo htmlspecialchars($api_response['qr_codes'][0]['text']); ?>" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()" id="copy-btn"><i class="bi bi-clipboard"></i></button>
+                        </div>
                     </div>
-                </div>
-                <div class="d-grid mt-4">
-                     <a href="../carrinho/pedidos/confirmacao_pedido.php?id_pedido=<?php echo $id_pedido; ?>" class="btn btn-primary">Já Paguei, Verificar Status</a>
-                </div>
-            <?php else: ?>
-                <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
-                <h2 class="h4 fw-bold mt-3">Resposta Inesperada</h2>
+                    <div class="d-grid mt-4">
+                        <a href="../carrinho/pedidos/confirmacao_pedido.php?id_pedido=<?php echo $id_pedido; ?>" class="btn btn-primary">Já Paguei, Verificar Status</a>
+                    </div>
+                <?php else: ?>
+                    <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
+                    <h2 class="h4 fw-bold mt-3">Resposta Inesperada</h2>
                 <?php endif; ?>
 
             </div>
@@ -152,4 +171,5 @@ if ($payment_method === 'credit_card') {
     </script>
     <?php include("../php/footer_pag.php"); ?>
 </body>
+
 </html>

@@ -70,6 +70,15 @@ if (!$order_details) {
         .form-check-label { width: 100%; }
         .valor-total { font-size: 1.5rem; font-weight: bold; color: #0d6efd; }
         .form-control[readonly] { background-color: #e9ecef; }
+
+        .py-5 {
+            padding-top: 0px !important;
+            padding-bottom: 3px !important;
+        }
+
+        .menu li a {
+        font-size: 14px;
+    }
         
     </style>
 </head>

@@ -286,7 +286,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 } else {
                     // Se não houver endereço, redireciona para o cadastro
                     alert('Nenhum endereço cadastrado. Você será redirecionado para cadastrar um.');
-                    window.location.href = '../cadastro_endereco.php?retorno=finalizar_pedido.php';
+                    window.location.href = '../cadastro_endereco.php?retorno=./finalizar_pedido.php';
                 }
             } else {
                 enderecoSection.style.display = 'none';
