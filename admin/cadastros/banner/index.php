@@ -139,7 +139,6 @@ $banner = mysqli_query($conexao, $query);
 
 
     $("#btnSalvar").click(function() {
-      /*$("#txtSubCategoria").css("border-color", "#CCC");*/
 
       if ($("#txtpro").val() == '') {
         $("#txtpro").css("border-color", "red");

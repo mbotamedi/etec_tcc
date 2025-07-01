@@ -1,6 +1,5 @@
 <?php
-// Arquivo: pgseguro/notificacao.php
-// Versão convertida para usar MySQLi e a variável $conexao.
+
 
 require_once '../includes/conexao.php';
 require_once 'config.php';

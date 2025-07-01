@@ -11,9 +11,7 @@ if ($id_pedido <= 0) {
     exit;
 }
 
-// 2. Consulta o banco para pegar o status mais recente do pagamento para este pedido
-// Usamos LEFT JOIN para funcionar mesmo que a linha em tb_payments ainda não exista
-// Usamos ORDER BY e LIMIT 1 para pegar a tentativa de pagamento mais recente, caso haja mais de uma.
+
 $sql = "SELECT status FROM tb_payments WHERE id_pedidos = ? ORDER BY id DESC LIMIT 1";
 
 $stmt = mysqli_prepare($conexao, $sql);

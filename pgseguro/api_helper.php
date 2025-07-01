@@ -1,6 +1,5 @@
 <?php
-// File: api_helper.php
-// Description: Função reutilizável para fazer chamadas cURL para a API do PagSeguro.
+
 include('../includes/conexao.php');
 /**
  * Envia uma requisição para a API do PagSeguro.
@@ -21,11 +20,10 @@ function callPagSeguroAPI(array $data) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    // Descomente a linha abaixo para depuração em ambientes locais sem SSL configurado corretamente.
+
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    // Descomente a linha abaixo para depuração em ambientes locais sem SSL configurado corretamente.
-    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    
+
+
     $response = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     
@@ -48,21 +46,6 @@ function callPagSeguroAPI(array $data) {
     return $responseData;
 }
 
-/**
- * Conecta ao banco de dados usando PDO.
- *
- * @return PDO|null O objeto PDO da conexão ou null em caso de falha.
- */
-/*function getDbConnection() {
-    try {
-        $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $pdo;
-    } catch (PDOException $e) {
-        // Em um ambiente de produção, logue este erro em vez de exibi-lo.
-        error_log('Connection failed: ' . $e->getMessage());
-        return null;
-    }
-}*/
+
 
 ?>
