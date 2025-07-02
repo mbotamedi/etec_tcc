@@ -22,8 +22,8 @@ if (!isset($_SESSION["carrinho"]) || count($_SESSION["carrinho"]) <= 0) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo_entrega = mysqli_real_escape_string($conexao, $_POST['tipo_entrega']);
     $id_endereco = mysqli_real_escape_string($conexao, $_POST['id_endereco'] ?? '');
-    
-    // --- CORREÇÃO: Tratamento para o valor do método de pagamento ---
+
+    // CORREÇÃO: Tratamento para o valor do método de pagamento
     // Pega o valor do formulário (minúsculo) para usar na lógica PHP
     $metodo_pagamento_form = mysqli_real_escape_string($conexao, $_POST['metodo_pagamento'] ?? 'online');
     // Cria uma versão em MAIÚSCULAS para ser salva no banco de dados

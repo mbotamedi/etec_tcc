@@ -254,6 +254,14 @@ include '../php/config.php';
                   </a>
                 </li>
               </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="?pg=Mensagens" class="nav-link">
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>Mensagens</p>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
           <!--end::Sidebar Menu-->
@@ -324,6 +332,9 @@ include '../php/config.php';
             break;
           case "Relatorio":
             $incluir = "gerenciamento/caixa/relatorio_caixa.php";
+            break;
+          case "Mensagens":
+            $incluir = "gerenciamento/mensagens/index.php";
             break;
         }
         include($incluir);

@@ -35,14 +35,14 @@ echo '<thead>
 // Verifica se a consulta foi bem-sucedida
 while ($lista = mysqli_fetch_assoc($listar)) {
 
-    
+
     echo '<tr class="align-middle">
                     <td>' . $lista["id"] . '</td>
                     <td>' . $lista["id_produto"] . '</td>
                     <td>' . $lista["id_promocao"] . '</td>
                     <td>' . $lista["descricao"] . '</td>
                     <td>' . $lista["quantidade"] . '</td>
-                    <td>' . $lista["Vl_pro"] . '</td>
+                    <td>R$ ' . number_format($lista["Vl_pro"], 2, ',', '.') . '</td>
                     <td><i class="bi bi-pencil-square altera"></i> |
                         <i class="bi bi-trash deleta"></i></td>
                 </tr>';
@@ -61,7 +61,8 @@ echo '</tbody>
         var cod_promocao = $(this).closest("tr").find("td").eq(2).text();
         var descricao = $(this).closest("tr").find("td").eq(3).text();
         var qtd = $(this).closest("tr").find("td").eq(4).text();
-        var valor = $(this).closest("tr").find("td").eq(5).text();
+        var valor_formatado = $(this).closest("tr").find("td").eq(5).text();
+        var valor = valor_formatado.replace('R$', '').replace(',', '.');
 
 
         //Carrego a descricao no Campo txtcategoria 

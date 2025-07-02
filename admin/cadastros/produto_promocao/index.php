@@ -91,7 +91,7 @@
 
 
     $("#btnSalvar").click(function() {
-      /*$("#txtSubCategoria").css("border-color", "#CCC");*/
+
 
       if ($("#txtcod").val() == '') {
         $("#txtcod").css("border-color", "red");
@@ -100,12 +100,7 @@
         return false;
       }
 
-      /*if ($("#txtprodutos").val() == '') {
-        $("#txtprodutos").css("border-color", "red");
-        alert("Favor Preencha o campo Descrição do Produtos");
-        $("#txtprodutos").focus();
-        return false;
-      }*/
+
 
       if ($("#txtdesconto").val() == '') {
         $("#txtdesconto").css("border-color", "red");

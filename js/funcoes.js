@@ -21,8 +21,12 @@ function mostraDialogo(mensagem, tipo, tempo){
     // monta o html da mensagem com Bootstrap
     var dialogo = "";
     dialogo += '<div id="message" style="'+cssMessage+'">';
-    dialogo += '    <div id="message" class="alert alert-'+tipo+' alert-dismissable" style="'+cssInner+'">';
-   // dialogo += '    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>';
+    dialogo +=
+      '    <div id="message" class="alert alert-' +
+      tipo +
+      ' alert-dismissable" style="' +
+      cssInner +
+      '">';
     dialogo +=          mensagem;
     dialogo += '    </div>';
     dialogo += '</div>';
