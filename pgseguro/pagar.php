@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['payment_method'])) {
 }
 
 // Limpa a sessão para evitar que o mesmo pedido seja pago duas vezes
-unset($_SESSION['pagamento_id_pedido']);
+// unset($_SESSION['pagamento_id_pedido']);
 
 // --- COLETA E LIMPEZA DOS DADOS ---
 $payment_method = $_POST['payment_method'];
@@ -121,12 +121,19 @@ if ($payment_method === 'credit_card') {
     }
     </style>
 </head>
-<?php include("../php/navbar_pag.php"); ?>
 
 <body class="py-5">
     <div class="container" style="padding: 20px;">
-        <div class="card shadow-sm">
-            <div class="card-body p-4 p-md-5 text-center">
+        <div class="card shadow-sm " style="margin-top: 120px;">
+             <div class="container-voltar">
+                    <div class="buttonVoltar">
+                        <a href="../pgseguro/index.php" class="botaoVoltar">
+                            ← Página anterior
+                        </a>
+                    </div>
+                </div>
+            <div class="card-body p-4 p-md-5 text-center display-flex flex-column align-items-center justify-content-center">
+               
 
                 <?php if (isset($api_response['error_messages'])): ?>
                     <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
@@ -169,7 +176,6 @@ if ($payment_method === 'credit_card') {
             });
         }
     </script>
-    <?php include("../php/footer_pag.php"); ?>
 </body>
 
 </html>

@@ -93,10 +93,10 @@
         align-items: center;
         gap: 20px;
         width: 100%;
-        padding: 0 10px;
+        padding: 50px 0;
         box-sizing: border-box;
         text-align: center;
-        text-align: center;
+        /* padding-top: 50px; */
     }
 
     .ul-content {
@@ -113,7 +113,11 @@
 
 @media (max-width: 360px) {
     .menu li a {
-        font-size: 14px;
+        font-size: 10px;
+    }
+
+    li, a, ul{
+        font-size: 10px;
     }
 }
 

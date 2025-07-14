@@ -4,11 +4,9 @@
         display: flex;
         justify-content: center;
         gap: 100px;
+        padding-top: 50px;
     }
 
-    .ul-content {
-        list-style: none;
-    }
 </style>
 
 <head>

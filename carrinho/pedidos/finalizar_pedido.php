@@ -2,6 +2,9 @@
 session_start();
 include("../../includes/conexao.php");
 
+$current_page = basename($_SERVER['PHP_SELF']);
+$is_paginaatual = ($current_page == 'finalizar_pedido.php');
+
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
     $_SESSION['url_retorno'] = 'finalizar_pedido.php';
@@ -29,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Cria uma versão em MAIÚSCULAS para ser salva no banco de dados
     $metodo_pagamento_db = strtoupper($metodo_pagamento_form);
     // --- FIM DA CORREÇÃO ---
-    
+
     $id_endereco_value = ($tipo_entrega == 'entrega' && !empty($id_endereco)) ? "'$id_endereco'" : "NULL";
     $tipo_pedido = "WEB";
 
@@ -58,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $qtd = $item['qtd'];
                 // CORREÇÃO: Evita o warning de 'Undefined array key "nome"'
                 $nome_produto = isset($item['nome']) ? mysqli_real_escape_string($conexao, $item['nome']) : "Produto ID $id_produto";
-                
+
                 $query_estoque = "SELECT estoque FROM tb_produtos WHERE id = '$id_produto'";
                 $result_estoque = mysqli_query($conexao, $query_estoque);
                 if ($result_estoque && mysqli_num_rows($result_estoque) > 0) {
@@ -75,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!isset($erro)) {
-            $conexao->begin_transaction(); 
+            $conexao->begin_transaction();
 
             try {
                 $emissao = date('Y-m-d H:i:s');
@@ -84,13 +87,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach ($_SESSION["carrinho"] as $item) {
                     $valor_total += $item['valor'] * $item['qtd'];
                 }
-                
+
                 $status_pagamento = ($metodo_pagamento_form == 'online') ? 'AGUARDANDO' : 'NAO_APLICAVEL';
 
                 // Usando a variável com valor em MAIÚSCULO para o banco de dados
                 $query_pedido = "INSERT INTO tb_pedidos (id_cliente, id_endereco, emissao, valor_total, tipo_entrega, tipo_pedido, metodo_pagamento, status_pagamento) 
                                  VALUES ('$id_cliente', $id_endereco_value, '$emissao', '$valor_total', '$tipo_entrega', '$tipo_pedido', '$metodo_pagamento_db', '$status_pagamento')";
-                
+
                 if (!mysqli_query($conexao, $query_pedido)) {
                     throw new Exception(mysqli_error($conexao));
                 }
@@ -113,8 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
-                $conexao->commit(); 
-                unset($_SESSION['carrinho']);
+                $conexao->commit();
+
+                // unset($_SESSION['carrinho']);
+                //EU REMOVI O UNSET PARA NÃO INTERFERIR NA VOLTA DA TELA DE PAGAMENTO. (06/07/2025, RAFAEL)
 
                 // Usando a variável do formulário (minúscula) para a lógica do IF
                 if ($metodo_pagamento_form === 'online') {
@@ -122,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: ../../pgseguro/index.php");
                     exit;
                 } else {
-                     if (in_array($metodo_pagamento_form, ['dinheiro', 'cartao']) && $id_caixa) {
+                    if (in_array($metodo_pagamento_form, ['dinheiro', 'cartao']) && $id_caixa) {
                         $descricao = "Pedido Web #$id_pedido";
                         $query_mov = "INSERT INTO tb_movimentacoes_caixa (id_caixa, tipo, descricao, valor, data_movimento) 
                                       VALUES ('$id_caixa', 'ENTRADA', '$descricao', '$valor_total', '$emissao')";
@@ -131,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: confirmacao_pedido.php?id_pedido=$id_pedido");
                     exit;
                 }
-
             } catch (Exception $e) {
                 $conexao->rollback();
                 $erro = "Ocorreu um erro ao processar seu pedido: " . $e->getMessage();
@@ -164,24 +168,101 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <style>
-        .cart-container { max-width: 340px; margin: 0 auto; padding-top: 10px; }
-        .container-finalizar { max-width: 800px; margin: 20px auto; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px; }
-        .endereco-list, .tipo-entrega-options { margin-bottom: 20px; }
-        .endereco-item { display: flex; align-items: flex-start; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 5px; }
-        .endereco-item input[type="radio"] { margin-right: 15px; margin-top: 5px; }
-        .endereco-item label { flex: 1; text-align: left; line-height: 1.5; }
-        .btn-finalizar { background-color: #28a745; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; }
-        .btn-finalizar:hover { background-color: #218838; }
-        .tipo-entrega-option { display: flex; align-items: center; margin-bottom: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.2s ease-in-out; }
-        .tipo-entrega-option:has(input:checked) { border-color: #28a745; background-color: #e9f5ec; }
-        .tipo-entrega-option input { margin-right: 10px; }
-        #endereco-section { display: none; }
-        .erro { color: #D8000C; background-color: #FFD2D2; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+        .cart-container {
+            max-width: 340px;
+            margin: 0 auto;
+            padding-top: 10px;
+        }
+
+        .container-finalizar {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .endereco-list,
+        .tipo-entrega-options {
+            margin-bottom: 20px;
+        }
+
+        .endereco-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .endereco-item input[type="radio"] {
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .endereco-item label {
+            flex: 1;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .btn-finalizar {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 300px;
+        }
+
+        .btn-finalizar:hover {
+            background-color: #218838;
+        }
+
+        .tipo-entrega-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tipo-entrega-option:has(input:checked) {
+            border-color: #28a745;
+            background-color: #e9f5ec;
+        }
+
+        .tipo-entrega-option input {
+            margin-right: 10px;
+        }
+
+        #endereco-section {
+            display: none;
+        }
+
+        .erro {
+            color: #D8000C;
+            background-color: #FFD2D2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .container-buttonConcluir {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <?php include("../../php/navbar.php"); ?>
+    <?php include("../../php/navbar_pag.php"); ?>
 
     <section class="py-5">
         <div class="container-finalizar">
@@ -191,7 +272,13 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             <?php endif; ?>
             <h3>Resumo do Carrinho</h3>
             <div class="cart-container">
-                <?php include("../carrinho.php"); ?>
+                <?php
+                // Se a variável '$estaNaPaginaFinalizarPedido' for relevante aqui, mantenha-a.
+                // Caso contrário, se ela só serve para a lógica dentro do carrinho.php,
+                // você pode removê-la daqui se o carrinho.php já for inteligente o suficiente.
+                $estaNaPaginaFinalizarPedido = true;
+                include("../carrinho.php");
+                ?>
             </div>
 
             <form method="POST" action="finalizar_pedido.php">
@@ -236,40 +323,34 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 </div>
 
                 <h3>Pagamento</h3>
-                <!---<div class="tipo-entrega-options">
-                    <label class="tipo-entrega-option">
-                        <input type="radio" name="metodo_pagamento" value="dinheiro" required>
-                        <div>
-                            <strong>Dinheiro</strong>
-                            <p>Pagamento em dinheiro na entrega ou retirada.</p>
-                        </div>
-                    </label>
-                    <label class="tipo-entrega-option">
-                        <input type="radio" name="metodo_pagamento" value="cartao">
-                        <div>
-                            <strong>Cartão</strong>
-                            <p>Pagamento com cartão na entrega ou retirada.</p>
-                        </div>
-                    </label>---->
-                    <label class="tipo-entrega-option">
-                        <input type="radio" name="metodo_pagamento" value="online" checked>
-                        <div>
-                            <strong>Online</strong>
-                            <p>Pagamento via PIX ou Cartão de Crédito.</p>
-                        </div>
-                    </label>
-                </div>
+                <label class="tipo-entrega-option">
+                    <input type="radio" name="metodo_pagamento" value="online" checked>
+                    <div>
+                        <strong>Online</strong>
+                        <p>Pagamento via PIX ou Cartão de Crédito.</p>
+                    </div>
+                </label>
+        </div>
+        <div class="container-buttonConcluir">
+            <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
+        </div>
+        </form>
 
-                <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
-            </form>
         </div>
     </section>
 
     <?php include("../../php/footer.php"); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/scripts.js"></script>
     <script src="../../js/carrinho.js"></script>
+    <!-- <script src="../../js/controlaModal.js"></script> -->
+
+    <!-- Nesse caso, deve se abrir o controlateste.js por causa de caminho de arquivos dentro do js -->
+    <?php if ($is_paginaatual) {
+        echo '<script src="../../js/controlateste.js"></script>';
+    }
+    ?>
+
     <script>
         function toggleEndereco(show) {
             const enderecoSection = document.getElementById('endereco-section');
@@ -297,6 +378,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
             }
         }
     </script>
+
 </body>
 
 </html>

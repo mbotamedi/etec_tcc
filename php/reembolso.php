@@ -16,6 +16,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
+    <link rel="stylesheet" href="../css/mediaQuery.css">
     <style>
         body {
             background-color: #f9f9f9;
@@ -87,6 +88,8 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             color: #27ae60;
             font-weight: bold;
         }
+
+      
     </style>
 </head>
 
@@ -135,7 +138,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <?php include("./zap.php")?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
 </body>
 
 </html>

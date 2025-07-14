@@ -90,8 +90,6 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
                 justify-content: center;
                 gap: 20px; /* Aumentado o espaço entre os botões */
                 margin-bottom: 10px;
-                
-                
             }
             .close-btn {
                 background: none;
@@ -109,7 +107,20 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
                 text-align: center;
                 margin-top: 20px;
             }
+
+            .button-clear {
+                color: red; /* Cor do texto padrão */
+                text-decoration: underline; /* Deixa o texto sublinhado */
+                transition: color 0.3s ease-in-out; /* Transição suave para a cor */
+                cursor: pointer; /* Indica que é clicável */
+            }
+
+            .button-clear:hover {
+                color: rgb(198, 0, 0); /* Cor vermelha escura ao passar o mouse */
+            }
+            
           </style>';
+
 
     echo '<div>';
 
@@ -129,9 +140,9 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
         echo '</div>';
         echo '<div class="bottom-row">';
         echo '<div class="quantity-controls">
-                <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=subtrair">−</a>
-                <span>' . $value["qtd"] . '</span>
-                <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=somar">+</a>
+                  <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=subtrair">−</a>
+                  <span>' . $value["qtd"] . '</span>
+                  <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=somar">+</a>
               </div>';
         echo '<div class="unit-price">R$' . number_format($value["valor"], 2, ',', '.') . ' (unitário)</div>';
         echo '<div><a href="../carrinho/delCarrinho.php?id=' . $key . '"><i class="fas fa-trash deleta"></i></a></div>';
@@ -145,6 +156,25 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     echo '<span>Total:</span>';
     echo '<span>R$' . number_format($total, 2, ',', '.') . '</span>';
     echo '</div>';
+
+    // Exibe o botão "Limpar Carrinho" apenas se não for a página de finalizar pedido
+    // e se o carrinho não estiver vazio
+
+    if (!$is_finalizar_pedido) {
+        echo '<div class="clear-items"> 
+                <a class="button-clear" href="../carrinho/deletarItem?acao=limpar">Limpar Carrinho</a>
+              </div>';
+    }
+
+    if ($is_finalizar_pedido) {
+        echo '<div class="alert alert-info" role="alert" style="margin-top: 15px;>';
+        echo '    <button type="button" class="close-btn" data-bs-dismiss="alert" aria-label="Close">&times;</button>';
+        echo '    <strong>Informação:</strong> O carrinho não contém o botão finalizar, pois você já está na página de finalização.';
+        echo '</div>';
+    }
+
+
+    // fim da correção
 
     // Botões dentro do cart-container, após o total-row
     if (!$is_finalizar_pedido) {
@@ -165,4 +195,3 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
 
     echo '</div>';
 }
-?>

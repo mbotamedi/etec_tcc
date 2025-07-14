@@ -157,7 +157,7 @@ $result_estado = mysqli_query($conexao, $query_estado);
     <?php include("../../php/footer.php"); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/scripts.js"></script>
+
     <script>
         function carregarCidades() {
             const estadoSelect = document.getElementById('id_estado');

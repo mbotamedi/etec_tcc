@@ -157,7 +157,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
     <?php include("../../php/zap.php")?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/scripts.js"></script>
     <script src="../../js/funcao.js"></script>
     <script src="../../js/pedidos.js"></script>
     <script src="../../js/gerenciar.js"></script>

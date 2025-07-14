@@ -113,9 +113,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!--------------SCRIPTS-------------->
-
-    <script src="../js/scripts.js"></script>
-    <script src="../js/dropDown-menu.js"></script>
+    <script src="../js/"></script>
     <script src="../js/funcao.js"></script>
     <script src="../js/controlaModal.js"></script>
 
