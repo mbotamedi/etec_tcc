@@ -12,7 +12,7 @@ function addToCart(produtoId, quantidade) {
   // Converte a quantidade para um número inteiro
   let qty = parseInt(quantidade);
   // Apenas redireciona se a quantidade for maior que 0
-  if (qty > 0) {
+  if (qty >= 0) {
     window.location.href = `../carrinho/addCarrinho.php?id_produto=${produtoId}&qtd=${qty}`;
   }
 }

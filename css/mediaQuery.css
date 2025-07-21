@@ -1,3 +1,18 @@
+/* ----------- CELULAR (≤768px) ----------- */
+
+@media (max-width: 768px) {
+    
+
+    .botaoVoltar {
+        text-decoration: none;
+        color: red;
+        font-weight: 400;
+        border: 1px solid red;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}
+
 /* ----------- CELULAR (≤576px) ----------- */
 
 @media (max-width: 576px) {
@@ -53,8 +68,20 @@
         margin-top: 60px;
     }
 
+    /* .p-4 {
+        padding: 1.5rem !important;
+    } */
+
+    .botaoVoltar {
+        font-size: 12px;
+    }
 
     /*---NAVBAR----*/
+
+    #offcanvasCart {
+        width: 100% !important;
+        /* Aumente para o valor desejado, ex.: 600px */
+    }
 
     .menu {
         display: flex;
@@ -111,14 +138,23 @@
 
 }
 
+/* ----------- CELULAR PEQUENO PORTE (≤360px) ----------- */
+
 @media (max-width: 360px) {
     .menu li a {
-        font-size: 10px;
+        font-size: 14px;
     }
 
-    li, a, ul{
-        font-size: 10px;
+    li,
+    a,
+    ul {
+        font-size: 14px;
     }
+
+    .botaoVoltar {
+        font-size: 12px;
+    }
+
 }
 
 /* ----------- TABLET (≤992px) ----------- */

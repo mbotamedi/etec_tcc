@@ -16,6 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['payment_method'])) {
     exit;
 }
 
+
+$current_page = basename($_SERVER['PHP_SELF']);
+$is_paginaatual = ($current_page == 'pagar.php');
+
+
 // Limpa a sessão para evitar que o mesmo pedido seja pago duas vezes
 // unset($_SESSION['pagamento_id_pedido']);
 
@@ -89,6 +94,7 @@ if ($payment_method === 'credit_card') {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -98,6 +104,8 @@ if ($payment_method === 'credit_card') {
     <title>Resultado do Pagamento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css//mediaQuery.css">
+    link
     <style>
         body {
             background-color: #f8f9fa;
@@ -117,23 +125,37 @@ if ($payment_method === 'credit_card') {
         }
 
         .menu li a {
-        font-size: 12px;
-    }
+            font-size: 12px;
+        }
+
+        .botaoVoltar {
+            text-decoration: none;
+            color: red;
+            font-weight: 400;
+            border: 1px solid red;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .buttonVoltar {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
     </style>
 </head>
 
 <body class="py-5">
     <div class="container" style="padding: 20px;">
         <div class="card shadow-sm " style="margin-top: 120px;">
-             <div class="container-voltar">
-                    <div class="buttonVoltar">
-                        <a href="../pgseguro/index.php" class="botaoVoltar">
-                            ← Página anterior
-                        </a>
-                    </div>
+            <div class="container-voltar">
+                <div class="buttonVoltar">
+                    <a href="../pgseguro/index.php" class="botaoVoltar">
+                        ← Página anterior
+                    </a>
                 </div>
+            </div>
             <div class="card-body p-4 p-md-5 text-center display-flex flex-column align-items-center justify-content-center">
-               
+
 
                 <?php if (isset($api_response['error_messages'])): ?>
                     <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
@@ -176,6 +198,24 @@ if ($payment_method === 'credit_card') {
             });
         }
     </script>
+    <?php if ($is_paginaatual): ?>
+
+        <style>
+            .botaoVoltar {
+                text-decoration: none;
+                color: red;
+                font-weight: 400;
+                border: 1px solid red;
+                padding: 5px;
+                border-radius: 5px;
+            }
+        </style>
+
+    <?php endif; ?>
+
+
 </body>
+
+
 
 </html>

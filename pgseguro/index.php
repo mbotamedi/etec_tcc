@@ -64,6 +64,7 @@ if ($stmt) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento Seguro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css//mediaQuery.css">
     <style>
         body {
             background-color: #f8f9fa;

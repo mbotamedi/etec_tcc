@@ -8314,9 +8314,15 @@ textarea.form-control-lg {
   padding: 1rem !important;
 }
 
-.p-4 {
+/*---HAVIA EXTRAPOLADO O LIMITE DO INPUT TEXT---- */
+
+/* .p-4 {
   padding: 1.5rem !important;
-}
+} */
+
+ /*-----------------------------------------------*/
+   
+
 
 .p-5 {
   padding: 3rem !important;
