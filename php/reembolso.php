@@ -26,6 +26,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             padding: 0;
         }
 
+
         .container-politica {
             max-width: 960px;
             margin: 60px auto;
@@ -74,12 +75,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             margin-bottom: 25px;
         }
 
-        ul li {
-            margin-bottom: 12px;
-            font-size: 1.05rem;
-            position: relative;
-            padding-left: 25px;
-        }
 
         ul li::before {
             position: absolute;
@@ -88,8 +83,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
             color: #27ae60;
             font-weight: bold;
         }
-
-      
     </style>
 </head>
 
@@ -135,7 +128,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     </div>
 
     <?php include("footer.php"); ?>
-    <?php include("./zap.php")?>
+    <?php include("./zap.php") ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

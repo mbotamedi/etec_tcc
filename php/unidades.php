@@ -47,9 +47,9 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
     </div>
 
-    <section class="#">
+    <section class="unidade01">
         <div class="container-info col-12">
-            <div class="container col-12" style="display: flex;">
+            <div class="container col-12">
                 <div class="foto01-cantina">
                     <img src="../assets/img/cantina.jpg" alt="Logo" style="width: 100%; height: 100%;">
                 </div>
@@ -113,7 +113,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!--------------SCRIPTS-------------->
-    <script src="../js/"></script>
     <script src="../js/funcao.js"></script>
     <script src="../js/controlaModal.js"></script>
 

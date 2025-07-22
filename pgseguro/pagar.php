@@ -141,6 +141,7 @@ if ($payment_method === 'credit_card') {
             margin-top: 20px;
             margin-left: 20px;
         }
+        
     </style>
 </head>
 

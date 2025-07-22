@@ -159,5 +159,48 @@
 
 /* ----------- TABLET (≤992px) ----------- */
 
+@media (max-width: 992px) {
+    /* Font sizes extracted and adjusted for tablet */
+
+    .produtos-Destaques {
+        font-size: 25px; /* Mantido do media query de 576px */
+    }
+
+    .card-text {
+        font-size: 10px; /* Mantido do media query de 576px */
+    }
+
+    .card-title {
+        font-size: 12px; /* Mantido do media query de 576px */
+    }
+
+    .botaoVoltar {
+        font-size: 12px; /* Mantido do media query de 576px e 360px */
+    }
+
+    .menu li a {
+        font-size: 15px; /* Mantido do media query de 576px, sobrescreve o de 360px para este breakpoint */
+    }
+
+    .information-divs > h2 {
+        font-size: 25px; /* Mantido do media query de 576px */
+    }
+    li,
+    a,
+    ul {
+        
+        font-size: 14px; /* Mantido do media query de 360px como um fallback geral, mas pode ser ajustado */
+    }
+
+    /* .container col-12{
+        display: grid !important;
+    } */
+
+    .container col-12 {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
 
 /* ----------- NOTEBOOK (≤1200px) ----------- */
