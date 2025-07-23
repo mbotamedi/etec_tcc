@@ -14,8 +14,43 @@ session_start(); // Inicia a sessão para armazenar mensagens
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../css/mediaQuery.css">
     <link rel="shortcut icon" href="../assets/img/logo_copia01.png" type="image/x-icon">
     <title>Cantina Três Irmãos - Cadastre-se</title>
+
+    <style>
+        @media (max-width: 992px) {
+
+            .cadastro-login{
+                max-width: 500px;
+            }
+            form {
+                width: 80%;
+                margin: 0 auto;
+                padding: 0 auto;
+            }
+
+            .header-font {
+                font-size: 40px;
+            }
+
+            .information-text {
+                font-size: 18px;
+            }
+
+            .link-cadastro {
+                font-size: 15px;
+            }
+
+            .label-text {
+                font-size: 18px;
+            }
+
+            .button-open {
+                margin-left: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +58,7 @@ session_start(); // Inicia a sessão para armazenar mensagens
     <div class="container">
         <div class="cadastro-login">
             <div class="header-title">
-                <h2>Cadastre-se</h2>
+                <h2 class="header-font">Cadastre-se</h2>
                 <div class="barra-laranja"></div>
             </div>
             <div class="user-icon">
@@ -41,29 +76,29 @@ session_start(); // Inicia a sessão para armazenar mensagens
 
             <form name="cadastro" id="cadastro" action="../includes/salvar.php" method="POST">
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
+                    <label for="nome" class="label-text">Nome:</label>
                     <input type="text" id="nome" name="nome" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">E-mail:</label>
+                    <label for="email" class="label-text">E-mail:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="celular">Celular:</label>
+                    <label for="celular" class="label-text">Celular:</label>
                     <input type="tel" id="celular" name="celular" required pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
                         placeholder="(99) 99999-9999" maxlength="15" oninput="mascaraTelefone(this)">
                 </div>
                 <div class="form-group">
-                    <label for="CPF">CPF:</label>
+                    <label for="CPF" class="label-text">CPF:</label>
                     <input type="text" id="cpf" name="cpf" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
                         placeholder="555.555.555-55" maxlength="14" oninput="mascaraCPF(this)">
                 </div>
                 <div class="form-group">
-                    <label for="senha">Senha:</label>
+                    <label for="senha" class="label-text">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
                 </div>
-                <div class="form-group">
-                    <label for="confirmar-senha">Confirmar Senha:</label>
+                <div class="form-group" >
+                    <label for="confirmar-senha" class="label-text">Confirmar Senha:</label>
                     <input type="password" id="confirmar-senha" name="confirmar-senha" required>
                 </div>
                 <div class="botao">
@@ -71,7 +106,7 @@ session_start(); // Inicia a sessão para armazenar mensagens
                 </div>
             </form>
             <div class="information">
-                <p>Já tem conta? <a href="login.php">Entrar</a></p>
+                <p class="information-text">Já tem conta? <a href="login.php" class="link-cadastro">Entrar</a></p>
             </div>
         </div>
     </div>
