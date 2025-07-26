@@ -18,7 +18,8 @@ session_start(); // Inicia a sessão para armazenar mensagens
     <link rel="shortcut icon" href="../assets/img/logo_copia01.png" type="image/x-icon">
     <title>Cantina Três Irmãos - Cadastre-se</title>
 
-    <style>
+    <style> 
+    /*------Parte do cadastro e login------*/
         @media (max-width: 992px) {
 
             .cadastro-login{

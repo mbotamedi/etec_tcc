@@ -19,6 +19,7 @@ if (!$pedido) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,6 +39,7 @@ if (!$pedido) {
             padding: 20px;
             text-align: center;
         }
+
         .btn-continuar {
             background-color: #007bff;
             color: white;
@@ -46,11 +48,19 @@ if (!$pedido) {
             border-radius: 5px;
             text-decoration: none;
         }
+
         .btn-continuar:hover {
             background-color: #0056b3;
         }
+
+        @media (max-width: 992px) {
+            .py-5 {
+                margin-top: 150px !important;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Inclui a navegação -->
     <?php include("../php/navbar.php"); ?>
@@ -67,9 +77,11 @@ if (!$pedido) {
 
     <!-- Footer -->
     <?php include("../php/footer.php"); ?>
+    <!-- <?php include("../../php/verificar_login.php"); ?> -->
 
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

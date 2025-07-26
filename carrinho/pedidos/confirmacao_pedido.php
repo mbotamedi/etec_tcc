@@ -104,7 +104,7 @@ $is_paginaatual = ($current_page == 'confirmacao_pedido.php');
 </head>
 
 <body>
-    <?php include("../../php/navbar.php"); ?>
+    <?php include("../../php/navbar_ConfirmaPedido"); ?>
 
     <section class="py-5">
         <div class="container-confirmacao">
@@ -209,7 +209,7 @@ $is_paginaatual = ($current_page == 'confirmacao_pedido.php');
             // Função para verificar o estado de login
             async function verificarLogin() {
                 try {
-                    const response = await fetch('../php/verificar_login.php', {
+                    const response = await fetch('../../php/verificar_login.php', {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json'
