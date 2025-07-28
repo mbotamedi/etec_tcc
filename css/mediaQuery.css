@@ -196,9 +196,13 @@
         display: grid !important;
     } */
 
-    .container col-12 {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .container-info, .container col-12{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .pesquisa-input {
+        width: 600px !important; /* Ajuste para tablet */
     }
 
     /*----------TELA DE LOGIN E CADASTRO----------*/

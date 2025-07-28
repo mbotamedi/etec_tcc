@@ -4,8 +4,10 @@ $is_finalizar_pedido =
     ($current_page == 'cadastro_endereco.php' ||
         $current_page == 'finalizar_pedido.php' ||
         $current_page == 'pedidos_cliente.php' ||
-        $current_page == 'confirmacao_pedido.php'
+        $current_page == 'confirmacao_pedido.php' ||
     );
+
+$pagina_Unidades = ($current_page == 'unidades.php');
 ?>
 
 <style>
@@ -54,6 +56,7 @@ $is_finalizar_pedido =
             <p class="m-0 text-center text-white">Copyright &copy; Cantina Três Irmãos</p>
         </div>
     </footer>
+    
 <?php else: ?>
     <head>
         <link rel="stylesheet" href="../../css/mediaQuery.css" />
