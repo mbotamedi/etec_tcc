@@ -24,7 +24,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
         <div class="user-cart">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                <img src="../assets/img/user.png" alt="Usuário" width="30px">
+                <img src="../assets/img/User.png" alt="Usuário" width="30px">
             </button>
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
                 <img src="../assets/img/Shopping cart.png" alt="Carrinho" width="30px">

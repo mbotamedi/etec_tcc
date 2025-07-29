@@ -1,9 +1,10 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
-$is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php' );
+$is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_page == 'finalizar_pedido.php' || $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php');
 ?>
 
 <?php if (!$is_finalizar_pedido): ?>
+
     <head>
         <link rel="stylesheet" href="../css/navbar.css">
         <link rel="stylesheet" href="../css/mediaQuery.css">
@@ -31,7 +32,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
 
             <div class="user-cart" id="user-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo isset($_SESSION['usuario']) ? 'canvas-logado' : 'canvas-deslogado'; ?>" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                    <img src="../assets/img/user.png" alt="Usuário" width="30px">
+                    <img src="../assets/img/User.png" alt="Usuário" width="30px">
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
                     <img src="../assets/img/Shopping cart.png" alt="Carrinho" width="30px">
@@ -119,6 +120,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     </div>
 
 <?php else: ?>
+
     <head>
         <link rel="stylesheet" href="../../css/navbar.css">
         <link rel="stylesheet" href="../../css/mediaQuery.css">
@@ -138,18 +140,18 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
             </div>
             <div class="user-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvas-logado" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                    <img src="../../assets/img/user.png" alt="Usuário" width="30px">
+                    <img src="../../assets/img/User.png" alt="Usuário" width="30px">
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
-                <img src="./cart.png" alt="Carrinho" width="30px">
-                <?php
-                $quantidadeItens = isset($_SESSION["carrinho"]) && is_array($_SESSION["carrinho"]) ? count($_SESSION["carrinho"]) : 0;
-                if ($quantidadeItens > 0) {
-                    echo '<span class="cart-badge">' . $quantidadeItens . '</span>';
-                }
-                ?>
-            </button>
-        </div>
+                    <img src="./cart.png" alt="Carrinho" width="30px">
+                    <?php
+                    $quantidadeItens = isset($_SESSION["carrinho"]) && is_array($_SESSION["carrinho"]) ? count($_SESSION["carrinho"]) : 0;
+                    if ($quantidadeItens > 0) {
+                        echo '<span class="cart-badge">' . $quantidadeItens . '</span>';
+                    }
+                    ?>
+                </button>
+            </div>
     </nav>
 
     <!-- OFF CANVAS PARA USUARIO DESLOGADO -->
@@ -221,8 +223,8 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <?php include(__DIR__ . '/../carrinho/carrinho.php');;?>
+            <?php include(__DIR__ . '/../carrinho/carrinho.php');; ?>
         </div>
     </div>
-    
+
 <?php endif; ?>
