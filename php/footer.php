@@ -4,7 +4,7 @@ $is_finalizar_pedido =
     ($current_page == 'cadastro_endereco.php' ||
         $current_page == 'finalizar_pedido.php' ||
         $current_page == 'pedidos_cliente.php' ||
-        $current_page == 'confirmacao_pedido.php' ||
+        $current_page == 'confirmacao_pedido.php'
     );
 
 $pagina_Unidades = ($current_page == 'unidades.php');
@@ -19,6 +19,8 @@ $pagina_Unidades = ($current_page == 'unidades.php');
 
     .ul-content {
         list-style: none;
+        color: white;
+        text-decoration: none;
     }
 </style>
 

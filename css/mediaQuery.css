@@ -11,6 +11,10 @@
         padding: 5px;
         border-radius: 5px;
     }
+
+    .pesquisa-input {
+        width: 300px !important; /* Ajuste para celular */
+    }
 }
 
 /* ----------- CELULAR (≤576px) ----------- */
