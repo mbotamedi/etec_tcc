@@ -7,6 +7,12 @@
         padding-top: 50px;
     }
 
+    ul>li>a{
+        list-style: none;
+        color: white;
+        text-decoration: none;
+    }
+
 </style>
 
 <head>
