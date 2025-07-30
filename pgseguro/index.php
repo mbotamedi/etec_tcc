@@ -101,7 +101,7 @@ if ($stmt) {
             font-size: 14px;
         }
 
-        .botaoVoltar{
+        .botaoVoltar {
             text-decoration: none;
             color: red;
             font-weight: 400;
@@ -109,11 +109,10 @@ if ($stmt) {
             padding: 5px;
             border-radius: 5px;
         }
-
-
     </style>
 </head>
-<!-- <?php include("../php/navbar.php"); ?> -->
+<?php //include("../php/navbar.php"); 
+?>
 
 <body class="bg-light">
     <div class="container" style="padding: 20px; margin-top: 20px;">
