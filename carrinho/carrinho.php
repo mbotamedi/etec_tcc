@@ -33,7 +33,12 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     $total = 0;
     foreach ($_SESSION["carrinho"] as $key => $value) {
         $valprodutos = $value["valor"] * $value["qtd"];
-        $foto = '../assets/fotos/' . $value["id"] . '.png';
+        if ($is_finalizar_pedido) {
+            $foto = '../../assets/fotos/' . $value["id"] . '.png';
+        } else {
+            $foto = '../assets/fotos/' . $value["id"] . '.png';
+        }
+
 
         echo '<div class="cart-item">';
         echo '  <div class="top-row">';
@@ -77,7 +82,7 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
         echo '<div class="offcanvas-cart-buttons">';
         echo '  <button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar</button>';
         if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0) {
-            echo '<a href="/carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar</a>';
+            echo '<a href="../carrinho/pedidos/finalizar_pedido.php" class="btn btn-primary">Finalizar</a>';
         }
         echo '</div>';
     }

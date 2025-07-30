@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $conexao->commit();
 
-                // unset($_SESSION['carrinho']);
+                unset($_SESSION['carrinho']);
                 //EU REMOVI O UNSET PARA NÃO INTERFERIR NA VOLTA DA TELA DE PAGAMENTO. (06/07/2025, RAFAEL)
 
                 // Usando a variável do formulário (minúscula) para a lógica do IF

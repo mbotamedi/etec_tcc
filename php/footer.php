@@ -1,15 +1,10 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 $is_finalizar_pedido =
-<<<<<<< HEAD
+
     ($current_page == 'cadastro_endereco.php' ||  $current_page == 'finalizar_pedido.php' ||
         $current_page == 'pedidos_cliente.php' || $current_page == 'confirmacao_pedido.php'
-=======
-    ($current_page == 'cadastro_endereco.php' ||
-        $current_page == 'finalizar_pedido.php' ||
-        $current_page == 'pedidos_cliente.php' ||
-        $current_page == 'confirmacao_pedido.php'
->>>>>>> 120a674bde91a3004fd55d6ee5543ed4c041112d
+
     );
 
 $pagina_Unidades = ($current_page == 'unidades.php');
