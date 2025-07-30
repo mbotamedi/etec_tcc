@@ -33,7 +33,7 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     $total = 0;
     foreach ($_SESSION["carrinho"] as $key => $value) {
         $valprodutos = $value["valor"] * $value["qtd"];
-        $foto = '/assets/fotos/' . $value["id"] . '.png';
+        $foto = '../assets/fotos/' . $value["id"] . '.png';
 
         echo '<div class="cart-item">';
         echo '  <div class="top-row">';
@@ -42,12 +42,12 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
         echo '  </div>';
         echo '  <div class="bottom-row">';
         echo '    <div class="quantity-controls">
-                      <a href="/carrinho/alteraQtd.php?id=' . $key . '&acao=subtrair">−</a>
+                      <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=subtrair">−</a>
                       <span>' . $value["qtd"] . '</span>
-                      <a href="/carrinho/alteraQtd.php?id=' . $key . '&acao=somar">+</a>
+                      <a href="../carrinho/alteraQtd.php?id=' . $key . '&acao=somar">+</a>
                   </div>';
         echo '    <div class="unit-price">R$' . number_format($value["valor"], 2, ',', '.') . ' (unitário)</div>';
-        echo '    <div><a href="/carrinho/delCarrinho.php?id=' . $key . '"><i class="fas fa-trash deleta"></i></a></div>';
+        echo '    <div><a href="../carrinho/delCarrinho.php?id=' . $key . '"><i class="fas fa-trash deleta"></i></a></div>';
         echo '  </div>';
         echo '</div>';
 
@@ -62,7 +62,7 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     if (!$is_finalizar_pedido) {
         // O LINK MAIS IMPORTANTE - AGORA CORRIGIDO
         echo '<div class="clear-items" style="text-align: center; margin-top: 15px;"> 
-                <a class="button-clear" href="/carrinho/deletarItem.php?acao=limpar">Limpar Carrinho</a>
+                <a class="button-clear" href="../carrinho/deletarItem.php?acao=limpar">Limpar Carrinho</a>
               </div>';
     }
     
