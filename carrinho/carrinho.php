@@ -64,7 +64,7 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     echo '  <span>R$' . number_format($total, 2, ',', '.') . '</span>';
     echo '</div>';
 
-    if (!$is_finalizar_pedido) {
+    /*if (!$is_finalizar_pedido) {
         // O LINK MAIS IMPORTANTE - AGORA CORRIGIDO
         echo '<div class="clear-items" style="text-align: center; margin-top: 15px;"> 
                 <a class="button-clear" href="../carrinho/deletarItem.php?acao=limpar">Limpar Carrinho</a>
@@ -76,7 +76,7 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
         echo '    <button type="button" class="close-btn" data-bs-dismiss="alert" aria-label="Close">&times;</button>';
         echo '    <strong>Informação:</strong> O carrinho não contém o botão finalizar, pois você já está na página de finalização.';
         echo '</div>';
-    }
+    }*/
 
     if (!$is_finalizar_pedido) {
         echo '<div class="offcanvas-cart-buttons">';

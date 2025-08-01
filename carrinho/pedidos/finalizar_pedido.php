@@ -2,10 +2,10 @@
 session_start();
 include("../../includes/conexao.php");
 
-$current_page = basename($_SERVER['PHP_SELF']);
-$is_paginaatual = ($current_page == 'finalizar_pedido.php');
+/*$current_page = basename($_SERVER['PHP_SELF']);
+$is_paginaatual = ($current_page == 'finalizar_pedido.php');*/
 
-// Verifica se o usuário está logado
+//Verifica se o usuário está logado
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
     $_SESSION['url_retorno'] = 'finalizar_pedido.php';
     header("Location: ../../php/login.php");
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $conexao->commit();
 
-                unset($_SESSION['carrinho']);
+                //unset($_SESSION['carrinho']);
                 //EU REMOVI O UNSET PARA NÃO INTERFERIR NA VOLTA DA TELA DE PAGAMENTO. (06/07/2025, RAFAEL)
 
                 // Usando a variável do formulário (minúscula) para a lógica do IF
@@ -276,7 +276,7 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
                 // Se a variável '$estaNaPaginaFinalizarPedido' for relevante aqui, mantenha-a.
                 // Caso contrário, se ela só serve para a lógica dentro do carrinho.php,
                 // você pode removê-la daqui se o carrinho.php já for inteligente o suficiente.
-                $estaNaPaginaFinalizarPedido = true;
+                //$estaNaPaginaFinalizarPedido = true;
                 include("../carrinho.php");
                 ?>
             </div>
@@ -343,13 +343,13 @@ $result_enderecos = mysqli_query($conexao, $query_enderecos);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../js/carrinho.js"></script>
-    <!-- <script src="../../js/controlaModal.js"></script> -->
+    <script src="../../js/scripts"></script>
 
     <!-- Nesse caso, deve se abrir o controlateste.js por causa de caminho de arquivos dentro do js -->
-    <?php if ($is_paginaatual) {
-        echo '<script src="../../js/controlateste.js"></script>';
-    }
-    ?>
+    <?php /*if ($is_paginaatual) {
+           echo '<script src="../../js/controlateste.js"></script>';
+     }*/ ?>
+
 
     <script>
         function toggleEndereco(show) {

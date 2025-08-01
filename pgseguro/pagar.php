@@ -93,6 +93,7 @@ if ($payment_method === 'credit_card') {
     exit;
 }
 
+unset($_SESSION['carrinho']);
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +106,7 @@ if ($payment_method === 'credit_card') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css//mediaQuery.css">
-    link
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -141,20 +142,19 @@ if ($payment_method === 'credit_card') {
             margin-top: 20px;
             margin-left: 20px;
         }
-        
     </style>
 </head>
 
 <body class="py-5">
     <div class="container" style="padding: 20px;">
         <div class="card shadow-sm " style="margin-top: 120px;">
-            <div class="container-voltar">
+            <!---<div class="container-voltar">
                 <div class="buttonVoltar">
                     <a href="../pgseguro/index.php" class="botaoVoltar">
                         ← Página anterior
                     </a>
                 </div>
-            </div>
+            </div>--->
             <div class="card-body p-4 p-md-5 text-center display-flex flex-column align-items-center justify-content-center">
 
 

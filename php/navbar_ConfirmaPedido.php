@@ -25,7 +25,7 @@ $confirmation_page = ($current_page == 'confirmacao_pedido.php');
                 </ul>
             </div>
 
-            <div class="user-cart" id="user-cart">
+            <div class="User-cart" id="User-cart">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo isset($_SESSION['usuario']) ? 'canvas-logado' : 'canvas-deslogado'; ?>" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
                     <img src="../assets/img/User.png" alt="Usuário" width="30px">
                 </button>
@@ -171,7 +171,7 @@ $confirmation_page = ($current_page == 'confirmacao_pedido.php');
                 </div>
                 <div class="botao-sair">
                     <a href="../../php/logout.php" class="btn-logout">Sair</a>
-                </div>
+                </div>F
             </div>
         </div>
         <div class="line"></div>

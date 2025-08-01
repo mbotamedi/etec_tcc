@@ -197,6 +197,8 @@ if ($stmt) {
             </div>
         </div>
     </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
