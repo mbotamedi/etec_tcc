@@ -1,7 +1,7 @@
 /* ----------- CELULAR (≤768px) ----------- */
 
 @media (max-width: 768px) {
-    
+
 
     .botaoVoltar {
         text-decoration: none;
@@ -107,7 +107,7 @@
     }
 
     .pesquisa-input {
-        width: 250px !important;
+        width: 300px !important;
     }
 
 
@@ -155,7 +155,17 @@
         font-size: 12px;
     }
 
+    /*MEDIA QUERY DA BARRA DE PESQUISA*/
+
+    .barra-pesquisa {
+        width: 300px !important;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
 }
+
 
 /* ----------- TABLET (≤992px) ----------- */
 
@@ -163,51 +173,61 @@
     /* Font sizes extracted and adjusted for tablet */
 
     .produtos-Destaques {
-        font-size: 25px; /* Mantido do media query de 576px */
+        font-size: 25px;
+        /* Mantido do media query de 576px */
     }
 
     .card-text {
-        font-size: 10px; /* Mantido do media query de 576px */
+        font-size: 10px;
+        /* Mantido do media query de 576px */
     }
 
     .card-title {
-        font-size: 12px; /* Mantido do media query de 576px */
+        font-size: 12px;
+        /* Mantido do media query de 576px */
     }
 
     .botaoVoltar {
-        font-size: 12px; /* Mantido do media query de 576px e 360px */
+        font-size: 12px;
+        /* Mantido do media query de 576px e 360px */
     }
 
     .menu li a {
-        font-size: 15px; /* Mantido do media query de 576px, sobrescreve o de 360px para este breakpoint */
+        font-size: 15px;
+        /* Mantido do media query de 576px, sobrescreve o de 360px para este breakpoint */
     }
 
-    .information-divs > h2 {
-        font-size: 25px; /* Mantido do media query de 576px */
+    .information-divs>h2 {
+        font-size: 25px;
+        /* Mantido do media query de 576px */
     }
+
     li,
     a,
     ul {
-        
-        font-size: 14px; /* Mantido do media query de 360px como um fallback geral, mas pode ser ajustado */
+
+        font-size: 14px;
+        /* Mantido do media query de 360px como um fallback geral, mas pode ser ajustado */
     }
 
     /* .container col-12{
         display: grid !important;
     } */
 
-    .container-info, .container col-12{
+    .container-info,
+    .container col-12 {
         display: flex !important;
         flex-direction: column !important;
     }
 
     .pesquisa-input {
-        width: 600px !important; /* Ajuste para tablet */
+        width: 600px;
+        /* Ajuste para tablet */
     }
 
     /*----------TELA DE LOGIN E CADASTRO----------*/
 
-    
+
 }
 
 

@@ -9,6 +9,12 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/mediaQuery.css">
 </head>
 
+<style>
+    .pesquisa-input {
+        width: 800px !important;
+    }
+</style>
+
 
 <nav class="navbar">
     <div class="nav-top">
@@ -39,7 +45,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     </div>
     <div class="search-bar" style="gap: 20px;">
         <form method="post" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
-            <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px; width: 800px;">
+            <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px;">
             <button type="submit" class="botao-pesquisa" style="background: none; border: none; cursor: pointer; padding: 0; height: 30px; display: flex; align-items: center;">
                 <img src="../assets/img/lupa (3).png" style="width: 25px;" alt="">
             </button>
