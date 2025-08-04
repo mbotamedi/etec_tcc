@@ -13,7 +13,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
             <?php
             include("../includes/conexao.php");
-            $categorias = mysqli_query($conexao,"select * from tb_categorias  where descricao <> 'Promoção do dia' and descricao <> 'teste' order by upper(descricao)");
+            $categorias = mysqli_query($conexao, "select id, upper(descricao) as descricao from tb_categorias  where descricao <> 'Promoção do dia' and descricao <> 'teste' order by upper(descricao)");
             while ($listaCategoria = mysqli_fetch_assoc($categorias)){
                 $subcategoria = mysqli_query($conexao,"select * from tb_subcategorias 
                 where id_categoria = ".$listaCategoria["id"] . " order by descricao");
