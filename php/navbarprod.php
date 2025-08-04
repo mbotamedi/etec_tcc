@@ -1,5 +1,4 @@
 <?php
-//@session_start();
 // Inclui o arquivo de verificação de login
 @session_start();
 $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
@@ -9,6 +8,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/mediaQuery.css">
 </head>
 
+<<<<<<< Updated upstream
 <style>
     .pesquisa-input {
         width: 800px !important;
@@ -16,6 +16,8 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 </style>
 
 
+=======
+>>>>>>> Stashed changes
 <nav class="navbar">
     <div class="nav-top">
         <div class="logo">
@@ -44,10 +46,22 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
     </div>
     <div class="search-bar" style="gap: 20px;">
+<<<<<<< Updated upstream
         <form method="post" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
             <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px;">
+=======
+        <form action="produtos.php" method="get" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
+            <input type="text"
+                name="consulta"
+                id="consulta"
+                class="pesquisa-input"
+                placeholder="Digite o Nome do Produto"
+                style="padding-left: 10px; height: 40px; width: 800px;"
+                value="<?= isset($_GET['consulta']) ? htmlspecialchars($_GET['consulta']) : '' ?>">
+
+>>>>>>> Stashed changes
             <button type="submit" class="botao-pesquisa" style="background: none; border: none; cursor: pointer; padding: 0; height: 30px; display: flex; align-items: center;">
-                <img src="../assets/img/lupa (3).png" style="width: 25px;" alt="">
+                <img src="../assets/img/lupa (3).png" style="width: 25px;" alt="Buscar">
             </button>
         </form>
     </div>

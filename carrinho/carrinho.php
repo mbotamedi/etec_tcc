@@ -69,9 +69,9 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
         echo '<div class="clear-items" style="text-align: center; margin-top: 15px;"> 
                 <a class="button-clear" href="../carrinho/deletarItem.php?acao=limpar">Limpar Carrinho</a>
               </div>';
-    }
-    
-    if ($is_finalizar_pedido) {
+    }*/
+
+    /*if ($is_finalizar_pedido) {
         echo '<div class="alert alert-info" role="alert" style="margin-top: 15px;">';
         echo '    <button type="button" class="close-btn" data-bs-dismiss="alert" aria-label="Close">&times;</button>';
         echo '    <strong>Informação:</strong> O carrinho não contém o botão finalizar, pois você já está na página de finalização.';
@@ -79,6 +79,9 @@ if (!isset($_SESSION["carrinho"]) || (count($_SESSION["carrinho"]) <= 0)) {
     }*/
 
     if (!$is_finalizar_pedido) {
+        echo '<div class="clear-items" style="text-align: center; margin-top: 15px;"> 
+                <a class="btn btn-dark" href="../carrinho/deletarItem.php?acao=limpar">Limpar Carrinho</a>
+              </div>';
         echo '<div class="offcanvas-cart-buttons">';
         echo '  <button class="btn btn-secondary" data-bs-dismiss="offcanvas">Continuar</button>';
         if (isset($_SESSION["carrinho"]) && count($_SESSION["carrinho"]) > 0) {
