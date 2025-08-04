@@ -1,4 +1,5 @@
 <?php
+//@session_start();
 // Inclui o arquivo de verificação de login
 @session_start();
 $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
@@ -8,16 +9,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/mediaQuery.css">
 </head>
 
-<<<<<<< Updated upstream
-<style>
-    .pesquisa-input {
-        width: 800px !important;
-    }
-</style>
 
-
-=======
->>>>>>> Stashed changes
 <nav class="navbar">
     <div class="nav-top">
         <div class="logo">
@@ -32,7 +24,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
         <div class="user-cart">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="background-color: transparent; border: none;">
-                <img src="../assets/img/User.png" alt="Usuário" width="30px">
+                <img src="../assets/img/user.png" alt="Usuário" width="30px">
             </button>
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" style="background-color: transparent; border: none;">
                 <img src="../assets/img/Shopping cart.png" alt="Carrinho" width="30px">
@@ -46,22 +38,10 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
     </div>
     <div class="search-bar" style="gap: 20px;">
-<<<<<<< Updated upstream
-        <form method="post" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
-            <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px;">
-=======
-        <form action="produtos.php" method="get" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
-            <input type="text"
-                name="consulta"
-                id="consulta"
-                class="pesquisa-input"
-                placeholder="Digite o Nome do Produto"
-                style="padding-left: 10px; height: 40px; width: 800px;"
-                value="<?= isset($_GET['consulta']) ? htmlspecialchars($_GET['consulta']) : '' ?>">
-
->>>>>>> Stashed changes
+        <form method="get" action="produtos.php" class="barra-pesquisa" style="display: flex; gap: 20px; align-items: center;">
+            <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto" style="padding-left: 10px; height: 40px; width: 800px;">
             <button type="submit" class="botao-pesquisa" style="background: none; border: none; cursor: pointer; padding: 0; height: 30px; display: flex; align-items: center;">
-                <img src="../assets/img/lupa (3).png" style="width: 25px;" alt="Buscar">
+                <img src="../assets/img/lupa (3).png" style="width: 25px;" alt="">
             </button>
         </form>
     </div>
