@@ -77,9 +77,13 @@
             </div>
 
             <?php
+    // ===================================================================
+    // INÍCIO DO COMPONENTE DE PAGINAÇÃO
+    // ===================================================================
 
-            // Só exibe a paginação se houver mais de uma página
-            if ($total_paginas > 1):
+
+    // Só exibe a paginação se houver mais de uma página
+    if ($total_paginas > 1):
 
                 // Pega todos os parâmetros GET atuais (ex: 'subCategoria', 'consulta', etc.)
                 $parametros_atuais = $_GET;
@@ -89,8 +93,8 @@
 
                         <li class="page-item <?= ($pagina_atual <= 1) ? 'disabled' : '' ?>">
                             <?php
-                            $parametros_atuais['pagina'] = $pagina_atual - 1;
-                            $query_string = http_build_query($parametros_atuais);
+                $parametros_atuais['pagina'] = $pagina_atual - 1;
+                $query_string = http_build_query($parametros_atuais);
                             ?>
                             <a class="page-link" href="?<?= $query_string ?>" aria-label="Anterior">
                                 <span aria-hidden="true">&laquo;</span>
@@ -109,8 +113,8 @@
 
                         <li class="page-item <?= ($pagina_atual >= $total_paginas) ? 'disabled' : '' ?>">
                             <?php
-                            $parametros_atuais['pagina'] = $pagina_atual + 1;
-                            $query_string = http_build_query($parametros_atuais);
+                $parametros_atuais['pagina'] = $pagina_atual + 1;
+                $query_string = http_build_query($parametros_atuais);
                             ?>
                             <a class="page-link" href="?<?= $query_string ?>" aria-label="Próxima">
                                 <span aria-hidden="true">&raquo;</span>
@@ -119,8 +123,10 @@
 
                     </ul>
                 </nav>
-            <?php
-            endif;
+            <?php endif;
+            // ===================================================================
+            // FIM DO COMPONENTE DE PAGINAÇÃO
+            // ===================================================================
             ?>
         </div>
     </section>

@@ -2,7 +2,9 @@
 // Inclui o arquivo de conexão com o banco de dados
 include("conexao.php");
 
-
+// ===================================================================
+// PASSO 1: DEFINIR VARIÁVEIS DE PAGINAÇÃO
+// ===================================================================
 $itens_por_pagina = 8;
 $pagina_atual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 if ($pagina_atual < 1) {
@@ -10,7 +12,8 @@ if ($pagina_atual < 1) {
 }
 $offset = ($pagina_atual - 1) * $itens_por_pagina;
 
-
+// ===================================================================
+// PASSO 2: PROCESSAR A CONSULTA DE BUSCA E FILTROS
 // ===================================================================
 $clausula_where = ""; // Inicia a cláusula WHERE vazia
 $params = []; // Array para guardar os parâmetros para o bind
@@ -36,7 +39,8 @@ if (!empty($_GET["consulta"])) {
     $types .= "i";
 }
 
-
+// ===================================================================
+// PASSO 3: CONTAR O TOTAL DE ITENS PARA CALCULAR AS PÁGINAS
 // ===================================================================
 $sql_total = "SELECT COUNT(pr.id) as total FROM tb_produtos pr {$clausula_where}";
 $stmt_total = mysqli_prepare($conexao, $sql_total);
@@ -51,7 +55,8 @@ $resultado_total = mysqli_stmt_get_result($stmt_total);
 $total_produtos = mysqli_fetch_assoc($resultado_total)['total'];
 $total_paginas = ceil($total_produtos / $itens_por_pagina);
 
-
+// ===================================================================
+// PASSO 4: BUSCAR OS PRODUTOS PARA A PÁGINA ATUAL
 // ===================================================================
 $sql_pagina = "SELECT 
                     pr.id, 
