@@ -10,7 +10,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 </head>
 
 
-<nav class="navbar">
+<nav class="navbar ">
     <div class="nav-top">
         <div class="logo">
             <img src="../assets/img/logo_copia01.png" alt="Logo Cantina" width="100px">
