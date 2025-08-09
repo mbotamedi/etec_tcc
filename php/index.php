@@ -58,6 +58,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <?php
     include("navbar.php");
     include("nav_cat.php");
+
     ?>
 
     <!-- Navigation End-->
@@ -66,9 +67,9 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
 
-                <div class="carousel-item active">
+                <div class="carousel-item active"
                     <a href="../carrinho/addPromocao.php?id_promo=1" title="Adicionar promoção ao carrinho">
-                        <img src="../assets/img/promocoes_notebook/promo1.jpg" alt="Promoção Coxinhas e Refrigerante" class="d-block w-100">
+                    <img src="../assets/img/promocoes_notebook/promo1.jpg" alt="Promoção Coxinhas e Refrigerante" class="d-block w-100">
                     </a>
                 </div>
 
