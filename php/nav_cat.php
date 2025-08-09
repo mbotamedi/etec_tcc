@@ -28,7 +28,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
     <link rel="stylesheet" href="../css/pesquisa.css">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #dad7cd; margin-top: 2px;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #dad7cd; margin-top: 2px; margin-bottom: 0 !important;">
 
     <div class=" search-bar">
         <form method="get" action="index.php" class="barra-pesquisa">
@@ -47,7 +47,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             <span class="navbar-toggler-icon"></span>
             <span>Promoções e Consulta</span>
         </button>
-        <div style="margin-top: 10px;" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <img style=" padding-right: 5px" src="../assets/img/megaphone.jpg" alt="" width="38" height="30">
