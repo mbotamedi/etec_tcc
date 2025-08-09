@@ -14,12 +14,12 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">
-                <img src="../assets/img/logo_copia01.png" alt="Logo Cantina" width="100px">
+                <img src="../assets/img/logo_copia01.png" alt="Logo Cantina" width="45px">
             </div>
             <div class="menu" id="menu">
                 <ul>
                     <li><a href="../index.php" class="titulo">INICIO</a></li>
-                    <li><a href="../php/produtos.php" class="titulo">PEÇA AGORA</a></li>
+                    <!---<li><a href="../php/produtos.php" class="titulo">PEÇA AGORA</a></li>--->
                     <li><a href="../php/unidades.php" class="titulo">UNIDADES</a></li>
                 </ul>
             </div>
@@ -39,6 +39,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                 </button>
             </div>
         </div>
+
     </nav>
 
     <!-- OFF CANVAS PARA USUARIO DESLOGADO -->
@@ -85,14 +86,14 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                     $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
                     $menu = '
                         <li class="li-items"><a href="../index.php">Home</a></li>
-                        <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
+                        
                         <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>
                         <li class="li-items"><a href="../carrinho/pedidos/pedidos_cliente.php">Pedidos/Compras</a></li>';
                     if ($tipo !== "cliente") {
                         $menu = '
                             <li class="li-items"><a href="../index.php">Home</a></li>
                             <li class="li-items"><a href="../admin/admin.php">Administrador</a></li>
-                            <li class="li-items"><a href="../php/produtos.php">Produtos</a></li>
+                            
                             <li class="li-items"><a href="../php/unidades.php">Unidades</a></li>';
                     }
                     echo $menu;
@@ -128,7 +129,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
             <div class="menu">
                 <ul>
                     <li><a href="../../index.php">INICIO</a></li>
-                    <li><a href="../../php/produtos.php">PEÇA AGORA</a></li>
+                    <!---<li><a href="../../php/produtos.php">PEÇA AGORA</a></li>--->
                     <li><a href="../../php/unidades.php">UNIDADES</a></li>
                 </ul>
             </div>
@@ -192,7 +193,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                     $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cliente';
                     $menu = '
                         <li class="li-items"><a href="../../index.php">Home</a></li>
-                        <li class="li-items"><a href="../../php/produtos.php">Produtos</a></li>
+                        
                         <li class="li-items"><a href="../../php/unidades.php">Unidades</a></li>
                     
                         <li class="li-items"><a href="../../carrinho/pedidos/pedidos_cliente.php">Pedidos/Compras</a></li>';
@@ -200,7 +201,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                         $menu = '
                             <li class="li-items"><a href="../../index.php">Home</a></li>
                             <li class="li-items"><a href="../../admin/admin.php">Administrador</a></li>
-                            <li class="li-items"><a href="../../php/produtos.php">Produtos</a></li>
+                            
                             <li class="li-items"><a href="../../php/unidades.php">Unidades</a></li>';
                     }
                     echo $menu;

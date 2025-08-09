@@ -55,7 +55,10 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 <body>
     <!-- Navigation-->
 
-    <?php include("navbar.php"); ?>
+    <?php
+    include("navbar.php");
+    include("nav_cat.php");
+    ?>
 
     <!-- Navigation End-->
 
@@ -90,17 +93,18 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     </div>
 
     <!-- Section-->
-    <section class="py-5">
 
-        <div class="titulo-pricipal">
-            <h1 class="produtos-Destaques">PROMOÇÕES DA SEMANA</h1>
-        </div>
+    <section class="py-5">
 
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
-                include("../includes/consulta.php");
+                // Inclui o arquivo de pesquisa que agora contém a lógica de paginação
+                include("../includes/pesquisa.php");
+
+                // Loop para exibir os produtos da página atual
                 foreach ($produtos as $produto):
+                    $em_promocao = !is_null($produto['desconto']) && $produto['desconto'] > 0;
                 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
@@ -110,8 +114,12 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                             </div>
                             <div class="card-body p-4">
                                 <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
-
-                                <p class="card-text">Preço: R$ <?= number_format($produto['valor'], 2, ',', '.') ?> cada</p>
+                                <?php if ($em_promocao): ?>
+                                    <span class="text-muted text-decoration-line-through">R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?></span>
+                                    <span style="color:red; font-weight:bold;">R$ <?= number_format($produto['valor_promocional'], 2, ',', '.') ?></span>
+                                <?php else: ?>
+                                    R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?>
+                                <?php endif; ?>
                                 <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
                             </div>
                             <div class="quantity-controls">
@@ -121,7 +129,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                                     <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
                                     <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" class="campo" />
                                 </div>
-
                             </div>
                             <div class="text-center">
                                 <a href="javascript:void(0)" onclick="addToCart(<?= $produto['id'] ?>, document.getElementById('quant_<?= $produto['id'] ?>').value)" class="btn btn-outline-primary mt-auto buy-button">Comprar</a>
@@ -130,6 +137,53 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <?php
+
+            // Só exibe a paginação se houver mais de uma página
+            if ($total_paginas > 1):
+
+                // Pega todos os parâmetros GET atuais (ex: 'subCategoria', 'consulta', etc.)
+                $parametros_atuais = $_GET;
+            ?>
+                <nav aria-label="Navegação de página de produtos">
+                    <ul class="pagination justify-content-center mt-5">
+
+                        <li class="page-item <?= ($pagina_atual <= 1) ? 'disabled' : '' ?>">
+                            <?php
+                            $parametros_atuais['pagina'] = $pagina_atual - 1;
+                            $query_string = http_build_query($parametros_atuais);
+                            ?>
+                            <a class="page-link" href="?<?= $query_string ?>" aria-label="Anterior">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                            <?php
+                            $parametros_atuais['pagina'] = $i;
+                            $query_string = http_build_query($parametros_atuais);
+                            ?>
+                            <li class="page-item <?= ($i == $pagina_atual) ? 'active' : '' ?>">
+                                <a class="page-link" href="?<?= $query_string ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <li class="page-item <?= ($pagina_atual >= $total_paginas) ? 'disabled' : '' ?>">
+                            <?php
+                            $parametros_atuais['pagina'] = $pagina_atual + 1;
+                            $query_string = http_build_query($parametros_atuais);
+                            ?>
+                            <a class="page-link" href="?<?= $query_string ?>" aria-label="Próxima">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            <?php
+            endif;
+            ?>
         </div>
     </section>
 

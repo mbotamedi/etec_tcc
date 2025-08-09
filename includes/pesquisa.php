@@ -15,8 +15,16 @@ $clausula_where = "";
 $where_params = [];
 $types = "";
 
-// Verifica se há uma busca por texto
-if (!empty($_GET["consulta"])) {
+// ===================================================================
+// LÓGICA DE FILTRO ATUALIZADA
+// ===================================================================
+// Verifica se o filtro de promoção está ativo
+if (isset($_GET['promocao']) && $_GET['promocao'] == '') {
+    // Adiciona a condição para buscar apenas produtos com desconto maior que 0
+    $clausula_where = "WHERE pro.id_produto IS NOT NULL AND pro.desconto > 0";
+}
+// Verifica se há uma busca por texto (usando else if para garantir que os filtros sejam exclusivos)
+else if (!empty($_GET["consulta"])) {
     $consulta = $_GET["consulta"];
     $termo_busca = "%" . strtoupper($consulta) . "%";
     $clausula_where = "WHERE pr.descricao LIKE ?";
@@ -30,8 +38,10 @@ else if (!empty($_GET["subCategoria"])) {
     $where_params[] = $subCategoria;
     $types .= "i";
 }
-
 // ===================================================================
+// FIM DA LÓGICA DE FILTRO
+// ===================================================================
+
 
 $clausula_having = ""; // Inicia a cláusula HAVING vazia
 $having_conditions = []; // Array para as condições do HAVING
@@ -62,7 +72,6 @@ if (!empty($having_conditions)) {
 // ===================================================================
 // Consulta para contar o TOTAL de produtos (respeitando todos os filtros)
 
-// LINHA CORRIGIDA: Troca de COUNT(pr.id) por COUNT(*)
 $sql_total = "SELECT COUNT(*) as total FROM (
                 SELECT 
                     pr.id, 
