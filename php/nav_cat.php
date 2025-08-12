@@ -28,7 +28,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
     <link rel="stylesheet" href="../css/pesquisa.css">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #dad7cd; margin-top: 2px; margin-bottom: 0 !important;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(51, 51, 51, 1);; margin-top: 2px; margin-bottom: 0 !important;">
 
     <div class=" search-bar">
         <form method="get" action="index.php" class="barra-pesquisa">

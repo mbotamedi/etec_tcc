@@ -21,7 +21,6 @@
     /* Ocupa todo o espaço dentro do formulário */
     height: 40px;
     padding-left: 10px;
-    border: 1px solid #ccc;
     /* Adiciona uma borda para visualização */
     border-radius: 5px;
 }
