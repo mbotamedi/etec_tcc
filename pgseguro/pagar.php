@@ -125,7 +125,7 @@ unset($_SESSION['carrinho']);
             padding-bottom: 3px !important;
         }
 
-        .menu li a {
+            {
             font-size: 12px;
         }
 
