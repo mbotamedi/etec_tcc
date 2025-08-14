@@ -128,7 +128,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="../../index.php">INICIO</a></li>
+                    <li><a href="../../index.php">HOME</a></li>
                     <!---<li><a href="../../php/produtos.php">PEÇA AGORA</a></li>--->
                     <li><a href="../../php/unidades.php">UNIDADES</a></li>
                 </ul>

@@ -26,9 +26,31 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 <head>
     <link rel="stylesheet" href="../css/mediaQuery.css">
     <link rel="stylesheet" href="../css/pesquisa.css">
+
+    <style>
+        .nav-link {
+            color: white ;
+            /* Transição para a cor do texto durante 0.3 segundos */
+              transition: transform 0.8s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffcc00;
+             transform: scale(1.3);
+            /* Nova cor quando o mouse está sobre o elemento */
+        }
+
+        .nav-item > a{
+            color: white ;
+        }
+
+        .gap-1{
+            gap: 10px !important;
+        }
+    </style>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(51, 51, 51, 1);; margin-top: 2px; margin-bottom: 0 !important;">
+<nav class="navbar navbar-expand-lg navbar-dark" style=" margin-bottom: 0 !important;">
 
     <div class=" search-bar">
         <form method="get" action="index.php" class="barra-pesquisa">
@@ -50,9 +72,8 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <img style=" padding-right: 5px" src="../assets/img/megaphone.jpg" alt="" width="38" height="30">
                 <li class="nav-item">
-                    <a class="nav-link" style="font-weight: bold; font-size: 15x; color: #000000;background-color: rgba(245, 226, 117, 0.59); border-radius: 5px; padding: 5px;" href="index.php?promocao">PROMOÇÕES</a>
+                    <a class="nav-link" style="font-weight: bold; font-size: 20px; background-color: rgba(252, 217, 20, 0.59); border-radius: 5px; margin-right: 15px; padding: 5px;" href="index.php?promocao">PROMOÇÕES</a>
                 </li>
 
 
@@ -73,7 +94,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
                     }
                     echo '
                     <li class="nav-item ' . $dropdown . '">
-                        <a class="nav-link" style="font-weight: bold; font-size: 15x; color: #000000;" ' . $dropdown_toggle . '" href="#" ' . $parametros . '>' . $listaCategoria["descricao"] . '</a>                                
+                        <a class="nav-link" style="font-weight: bold; font-size: 15x;" ' . $dropdown_toggle . '" href="#" ' . $parametros . '>' . $listaCategoria["descricao"] . '</a>                                
                 ';
                     if ($possuiSubmenu > 0) {
                         echo '<div class="dropdown-menu">';
@@ -90,7 +111,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             </ul>
 
             <span class="navbar-text" style="margin-right: 10px;">
-                <strong style=" font-weight:bold; font-size: 16px; color: #000000">Valor:</strong>
+                <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
             </span>
             <form action="index.php" method="GET" class="d-flex align-items-center gap-1">
 
@@ -109,7 +130,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
                 <input type="number" name="valor_min" class="form-control" placeholder="Mín"
                     value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
                     step="0.01" style="width: 75px;">
-                <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #000000">até</span>
+                <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #ffffffff">até</span>
                 <input type="number" name="valor_max" class="form-control" placeholder="Máx"
                     value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
                     step="0.01" style="width: 75px;">

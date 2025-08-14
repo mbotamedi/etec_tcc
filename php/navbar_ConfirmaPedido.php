@@ -19,7 +19,7 @@ $confirmation_page = ($current_page == 'confirmacao_pedido.php');
             </div>
             <div class="menu" id="menu">
                 <ul>
-                    <li><a href="../index.php" class="titulo">INICIO</a></li>
+                    <li><a href="../index.php" class="titulo">HOME</a></li>
                     <li><a href="../php/produtos.php" class="titulo">PEÇA AGORA</a></li>
                     <li><a href="../php/unidades.php" class="titulo">UNIDADES</a></li>
                 </ul>
@@ -128,7 +128,7 @@ $confirmation_page = ($current_page == 'confirmacao_pedido.php');
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="../../index.php">INICIO</a></li>
+                    <li><a href="../../index.php">HOME</a></li>
                     <li><a href="../../php/produtos.php">PEÇA AGORA</a></li>
                     <li><a href="../../php/unidades.php">UNIDADES</a></li>
                 </ul>

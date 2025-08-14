@@ -8897,9 +8897,9 @@ fieldset:disabled .btn {
   gap: 0 !important;
 }
 
-.gap-1 {
+/* .gap-1 {
   gap: 0.25rem !important;
-}
+} */
 
 .gap-2 {
   gap: 0.5rem !important;
