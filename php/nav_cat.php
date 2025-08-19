@@ -29,22 +29,22 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
     <style>
         .nav-link {
-            color: white ;
+            color: white;
             /* Transição para a cor do texto durante 0.3 segundos */
-              transition: transform 0.8s ease;
+            transition: transform 0.8s ease;
         }
 
         .nav-link:hover {
             color: #ffcc00;
-             transform: scale(1.3);
+            transform: scale(1.3);
             /* Nova cor quando o mouse está sobre o elemento */
         }
 
-        .nav-item > a{
-            color: white ;
+        .nav-item>a {
+            color: white;
         }
 
-        .gap-1{
+        .gap-1 {
             gap: 10px !important;
         }
     </style>
@@ -110,10 +110,11 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
             </ul>
 
-            <span class="navbar-text" style="margin-right: 10px;">
-                <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
-            </span>
-            <form action="index.php" method="GET" class="d-flex align-items-center gap-1">
+
+            <form action="index.php" method="GET" class="d-flex align-items-center gap-1" style="border: 2px solid white; border-radius: 2px; padding: 5px;">
+                <span class="navbar-text" style="margin-right: 10px;">
+                    <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
+                </span>
 
                 <!-- Campos ocultos para manter os filtros existentes ao filtrar por valor -->
                 <?php if (!empty($_GET['consulta'])): ?>
