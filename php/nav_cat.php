@@ -30,13 +30,12 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
     <style>
         .nav-link {
             color: white;
-            /* Transição para a cor do texto durante 0.3 segundos */
-            transition: transform 0.8s ease;
+   
         }
 
         .nav-link:hover {
             color: #ffcc00;
-            transform: scale(1.3);
+            
             /* Nova cor quando o mouse está sobre o elemento */
         }
 
@@ -47,6 +46,21 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
         .gap-1 {
             gap: 10px !important;
         }
+
+        .navbar-toggler{
+            margin-top: 10px;
+            
+        }
+
+        .text-promo{
+            font-size: 15px;
+        }
+
+        .form-control{
+            font-size: 10px;
+            max-width: 80%;
+        }
+
     </style>
 </head>
 
@@ -60,20 +74,22 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             </button>
         </form>
     </div>
-    <div>
+    <div class="controla-ul">
         <button class="navbar-toggler"
             type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            <span>Promoções e Consulta</span>
+            <span class="text-promo">Promoções e Consulta</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" style="font-weight: bold; font-size: 20px; background-color: rgba(252, 217, 20, 0.59); border-radius: 5px; margin-right: 15px; padding: 5px;" href="index.php?promocao">PROMOÇÕES</a>
+                    <a class="nav-link" style="font-weight: bold; font-size: 20px;
+                     background-color: rgba(252, 217, 20, 0.59); border-radius: 5px; 
+                     margin-right: 15px; padding: 5px; margin-top: 20px;" href="index.php?promocao">PROMOÇÕES</a>
                 </li>
 
 
@@ -111,7 +127,8 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             </ul>
 
 
-            <form action="index.php" method="GET" class="d-flex align-items-center gap-1" style="border: 2px solid white; border-radius: 2px; padding: 5px;">
+            <form action="index.php" method="GET" class="formulario-filtro"
+             style="border: 2px solid white; border-radius: 1px; padding: 5px; ">
                 <span class="navbar-text" style="margin-right: 10px;">
                     <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
                 </span>

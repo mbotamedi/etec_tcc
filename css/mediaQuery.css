@@ -97,7 +97,7 @@
     }
 
     .logo>img {
-        width: 80px !important;
+        width: 60px !important;
     }
 
     .menu>ul {
@@ -108,6 +108,10 @@
 
     .pesquisa-input {
         width: 250px !important;
+    }
+
+    .controla-ul{
+        max-width: 80%;
     }
 
 
