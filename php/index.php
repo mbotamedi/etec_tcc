@@ -102,13 +102,14 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                 <?php
                 // Inclui o arquivo de pesquisa que agora contém a lógica de paginação
                 include("../includes/pesquisa.php");
+                if (empty($produtos)) {
+                    echo '<div class="col-12 text-center"><p>Nenhum produto encontrado.</p></div>';
+                } else {
+                    // Loop para exibir os produtos da página atual
+                    foreach ($produtos as $produto):
+                        $em_promocao = !is_null($produto['desconto']) && $produto['desconto'] > 0;
 
-                // Loop para exibir os produtos da página atual
-                foreach ($produtos as $produto):
-                    $em_promocao = !is_null($produto['desconto']) && $produto['desconto'] > 0;
-                    echo ($produtos)
                 ?>
-                    
                         <div class="col-md-4 mb-4">
                             <div class="card h-100">
                                 <div class="card-img-container">
@@ -138,10 +139,9 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                                 </div>
                             </div>
                         </div>
-                        
-                    
-                    
-                <?php endforeach; ?>
+                <?php endforeach;
+                }
+                ?>
             </div>
 
             <?php
