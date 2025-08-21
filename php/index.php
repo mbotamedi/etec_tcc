@@ -106,36 +106,41 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                 // Loop para exibir os produtos da página atual
                 foreach ($produtos as $produto):
                     $em_promocao = !is_null($produto['desconto']) && $produto['desconto'] > 0;
+                    echo ($produtos)
                 ?>
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-img-container">
-                                <?php $foto = '../assets/fotos/' . $produto["id"] . '.png'; ?>
-                                <img class="card-img-top" src="<?php echo $foto ?>" style=" padding-top: 5px; width:200px; height:200px; margin:auto" alt="<?php echo htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8'); ?>">
-                            </div>
-                            <div class="card-body p-4">
-                                <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
-                                <?php if ($em_promocao): ?>
-                                    <span class="text-muted text-decoration-line-through">R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?></span>
-                                    <span style="color:red; font-weight:bold;">R$ <?= number_format($produto['valor_promocional'], 2, ',', '.') ?></span>
-                                <?php else: ?>
-                                    R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?>
-                                <?php endif; ?>
-                                <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
-                            </div>
-                            <div class="quantity-controls">
-                                <label class="qtd-label">Quantidade:</label>
-                                <div>
-                                    <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" class="campo" />
-                                    <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
-                                    <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" class="campo" />
+                    
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-img-container">
+                                    <?php $foto = '../assets/fotos/' . $produto["id"] . '.png'; ?>
+                                    <img class="card-img-top" src="<?php echo $foto ?>" style=" padding-top: 5px; width:200px; height:200px; margin:auto" alt="<?php echo htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8'); ?>">
+                                </div>
+                                <div class="card-body p-4">
+                                    <h5 class="card-title"><?= htmlspecialchars($produto['descricao'], ENT_QUOTES, 'UTF-8') ?></h5>
+                                    <?php if ($em_promocao): ?>
+                                        <span class="text-muted text-decoration-line-through">R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?></span>
+                                        <span style="color:red; font-weight:bold;">R$ <?= number_format($produto['valor_promocional'], 2, ',', '.') ?></span>
+                                    <?php else: ?>
+                                        R$ <?= number_format($produto['valor_original'], 2, ',', '.') ?>
+                                    <?php endif; ?>
+                                    <p class="card-text">Estoque: <?= $produto['estoque'] ?> unidades</p>
+                                </div>
+                                <div class="quantity-controls">
+                                    <label class="qtd-label">Quantidade:</label>
+                                    <div>
+                                        <input type="button" id="minus_<?= $produto['id'] ?>" value="-" onclick="process(-1, 'quant_<?= $produto['id'] ?>')" class="campo" />
+                                        <input id="quant_<?= $produto['id'] ?>" name="quant" class="text" size="1" type="text" value="0" maxlength="5" />
+                                        <input type="button" id="plus_<?= $produto['id'] ?>" value="+" onclick="process(1, 'quant_<?= $produto['id'] ?>')" class="campo" />
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" onclick="addToCart(<?= $produto['id'] ?>, document.getElementById('quant_<?= $produto['id'] ?>').value)" class="btn btn-outline-primary mt-auto buy-button">Comprar</a>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <a href="javascript:void(0)" onclick="addToCart(<?= $produto['id'] ?>, document.getElementById('quant_<?= $produto['id'] ?>').value)" class="btn btn-outline-primary mt-auto buy-button">Comprar</a>
-                            </div>
                         </div>
-                    </div>
+                        
+                    
+                    
                 <?php endforeach; ?>
             </div>
 

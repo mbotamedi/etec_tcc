@@ -30,12 +30,10 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
     <style>
         .nav-link {
             color: white;
-   
         }
 
         .nav-link:hover {
             color: #ffcc00;
-            
             /* Nova cor quando o mouse está sobre o elemento */
         }
 
@@ -47,20 +45,67 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             gap: 10px !important;
         }
 
-        .navbar-toggler{
+        .navbar-toggler {
             margin-top: 10px;
-            
         }
 
-        .text-promo{
+        .text-promo {
             font-size: 15px;
         }
 
-        .form-control{
-            font-size: 10px;
-            max-width: 80%;
+        /* --- Início das Alterações para campos e botões menores --- */
+        .form-control {
+            font-size: 12px; /* Reduz o tamanho da fonte */
+            padding: 0.25rem 0.5rem; /* Reduz o preenchimento */
+            height: calc(1.5em + 0.5rem + 2px); /* Ajusta a altura com base no padding e border */
+            max-width: 65px; /* Deixa o campo mais estreito */
         }
 
+        .btn { /* Seletor genérico para todos os botões, se precisar ser mais específico use .btn-primary, .btn-danger */
+            font-size: 12px; /* Reduz o tamanho da fonte dos botões */
+            padding: 0.25rem 0.5rem; /* Reduz o preenchimento dos botões */
+            height: calc(1.5em + 0.5rem + 2px); /* Garante que os botões tenham altura similar aos inputs */
+            /* width: auto; Removido para que o padding ajuste o width naturalmente */
+        }
+
+        .navbar-text {
+            font-size: 12px !important; /* Reduz o tamanho da fonte do texto "Valor:" e "até" */
+            margin-right: 5px !important; /* Diminui a margem direita para economizar espaço */
+        }
+
+        .navbar-text strong {
+            font-size: 12px !important; /* Reduz o tamanho da fonte do texto "Valor:" em negrito */
+        }
+        /* --- Fim das Alterações para campos e botões menores --- */
+
+
+        /* --- Início das Alterações para Dispositivos Móveis --- */
+        @media (max-width: 768px) {
+            .d-flex.align-items-center {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .d-flex.align-items-center .navbar-text,
+            .d-flex.align-items-center .form-control {
+                margin-right: 0 !important;
+                margin-bottom: 5px;
+                width: 100% !important; /* Volta a ocupar 100% em telas menores */
+                max-width: unset !important; /* Remove o max-width em telas menores */
+            }
+            
+            .d-flex.align-items-center .navbar-text strong {
+                width: 100%;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .d-flex.align-items-center .btn {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+        /* --- Fim das Alterações para Dispositivos Móveis --- */
     </style>
 </head>
 
@@ -127,8 +172,8 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             </ul>
 
 
-            <form action="index.php" method="GET" class="formulario-filtro"
-             style="border: 2px solid white; border-radius: 1px; padding: 5px; ">
+            <form action="index.php" method="GET" class="d-flex g"
+             style="padding: 5px;gap: 10px !important;; ">
                 <span class="navbar-text" style="margin-right: 10px;">
                     <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
                 </span>
