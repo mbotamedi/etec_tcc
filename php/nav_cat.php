@@ -191,13 +191,16 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
 
                 <input type="number" name="valor_min" class="form-control" placeholder="Mín"
-                    value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
-                    step="0.01" style="width: 75px;">
-                <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #ffffffff">até</span>
-                <input type="number" name="valor_max" class="form-control" placeholder="Máx"
-                    value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
-                    step="0.01" style="width: 75px;">
-                <button type="submit" class="btn btn-primary ">Filtrar</button>
+       value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
+       step="0.01" style="width: 75px;" min="0" />
+
+<span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #fff;">até</span>
+
+<input type="number" name="valor_max" class="form-control" placeholder="Máx"
+       value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
+       step="0.01" style="width: 75px;" min="0" max="99" />
+
+                <button type="submit" class="btn btn-primary">Filtrar</button>
 
                 <?php if ($filtros_ativos): ?>
                     <a href="index.php" class="btn btn-danger">Limpar</a>
