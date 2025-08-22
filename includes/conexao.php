@@ -3,7 +3,7 @@
     $usuario= "root";
     $senha = "";
     $banco = "bd_cantina";
-    $port = "3306";
+$port = "3307";
 
     $conexao = mysqli_connect($host, $usuario, $senha, $banco, $port);
 
