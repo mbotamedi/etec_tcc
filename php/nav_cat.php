@@ -15,6 +15,24 @@ if (!empty($_GET['consulta'])) {
     $parametros_adicionais .= '&consulta=' . urlencode($_GET['consulta']);
 }
 
+//CASO O CAMPO DE VALOR MÍNIMO FOR MENOR, ESTOURA ERRO
+
+$erro_filtro = ''; // Variável para armazenar a mensagem de erro
+
+// Verifica se os valores foram enviados e faz a validação
+if (isset($_GET['valor_min']) && isset($_GET['valor_max'])) {
+
+    // Converte os valores para números
+    // A coerção de tipo (float) é uma boa prática mesmo para inputs "number"
+    $valor_min = (float) $_GET['valor_min'];
+    $valor_max = (float) $_GET['valor_max'];
+
+    // Agora, faça a validação
+    if ($valor_min > $valor_max) {
+        $erro_filtro = 'O valor mínimo não pode ser maior que o valor máximo.';
+    }
+}
+
 // =======================================================
 // Verifica se qualquer filtro está ativo para mostrar o botão de limpar
 // =======================================================
@@ -128,18 +146,16 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
     <div class=" search-bar">
         <form method="get" action="index.php" class="barra-pesquisa">
-            <input type="text" name="consulta" id="consulta" class="pesquisa-input" placeholder="Digite o Nome do Produto">
+            <input type="text" name="consulta" id="consulta" class="pesquisa-input"
+                placeholder="Digite o Nome do Produto">
             <button type="submit" class="botao-pesquisa">
                 <img src="../assets/img/lupa (3).png" alt="Pesquisar">
             </button>
         </form>
     </div>
     <div class="controla-ul">
-        <button class="navbar-toggler"
-            type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             <span class="text-promo">Promoções e Consulta</span>
         </button>
@@ -187,8 +203,12 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             </ul>
 
 
+<<<<<<< Updated upstream
             <form action="index.php" method="GET" class="d-flex g"
                 style="padding: 5px;gap: 10px !important;; ">
+=======
+            <form action="index.php" method="GET" class="d-flex g" style="padding: 5px;gap: 10px !important;; ">
+>>>>>>> Stashed changes
                 <span class="navbar-text" style="margin-right: 10px;">
                     <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
                 </span>
@@ -206,6 +226,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
 
                 <input type="number" name="valor_min" class="form-control" placeholder="Mín"
+<<<<<<< Updated upstream
                     value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
                     step="0.01" style="width: 75px;">
                 <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #ffffffff">até</span>
@@ -213,6 +234,18 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
                     value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
                     step="0.01" style="width: 75px;">
                 <button type="submit" class="btn btn-primary ">Filtrar</button>
+=======
+                    value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>" step="0.01"
+                    style="width: 75px;" min="0" />
+
+                <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #fff;">até</span>
+
+                <input type="number" name="valor_max" class="form-control" placeholder="Máx"
+                    value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>" step="0.01"
+                    style="width: 75px;" min="0" max="99" />
+
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+>>>>>>> Stashed changes
 
                 <?php if ($filtros_ativos): ?>
                     <a href="index.php" class="btn btn-danger">Limpar</a>
