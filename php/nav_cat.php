@@ -55,27 +55,39 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
         /* --- Início das Alterações para campos e botões menores --- */
         .form-control {
-            font-size: 12px; /* Reduz o tamanho da fonte */
-            padding: 0.25rem 0.5rem; /* Reduz o preenchimento */
-            height: calc(1.5em + 0.5rem + 2px); /* Ajusta a altura com base no padding e border */
-            max-width: 65px; /* Deixa o campo mais estreito */
+            font-size: 12px;
+            /* Reduz o tamanho da fonte */
+            padding: 0.25rem 0.5rem;
+            /* Reduz o preenchimento */
+            height: calc(1.5em + 0.5rem + 2px);
+            /* Ajusta a altura com base no padding e border */
+            max-width: 65px;
+            /* Deixa o campo mais estreito */
         }
 
-        .btn { /* Seletor genérico para todos os botões, se precisar ser mais específico use .btn-primary, .btn-danger */
-            font-size: 12px; /* Reduz o tamanho da fonte dos botões */
-            padding: 0.25rem 0.5rem; /* Reduz o preenchimento dos botões */
-            height: calc(1.5em + 0.5rem + 2px); /* Garante que os botões tenham altura similar aos inputs */
+        .btn {
+            /* Seletor genérico para todos os botões, se precisar ser mais específico use .btn-primary, .btn-danger */
+            font-size: 12px;
+            /* Reduz o tamanho da fonte dos botões */
+            padding: 0.25rem 0.5rem;
+            /* Reduz o preenchimento dos botões */
+            height: calc(1.5em + 0.5rem + 2px);
+            /* Garante que os botões tenham altura similar aos inputs */
             /* width: auto; Removido para que o padding ajuste o width naturalmente */
         }
 
         .navbar-text {
-            font-size: 12px !important; /* Reduz o tamanho da fonte do texto "Valor:" e "até" */
-            margin-right: 5px !important; /* Diminui a margem direita para economizar espaço */
+            font-size: 12px !important;
+            /* Reduz o tamanho da fonte do texto "Valor:" e "até" */
+            margin-right: 5px !important;
+            /* Diminui a margem direita para economizar espaço */
         }
 
         .navbar-text strong {
-            font-size: 12px !important; /* Reduz o tamanho da fonte do texto "Valor:" em negrito */
+            font-size: 12px !important;
+            /* Reduz o tamanho da fonte do texto "Valor:" em negrito */
         }
+
         /* --- Fim das Alterações para campos e botões menores --- */
 
 
@@ -90,10 +102,12 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
             .d-flex.align-items-center .form-control {
                 margin-right: 0 !important;
                 margin-bottom: 5px;
-                width: 100% !important; /* Volta a ocupar 100% em telas menores */
-                max-width: unset !important; /* Remove o max-width em telas menores */
+                width: 100% !important;
+                /* Volta a ocupar 100% em telas menores */
+                max-width: unset !important;
+                /* Remove o max-width em telas menores */
             }
-            
+
             .d-flex.align-items-center .navbar-text strong {
                 width: 100%;
                 display: block;
@@ -105,6 +119,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
                 margin-top: 10px;
             }
         }
+
         /* --- Fim das Alterações para Dispositivos Móveis --- */
     </style>
 </head>
@@ -173,7 +188,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
 
             <form action="index.php" method="GET" class="d-flex g"
-             style="padding: 5px;gap: 10px !important;; ">
+                style="padding: 5px;gap: 10px !important;; ">
                 <span class="navbar-text" style="margin-right: 10px;">
                     <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
                 </span>
@@ -191,16 +206,13 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
 
                 <input type="number" name="valor_min" class="form-control" placeholder="Mín"
-       value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
-       step="0.01" style="width: 75px;" min="0" />
-
-<span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #fff;">até</span>
-
-<input type="number" name="valor_max" class="form-control" placeholder="Máx"
-       value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
-       step="0.01" style="width: 75px;" min="0" max="99" />
-
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                    value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
+                    step="0.01" style="width: 75px;">
+                <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #ffffffff">até</span>
+                <input type="number" name="valor_max" class="form-control" placeholder="Máx"
+                    value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
+                    step="0.01" style="width: 75px;">
+                <button type="submit" class="btn btn-primary ">Filtrar</button>
 
                 <?php if ($filtros_ativos): ?>
                     <a href="index.php" class="btn btn-danger">Limpar</a>
