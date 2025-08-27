@@ -14,7 +14,7 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo">
-                <img src="../assets/img/logo_copia01.png" alt="Logo Cantina" width="45px">
+                <img src="../assets/img/logo_copia01.png" alt="Logo Cantina" width="70px">
             </div>
             <div class="menu" id="menu">
                 <ul>

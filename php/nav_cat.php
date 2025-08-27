@@ -95,14 +95,14 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
         }
 
         .navbar-text {
-            font-size: 12px !important;
+            font-size: 16px !important;
             /* Reduz o tamanho da fonte do texto "Valor:" e "até" */
             margin-right: 5px !important;
             /* Diminui a margem direita para economizar espaço */
         }
 
         .navbar-text strong {
-            font-size: 12px !important;
+            font-size: 15px !important;
             /* Reduz o tamanho da fonte do texto "Valor:" em negrito */
         }
 
@@ -202,13 +202,7 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
             </ul>
 
-
-<<<<<<< Updated upstream
-            <form action="index.php" method="GET" class="d-flex g"
-                style="padding: 5px;gap: 10px !important;; ">
-=======
-            <form action="index.php" method="GET" class="d-flex g" style="padding: 5px;gap: 10px !important;; ">
->>>>>>> Stashed changes
+            <form action="index.php" method="GET" class="d-flex g" style="padding: 5px;gap: 10px !important;  align-items: center; margin-bottom: 5px ">
                 <span class="navbar-text" style="margin-right: 10px;">
                     <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
                 </span>
@@ -226,26 +220,13 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
 
                 <input type="number" name="valor_min" class="form-control" placeholder="Mín"
-<<<<<<< Updated upstream
-                    value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>"
-                    step="0.01" style="width: 75px;">
+                    value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>" step="0.01"
+                    style="width: 75px;">
                 <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #ffffffff">até</span>
                 <input type="number" name="valor_max" class="form-control" placeholder="Máx"
-                    value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>"
-                    step="0.01" style="width: 75px;">
-                <button type="submit" class="btn btn-primary ">Filtrar</button>
-=======
-                    value="<?= isset($_GET['valor_min']) ? htmlspecialchars($_GET['valor_min']) : '' ?>" step="0.01"
-                    style="width: 75px;" min="0" />
-
-                <span class="navbar-text" style="font-weight: bold; font-size: 16px; color: #fff;">até</span>
-
-                <input type="number" name="valor_max" class="form-control" placeholder="Máx"
                     value="<?= isset($_GET['valor_max']) ? htmlspecialchars($_GET['valor_max']) : '' ?>" step="0.01"
-                    style="width: 75px;" min="0" max="99" />
-
-                <button type="submit" class="btn btn-primary">Filtrar</button>
->>>>>>> Stashed changes
+                    style="width: 75px;">
+                <button type="submit" class="btn btn-primary ">Filtrar</button>
 
                 <?php if ($filtros_ativos): ?>
                     <a href="index.php" class="btn btn-danger">Limpar</a>
