@@ -203,6 +203,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 
     <!---Footer--->
     <?php include("footer.php"); ?>
+    <?php include("zap.php"); ?>
     <!---Footer End--->
 
     <!--------------SCRIPTS-------------->

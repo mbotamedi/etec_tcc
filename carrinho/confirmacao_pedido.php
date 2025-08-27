@@ -49,9 +49,9 @@ if (!$pedido) {
             text-decoration: none;
         }
 
-        .btn-continuar:hover {
-            background-color: #0056b3;
-        }
+        /* .btn-continuar:hover {
+            background-color: #aacff7ff;
+        } */
 
         @media (max-width: 992px) {
             .py-5 {

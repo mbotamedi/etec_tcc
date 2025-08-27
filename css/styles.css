@@ -3451,8 +3451,9 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-  --bs-btn-color: #f8a254;
-  --bs-btn-border-color: #f8a254;
+  --bs-btn-color: #000000;
+  font-weight: 500;
+  --bs-btn-border-color: #ff8000;
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #fd750d;
   --bs-btn-hover-border-color: #f8a254;
@@ -12691,12 +12692,14 @@ fieldset:disabled .btn {
   border-color: #ffc107;
   transition: all 0.2s ease;
   cursor: pointer;
+    color: #000 !important;
 }
 
 .buy-button:hover {
   background-color: #ff8c00;
   transform: scale(1.02);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Efeito hover no botão */

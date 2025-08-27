@@ -1,6 +1,7 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
+include('../css/mediaQuery.css');
 ?>
 <style>
     .whatsapp-float {
@@ -23,7 +24,7 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
         transform: scale(1.1);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768px){
         .whatsapp-float {
             bottom: 15px;
             right: 15px;
@@ -32,6 +33,10 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
         .whatsapp-float img {
             width: 40px;
         }
+    }
+
+    @media (max-width: 364px){
+       
     }
 
     .mensagem {
@@ -74,7 +79,7 @@ $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
     <div class="container">
         <div class="whatsapp-float">
             <div class="mensagem">
-                FALE PELO WHATSAPP
+                <p class="msg-zap">FALE PELO WHATSAPP</p>
             </div>
             <a href="https://wa.me/+5516988543993" target="_blank" rel="noopener">
                 <img src="../../assets/img/zapImg.png" alt="WhatsApp">

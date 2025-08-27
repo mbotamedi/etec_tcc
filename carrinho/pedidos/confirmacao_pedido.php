@@ -104,7 +104,7 @@ $is_paginaatual = ($current_page == 'confirmacao_pedido.php');
 </head>
 
 <body>
-    <?php include("../../php/navbar_ConfirmaPedido.php"); ?>
+    <!-- <?php include("../../php/navbar_ConfirmaPedido.php"); ?> -->
 
     <section class="py-5">
         <div class="container-confirmacao">
@@ -132,7 +132,7 @@ $is_paginaatual = ($current_page == 'confirmacao_pedido.php');
                 <p>Por favor, tente novamente com outro método de pagamento ou entre em contato com seu banco.</p>
             </div>
 
-            <a href="../../php/produtos.php" class="btn-continuar">Continuar Comprando</a>
+            <a href="../../php/index.php" class="btn-continuar">Continuar Comprando</a>
         </div>
     </section>
 

@@ -171,11 +171,11 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
 
                 <?php
                 include("../includes/conexao.php");
-                $categorias = mysqli_query($conexao, "select id, upper(descricao) as descricao from tb_categorias  where descricao <> 'Promoção do dia' and descricao <> 'teste' order by upper(descricao)");
-                while ($listaCategoria = mysqli_fetch_assoc($categorias)) {
-                    $subcategoria = mysqli_query($conexao, "select * from tb_subcategorias 
-                where id_categoria = " . $listaCategoria["id"] . " order by descricao");
-                    $possuiSubmenu = mysqli_num_rows($subcategoria);
+                $categorias = mysqli_query(mysql: $conexao, query: "select id, upper(descricao) as descricao from tb_categorias  where descricao <> 'Promoção do dia' and descricao <> 'teste' order by upper(descricao)");
+                while ($listaCategoria = mysqli_fetch_assoc(result: $categorias)) {
+                    $subcategoria = mysqli_query(mysql: $conexao, query: "select * from tb_subcategorias 
+                 where id_categoria = " . $listaCategoria["id"] . " order by descricao");
+                    $possuiSubmenu = mysqli_num_rows(result: $subcategoria);
                     $dropdown = "";
                     $parametros = '';
                     $dropdown_toggle = "";
@@ -185,12 +185,12 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
                         $parametros = 'role="button" data-bs-toggle="dropdown" aria-expanded="false"';
                     }
                     echo '
-                    <li class="nav-item ' . $dropdown . '">
-                        <a class="nav-link" style="font-weight: bold; font-size: 15x;" ' . $dropdown_toggle . '" href="#" ' . $parametros . '>' . $listaCategoria["descricao"] . '</a>                                
+                    <li class="nav-item  ' . $dropdown . '">
+                        <a class="nav-link" style="font-weight: bold; font-size: 15px;" ' . $dropdown_toggle . ' href="#" ' . $parametros . '>' . $listaCategoria["descricao"] . '</a>
                 ';
                     if ($possuiSubmenu > 0) {
                         echo '<div class="dropdown-menu">';
-                        while ($listaSubcategoria = mysqli_fetch_assoc($subcategoria)) {
+                        while ($listaSubcategoria = mysqli_fetch_assoc(result: $subcategoria)) {
                             echo '<a class="dropdown-item" href="?subCategoria=' . $listaSubcategoria["id"] . $parametros_adicionais . '">
                         ' . $listaSubcategoria["descricao"] . '</a>';
                         }
@@ -207,7 +207,6 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
                     <strong style=" font-weight:bold; font-size: 16px; color: #ffffffff;">Valor:</strong>
                 </span>
 
-                <!-- Campos ocultos para manter os filtros existentes ao filtrar por valor -->
                 <?php if (!empty($_GET['consulta'])): ?>
                     <input type="hidden" name="consulta" value="<?= htmlspecialchars($_GET['consulta']) ?>">
                 <?php endif; ?>

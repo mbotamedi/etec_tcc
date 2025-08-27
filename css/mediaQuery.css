@@ -110,10 +110,18 @@
         width: 250px !important;
     }
 
-    .controla-ul{
+    .controla-ul {
         max-width: 80%;
     }
 
+    .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .whatsapp-float img {
+        width: 40px;
+    }
 
 
     /*-----FOOTER-------*/
@@ -177,12 +185,14 @@
     /* Font sizes extracted and adjusted for tablet */
 
     .produtos-Destaques {
-        font-size: 25px;/* Mantido do media query de 576px */
+        font-size: 25px;
+        /* Mantido do media query de 576px */
         /* Mantido do media query de 576px */
     }
 
     .card-text {
-        font-size: 10px; /* Mantido do media query de 576px */
+        font-size: 10px;
+        /* Mantido do media query de 576px */
         /* Mantido do media query de 576px */
     }
 
@@ -192,12 +202,14 @@
     }
 
     .botaoVoltar {
-        font-size: 12px; /* Mantido do media query de 576px e 360px */
+        font-size: 12px;
+        /* Mantido do media query de 576px e 360px */
         /* Mantido do media query de 576px e 360px */
     }
 
     .menu li a {
-        font-size: 15px; /* Mantido do media query de 576px, sobrescreve o de 360px para este breakpoint */
+        font-size: 15px;
+        /* Mantido do media query de 576px, sobrescreve o de 360px para este breakpoint */
         /* Mantido do media query de 576px, sobrescreve o de 360px para este breakpoint */
     }
 
@@ -210,7 +222,8 @@
     a,
     ul {
 
-        font-size: 14px; /* Mantido do media query de 360px como um fallback geral, mas pode ser ajustado */
+        font-size: 14px;
+        /* Mantido do media query de 360px como um fallback geral, mas pode ser ajustado */
         /* Mantido do media query de 360px como um fallback geral, mas pode ser ajustado */
     }
 
@@ -225,7 +238,8 @@
     }
 
     .pesquisa-input {
-        width: 600px !important; /* Ajuste para tablet */
+        width: 600px !important;
+        /* Ajuste para tablet */
         /* Ajuste para tablet */
     }
 
