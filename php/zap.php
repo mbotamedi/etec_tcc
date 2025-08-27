@@ -1,7 +1,7 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 $paginaSelecionada = ($current_page == 'pedidos_cliente.php');
-include('../css/mediaQuery.css');
+
 ?>
 <style>
     .whatsapp-float {
