@@ -31,7 +31,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] != 'cliente') {
 </head>
 
 <body>
-    <?php include("../../php/navbar.php"); ?>
+    <?php include("./navbar.php"); ?>
 
 
     <section class="py-5">

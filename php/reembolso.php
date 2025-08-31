@@ -12,11 +12,15 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
     <link rel="stylesheet" href="../css/mediaQuery.css">
+
+    <!-- Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f9f9f9;
@@ -92,28 +96,36 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <div class="container-politica">
         <h1>Política de Devolução e Reembolso - Cantina Três Irmãos</h1>
 
-        <p>Na <strong>Cantina Três Irmãos</strong>, nossa missão é garantir a satisfação de todos os nossos clientes. Trabalhamos com o sistema de pagamentos do <strong>Mercado Pago</strong> para proporcionar a maior segurança nas suas transações.</p>
+        <p>Na <strong>Cantina Três Irmãos</strong>, nossa missão é garantir a satisfação de todos os nossos clientes.
+            Trabalhamos com o sistema de pagamentos do <strong>Mercado Pago</strong> para proporcionar a maior segurança
+            nas suas transações.</p>
 
         <div class="highlight">
-            <strong>Proteção ao comprador:</strong> Caso seu pedido não seja retirado ou apresente algum problema, você poderá solicitar o reembolso diretamente pela plataforma do Mercado Pago.
+            <strong>Proteção ao comprador:</strong> Caso seu pedido não seja retirado ou apresente algum problema, você
+            poderá solicitar o reembolso diretamente pela plataforma do Mercado Pago.
         </div>
 
         <h2>1. Pedidos Não Retirados</h2>
-        <p>Se, por algum motivo, o pedido não for retirado dentro do horário determinado na cantina, você poderá solicitar o reembolso do valor pago.</p>
+        <p>Se, por algum motivo, o pedido não for retirado dentro do horário determinado na cantina, você poderá
+            solicitar o reembolso do valor pago.</p>
         <ul>
             <li>Você pode solicitar o reembolso dentro de <strong>24 horas após o horário da retirada</strong>.</li>
-            <li>Entre em contato conosco pelo e-mail <strong>suportecantina@gmail.com</strong> ou pelo nosso chat online.</li>
+            <li>Entre em contato conosco pelo e-mail <strong>suportecantina@gmail.com</strong> ou pelo nosso chat
+                online.</li>
         </ul>
 
         <h2>2. Produtos com Defeito ou Incorretos</h2>
-        <p>Se o produto recebido estiver com defeito ou for diferente do solicitado, você poderá solicitar a devolução ou o reembolso.</p>
+        <p>Se o produto recebido estiver com defeito ou for diferente do solicitado, você poderá solicitar a devolução
+            ou o reembolso.</p>
         <ul>
             <li>Envie uma foto do produto para análise, junto com o número do pedido.</li>
             <li>A solicitação deve ser feita dentro de <strong>24 horas após a retirada</strong> do pedido.</li>
         </ul>
 
         <h2>3. Como Funciona o Reembolso?</h2>
-        <p>O reembolso será processado pelo Mercado Pago. Se o pagamento foi feito via cartão de crédito, o valor será estornado na próxima fatura. Se o pagamento foi via boleto bancário ou saldo do Mercado Pago, o reembolso será feito diretamente na sua conta do Mercado Pago.</p>
+        <p>O reembolso será processado pelo Mercado Pago. Se o pagamento foi feito via cartão de crédito, o valor será
+            estornado na próxima fatura. Se o pagamento foi via boleto bancário ou saldo do Mercado Pago, o reembolso
+            será feito diretamente na sua conta do Mercado Pago.</p>
 
         <h2>4. Requisitos para Devolução</h2>
         <ul>
@@ -122,9 +134,11 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </ul>
 
         <h2>5. Importante</h2>
-        <p>Nosso sistema de pedidos é exclusivamente para retirada na <strong>ETEC de Bebedouro</strong>. Não realizamos entregas fora do campus da escola. Lembre-se: a retirada do pedido no balcão da cantina é fundamental.</p>
+        <p>Nosso sistema de pedidos é exclusivamente para retirada na <strong>ETEC de Bebedouro</strong>. Não realizamos
+            entregas fora do campus da escola. Lembre-se: a retirada do pedido no balcão da cantina é fundamental.</p>
 
-        <p>Se precisar de mais informações ou tiver alguma dúvida, entre em contato conosco. Estamos à disposição para ajudar!</p>
+        <p>Se precisar de mais informações ou tiver alguma dúvida, entre em contato conosco. Estamos à disposição para
+            ajudar!</p>
     </div>
 
     <?php include("footer.php"); ?>

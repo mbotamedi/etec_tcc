@@ -11,12 +11,15 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <title>Como Funciona - Cantina Três Irmãos</title>
     <link rel="stylesheet" href="../css/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
     <link rel="stylesheet" href="../css/mediaQuery.css">
+
+    <!-- Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f9f9f9;
@@ -102,21 +105,25 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <div class="container-pedidos">
         <h1>Como Funciona o Pedido na Cantina Três Irmãos?</h1>
 
-        <p>A Cantina Três Irmãos está localizada dentro da ETEC de Bebedouro e oferece um serviço prático para você fazer seu pedido antes do intervalo. Veja como funciona:</p>
+        <p>A Cantina Três Irmãos está localizada dentro da ETEC de Bebedouro e oferece um serviço prático para você
+            fazer seu pedido antes do intervalo. Veja como funciona:</p>
 
         <h2>Passo a Passo para Realizar seu Pedido</h2>
         <ul>
             <li>✅ Acesse o nosso site e escolha os produtos que você deseja comprar.</li>
             <li>✅ Adicione os itens ao carrinho e finalize o pagamento através da plataforma Mercado Pago.</li>
             <li>✅ O pagamento é processado de forma segura, garantindo a proteção dos seus dados.</li>
-            <li>✅ Após o pagamento confirmado, você pode retirar seu pedido diretamente no balcão da Cantina Três Irmãos na ETEC de Bebedouro.</li>
+            <li>✅ Após o pagamento confirmado, você pode retirar seu pedido diretamente no balcão da Cantina Três Irmãos
+                na ETEC de Bebedouro.</li>
         </ul>
 
         <h2>Importante</h2>
-        <p>🛑 **Entrega limitada**: A Cantina Três Irmãos **não realiza entregas fora da ETEC**. Todos os pedidos devem ser retirados no balcão.</p>
+        <p>🛑 **Entrega limitada**: A Cantina Três Irmãos **não realiza entregas fora da ETEC**. Todos os pedidos devem
+            ser retirados no balcão.</p>
 
         <div class="highlight">
-            <strong>Horário de Retirada:</strong> Você poderá retirar seu pedido durante o intervalo. O pagamento é feito antecipadamente, então você não precisa se preocupar com fila ou pagamento no balcão.
+            <strong>Horário de Retirada:</strong> Você poderá retirar seu pedido durante o intervalo. O pagamento é
+            feito antecipadamente, então você não precisa se preocupar com fila ou pagamento no balcão.
         </div>
 
         <h2>Vantagens de Pedir Antes</h2>
@@ -127,13 +134,14 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </ul>
 
         <h2>Detalhes Importantes</h2>
-        <p>A Cantina Três Irmãos está comprometida em oferecer uma experiência prática e segura para todos os alunos da ETEC de Bebedouro. Nossa plataforma de pagamento é 100% segura e seus dados estão protegidos.</p>
+        <p>A Cantina Três Irmãos está comprometida em oferecer uma experiência prática e segura para todos os alunos da
+            ETEC de Bebedouro. Nossa plataforma de pagamento é 100% segura e seus dados estão protegidos.</p>
 
         <p>Em caso de dúvidas, entre em contato pelo e-mail: <strong>suportecantina@gmail.com</strong></p>
     </div>
 
     <?php include("footer.php"); ?>
-    <?php include("./zap.php")?>
+    <?php include("./zap.php") ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -21,6 +21,7 @@ $confirmation_page = ($current_page == 'confirmacao_pedido.php');
                 <ul>
                     <li><a href="../index.php" class="titulo">HOME</a></li>
                     <li><a href="../php/unidades.php" class="titulo">UNIDADES</a></li>
+                    <li><a href="../php/faleConosco.php">FALE CONOSCO</a></li>
                 </ul>
             </div>
 
