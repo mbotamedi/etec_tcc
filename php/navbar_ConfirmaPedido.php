@@ -20,8 +20,8 @@ $confirmation_page = ($current_page == 'confirmacao_pedido.php');
             <div class="menu" id="menu">
                 <ul>
                     <li><a href="../index.php" class="titulo">HOME</a></li>
+                    <li><a href="../php/produtos.php" class="titulo">PEÇA AGORA</a></li>
                     <li><a href="../php/unidades.php" class="titulo">UNIDADES</a></li>
-                    <li><a href="../php/faleConosco.php">FALE CONOSCO</a></li>
                 </ul>
             </div>
 

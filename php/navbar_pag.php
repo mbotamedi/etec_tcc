@@ -27,7 +27,6 @@ $is_finalizar_pedido = ($current_page == 'cadastro_endereco.php' || $current_pag
                     <li><a href="../index.php" class="titulo">HOME</a></li>
                     <li><a href="../php/produtos.php" class="titulo">PEÇA AGORA</a></li>
                     <li><a href="../php/unidades.php" class="titulo">UNIDADES</a></li>
-                    <li><a href="../php/faleConosco.php">FALE CONOSCO</a></li>
                 </ul>
             </div>
 

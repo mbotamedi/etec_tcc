@@ -5,28 +5,24 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+<?php
+ob_start();
+?>
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Cantina Três Irmãos</title>
-    <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
     <link rel="stylesheet" href="../css/mediaQuery.css">
-
-
-    <!--FONTS---->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,20 +49,14 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
 </head>
 
 <body>
-    <!-- Navigation-->
-
     <?php
     include("navbar.php");
     include("nav_cat.php");
-
     ?>
-
-    <!-- Navigation End-->
 
     <div class="carrosel" style="display: flex; justify-content: center;">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-
                 <div class="carousel-item active">
                     <a href="../carrinho/addPromocao.php?id_promo=1" title="Adicionar promoção ao carrinho">
                         <img src="../assets/img/promocoes_notebook/promo1.jpg" alt="Promoção Coxinhas e Refrigerante" class="d-block w-100">
@@ -78,7 +68,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                         <img src="../assets/img/promocoes_notebook/promo2.jpg" alt="Promoção 2 Lanche e Refrigerante" class="d-block w-100">
                     </a>
                 </div>
-
             </div>
 
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -93,10 +82,7 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
     </div>
 
-    <!-- Section-->
-
     <section class="py-5">
-
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
@@ -112,11 +98,9 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                         </div>
                     </div>';
                 } else {
-
                     // Loop para exibir os produtos da página atual
                     foreach ($produtos as $produto):
                         $em_promocao = !is_null($produto['desconto']) && $produto['desconto'] > 0;
-
                 ?>
                         <div class="col-md-4 mb-4">
                             <div class="card h-100">
@@ -148,21 +132,16 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                             </div>
                         </div>
                 <?php endforeach;
-                }
-                ?>
+                } ?>
             </div>
-
             <?php
-
             // Só exibe a paginação se houver mais de uma página
             if ($total_paginas > 1):
-
                 // Pega todos os parâmetros GET atuais (ex: 'subCategoria', 'consulta', etc.)
                 $parametros_atuais = $_GET;
             ?>
                 <nav aria-label="Navegação de página de produtos">
                     <ul class="pagination justify-content-center mt-5">
-
                         <li class="page-item <?= ($pagina_atual <= 1) ? 'disabled' : '' ?>">
                             <?php
                             $parametros_atuais['pagina'] = $pagina_atual - 1;
@@ -172,7 +151,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-
                         <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
                             <?php
                             $parametros_atuais['pagina'] = $i;
@@ -182,7 +160,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                                 <a class="page-link" href="?<?= $query_string ?>"><?= $i ?></a>
                             </li>
                         <?php endfor; ?>
-
                         <li class="page-item <?= ($pagina_atual >= $total_paginas) ? 'disabled' : '' ?>">
                             <?php
                             $parametros_atuais['pagina'] = $pagina_atual + 1;
@@ -192,7 +169,6 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
-
                     </ul>
                 </nav>
             <?php
@@ -201,18 +177,13 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </div>
     </section>
 
-    <!---Footer--->
     <?php include("footer.php"); ?>
-    <!---Footer End--->
-
-    <!--------------SCRIPTS-------------->
-    <!-- Bootstrap core JS-->
+    <?php include("zap.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="../js/funcao.js"></script>
     <script src="../js/controlaModal.js"></script>
     <script src="../js/carrinho.js"></script>
-    <!--------------SCRIPTS/-------------->
 
 
 </body>

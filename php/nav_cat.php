@@ -107,8 +107,6 @@ $filtros_ativos = !empty($_GET['subCategoria']) || !empty($_GET['valor_min']) ||
         }
 
         /* --- Fim das Alterações para campos e botões menores --- */
-
-
         /* --- Início das Alterações para Dispositivos Móveis --- */
         @media (max-width: 768px) {
             .d-flex.align-items-center {

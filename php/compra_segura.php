@@ -12,20 +12,16 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <link rel="stylesheet" href="../css/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/inicio.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/canvaDeslogado.css">
     <link rel="stylesheet" href="../css/canvaLogado.css">
-    <link rel="stylesheet" href="../css/mediaQuery.css">
 
-    <!-- Fontes e Ícones -->
-    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&display=swap" rel="stylesheet">
-
-
-
-
+    
+    
+    
     <style>
+
         .container-seguro {
             max-width: 960px;
             margin: 60px auto;
@@ -102,13 +98,10 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
     <div class="container-seguro">
         <h1>É seguro comprar na Cantina Três Irmãos?</h1>
 
-        <p>Sim, sua compra conosco é 100% segura. Utilizamos a plataforma <strong>Mercado Pago</strong>, uma das maiores
-            intermediadoras de pagamento da América Latina, que garante a proteção total de seus dados financeiros e
-            pessoais.</p>
+        <p>Sim, sua compra conosco é 100% segura. Utilizamos a plataforma <strong>Mercado Pago</strong>, uma das maiores intermediadoras de pagamento da América Latina, que garante a proteção total de seus dados financeiros e pessoais.</p>
 
         <div class="highlight">
-            <strong>Proteção ao comprador:</strong> Caso seu pedido não seja entregue ou apresente algum problema, você
-            poderá solicitar reembolso diretamente pela plataforma do Mercado Pago.
+            <strong>Proteção ao comprador:</strong> Caso seu pedido não seja entregue ou apresente algum problema, você poderá solicitar reembolso diretamente pela plataforma do Mercado Pago.
         </div>
 
         <h2>Por que confiar?</h2>
@@ -119,33 +112,28 @@ $tipo = isset($_SESSION['usuario']['tipo']) ? $_SESSION['usuario']['tipo'] : 'cl
         </ul>
 
         <h2>Transações com garantia</h2>
-        <p>Ao efetuar um pagamento com Mercado Pago, o valor fica em custódia da plataforma até que você receba seu
-            pedido corretamente. Isso garante mais segurança e confiança para o comprador.</p>
+        <p>Ao efetuar um pagamento com Mercado Pago, o valor fica em custódia da plataforma até que você receba seu pedido corretamente. Isso garante mais segurança e confiança para o comprador.</p>
 
         <div class="highlight">
-            <strong>Política de Privacidade:</strong> Seus dados são tratados com total sigilo. Nossa empresa segue
-            normas de privacidade rigorosas, para garantir a segurança das suas informações pessoais e bancárias.
+            <strong>Política de Privacidade:</strong> Seus dados são tratados com total sigilo. Nossa empresa segue normas de privacidade rigorosas, para garantir a segurança das suas informações pessoais e bancárias.
         </div>
 
         <div class="highlight">
-            <strong>Compra Garantida:</strong> Se o produto não chegar ou não for conforme o esperado, o Mercado Pago
-            assegura o reembolso total de seu valor.
+            <strong>Compra Garantida:</strong> Se o produto não chegar ou não for conforme o esperado, o Mercado Pago assegura o reembolso total de seu valor.
         </div>
 
         <div class="highlight">
-            <strong>Certificação de Segurança:</strong> As transações são realizadas em um ambiente criptografado e
-            auditado, seguindo padrões internacionais de segurança de dados.
+            <strong>Certificação de Segurança:</strong> As transações são realizadas em um ambiente criptografado e auditado, seguindo padrões internacionais de segurança de dados.
         </div>
 
         <h2>Privacidade e segurança</h2>
-        <p>Além do Mercado Pago, nós da <strong>Cantina Três Irmãos</strong> seguimos rigorosamente políticas de
-            privacidade e boas práticas de segurança da informação. Seus dados estão protegidos!</p>
+        <p>Além do Mercado Pago, nós da <strong>Cantina Três Irmãos</strong> seguimos rigorosamente políticas de privacidade e boas práticas de segurança da informação. Seus dados estão protegidos!</p>
 
         <p>Em caso de dúvidas, entre em contato pelo e-mail: <strong>suportecantina@gmail.com</strong></p>
     </div>
 
     <?php include("footer.php"); ?>
-    <?php include("./zap.php") ?>
+    <?php include("./zap.php")?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
