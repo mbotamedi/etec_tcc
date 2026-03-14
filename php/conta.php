@@ -114,6 +114,7 @@ $resultado_enderecos = mysqli_query($conexao, $query_enderecos);
             border: 2px solid #f6d365;
             border-radius: 50%;
             background-color: #f3c747;
+            
         }
 
         .info-label {
